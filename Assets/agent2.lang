@@ -1,0 +1,26 @@
+var health
+health = 3
+
+var ammo
+ammo = 99
+
+
+while ( health ) {
+
+
+
+    while ( shoot ) {
+        ammo = 1
+    }
+
+    while ( death ) {
+        health = 0
+    }
+
+
+    health = 6
+}
+
+
+
+

@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/Glynth.dir/main.cpp.o CMakeFiles/Glynth.dir/Language/Lexer.cpp.o CMakeFiles/Glynth.dir/Language/Parser.cpp.o CMakeFiles/Glynth.dir/Language/AST.cpp.o  -o Glynth 

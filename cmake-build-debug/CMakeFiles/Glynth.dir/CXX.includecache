@@ -1,0 +1,42 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/sean/Projects/Glynth/Language/AST.h
+string
+-
+vector
+-
+
+/home/sean/Projects/Glynth/Language/Parser.cpp
+stdlib.h
+-
+iostream
+-
+fstream
+-
+Parser.h
+/home/sean/Projects/Glynth/Language/Parser.h
+AST.h
+/home/sean/Projects/Glynth/Language/AST.h
+
+/home/sean/Projects/Glynth/Language/Parser.h
+string
+-
+vector
+-
+iostream
+-
+filesystem
+-
+Tokens.h
+/home/sean/Projects/Glynth/Language/Tokens.h
+AST.h
+/home/sean/Projects/Glynth/Language/AST.h
+
+/home/sean/Projects/Glynth/Language/Tokens.h
+

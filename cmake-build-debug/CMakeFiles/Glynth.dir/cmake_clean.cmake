@@ -1,0 +1,13 @@
+file(REMOVE_RECURSE
+  "CMakeFiles/Glynth.dir/Language/AST.cpp.o"
+  "CMakeFiles/Glynth.dir/Language/Lexer.cpp.o"
+  "CMakeFiles/Glynth.dir/Language/Parser.cpp.o"
+  "CMakeFiles/Glynth.dir/main.cpp.o"
+  "Glynth"
+  "Glynth.pdb"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang CXX)
+  include(CMakeFiles/Glynth.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()

@@ -1,0 +1,17 @@
+var health
+health = 3
+
+var ammo
+ammo = 99
+
+
+while ( health ) {
+    health = 6
+}
+
+
+while ( ammo ) {
+    ammo = 6
+}
+
+
