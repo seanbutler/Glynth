@@ -9,7 +9,7 @@ int main(int argc, char **argv) {
 
 //    srand(time(0));
 
-    std::string filename = "Assets/agent2.lang";
+    std::string filename = "Assets/agent1.lang";
     std::ifstream sourceFile(filename);
     std::string sourceString((std::istreambuf_iterator<char>(sourceFile)), std::istreambuf_iterator<char>());
 

@@ -327,16 +327,6 @@ bool Parser::debug(std::string filename) {
     diagramFilename += std::string(".gv");
     diagramFile.open(diagramFilename);
 
-//    diagramFile <<
-
-
-//    time_t t = time(0);   // get time now
-//    struct tm * now = localtime( & t );
-//    char buffer [80];
-//    strftime (buffer,80,"%Y-%m-%d-%H-%M-%S",now);
-//    std::ofstream out((std::string)"parsertree_" + buffer + "_" + std::to_string(ufid) + ".gv");
-//    ufid++;
-
     std::cout.rdbuf(diagramFile.rdbuf());
     std::cout << "digraph G {" << std::endl;
     for (auto  N : abstractSyntaxTree ) {
