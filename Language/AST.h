@@ -7,6 +7,7 @@
 
 #include <string>
 #include <vector>
+#include "Tokens.h"
 
 // ------------------------------------------------------------------------
 
@@ -54,6 +55,7 @@ public:
 
 private:
     std::string name;
+
 };
 
 // ------------------------------------------------------------------------
@@ -71,29 +73,31 @@ public:
     virtual std::string eval();
 
 private:
+    std::vector<ASTNode*> children;
+
 };
 
 // ------------------------------------------------------------------------
 
 // FunctionDeclarationAST - statements like "func id()"
-
-class FunctionDeclarationAST : public ASTNode {
-
-public:
-    IdentifierAST *identifier;
-    BlockAST *block;
-
-    FunctionDeclarationAST(const std::string &N) : name(N) {}
-    std::string &getName() {
-        return name;
-    }
-    virtual void print();
-    virtual void diag(unsigned int parentID);
-    virtual std::string eval();
-
-private:
-    std::string name;
-};
+//
+//class FunctionDeclarationAST : public ASTNode {
+//
+//public:
+//    IdentifierAST *identifier;
+//    BlockAST *block;
+//
+//    FunctionDeclarationAST(const std::string &N) : name(N) {}
+//    std::string &getName() {
+//        return name;
+//    }
+//    virtual void print();
+//    virtual void diag(unsigned int parentID);
+//    virtual std::string eval();
+//
+//private:
+//    std::string name;
+//};
 
 // ------------------------------------------------------------------------
 
@@ -160,14 +164,14 @@ private:
 
 // ------------------------------------------------------------------------
 
-class BinOpAST : public ASTNode {
+class BinaryExpressionAST : public ASTNode {
 
 public:
     ASTNode * lhs;
-    ASTNode * op;
+    Token op;
     ASTNode * rhs;
 
-    BinOpAST(ASTNode* L, ASTNode* O, ASTNode* R) : lhs(L), op(O), rhs(R) { }
+    BinaryExpressionAST(ASTNode* L, Token O, ASTNode* R) : lhs(L), op(O), rhs(R) { }
     std::string &getName() {
         return name;
     }

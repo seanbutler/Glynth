@@ -4,6 +4,7 @@
 CMakeFiles/Glynth.dir/Language/AST.cpp.o
  /home/sean/Projects/Glynth/Language/AST.cpp
  /home/sean/Projects/Glynth/Language/AST.h
+ /home/sean/Projects/Glynth/Language/Tokens.h
 CMakeFiles/Glynth.dir/Language/Lexer.cpp.o
  /home/sean/Projects/Glynth/Language/Lexer.cpp
  /home/sean/Projects/Glynth/Language/Lexer.h

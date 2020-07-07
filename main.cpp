@@ -19,7 +19,7 @@ int main(int argc, char **argv) {
 
     Parser parser(lexer.GetTokenList());
     parser.parse();
-    parser.debug(filename);
+//    parser.debug(filename);
 
     return 0;
 }

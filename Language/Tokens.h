@@ -18,11 +18,12 @@ enum class Token : int {
     IDENTIFIER,
     NUMBER,
 
+    SYM_ASSIGN,
+
     OP_GT,
     OP_LT,
     OP_EQ,
     OP_NE,
-    OP_ASSIGN,
     OP_ADD,
     OP_SUB,
     OP_MUL,

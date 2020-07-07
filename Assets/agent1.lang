@@ -1,17 +1,6 @@
-var health
-health = 3
-
-var ammo
-ammo = 99
-
+var health;
+health = 99;
 
 while ( health ) {
-    health = 6
+    health = 1;
 }
-
-
-while ( ammo ) {
-    ammo = 6
-}
-
-

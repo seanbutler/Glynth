@@ -11,20 +11,8 @@ string
 -
 vector
 -
-
-/home/sean/Projects/Glynth/Language/Lexer.h
 Tokens.h
 /home/sean/Projects/Glynth/Language/Tokens.h
-string
--
-vector
--
-iostream
--
-fstream
--
-filesystem
--
 
 /home/sean/Projects/Glynth/Language/Parser.cpp
 stdlib.h
@@ -32,6 +20,8 @@ stdlib.h
 iostream
 -
 fstream
+-
+stack
 -
 Parser.h
 /home/sean/Projects/Glynth/Language/Parser.h
@@ -53,14 +43,4 @@ AST.h
 /home/sean/Projects/Glynth/Language/AST.h
 
 /home/sean/Projects/Glynth/Language/Tokens.h
-
-/home/sean/Projects/Glynth/main.cpp
-iostream
--
-fstream
--
-./Language/Lexer.h
-/home/sean/Projects/Glynth/Language/Lexer.h
-./Language/Parser.h
-/home/sean/Projects/Glynth/Language/Parser.h
 

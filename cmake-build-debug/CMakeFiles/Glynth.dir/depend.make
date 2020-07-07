@@ -3,6 +3,7 @@
 
 CMakeFiles/Glynth.dir/Language/AST.cpp.o: ../Language/AST.cpp
 CMakeFiles/Glynth.dir/Language/AST.cpp.o: ../Language/AST.h
+CMakeFiles/Glynth.dir/Language/AST.cpp.o: ../Language/Tokens.h
 
 CMakeFiles/Glynth.dir/Language/Lexer.cpp.o: ../Language/Lexer.cpp
 CMakeFiles/Glynth.dir/Language/Lexer.cpp.o: ../Language/Lexer.h

@@ -7,8 +7,6 @@ ammo = 99
 
 while ( health ) {
 
-
-
     while ( shoot ) {
         ammo = 1
     }
@@ -16,7 +14,6 @@ while ( health ) {
     while ( death ) {
         health = 0
     }
-
 
     health = 6
 }

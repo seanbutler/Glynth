@@ -41,23 +41,22 @@ Token Lexer::ScanToken() {
         } else if (tokenString == "while") {
             tokens.push_back(std::make_pair(Token::KEYWORD_WHILE, tokenString));
             return Token::KEYWORD_WHILE;
-        } else if (tokenString == "func") {
-            tokens.push_back(std::make_pair(Token::KEYWORD_FUNC, tokenString));
-            return Token::KEYWORD_FUNC;
+//        } else if (tokenString == "func") {
+//            tokens.push_back(std::make_pair(Token::KEYWORD_FUNC, tokenString));
+//            return Token::KEYWORD_FUNC;
         } else if (tokenString == "var") {
             tokens.push_back(std::make_pair(Token::KEYWORD_VAR, tokenString));
             return Token::KEYWORD_VAR;
-        } else if (tokenString == "return") {
-            tokens.push_back(std::make_pair(Token::KEYWORD_RETURN, tokenString));
-            return Token::KEYWORD_RETURN;
-        } else if (tokenString == "yield") {
-            tokens.push_back(std::make_pair(Token::KEYWORD_YIELD, tokenString));
-            return Token::KEYWORD_YIELD;
-        } else if (tokenString == "exit") {
-            tokens.push_back(std::make_pair(Token::KEYWORD_EXIT, tokenString));
-            return Token::KEYWORD_EXIT;
+//        } else if (tokenString == "return") {
+//            tokens.push_back(std::make_pair(Token::KEYWORD_RETURN, tokenString));
+//            return Token::KEYWORD_RETURN;
+//        } else if (tokenString == "yield") {
+//            tokens.push_back(std::make_pair(Token::KEYWORD_YIELD, tokenString));
+//            return Token::KEYWORD_YIELD;
+//        } else if (tokenString == "exit") {
+//            tokens.push_back(std::make_pair(Token::KEYWORD_EXIT, tokenString));
+//            return Token::KEYWORD_EXIT;
         }
-
         tokens.push_back(std::make_pair(Token::IDENTIFIER, tokenString));
         return Token::IDENTIFIER;
     }
@@ -158,8 +157,8 @@ Token Lexer::ScanToken() {
                 ++lexingPos;
                 return Token::OP_EQ;
             }
-            tokens.push_back(std::make_pair(Token::OP_ASSIGN, "="));
-            return Token::OP_ASSIGN;
+            tokens.push_back(std::make_pair(Token::SYM_ASSIGN, "="));
+            return Token::SYM_ASSIGN;
         }
 
         case ';': {

@@ -39,10 +39,9 @@ public:
     ASTNode * ParseNumber();
     ASTNode * ParseIdentifier();
     ASTNode * ParseExpression();
-    ASTNode * ParseSubExpression();
+    ASTNode * ParseParenExpression();
 
     ASTNode * ParseAssignmentStatement();
-    ASTNode * ParseFunctionDeclaration();
 
     bool debug(std::string filename);
 
