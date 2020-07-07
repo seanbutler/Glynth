@@ -101,6 +101,28 @@ private:
 
 // ------------------------------------------------------------------------
 
+// IfStatementAST - statements like "if(expression){statements}"
+
+class IfStatementAST : public ASTNode {
+
+public:
+    ASTNode *expression;
+    ASTNode *block;
+
+    IfStatementAST(ASTNode *E, ASTNode *B) : expression(E), block(B) {}
+    std::string &getName() {
+        return name;
+    }
+    virtual void print();
+    virtual void diag(unsigned int parentID);
+    virtual std::string eval();
+
+private:
+    std::string name;
+};
+
+// ------------------------------------------------------------------------
+
 // WhileStatementAST - statements like "while(expression){statements}"
 
 class WhileStatementAST : public ASTNode {
@@ -120,6 +142,7 @@ public:
 private:
     std::string name;
 };
+
 
 // ------------------------------------------------------------------------
 // AssignmentStatementAST - statements like "while(expression){statements}"

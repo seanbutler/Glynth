@@ -48,6 +48,10 @@ ASTNode * Parser::ParseStatement(){
             return ParseWhileStatement();
         }
 
+        case Token::KEYWORD_IF: {
+            return ParseIfStatement();
+        }
+
         case Token::IDENTIFIER: {
             Token aheadTokenType = lookAhead(0).first;
             if ( aheadTokenType == Token::SYM_ASSIGN ) {
@@ -157,6 +161,52 @@ ASTNode *Parser::ParseBlock() {
 
 // ----------------------------------------------------------------------
 
+ASTNode * Parser::ParseIfStatement() {
+
+    Token tokenType = currentToken.first;
+    std::string tokenString = currentToken.second;
+
+    Token aheadTokenType = lookAhead(0).first;
+    std::string aheadTokenString = lookAhead(0).second;
+
+    std::cout << "Parser::ParseIfStatement tokenType = " << (int)tokenType << " " << tokenString
+              << " (aheadTokenType = " << (int)aheadTokenType << " " << aheadTokenString << ") " << std::endl;
+
+    getNextToken();
+
+    if ( currentToken.first != Token::SYM_LPAREN) {
+        std::cerr << "ERROR Parser::ParseIfStatement() -  Unrecognised Token Before If Statement Expression, Expected Left Parenthesis." << std::endl;
+        return nullptr;
+    }
+
+    getNextToken();
+
+    ASTNode *cond = this->ParseExpression();
+
+    getNextToken();
+
+    if ( currentToken.first != Token::SYM_RPAREN) {
+        std::cerr << "ERROR Parser::ParseIfStatement() - Unrecognised Token After While Statement Expression, Expected Right Parenthesis." << std::endl;
+        return nullptr;
+    }
+
+    getNextToken();
+
+    if ( currentToken.first != Token::SYM_LBRACES) {
+        std::cerr << "ERROR Parser::ParseIfStatement() - Unrecognised Token Before While Statement Block, Expected Left Braces '{'." << std::endl;
+        return nullptr;
+    }
+
+    ASTNode *block = this->ParseBlock();
+
+    IfStatementAST *ifStatement = new IfStatementAST(cond, block);
+    return ifStatement;
+}
+
+
+
+// ----------------------------------------------------------------------
+
 ASTNode * Parser::ParseWhileStatement() {
 
     Token tokenType = currentToken.first;
@@ -198,6 +248,7 @@ ASTNode * Parser::ParseWhileStatement() {
     WhileStatementAST *whileStatement = new WhileStatementAST(cond, block);
     return whileStatement;
 }
+
 
 // ----------------------------------------------------------------------
 
@@ -353,7 +404,9 @@ bool Parser::debug(std::string filename) {
     std::cout.rdbuf(diagramFile.rdbuf());
     std::cout << "digraph G {" << std::endl;
     for (auto  N : abstractSyntaxTree ) {
-        N->diag(0);
+        if ( N ) {
+            N->diag(0);
+        }
     }
     std::cout << std::endl << "}" << std::endl;
     return true;

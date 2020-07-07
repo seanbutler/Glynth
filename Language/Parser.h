@@ -35,6 +35,7 @@ public:
     ASTNode * ParseVariableDeclaration();
     ASTNode * ParseBlock();
     ASTNode * ParseWhileStatement();
+    ASTNode * ParseIfStatement();
 
     ASTNode * ParseNumber();
     ASTNode * ParseIdentifier();

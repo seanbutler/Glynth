@@ -7,7 +7,7 @@ ammo = 99
 
 while ( health ) {
 
-    while ( shoot ) {
+    if ( shoot ) {
         ammo = 1
     }
 

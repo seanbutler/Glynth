@@ -8,6 +8,23 @@ var state;
 state = 1;
 
 while ( state ) {
+
     health = 2;
     coins = 2;
+
+    while ( state ) {
+
+        if ( state ) {
+
+            health = 2;
+            coins = 2;
+        }
+
+
+        health = 2;
+        coins = 2;
+    }
+
+
 }
+

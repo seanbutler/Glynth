@@ -85,7 +85,7 @@ Token Lexer::ScanToken() {
     switch (currentChar) {
 
         case '\0': {
-            tokens.push_back(std::make_pair(Token::END_OF_FILE, "\0"));
+            tokens.push_back(std::make_pair(Token::END_OF_FILE, "EOF"));
             return Token::END_OF_FILE;
         }
 
