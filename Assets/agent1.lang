@@ -1,6 +1,13 @@
 var health;
-health = 99;
+health = 0;
 
-while ( health ) {
-    health = 1;
+var coins;
+coins = 0;
+
+var state;
+state = 1;
+
+while ( state ) {
+    health = 2;
+    coins = 2;
 }

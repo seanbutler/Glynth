@@ -40,10 +40,6 @@ ASTNode * Parser::ParseStatement(){
 
     switch ( currentToken.first  ) {
 
-        case Token::END_OF_FILE: {
-            return nullptr;
-        }
-
         case Token::KEYWORD_VAR: {
             return ParseVariableDeclaration();
         }
@@ -67,6 +63,10 @@ ASTNode * Parser::ParseStatement(){
             return nullptr;
         }
 
+        case Token::END_OF_FILE: {
+            return nullptr;
+        }
+
         default: {
             std::cerr << "ERROR : Parser::ParseStatement() - Unrecognised Token "
                     << (int) currentToken.first << " "
@@ -81,7 +81,7 @@ ASTNode * Parser::ParseStatement(){
 
 ASTNode * Parser::ParseVariableDeclaration(){
 
-    getNextToken(); // eat the 'var'
+    getNextToken();
 
     Token tokenType = currentToken.first;
     std::string tokenString = currentToken.second;
@@ -130,8 +130,13 @@ ASTNode * Parser::ParseNumber(){
 // ----------------------------------------------------------------------
 
 ASTNode *Parser::ParseBlock() {
-    ASTNode *newNode = nullptr;
+
     getNextToken();
+
+    Token tokenType = currentToken.first;
+    std::string tokenString = currentToken.second;
+
+    ASTNode *newNode = nullptr;
     std::vector<ASTNode*> nodes;
     BlockAST *block = new BlockAST();
 
