@@ -42,6 +42,7 @@ private:
 // ------------------------------------------------------------------------
 
 // IdentifierAST - statements like "var a"
+
 class IdentifierAST : public ASTNode {
 
 public:
@@ -60,7 +61,7 @@ private:
 
 // ------------------------------------------------------------------------
 
-// BlockAST - for lists of statements between BEGIN and END tokens
+// BlockAST - for lists of statements between { and } tokens
 
 class BlockAST : public ASTNode {
 
@@ -76,28 +77,6 @@ private:
     std::vector<ASTNode*> children;
 
 };
-
-// ------------------------------------------------------------------------
-
-// FunctionDeclarationAST - statements like "func id()"
-//
-//class FunctionDeclarationAST : public ASTNode {
-//
-//public:
-//    IdentifierAST *identifier;
-//    BlockAST *block;
-//
-//    FunctionDeclarationAST(const std::string &N) : name(N) {}
-//    std::string &getName() {
-//        return name;
-//    }
-//    virtual void print();
-//    virtual void diag(unsigned int parentID);
-//    virtual std::string eval();
-//
-//private:
-//    std::string name;
-//};
 
 // ------------------------------------------------------------------------
 
@@ -145,7 +124,7 @@ private:
 
 
 // ------------------------------------------------------------------------
-// AssignmentStatementAST - statements like "while(expression){statements}"
+// AssignmentStatementAST -
 
 class AssignmentStatementAST : public ASTNode {
 
@@ -166,7 +145,7 @@ private:
 };
 
 // ------------------------------------------------------------------------
-// AssignmentStatementAST - statements like "while(expression){statements}"
+// NumberAST -
 
 class NumberAST : public ASTNode {
 
@@ -187,14 +166,16 @@ private:
 
 // ------------------------------------------------------------------------
 
-class BinaryExpressionAST : public ASTNode {
+// OperandAST - operators involved in expressions like "A * B or A + C etc"
+
+class OperandAST : public ASTNode {
 
 public:
-    ASTNode * lhs;
+    ASTNode *lhs;
     Token op;
-    ASTNode * rhs;
+    ASTNode *rhs;
 
-    BinaryExpressionAST(ASTNode* L, Token O, ASTNode* R) : lhs(L), op(O), rhs(R) { }
+    OperandAST(Token O) : op(O){}
     std::string &getName() {
         return name;
     }
@@ -206,5 +187,33 @@ private:
     std::string name;
 };
 
+
+// ------------------------------------------------------------------------
+
+
+// ------------------------------------------------------------------------
+
+
+// FunctionDeclarationAST - statements like "func id()"
+//
+//class FunctionDeclarationAST : public ASTNode {
+//
+//public:
+//    IdentifierAST *identifier;
+//    BlockAST *block;
+//
+//    FunctionDeclarationAST(const std::string &N) : name(N) {}
+//    std::string &getName() {
+//        return name;
+//    }
+//    virtual void print();
+//    virtual void diag(unsigned int parentID);
+//    virtual std::string eval();
+//
+//private:
+//    std::string name;
+//};
+
+// ------------------------------------------------------------------------
 
 #endif //GLYNTH_AST_H

@@ -8,27 +8,17 @@
 
 enum class Token : int {
     KEYWORD_VAR,
-    KEYWORD_FUNC,
     KEYWORD_WHILE,
     KEYWORD_IF,
-    KEYWORD_RETURN,
-    KEYWORD_YIELD,
-    KEYWORD_EXIT,
+//    KEYWORD_YIELD,
+//    KEYWORD_EXIT,
+//    KEYWORD_FUNC,
+//    KEYWORD_RETURN,
 
     IDENTIFIER,
     NUMBER,
 
     SYM_ASSIGN,
-
-    OP_GT,
-    OP_LT,
-    OP_EQ,
-    OP_NE,
-    OP_ADD,
-    OP_SUB,
-    OP_MUL,
-    OP_DIV,
-
     SYM_LBRACES,
     SYM_RBRACES,
     SYM_LPAREN,
@@ -37,6 +27,18 @@ enum class Token : int {
     SYM_RBRACKET,
     SYM_COLON,
     SYM_SEMICOLON,
+    SYM_HASH,
+
+    OP_GT,
+    OP_GTE,
+    OP_LT,
+    OP_LTE,
+    OP_EQ,
+    OP_NE,
+    OP_ADD,
+    OP_SUB,
+    OP_MUL,
+    OP_DIV,
 
     END_OF_FILE = -1,
     ERROR = -2

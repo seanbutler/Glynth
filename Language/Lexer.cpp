@@ -171,6 +171,10 @@ Token Lexer::ScanToken() {
             return Token::SYM_COLON;
         }
 
+        case '#': {
+            tokens.push_back(std::make_pair(Token::SYM_HASH, "#"));
+            return Token::SYM_HASH;
+        }
 
         default: {
             return Token::ERROR;

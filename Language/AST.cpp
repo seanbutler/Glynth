@@ -68,24 +68,26 @@ std::string BlockAST::eval() {
 }
 
 // ---------------------------------------------------------------------------
-//
+
+
+
 //void FunctionDeclarationAST::print() {
 //    std::cout << "var: \"" << name << "\"" << std::endl;
 //}
-//
+
+
 //void FunctionDeclarationAST::diag(unsigned int parentID) {
 //    std::cout << "node" << ASTNode::id << " [ label = \"func: " << name << "\"];" << std::endl;
 //    std::cout << "node" << parentID << " -> " << "node" << ASTNode::id << ";" << std::endl;
 //
 //}
-//
+
+
 //std::string FunctionDeclarationAST::eval() {
 //    std::string str;
 //    str = "VAR " + getName();
 //    return str;
 //}
-
-
 
 // ---------------------------------------------------------------------------
 
@@ -173,20 +175,20 @@ std::string NumberAST::eval() {
 
 // ---------------------------------------------------------------------------
 
-void BinaryExpressionAST::print() {
+void OperandAST::print() {
     std::cout <<  "opr: " << (int)op << std::endl;
     lhs->print();
     rhs->print();
 }
 
-void BinaryExpressionAST::diag(unsigned int parentID) {
+void OperandAST::diag(unsigned int parentID) {
     lhs->diag(ASTNode::id);
     std::cout << "node" << ASTNode::id << " [ label = \"opr: " << (int)op << "\"];" << std::endl;
     rhs->diag(ASTNode::id);
     std::cout << "node" << parentID << " -> " << "node" << ASTNode::id << ";" << std::endl;
 }
 
-std::string BinaryExpressionAST::eval() {
+std::string OperandAST::eval() {
 
     std::string str = "";
     switch (op) {
@@ -206,7 +208,6 @@ std::string BinaryExpressionAST::eval() {
             str += lhs->eval() + rhs->eval() + "DIV";
             break;
         }
-
         case Token::OP_GT: {
             str += lhs->eval() + rhs->eval() + "GT";
             break;
@@ -215,14 +216,14 @@ std::string BinaryExpressionAST::eval() {
             str += lhs->eval() + rhs->eval() + "LT";
             break;
         }
-//        case Token::OP_GTE: {
-//            str += lhs->eval() + rhs->eval() + "GTE";
-//            break;
-//        }
-//        case (int)Token::OP_LTE: {
-//            str += lhs->eval() + rhs->eval() + "LTE";
-//            break;
-//        }
+        case Token::OP_GTE: {
+            str += lhs->eval() + rhs->eval() + "GTE";
+            break;
+        }
+        case Token::OP_LTE: {
+            str += lhs->eval() + rhs->eval() + "LTE";
+            break;
+        }
         case Token::OP_EQ: {
             str += lhs->eval() + rhs->eval() + "EQU";
             break;
@@ -231,10 +232,6 @@ std::string BinaryExpressionAST::eval() {
             str += lhs->eval() + rhs->eval() + "NE";
             break;
         }
-            // case ',': {
-            //     str = LHS->eval() , RHS->eval();
-            //     break;
-            // }
         default: {
             std::cout<<"Unknown BinaryExprAST opr: " << (int)op << std::endl;
             break;

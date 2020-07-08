@@ -39,6 +39,7 @@ public:
 
     ASTNode * ParseNumber();
     ASTNode * ParseIdentifier();
+    ASTNode * ParseOperand();
     ASTNode * ParseExpression();
     ASTNode * ParseParenExpression();
 

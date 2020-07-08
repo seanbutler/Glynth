@@ -33,7 +33,7 @@ bool Parser::parse(){
 
 ASTNode * Parser::ParseStatement(){
 
-    std::cout << "Parser::ParseStatement "
+    std::cout << "\nParser::ParseStatement "
             << (int) currentToken.first << " "
             << currentToken.second
             << std::endl;
@@ -117,19 +117,6 @@ ASTNode * Parser::ParseVariableDeclaration(){
 
 }
 
-// ----------------------------------------------------------------------
-
-ASTNode * Parser::ParseIdentifier(){
-    std::cout << "Parser::ParseIdentifier currentToken = " << (int)currentToken.first << " '" << currentToken.second << "' " << std::endl;
-    ASTNode* identifierNode = new IdentifierAST(currentToken.second);
-    return identifierNode;
-}
-
-ASTNode * Parser::ParseNumber(){
-    std::cout << "Parser::ParseNumber currentToken = " << (int)currentToken.first << " '" << currentToken.second << "' " << std::endl;
-    ASTNode* numberNode =  new NumberAST(atoi(currentToken.second.c_str()));
-    return numberNode;
-}
 
 // ----------------------------------------------------------------------
 
@@ -166,11 +153,8 @@ ASTNode * Parser::ParseIfStatement() {
     Token tokenType = currentToken.first;
     std::string tokenString = currentToken.second;
 
-    Token aheadTokenType = lookAhead(0).first;
-    std::string aheadTokenString = lookAhead(0).second;
-
     std::cout << "Parser::ParseIfStatement tokenType = " << (int)tokenType << " " << tokenString
-              << " (aheadTokenType = " << (int)aheadTokenType << " " << aheadTokenString << ") " << std::endl;
+              << std::endl;
 
     getNextToken();
 
@@ -183,27 +167,30 @@ ASTNode * Parser::ParseIfStatement() {
 
     ASTNode *cond = this->ParseExpression();
 
-    getNextToken();
-
-    if ( currentToken.first != Token::SYM_RPAREN) {
-        std::cerr << "ERROR Parser::ParseIfStatement() - Unrecognised Token After While Statement Expression, Expected Right Parenthesis." << std::endl;
-        return nullptr;
-    }
+//    getNextToken();
+//
+//    if ( currentToken.first != Token::SYM_RPAREN) {
+//        std::cerr << "ERROR Parser::ParseIfStatement() - Unrecognised Token After If Statement Expression " << (int)currentToken.first << currentToken.second << " Expected Right Parenthesis." << std::endl;
+//        return nullptr;
+//    }
 
     getNextToken();
 
     if ( currentToken.first != Token::SYM_LBRACES) {
-        std::cerr << "ERROR Parser::ParseIfStatement() - Unrecognised Token Before While Statement Block, Expected Left Braces '{'." << std::endl;
+        std::cerr << "ERROR Parser::ParseIfStatement() - Unrecognised Token Before If Statement Block, Expected Left Braces '{'." << std::endl;
         return nullptr;
     }
 
     ASTNode *block = this->ParseBlock();
 
     IfStatementAST *ifStatement = new IfStatementAST(cond, block);
+
+    if ( currentToken.first != Token::SYM_RBRACES) {
+        std::cerr << "ERROR Parser::ParseIfStatement() - Unrecognised Token Before If Statement Block, Expected Right Braces '{'." << std::endl;
+        return nullptr;
+    }
     return ifStatement;
 }
-
-
 
 // ----------------------------------------------------------------------
 
@@ -212,16 +199,13 @@ ASTNode * Parser::ParseWhileStatement() {
     Token tokenType = currentToken.first;
     std::string tokenString = currentToken.second;
 
-    Token aheadTokenType = lookAhead(0).first;
-    std::string aheadTokenString = lookAhead(0).second;
-
-    std::cout << "Parser::ParseWhileStatement tokenType = " << (int)tokenType << " " << tokenString
-              << " (aheadTokenType = " << (int)aheadTokenType << " " << aheadTokenString << ") " << std::endl;
+    std::cout << "Parser::ParseWhileStatement tokenType = " << (int)tokenType
+                << " " << tokenString << std::endl;
 
     getNextToken();
 
     if ( currentToken.first != Token::SYM_LPAREN) {
-        std::cerr << "ERROR Parser::ParseVariableDeclaration() -  Unrecognised Token Before While Statement Expression, Expected Left Parenthesis." << std::endl;
+        std::cerr << "ERROR Parser::ParseWhileStatement() -  Unrecognised Token Before While Statement Expression, Expected Left Parenthesis." << std::endl;
         return nullptr;
     }
 
@@ -229,32 +213,40 @@ ASTNode * Parser::ParseWhileStatement() {
 
     ASTNode *cond = this->ParseExpression();
 
-    getNextToken();
-
-    if ( currentToken.first != Token::SYM_RPAREN) {
-        std::cerr << "ERROR Parser::ParseVariableDeclaration() - Unrecognised Token After While Statement Expression, Expected Right Parenthesis." << std::endl;
-        return nullptr;
-    }
+//    getNextToken();
+//
+//    if ( currentToken.first != Token::SYM_RPAREN) {
+//        std::cerr << "ERROR Parser::ParseWhileStatement() - Unrecognised Token After While Statement Expression, Expected Right Parenthesis." << std::endl;
+//        return nullptr;
+//    }
 
     getNextToken();
 
     if ( currentToken.first != Token::SYM_LBRACES) {
-        std::cerr << "ERROR Parser::ParseVariableDeclaration() - Unrecognised Token Before While Statement Block, Expected Left Braces '{'." << std::endl;
+        std::cerr << "ERROR Parser::ParseWhileStatement() - Unrecognised Token Before While Statement Block, Expected Left Braces '{'." << std::endl;
         return nullptr;
     }
 
     ASTNode *block = this->ParseBlock();
 
     WhileStatementAST *whileStatement = new WhileStatementAST(cond, block);
+
+    if ( currentToken.first != Token::SYM_RBRACES) {
+        std::cerr << "ERROR Parser::ParseWhileStatement() - Unrecognised Token Before While Statement Block, Expected Right Braces '{'." << std::endl;
+        return nullptr;
+    }
+
     return whileStatement;
 }
-
 
 // ----------------------------------------------------------------------
 
 ASTNode *Parser::ParseExpression() {
 
     std::cout << "Parser::ParseExpression() currentToken = " << (int)currentToken.first << " " << currentToken.second << std::endl;
+
+    std::stack<ASTNode*> valueStack;
+    std::stack<Token> opStack;
 
     ASTNode* expr = nullptr;
 
@@ -264,30 +256,98 @@ ASTNode *Parser::ParseExpression() {
         switch (currentToken.first) {
 
             case Token::NUMBER: {
-                expr = ParseNumber();
+                valueStack.push( ParseNumber() );
                 getNextToken();
-                if ( currentToken.first == Token::SYM_SEMICOLON) {
-                    done = true;
-                }
                 break;
             }
 
             case Token::IDENTIFIER: {
-                return ParseIdentifier();
-            }
-
-            case Token::SYM_LPAREN: {
-                return ParseParenExpression();
-            }
-
-            case Token::SYM_SEMICOLON: {
+                valueStack.push(ParseIdentifier());
                 getNextToken();
-                // TODO now transform the parsed things into a tree or something
-                return nullptr;
+                break;
+            }
+
+            // TODO - WORKING HERE
+
+//            case Token::SYM_LPAREN: {
+//                valueStack.push(ParseParenExpression());
+//                getNextToken();
+//                break;
+//            }
+
+            case Token::OP_GT:
+            case Token::OP_GTE:
+            case Token::OP_LT:
+            case Token::OP_LTE:
+            case Token::OP_EQ:
+            case Token::OP_NE:
+            case Token::OP_ADD:
+            case Token::OP_SUB:
+            case Token::OP_MUL:
+            case Token::OP_DIV: {
+                std::cout << "Parser::ParseExpression() op = " << (int)currentToken.first << " " << currentToken.second << std::endl;
+//                if (!opStack.empty()) {
+//                    // get the last operator
+//                    Token op = opStack.pop();
+//
+//                    // get the last two values
+//                    ASTNode* right = valueStack.top();
+//                    valueStack.pop();
+//
+//                    ASTNode *left = valueStack.top();
+//                    valueStack.pop();
+//
+//                    // construct a binary op ast node
+//                    // TODO construct operator Node here...
+//                    ASTNode *binOpNode = nullptr; // new OperandAST(opStack.pop(), , )
+//                    valueStack.push(binOpNode);
+//                }
+
+                opStack.push(currentToken.first);
+                getNextToken();
+                break;
+            }
+
+            case Token::SYM_RPAREN:
+            case Token::SYM_SEMICOLON: {
+                // TODO endof the whole expression so unwind the stack and return?
+                if (!valueStack.empty()) {
+                    return valueStack.top();
+                } else {
+                    // std::cout<<"empty expression!"<<std::endl;
+                    return nullptr;
+                }
+                break;
             }
 
             default: {
-                std::cerr <<"ERROR : Unrecognised Token in Expression Expected number, identifier or brackets."<< std::endl;
+                // anything else means the end of the expression, perhaps?
+
+                if (!opStack.empty()) {
+                    // get the last operator
+                    Token op = opStack.top();
+                    opStack.pop();
+
+                    // get the last two values
+                    ASTNode* right = valueStack.top();
+                    valueStack.pop();
+
+                    ASTNode *left = valueStack.top();
+                    valueStack.pop();
+
+                    // construct a binary op ast node
+                    // TODO construct operator Node here...
+                    ASTNode *binOpNode = nullptr; // new OperandAST(opStack.pop(), , )
+                    valueStack.push(binOpNode);
+                }
+
+                opStack.push(currentToken.first);
+                getNextToken();
+
+                std::cerr << "ERROR : Unrecognised Token in Expression Expected number, got ("
+                        << (int) currentToken.first  << ") \'"
+                        << currentToken.second << "\' expected identifier or number." << std::endl;
+                return expr;
             }
         }
     }
@@ -299,64 +359,20 @@ ASTNode *Parser::ParseExpression() {
 
 ASTNode *Parser::ParseParenExpression() {
 
+    getNextToken();  // eat '('
+
     std::cout << "Parser::ParseParenExpression currentToken = " << (int)currentToken.first << " " << currentToken.second << std::endl;
+    ASTNode* expr = nullptr;
+    expr = ParseExpression();
 
-    bool insideexpression = true;
-    while(insideexpression) {
-
-        switch (currentToken.first) {
-
-            case Token::NUMBER: {
-                return ParseNumber();
-                break;
-            }
-
-            case Token::IDENTIFIER: {
-                return ParseIdentifier();
-                break;
-            }
-
-            case Token::SYM_LPAREN: {
-                return ParseParenExpression();
-                break;
-            }
-
-
-
-//            case Token::SYM_LPAREN: {
-//                getNextToken();  // eat '('
-//                ASTNode *expr = ParseExpression();
-//
-//                if (currentToken.first != Token::SYM_RPAREN ) {
-//                    std::cerr <<"ERROR - expected \')\'"<< std::endl;
-//                }
-//                getNextToken();  // eat ')'
-//                valueStack.push(expr);
-//                break;
-//            }
-
-//            case Token::SYM_RPAREN: {
-//                while(!opStack.empty()) {
-//                    Token op = opStack.top();
-//                    opStack.pop();
-//                }
-//                ASTNode *expr = ParseExpression();
-//
-//                if (currentToken.first != Token::SYM_RPAREN ) {
-//                    std::cerr <<"ERROR - expected \')\'"<< std::endl;
-//                }
-//                getNextToken();  // eat ')'
-//                valueStack.push(expr);
-//                break;
-//            }
-
-            default: {
-                getNextToken();
-                break;
-
-            }
-        }
+    if (currentToken.first != Token::SYM_RPAREN) {
+        std::cerr << "ERROR : Parser::ParseParenExpression - Unrecognised Token after Expression got "
+                  << (int) currentToken.first  << ") "
+                  << currentToken.second << " expected \')\'." << std::endl;
     }
+
+    getNextToken();  // eat ')'
+    return expr;
 }
 
 // ----------------------------------------------------------------------
@@ -378,7 +394,7 @@ ASTNode * Parser::ParseAssignmentStatement() {
         return nullptr;
     }
 
-    std::cout << "Parser::ParseAssignmentStatement OP currentToken = " << (int)currentToken.first << " \'" << currentToken.second << "\'" << std::endl;
+    std::cout << "Parser::ParseAssignmentStatement currentToken = " << (int)currentToken.first << " \'" << currentToken.second << "\'" << std::endl;
 
     getNextToken();
 
@@ -389,6 +405,44 @@ ASTNode * Parser::ParseAssignmentStatement() {
     assignmentStatementAST = new AssignmentStatementAST(identifierNode, expressionNode);
     return assignmentStatementAST;
 }
+
+
+// ----------------------------------------------------------------------
+
+ASTNode * Parser::ParseIdentifier(){
+    std::cout << "Parser::ParseIdentifier currentToken = " << (int)currentToken.first << " '" << currentToken.second << "' " << std::endl;
+    ASTNode* identifierNode = new IdentifierAST(currentToken.second);
+    return identifierNode;
+}
+
+ASTNode * Parser::ParseNumber(){
+    std::cout << "Parser::ParseNumber currentToken = " << (int)currentToken.first << " '" << currentToken.second << "' " << std::endl;
+    ASTNode* numberNode =  new NumberAST(atoi(currentToken.second.c_str()));
+    return numberNode;
+}
+
+ASTNode * Parser::ParseOperand(){
+    std::cout << "Parser::ParseNumber currentToken = " << (int)currentToken.first << " '" << currentToken.second << "' " << std::endl;
+
+    ASTNode* operandNode = nullptr;
+
+    if ( ( currentToken.first == Token::OP_ADD ) ||
+            ( currentToken.first == Token::OP_SUB ) ||
+            ( currentToken.first == Token::OP_MUL ) ||
+            ( currentToken.first == Token::OP_DIV ) ||
+            ( currentToken.first == Token::OP_EQ ) ||
+            ( currentToken.first == Token::OP_NE ) ||
+            ( currentToken.first == Token::OP_GT ) ||
+            ( currentToken.first == Token::OP_GTE ) ||
+            ( currentToken.first == Token::OP_LT ) ||
+            ( currentToken.first == Token::OP_LTE ) )
+    {
+        operandNode =  new OperandAST(currentToken.first);
+    }
+
+    return operandNode;
+}
+
 
 // ----------------------------------------------------------------------
 
