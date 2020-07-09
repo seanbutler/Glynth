@@ -2,6 +2,7 @@
 // Created by sean on 17/06/2020.
 //
 
+#include "Tokens.h"
 #include "AST.h"
 #include <iostream>
 
@@ -175,20 +176,113 @@ std::string NumberAST::eval() {
 
 // ---------------------------------------------------------------------------
 
-void OperandAST::print() {
-    std::cout <<  "opr: " << (int)op << std::endl;
+void BinOperandAST::print() {
+
+    std::string opStr;
+
+    switch (op) {
+        case Token::OP_GT:
+            opStr = ">";
+            break;
+
+        case Token::OP_GTE:
+            opStr = ">=";
+            break;
+
+        case Token::OP_LT:
+            opStr = "<";
+            break;
+
+        case Token::OP_LTE:
+            opStr = "<=";
+            break;
+
+        case Token::OP_EQ:
+            opStr = "==";
+            break;
+
+        case Token::OP_NE:
+            opStr = "!=";
+            break;
+
+        case Token::OP_ADD:
+            opStr = "+";
+            break;
+
+        case Token::OP_SUB:
+            opStr = "-";
+            break;
+
+        case Token::OP_MUL:
+            opStr = "*";
+            break;
+
+        case Token::OP_DIV:
+            opStr = "/";
+            break;
+    }
+
+    std::cout <<  "opr: " << opStr << std::endl;
+
     lhs->print();
     rhs->print();
 }
 
-void OperandAST::diag(unsigned int parentID) {
+void BinOperandAST::diag(unsigned int parentID) {
     lhs->diag(ASTNode::id);
-    std::cout << "node" << ASTNode::id << " [ label = \"opr: " << (int)op << "\"];" << std::endl;
+
+    std::string opStr;
+
+    switch (op) {
+        case Token::OP_GT:
+            opStr = ">";
+            break;
+
+        case Token::OP_GTE:
+            opStr = ">=";
+            break;
+
+        case Token::OP_LT:
+            opStr = "<";
+            break;
+
+        case Token::OP_LTE:
+            opStr = "<=";
+            break;
+
+        case Token::OP_EQ:
+            opStr = "==";
+            break;
+
+        case Token::OP_NE:
+            opStr = "!=";
+            break;
+
+        case Token::OP_ADD:
+            opStr = "+";
+            break;
+
+        case Token::OP_SUB:
+            opStr = "-";
+            break;
+
+        case Token::OP_MUL:
+            opStr = "*";
+            break;
+
+        case Token::OP_DIV:
+            opStr = "/";
+            break;
+    }
+
+
+
+    std::cout << "node" << ASTNode::id << " [ label = \"opr: " << opStr << "\"];" << std::endl;
     rhs->diag(ASTNode::id);
     std::cout << "node" << parentID << " -> " << "node" << ASTNode::id << ";" << std::endl;
 }
 
-std::string OperandAST::eval() {
+std::string BinOperandAST::eval() {
 
     std::string str = "";
     switch (op) {

@@ -41,12 +41,12 @@ Token Lexer::ScanToken() {
         } else if (tokenString == "while") {
             tokens.push_back(std::make_pair(Token::KEYWORD_WHILE, tokenString));
             return Token::KEYWORD_WHILE;
-//        } else if (tokenString == "func") {
-//            tokens.push_back(std::make_pair(Token::KEYWORD_FUNC, tokenString));
-//            return Token::KEYWORD_FUNC;
         } else if (tokenString == "var") {
             tokens.push_back(std::make_pair(Token::KEYWORD_VAR, tokenString));
             return Token::KEYWORD_VAR;
+//        } else if (tokenString == "func") {
+//            tokens.push_back(std::make_pair(Token::KEYWORD_FUNC, tokenString));
+//            return Token::KEYWORD_FUNC;
 //        } else if (tokenString == "return") {
 //            tokens.push_back(std::make_pair(Token::KEYWORD_RETURN, tokenString));
 //            return Token::KEYWORD_RETURN;
@@ -149,6 +149,17 @@ Token Lexer::ScanToken() {
             return Token::OP_DIV;
         }
 
+        case '!': {
+            char nextChar = lexingStr[lexingPos];
+
+            if (nextChar == '=') {
+                tokens.push_back(std::make_pair(Token::OP_NE, "!="));
+                ++lexingPos;
+                return Token::OP_NE;
+            }
+            return Token::ERROR;
+        }
+
         case '=': {
             char nextChar = lexingStr[lexingPos];
 
@@ -179,6 +190,5 @@ Token Lexer::ScanToken() {
         default: {
             return Token::ERROR;
         }
-
     }
 }

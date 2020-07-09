@@ -168,14 +168,15 @@ private:
 
 // OperandAST - operators involved in expressions like "A * B or A + C etc"
 
-class OperandAST : public ASTNode {
+class BinOperandAST : public ASTNode {
 
 public:
-    ASTNode *lhs;
+    BinOperandAST(Token O, ASTNode *L, ASTNode *R) : op(O), lhs(L), rhs(R){}
+
     Token op;
+    ASTNode *lhs;
     ASTNode *rhs;
 
-    OperandAST(Token O) : op(O){}
     std::string &getName() {
         return name;
     }
@@ -187,12 +188,7 @@ private:
     std::string name;
 };
 
-
 // ------------------------------------------------------------------------
-
-
-// ------------------------------------------------------------------------
-
 
 // FunctionDeclarationAST - statements like "func id()"
 //

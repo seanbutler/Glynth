@@ -48,7 +48,6 @@ public:
         tokenListFilename += std::string(".tokens");
         tokenListFile.open(tokenListFilename);
         for (auto it = tokens.begin(); it != tokens.end(); ++it) {
-//            tokenListFile<<"type: "<<(int)it->first<<";\tvalue: "<<it->second<<std::endl;
             tokenListFile<< (int)it->first<<"\t"<<it->second<<std::endl;
         }
     }
