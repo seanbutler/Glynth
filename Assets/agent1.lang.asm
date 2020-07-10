@@ -19,7 +19,10 @@
 # IF EXPRESSION 
 	LOAD state
 	PUSH 0
-# IF BLOCK 
+	EQU
+	BRT past_the_ifblock
+
+# IF BLOCK
 # BEGIN BLOCK
 
 # Assignment Statement 
@@ -29,4 +32,6 @@
 # Assignment Statement 
 	PUSH 1
 	SAVE state
+
 # END BLOCK
+past_the_ifblock:

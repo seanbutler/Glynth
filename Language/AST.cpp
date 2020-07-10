@@ -66,7 +66,7 @@ std::string BlockAST::eval() {
     for (auto S  : statements) {
         str += S->eval();
     }
-    str += "# END BLOCK\n";
+    str += "\n# END BLOCK\n";
     return str;
 }
 
@@ -92,11 +92,14 @@ std::string IfStatementAST::eval() {
 
     str += "\n# IF EXPRESSION ""\n";
     str += this->expression->eval();
-    str += "# IF BLOCK " + name + "\n";
+    str += "\tBRT past_the_ifblock\n";
+    str += "\n# IF BLOCK\n";
     str += this->block->eval();
+    str += "past_the_ifblock:\n";
 
     return str;
 }
+
 
 // ---------------------------------------------------------------------------
 
@@ -327,7 +330,7 @@ std::string BinOperandAST::eval() {
         }
         case Token::OP_EQ: {
             str += lhs->eval() + rhs->eval();
-            str + "\tEQU\n";
+            str += "\tEQU\n";
 
             break;
         }
