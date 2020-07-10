@@ -1,29 +1,16 @@
+
 var health;
+
+var lives;
+lives = 5;
+
 var state;
 state = 0;
 
-while(lives>0)
-{
 
-    if (state == 0 ) {
-        health = 100;
-        state = 1;
-    }
 
-    while(hello == world) {
-    gosh = gee;
-    }
 
-    if (state == 1 ) {
-        coins = coins + 1;
-        if (health == 0 ) {
-            state = 2;
-        }
-    }
-
-    if (state == 2 ) {
-        if (health == 0 ) {
-            state = 2;
-        }
-    }
+if (state == 0) {
+    health = 100;
+    state = 1;
 }

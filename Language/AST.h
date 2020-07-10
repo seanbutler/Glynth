@@ -16,33 +16,11 @@ static unsigned int uid = 1;
 class ASTNode {
 public:
     ASTNode() { id = uid++; }
-
     virtual ~ASTNode() {}
-
     virtual void print() = 0;
-
     virtual void diag(unsigned int parentID) = 0;
-
     virtual std::string eval() = 0;
-
     unsigned int id;
-};
-
-// ------------------------------------------------------------------------
-
-class VariableDeclarationAST : public ASTNode {
-
-public:
-    VariableDeclarationAST(ASTNode *I) : identifier(I) {}
-
-    virtual void print();
-
-    virtual void diag(unsigned int parentID);
-
-    virtual std::string eval();
-
-private:
-    ASTNode *identifier;
 };
 
 // ------------------------------------------------------------------------
@@ -54,14 +32,9 @@ class IdentifierAST : public ASTNode {
 public:
     IdentifierAST(const std::string &N) : name(N) {}
 
-    std::string &getName() {
-        return name;
-    }
-
+    std::string &getName() { return name; }
     virtual void print();
-
     virtual void diag(unsigned int parentID);
-
     virtual std::string eval();
 
 private:
@@ -71,19 +44,30 @@ private:
 
 // ------------------------------------------------------------------------
 
+class VariableDeclarationAST : public ASTNode {
+
+public:
+    VariableDeclarationAST(IdentifierAST *I) : identifier(I) {}
+    virtual void print();
+    virtual void diag(unsigned int parentID);
+    virtual std::string eval();
+
+private:
+    IdentifierAST *identifier;
+};
+
+
+// ------------------------------------------------------------------------
+
 // BlockAST - for lists of statements between { and } tokens
 
 class BlockAST : public ASTNode {
 
 public:
     std::vector<ASTNode *> statements;
-
     BlockAST() {};
-
     virtual void print();
-
     virtual void diag(unsigned int parentID);
-
     virtual std::string eval();
 
 private:
@@ -103,14 +87,10 @@ public:
 
     IfStatementAST(ASTNode *E, ASTNode *B) : expression(E), block(B) {}
 
-    std::string &getName() {
-        return name;
-    }
+    std::string &getName() { return name; }
 
     virtual void print();
-
     virtual void diag(unsigned int parentID);
-
     virtual std::string eval();
 
 private:
@@ -129,14 +109,9 @@ public:
 
     WhileStatementAST(ASTNode *E, ASTNode *B) : expression(E), block(B) {}
 
-    std::string &getName() {
-        return name;
-    }
-
+    std::string &getName() { return name; }
     virtual void print();
-
     virtual void diag(unsigned int parentID);
-
     virtual std::string eval();
 
 private:
@@ -154,15 +129,9 @@ public:
     ASTNode *expression;
 
     AssignmentStatementAST(ASTNode *I, ASTNode *E) : identifier(I), expression(E) {}
-
-    std::string &getName() {
-        return name;
-    }
-
+    std::string &getName() { return name; }
     virtual void print();
-
     virtual void diag(unsigned int parentID);
-
     virtual std::string eval();
 
 private:
@@ -179,14 +148,9 @@ public:
 
     NumberAST(int V) : val(V) {}
 
-    std::string &getName() {
-        return name;
-    }
-
+    std::string &getName() { return name; }
     virtual void print();
-
     virtual void diag(unsigned int parentID);
-
     virtual std::string eval();
 
 private:
@@ -206,41 +170,14 @@ public:
     ASTNode *lhs;
     ASTNode *rhs;
 
-    std::string &getName() {
-        return name;
-    }
-
+    std::string &getName() { return name; }
     virtual void print();
-
     virtual void diag(unsigned int parentID);
-
     virtual std::string eval();
 
 private:
     std::string name;
 };
-
-// ------------------------------------------------------------------------
-
-// FunctionDeclarationAST - statements like "func id()"
-//
-//class FunctionDeclarationAST : public ASTNode {
-//
-//public:
-//    IdentifierAST *identifier;
-//    BlockAST *block;
-//
-//    FunctionDeclarationAST(const std::string &N) : name(N) {}
-//    std::string &getName() {
-//        return name;
-//    }
-//    virtual void print();
-//    virtual void diag(unsigned int parentID);
-//    virtual std::string eval();
-//
-//private:
-//    std::string name;
-//};
 
 // ------------------------------------------------------------------------
 

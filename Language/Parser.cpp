@@ -110,7 +110,7 @@ ASTNode *Parser::ParseVariableDeclaration() {
               << (int) tokenType << " "
               << tokenString << std::endl;
 
-    ASTNode *ident = nullptr;
+    IdentifierAST *ident = nullptr;
     ASTNode *var = nullptr;
 
     if (currentToken.first == Token::IDENTIFIER) {
@@ -430,10 +430,10 @@ ASTNode *Parser::ParseAssignmentStatement() {
 
 // ----------------------------------------------------------------------
 
-ASTNode *Parser::ParseIdentifier() {
+IdentifierAST *Parser::ParseIdentifier() {
     std::cout << "Parser::ParseIdentifier currentToken = " << (int) currentToken.first << " '" << currentToken.second
               << "' " << std::endl;
-    ASTNode *identifierNode = new IdentifierAST(currentToken.second);
+    IdentifierAST *identifierNode = new IdentifierAST(currentToken.second);
     return identifierNode;
 }
 
@@ -443,35 +443,13 @@ ASTNode *Parser::ParseNumber() {
     ASTNode *numberNode = new NumberAST(atoi(currentToken.second.c_str()));
     return numberNode;
 }
-//
-//ASTNode * Parser::ParseOperand(){
-//    std::cout << "Parser::ParseNumber currentToken = " << (int)currentToken.first << " '" << currentToken.second << "' " << std::endl;
-//
-//    ASTNode* operandNode = nullptr;
-//
-//    if ( ( currentToken.first == Token::OP_ADD ) ||
-//            ( currentToken.first == Token::OP_SUB ) ||
-//            ( currentToken.first == Token::OP_MUL ) ||
-//            ( currentToken.first == Token::OP_DIV ) ||
-//            ( currentToken.first == Token::OP_EQ ) ||
-//            ( currentToken.first == Token::OP_NE ) ||
-//            ( currentToken.first == Token::OP_GT ) ||
-//            ( currentToken.first == Token::OP_GTE ) ||
-//            ( currentToken.first == Token::OP_LT ) ||
-//            ( currentToken.first == Token::OP_LTE ) )
-//    {
-//        operandNode =  new BinOperandAST(currentToken.first);
-//    }
-//
-//    return operandNode;
-//}
 
 
 // ----------------------------------------------------------------------
 
 unsigned int ufid;
 
-bool Parser::debug(std::string filename) {
+bool Parser::OutputTreeDiagram(std::string filename) {
 
     std::ofstream diagramFile;
     std::string diagramFilename = std::filesystem::path(filename);
@@ -491,29 +469,24 @@ bool Parser::debug(std::string filename) {
 
 // ----------------------------------------------------------------------
 
-//ASTNode * Parser::ParseFunctionDeclaration(){
-//
-//    Token aheadTokenType = lookAhead(0).first;
-//    std::string aheadTokenString = lookAhead(0).second;
-//
-//    std::cout << "Parser::ParseFunctionDeclaration aheadTokenType = " << (int)aheadTokenType << " " << aheadTokenString<< std::endl;
-//
-//    getNextToken();S
-//
-//    ASTNode *var = nullptr;
-//
-//    switch(aheadTokenType) {
-//        case Token::IDENTIFIER: {
-//            var = ParseIdentifier();
-//            break;
-//        }
-//        default: {
-//            std::cerr << "Unrecognised Token in Function Declaration" << std::endl;
-//            return nullptr;
-//        }
-//    }
-//
-//    return var;
-//}
+bool Parser::OutputAsm(std::string filename) {
+
+    std::ofstream asmFile;
+    std::string diagramFilename = std::filesystem::path(filename);
+    diagramFilename += std::string(".asm");
+    asmFile.open(diagramFilename);
+
+    std::cout.rdbuf(asmFile.rdbuf());
+
+    std::string assemblyCode;
+
+    for (auto N : abstractSyntaxTree) {
+        if (N) {
+            assemblyCode += N->eval();
+        }
+    }
+    std::cout << assemblyCode;
+    return true;
+}
 
 // ----------------------------------------------------------------------

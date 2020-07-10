@@ -17,45 +17,30 @@ class Parser {
 
 public:
     Parser(const std::vector<std::pair<Token, std::string>> &T) : tokens(T) {}
-
     std::vector<std::pair<Token, std::string>> tokens;
-
     std::pair<Token, std::string> currentToken;
     unsigned int position = 0;
-
-    std::pair<Token, std::string> &getNextToken() {
-        return currentToken = tokens[position++];
-    }
-
-    std::pair<Token, std::string> &lookAhead(int offset = 1) {
-        return tokens[position + offset];
-    }
+    std::pair<Token, std::string> &getNextToken()               { return currentToken = tokens[position++]; }
+    std::pair<Token, std::string> &lookAhead(int offset = 1)    { return tokens[position + offset]; }
 
     bool parse();
 
     ASTNode *ParseStatement();
-
     ASTNode *ParseVariableDeclaration();
-
     ASTNode *ParseBlock();
-
     ASTNode *ParseWhileStatement();
-
     ASTNode *ParseIfStatement();
-
     ASTNode *ParseNumber();
-
-    ASTNode *ParseIdentifier();
-
+    IdentifierAST *ParseIdentifier();
     ASTNode *ParseExpression();
-
     ASTNode *ParseParenExpression();
-
     ASTNode *ParseAssignmentStatement();
 
-    bool debug(std::string filename);
-
+    bool OutputTreeDiagram(std::string filename);
     std::vector<ASTNode *> abstractSyntaxTree;
+
+    bool OutputAsm(std::string filename);
+
 };
 
 #endif //GLYNTH_PARSER_H

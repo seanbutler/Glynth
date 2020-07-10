@@ -32,11 +32,10 @@ private:
     std::vector<int> data;
     std::stack<int> stack;
 
-    unsigned int programCounter = 0;
+    int programCounter = 0;
 
-    void incrProgramCounter() { programCounter++; }
-
-    int getCurrentInstruction() { return instructions[programCounter]; }
+    void incrProgramCounter()       { programCounter++; }
+    int getCurrentInstruction()     { return instructions[programCounter]; }
 
 public:
     void DumpInstructions() {

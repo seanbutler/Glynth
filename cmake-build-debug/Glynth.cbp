@@ -96,6 +96,9 @@
 		<Unit filename="/home/sean/Projects/Glynth/Language/Assembler.h">
 			<Option target="Glynth"/>
 		</Unit>
+		<Unit filename="/home/sean/Projects/Glynth/Language/Instructions.h">
+			<Option target="Glynth"/>
+		</Unit>
 		<Unit filename="/home/sean/Projects/Glynth/Language/Lexer.cpp">
 			<Option target="Glynth"/>
 		</Unit>

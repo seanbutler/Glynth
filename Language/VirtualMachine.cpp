@@ -5,12 +5,11 @@
 #include "Instructions.h"
 #include "VirtualMachine.h"
 
-
 void VM::Execute() {
     bool running = true;
 
     while (running) {
-        switch (getCurrentInstruction()) {
+        switch ((INS)getCurrentInstruction()) {
             case INS::NOP : {
                 // Do Nothing
                 break;
@@ -102,7 +101,7 @@ void VM::Execute() {
             }
 
             case INS::OUTPUT : {
-                std::cout << "OUTPUT " << this->stack.top() << std::endl;
+                std::cout << "VMOUT " << this->stack.top() << std::endl;
                 this->stack.pop();
                 break;
             }
@@ -126,6 +125,27 @@ void VM::Execute() {
                 int addr = getCurrentInstruction();
                 int val = data[addr];
                 stack.push(val);
+                break;
+            }
+
+            case INS::JMP: {
+                incrProgramCounter();
+                int addr = getCurrentInstruction();
+                programCounter = addr-1;
+                break;
+            }
+
+            case INS::BNZ: {
+
+                int a = stack.top();
+                this->stack.pop();
+
+                incrProgramCounter();
+                int addr = getCurrentInstruction();
+
+                if (a) {
+                    programCounter = addr-1;
+                }
                 break;
             }
 

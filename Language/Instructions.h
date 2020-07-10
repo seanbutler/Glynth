@@ -6,33 +6,40 @@
 #define GLYNTH_INSTRUCTIONS_H
 
 #include <string>
-#include <map>
+#include <array>
 
-enum INS : int {
+enum class INS : int {
     NOP = 0,
     HALT,
     PUSH,
     POP,
 
-    ADD,    //(4)
+    SAVE,
+    LOAD,
+
+
+    ADD,
     SUB,
     MUL,
     DIV,
 
-    EQU,    //(8)
+
+    EQU,
     NE,
+    GT,
+    GTE,
+    LT,
+    LTE,
 
     RAND,
 
     OUTPUT,
-    INPUT,  //(12)
-    SAVE,
-    LOAD
+    INPUT,
+
+    JMP,
+    BNZ,
+    YIELD
+
 };
-
-class Instructions {
-
-};
-
 
 #endif //GLYNTH_INSTRUCTIONS_H

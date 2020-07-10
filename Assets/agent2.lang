@@ -1,23 +1,29 @@
-var health
-health = 3
 
-var ammo
-ammo = 99
+var state;
+var health;
+state = 0;
 
-
-while ( health ) {
-
-    if ( shoot ) {
-        ammo = 1
+while(lives>0)
+{
+    if (state == 0 ) {
+        health = 100;
+        state = 1;
     }
 
-    while ( death ) {
-        health = 0
+    while(hello == world) {
+        gosh = gee;
     }
 
-    health = 6
+    if (state == 1 ) {
+        coins = coins + 1;
+        if (health == 0 ) {
+            state = 2;
+        }
+    }
+
+    if (state == 2 ) {
+        if (health == 0 ) {
+            state = 2;
+        }
+    }
 }
-
-
-
-
