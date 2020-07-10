@@ -222,7 +222,7 @@ void BinOperandAST::print() {
             break;
     }
 
-    std::cout <<  "opr: " << opStr << std::endl;
+    std::cout << "opr: " << opStr << std::endl;
 
     lhs->print();
     rhs->print();
@@ -276,7 +276,6 @@ void BinOperandAST::diag(unsigned int parentID) {
     }
 
 
-
     std::cout << "node" << ASTNode::id << " [ label = \"opr: " << opStr << "\"];" << std::endl;
     rhs->diag(ASTNode::id);
     std::cout << "node" << parentID << " -> " << "node" << ASTNode::id << ";" << std::endl;
@@ -327,7 +326,7 @@ std::string BinOperandAST::eval() {
             break;
         }
         default: {
-            std::cout<<"Unknown BinaryExprAST opr: " << (int)op << std::endl;
+            std::cout << "Unknown BinaryExprAST opr: " << (int) op << std::endl;
             break;
         }
     }

@@ -20,8 +20,8 @@ class Lexer {
 public:
 
     Lexer(const std::string &str, int pos = 0) :
-        lexingStr(str),
-        lexingPos(pos) {
+            lexingStr(str),
+            lexingPos(pos) {
     }
 
     virtual ~Lexer() {
@@ -33,7 +33,7 @@ public:
         Token result;
         do {
             result = ScanToken();
-        } while ( result != Token::END_OF_FILE && result != Token::ERROR );
+        } while (result != Token::END_OF_FILE && result != Token::ERROR);
 
         return result;
     }
@@ -48,10 +48,9 @@ public:
         tokenListFilename += std::string(".tokens");
         tokenListFile.open(tokenListFilename);
         for (auto it = tokens.begin(); it != tokens.end(); ++it) {
-            tokenListFile<< (int)it->first<<"\t"<<it->second<<std::endl;
+            tokenListFile << (int) it->first << "\t" << it->second << std::endl;
         }
     }
-
 
 
 private:

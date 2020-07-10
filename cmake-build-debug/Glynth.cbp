@@ -90,6 +90,12 @@
 		<Unit filename="/home/sean/Projects/Glynth/Language/AST.h">
 			<Option target="Glynth"/>
 		</Unit>
+		<Unit filename="/home/sean/Projects/Glynth/Language/Assembler.cpp">
+			<Option target="Glynth"/>
+		</Unit>
+		<Unit filename="/home/sean/Projects/Glynth/Language/Assembler.h">
+			<Option target="Glynth"/>
+		</Unit>
 		<Unit filename="/home/sean/Projects/Glynth/Language/Lexer.cpp">
 			<Option target="Glynth"/>
 		</Unit>
@@ -103,6 +109,12 @@
 			<Option target="Glynth"/>
 		</Unit>
 		<Unit filename="/home/sean/Projects/Glynth/Language/Tokens.h">
+			<Option target="Glynth"/>
+		</Unit>
+		<Unit filename="/home/sean/Projects/Glynth/Language/VirtualMachine.cpp">
+			<Option target="Glynth"/>
+		</Unit>
+		<Unit filename="/home/sean/Projects/Glynth/Language/VirtualMachine.h">
 			<Option target="Glynth"/>
 		</Unit>
 		<Unit filename="/home/sean/Projects/Glynth/main.cpp">

@@ -150,6 +150,33 @@ Language/AST.cpp.s:
 	$(MAKE) -f CMakeFiles/Glynth.dir/build.make CMakeFiles/Glynth.dir/Language/AST.cpp.s
 .PHONY : Language/AST.cpp.s
 
+Language/Assembler.o: Language/Assembler.cpp.o
+
+.PHONY : Language/Assembler.o
+
+# target to build an object file
+Language/Assembler.cpp.o:
+	$(MAKE) -f CMakeFiles/Glynth.dir/build.make CMakeFiles/Glynth.dir/Language/Assembler.cpp.o
+.PHONY : Language/Assembler.cpp.o
+
+Language/Assembler.i: Language/Assembler.cpp.i
+
+.PHONY : Language/Assembler.i
+
+# target to preprocess a source file
+Language/Assembler.cpp.i:
+	$(MAKE) -f CMakeFiles/Glynth.dir/build.make CMakeFiles/Glynth.dir/Language/Assembler.cpp.i
+.PHONY : Language/Assembler.cpp.i
+
+Language/Assembler.s: Language/Assembler.cpp.s
+
+.PHONY : Language/Assembler.s
+
+# target to generate assembly for a file
+Language/Assembler.cpp.s:
+	$(MAKE) -f CMakeFiles/Glynth.dir/build.make CMakeFiles/Glynth.dir/Language/Assembler.cpp.s
+.PHONY : Language/Assembler.cpp.s
+
 Language/Lexer.o: Language/Lexer.cpp.o
 
 .PHONY : Language/Lexer.o
@@ -204,6 +231,33 @@ Language/Parser.cpp.s:
 	$(MAKE) -f CMakeFiles/Glynth.dir/build.make CMakeFiles/Glynth.dir/Language/Parser.cpp.s
 .PHONY : Language/Parser.cpp.s
 
+Language/VirtualMachine.o: Language/VirtualMachine.cpp.o
+
+.PHONY : Language/VirtualMachine.o
+
+# target to build an object file
+Language/VirtualMachine.cpp.o:
+	$(MAKE) -f CMakeFiles/Glynth.dir/build.make CMakeFiles/Glynth.dir/Language/VirtualMachine.cpp.o
+.PHONY : Language/VirtualMachine.cpp.o
+
+Language/VirtualMachine.i: Language/VirtualMachine.cpp.i
+
+.PHONY : Language/VirtualMachine.i
+
+# target to preprocess a source file
+Language/VirtualMachine.cpp.i:
+	$(MAKE) -f CMakeFiles/Glynth.dir/build.make CMakeFiles/Glynth.dir/Language/VirtualMachine.cpp.i
+.PHONY : Language/VirtualMachine.cpp.i
+
+Language/VirtualMachine.s: Language/VirtualMachine.cpp.s
+
+.PHONY : Language/VirtualMachine.s
+
+# target to generate assembly for a file
+Language/VirtualMachine.cpp.s:
+	$(MAKE) -f CMakeFiles/Glynth.dir/build.make CMakeFiles/Glynth.dir/Language/VirtualMachine.cpp.s
+.PHONY : Language/VirtualMachine.cpp.s
+
 main.o: main.cpp.o
 
 .PHONY : main.o
@@ -243,12 +297,18 @@ help:
 	@echo "... Language/AST.o"
 	@echo "... Language/AST.i"
 	@echo "... Language/AST.s"
+	@echo "... Language/Assembler.o"
+	@echo "... Language/Assembler.i"
+	@echo "... Language/Assembler.s"
 	@echo "... Language/Lexer.o"
 	@echo "... Language/Lexer.i"
 	@echo "... Language/Lexer.s"
 	@echo "... Language/Parser.o"
 	@echo "... Language/Parser.i"
 	@echo "... Language/Parser.s"
+	@echo "... Language/VirtualMachine.o"
+	@echo "... Language/VirtualMachine.i"
+	@echo "... Language/VirtualMachine.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

@@ -5,8 +5,10 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
   "/home/sean/Projects/Glynth/Language/AST.cpp" "/home/sean/Projects/Glynth/cmake-build-debug/CMakeFiles/Glynth.dir/Language/AST.cpp.o"
+  "/home/sean/Projects/Glynth/Language/Assembler.cpp" "/home/sean/Projects/Glynth/cmake-build-debug/CMakeFiles/Glynth.dir/Language/Assembler.cpp.o"
   "/home/sean/Projects/Glynth/Language/Lexer.cpp" "/home/sean/Projects/Glynth/cmake-build-debug/CMakeFiles/Glynth.dir/Language/Lexer.cpp.o"
   "/home/sean/Projects/Glynth/Language/Parser.cpp" "/home/sean/Projects/Glynth/cmake-build-debug/CMakeFiles/Glynth.dir/Language/Parser.cpp.o"
+  "/home/sean/Projects/Glynth/Language/VirtualMachine.cpp" "/home/sean/Projects/Glynth/cmake-build-debug/CMakeFiles/Glynth.dir/Language/VirtualMachine.cpp.o"
   "/home/sean/Projects/Glynth/main.cpp" "/home/sean/Projects/Glynth/cmake-build-debug/CMakeFiles/Glynth.dir/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")

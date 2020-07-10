@@ -3,23 +3,30 @@
 
 #include "./Language/Lexer.h"
 #include "./Language/Parser.h"
+#include "./Language/Assembler.h"
+#include "./Language/VirtualMachine.h"
 
 int main(int argc, char **argv) {
     std::cout << "GLYNTH - Game Language Program Synthesis" << std::endl;
 
 //    srand(time(0));
 
-    std::string filename = "Assets/agent1.lang";
-    std::ifstream sourceFile(filename);
-    std::string sourceString((std::istreambuf_iterator<char>(sourceFile)), std::istreambuf_iterator<char>());
+//    std::string filename = "Assets/agent1.lang";
+//    std::ifstream sourceFile(filename);
+//    std::string sourceString((std::istreambuf_iterator<char>(sourceFile)), std::istreambuf_iterator<char>());
+//
+//    Lexer lexer(sourceString);
+//    lexer.Scan();
+//    lexer.OutputTokenList(filename);
+//
+//    Parser parser(lexer.GetTokenList());
+//    parser.parse();
+//    parser.debug(filename);
 
-    Lexer lexer(sourceString);
-    lexer.Scan();
-    lexer.OutputTokenList(filename);
+    Assembler assembler;
 
-    Parser parser(lexer.GetTokenList());
-    parser.parse();
-    parser.debug(filename);
+    VM virtualMachine(assembler.GetBinaryInstructions());
+    virtualMachine.Execute();
 
     return 0;
 }

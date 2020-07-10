@@ -45,6 +45,4 @@ enum class Token : int {
 };
 
 
-
-
 #endif //GLYNTH_TOKENS_H

@@ -5,6 +5,10 @@ CMakeFiles/Glynth.dir/Language/AST.cpp.o
  /home/sean/Projects/Glynth/Language/AST.cpp
  /home/sean/Projects/Glynth/Language/AST.h
  /home/sean/Projects/Glynth/Language/Tokens.h
+CMakeFiles/Glynth.dir/Language/Assembler.cpp.o
+ /home/sean/Projects/Glynth/Language/Assembler.cpp
+ /home/sean/Projects/Glynth/Language/Assembler.h
+ /home/sean/Projects/Glynth/Language/Instructions.h
 CMakeFiles/Glynth.dir/Language/Lexer.cpp.o
  /home/sean/Projects/Glynth/Language/Lexer.cpp
  /home/sean/Projects/Glynth/Language/Lexer.h
@@ -14,9 +18,16 @@ CMakeFiles/Glynth.dir/Language/Parser.cpp.o
  /home/sean/Projects/Glynth/Language/Parser.cpp
  /home/sean/Projects/Glynth/Language/Parser.h
  /home/sean/Projects/Glynth/Language/Tokens.h
+CMakeFiles/Glynth.dir/Language/VirtualMachine.cpp.o
+ /home/sean/Projects/Glynth/Language/Instructions.h
+ /home/sean/Projects/Glynth/Language/VirtualMachine.cpp
+ /home/sean/Projects/Glynth/Language/VirtualMachine.h
 CMakeFiles/Glynth.dir/main.cpp.o
  /home/sean/Projects/Glynth/Language/AST.h
+ /home/sean/Projects/Glynth/Language/Assembler.h
+ /home/sean/Projects/Glynth/Language/Instructions.h
  /home/sean/Projects/Glynth/Language/Lexer.h
  /home/sean/Projects/Glynth/Language/Parser.h
  /home/sean/Projects/Glynth/Language/Tokens.h
+ /home/sean/Projects/Glynth/Language/VirtualMachine.h
  /home/sean/Projects/Glynth/main.cpp
