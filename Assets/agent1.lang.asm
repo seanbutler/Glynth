@@ -1,37 +1,41 @@
 
-# DECLARE health
+; DECLARE health
 	NOP
 
-# DECLARE lives
+; DECLARE lives
 	NOP
 
-# Assignment Statement 
+; Assignment Statement 
 	PUSH 5
 	SAVE lives
 
-# DECLARE state
+; DECLARE state
 	NOP
 
-# Assignment Statement 
+; Assignment Statement 
 	PUSH 0
 	SAVE state
 
-# IF EXPRESSION 
-	LOAD state
+; IF EXPRESSION 
+	LOAD health
 	PUSH 0
-	EQU
-	BRT past_the_ifblock
+	GT
+	BRF JumpLabel0
 
-# IF BLOCK
-# BEGIN BLOCK
+; IF BLOCK
+; BEGIN BLOCK
 
-# Assignment Statement 
-	PUSH 100
-	SAVE health
+; WHILE 
+JumpLabel1:
+	BRF JumpLabel2
+	JMP JumpLabel1
+JumpLabel2:
 
-# Assignment Statement 
-	PUSH 1
-	SAVE state
+; WHILE 
+JumpLabel3:
+	BRF JumpLabel4
+	JMP JumpLabel3
+JumpLabel4:
 
-# END BLOCK
-past_the_ifblock:
+; END BLOCK
+JumpLabel0:

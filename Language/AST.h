@@ -7,9 +7,20 @@
 
 #include <string>
 #include <vector>
+#include <sstream>
 #include "Tokens.h"
 
 // ------------------------------------------------------------------------
+
+static int jmpLabel = 0;
+static std::string generateJumpLabel() {
+    std::ostringstream label;
+    label<<"JumpLabel"<<jmpLabel++;
+    return label.str();
+}
+
+// ------------------------------------------------------------------------
+
 
 static unsigned int uid = 1;
 

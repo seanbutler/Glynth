@@ -23,7 +23,6 @@ int main(int argc, char **argv) {
     parser.OutputAsm(filename);
 
 //    Assembler assembler(parser.getAST());
-
 //    VM virtualMachine(assembler.GetBinaryInstructions());
 //    virtualMachine.Execute();
 

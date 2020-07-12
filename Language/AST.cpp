@@ -20,7 +20,7 @@ void VariableDeclarationAST::diag(unsigned int parentID) {
 
 std::string VariableDeclarationAST::eval() {
     std::string str = "";
-    str += "\n# DECLARE " + this->identifier->getName() + "\n";
+    str += "\n; DECLARE " + this->identifier->getName() + "\n";
     str += "\tNOP\n";
     return str;
 }
@@ -62,11 +62,11 @@ void BlockAST::diag(unsigned int parentID) {
 }
 
 std::string BlockAST::eval() {
-    std::string str = "# BEGIN BLOCK\n";
+    std::string str = "; BEGIN BLOCK\n";
     for (auto S  : statements) {
         str += S->eval();
     }
-    str += "\n# END BLOCK\n";
+    str += "\n; END BLOCK\n";
     return str;
 }
 
@@ -90,12 +90,15 @@ void IfStatementAST::diag(unsigned int parentID) {
 std::string IfStatementAST::eval() {
     std::string str = "";
 
-    str += "\n# IF EXPRESSION ""\n";
+    str += "\n; IF EXPRESSION ""\n";
     str += this->expression->eval();
-    str += "\tBRT past_the_ifblock\n";
-    str += "\n# IF BLOCK\n";
+
+    std::string label = generateJumpLabel();
+
+    str += "\tBRF " + label + "\n";
+    str += "\n; IF BLOCK\n";
     str += this->block->eval();
-    str += "past_the_ifblock:\n";
+    str += label + ":\n";
 
     return str;
 }
@@ -119,14 +122,19 @@ void WhileStatementAST::diag(unsigned int parentID) {
 }
 
 std::string WhileStatementAST::eval() {
+
+    std::string label1 = generateJumpLabel();
+    std::string label2 = generateJumpLabel();
+
     std::string str = "";
-    str += "\n# WHILE \n";
-    str += ".label1\n";
+    str += "\n; WHILE \n";
+
+    str += label1 + ":\n";
     this->expression->eval();
-    str += "\tBRF label2\n";
+    str += "\tBRF " + label2 + "\n";
     this->block->eval();
-    str += "\tJMP label1\n";
-    str += ".label2\n";
+    str += "\tJMP " + label1 + "\n";
+    str += label2 + ":\n";
     return str;
 }
 
@@ -145,7 +153,7 @@ void AssignmentStatementAST::diag(unsigned int parentID) {
 }
 
 std::string AssignmentStatementAST::eval() {
-    std::string str = "\n# Assignment Statement \n";
+    std::string str = "\n; Assignment Statement \n";
     str += this->expression->eval();
     // NASTY HACK - we edit out the LOAD and insert a SAVE instead!!!
     str += "\tSAVE " + this->identifier->eval().substr(6);
@@ -289,61 +297,51 @@ std::string BinOperandAST::eval() {
         case Token::OP_SUB: {
             str += lhs->eval() + rhs->eval() + "\tSUB";
             str += "\n";
-
             break;
         }
         case Token::OP_MUL: {
             str += lhs->eval() + rhs->eval() + "\tMUL";
             str += "\n";
-
             break;
         }
         case Token::OP_DIV: {
             str += lhs->eval() + rhs->eval() + "\tDIV";
             str += "\n";
-
             break;
         }
         case Token::OP_GT: {
             str += lhs->eval() + rhs->eval() + "\tGT";
             str += "\n";
-
             break;
         }
         case Token::OP_LT: {
             str += lhs->eval() + rhs->eval() + "\tLT";
             str += "\n";
-
             break;
         }
         case Token::OP_GTE: {
             str += lhs->eval() + rhs->eval() + "\tGTE";
             str += "\n";
-
             break;
         }
         case Token::OP_LTE: {
             str += lhs->eval() + rhs->eval() + "\tLTE";
             str += "\n";
-
             break;
         }
         case Token::OP_EQ: {
             str += lhs->eval() + rhs->eval();
             str += "\tEQU\n";
-
             break;
         }
         case Token::OP_NE: {
             str += lhs->eval() + rhs->eval() + "\tNE";
             str += "\n";
-
             break;
         }
         default: {
             std::cout << "Unknown BinaryExprAST opr: " << (int) op << std::endl;
-            str += "# Unknown BinaryExprAST \n";
-
+            str += "; Unknown BinaryExprAST \n";
             break;
         }
     }
