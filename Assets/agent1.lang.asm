@@ -1,14 +1,4 @@
 
-; DECLARE health
-	NOP
-
-; DECLARE lives
-	NOP
-
-; Assignment Statement 
-	PUSH 5
-	SAVE lives
-
 ; DECLARE state
 	NOP
 
@@ -16,26 +6,39 @@
 	PUSH 0
 	SAVE state
 
-; IF EXPRESSION 
+; DECLARE health
+	NOP
+
+; Assignment Statement 
+	PUSH 0
+	SAVE health
+
+; WHILE 
+JumpLabel0:
 	LOAD health
 	PUSH 0
 	GT
-	BRF JumpLabel0
+	BRF JumpLabel1
+
+; WHILE BLOCK
+; BEGIN BLOCK
+
+; IF EXPRESSION 
+	LOAD state
+	PUSH 0
+	EQU
+	BRF JumpLabel2
 
 ; IF BLOCK
 ; BEGIN BLOCK
 
-; WHILE 
-JumpLabel1:
-	BRF JumpLabel2
-	JMP JumpLabel1
-JumpLabel2:
-
-; WHILE 
-JumpLabel3:
-	BRF JumpLabel4
-	JMP JumpLabel3
-JumpLabel4:
+; Assignment Statement 
+	PUSH 1
+	SAVE state
 
 ; END BLOCK
-JumpLabel0:
+JumpLabel2:
+
+; END BLOCK
+	JMP JumpLabel0
+JumpLabel1:

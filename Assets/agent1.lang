@@ -1,22 +1,15 @@
-
-var health;
-
-var lives;
-lives = 5;
-
 var state;
 state = 0;
 
-if ( health > 0 ) {
+var health;
+health = 0;
 
-    while (state == 0) {
-        health = 100;
+while ( health > 0 ) {
+
+    if (state == 0) {
         state = 1;
     }
 
-    while (state == 0) {
-        health = 99;
-        state = 2;
-    }
 
 }
+
