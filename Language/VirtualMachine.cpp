@@ -135,7 +135,7 @@ void VM::Execute() {
                 break;
             }
 
-            case INS::BNZ: {
+            case INS::BRT: {
 
                 int a = stack.top();
                 this->stack.pop();

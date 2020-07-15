@@ -131,7 +131,6 @@ ASTNode *Parser::ParseVariableDeclaration() {
     return var;
 }
 
-
 // ----------------------------------------------------------------------
 
 ASTNode *Parser::ParseBlock() {
@@ -165,8 +164,7 @@ ASTNode *Parser::ParseIfStatement() {
     getNextToken();
 
     if (currentToken.first != Token::SYM_LPAREN) {
-        std::cerr
-                << "ERROR Parser::ParseIfStatement() -  Unrecognised Token Before If Statement Expression, Expected Left Parenthesis."
+        std::cerr << "ERROR Parser::ParseIfStatement() -  Unrecognised Token Before If Statement Expression, Expected Left Parenthesis."
                 << std::endl;
         return nullptr;
     }
@@ -185,8 +183,7 @@ ASTNode *Parser::ParseIfStatement() {
     getNextToken();
 
     if (currentToken.first != Token::SYM_LBRACES) {
-        std::cerr
-                << "ERROR Parser::ParseIfStatement() - Unrecognised Token Before If Statement Block, Expected Left Braces '{'."
+        std::cerr << "ERROR Parser::ParseIfStatement() - Unrecognised Token Before If Statement Block, Expected Left Braces '{'."
                 << std::endl;
         return nullptr;
     }
@@ -195,15 +192,11 @@ ASTNode *Parser::ParseIfStatement() {
 
     IfStatementAST *ifStatement = new IfStatementAST(cond, block);
 
-
     if (currentToken.first != Token::SYM_RBRACES) {
-        std::cerr
-                << "ERROR Parser::ParseIfStatement() - Unrecognised Token After If Statement Block, Expected Left Braces '}'."
+        std::cerr << "ERROR Parser::ParseIfStatement() - Unrecognised Token After If Statement Block, Expected Left Braces '}'."
                 << std::endl;
         return nullptr;
     }
-
-//    getNextToken();
 
     return ifStatement;
 }
@@ -221,8 +214,7 @@ ASTNode *Parser::ParseWhileStatement() {
     getNextToken();
 
     if (currentToken.first != Token::SYM_LPAREN) {
-        std::cerr
-                << "ERROR Parser::ParseWhileStatement() -  Unrecognised Token Before While Statement Expression, Expected Left Parenthesis."
+        std::cerr << "ERROR Parser::ParseWhileStatement() -  Unrecognised Token Before While Statement Expression, Expected Left Parenthesis."
                 << std::endl;
         return nullptr;
     }
@@ -456,14 +448,14 @@ bool Parser::OutputTreeDiagram(std::string filename) {
     diagramFilename += std::string(".gv");
     diagramFile.open(diagramFilename);
 
-    std::cout.rdbuf(diagramFile.rdbuf());
-    std::cout << "digraph G {" << std::endl;
+    diagramFile << "digraph G {" << std::endl;
     for (auto N : abstractSyntaxTree) {
         if (N) {
-            N->diag(0);
+            diagramFile << N->diag(0);
         }
     }
-    std::cout << std::endl << "}" << std::endl;
+    diagramFile << std::endl << "}" << std::endl;
+    diagramFile.close();
     return true;
 }
 
@@ -488,5 +480,19 @@ bool Parser::OutputAsm(std::string filename) {
     std::cout << assemblyCode;
     return true;
 }
+
+
+std::string Parser::GetAsm() {
+
+    std::string assemblyCode;
+
+    for (auto N : abstractSyntaxTree) {
+        if (N) {
+            assemblyCode += N->eval();
+        }
+    }
+    return  assemblyCode;
+}
+
 
 // ----------------------------------------------------------------------

@@ -5,11 +5,8 @@ var health;
 health = 0;
 
 while ( health > 0 ) {
-
     if (state == 0) {
         state = 1;
     }
-
-
 }
 

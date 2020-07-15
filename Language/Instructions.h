@@ -11,18 +11,21 @@
 enum class INS : int {
     NOP = 0,
     HALT,
+    YIELD,
     PUSH,
     POP,
 
     SAVE,
     LOAD,
 
+    JMP,
+    BRT,
+    BRF,
 
     ADD,
     SUB,
     MUL,
     DIV,
-
 
     EQU,
     NE,
@@ -36,10 +39,10 @@ enum class INS : int {
     OUTPUT,
     INPUT,
 
-    JMP,
-    BNZ,
-    YIELD
 
+    NUMBER,
+    END_OF_FILE,
+    ERROR
 };
 
 #endif //GLYNTH_INSTRUCTIONS_H

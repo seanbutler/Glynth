@@ -12,6 +12,7 @@ int main(int argc, char **argv) {
     std::string filename = "Assets/agent1.lang";
     std::ifstream sourceFile(filename);
     std::string sourceString((std::istreambuf_iterator<char>(sourceFile)), std::istreambuf_iterator<char>());
+    std::cout << sourceString << std::endl;
 
     Lexer lexer(sourceString);
     lexer.Scan();
@@ -22,8 +23,13 @@ int main(int argc, char **argv) {
     parser.OutputTreeDiagram(filename);
     parser.OutputAsm(filename);
 
-//    Assembler assembler(parser.getAST());
-//    VM virtualMachine(assembler.GetBinaryInstructions());
+//    Assembler assembler(parser.GetAsm());
+//    assembler.Scan();
+//    assembler.OutputInstructionList(filename);
+
+//    assembler.GenerateTestBinaryInstructions();
+
+//    VM virtualMachine(assembler.GetInstructions());
 //    virtualMachine.Execute();
 
     return 0;

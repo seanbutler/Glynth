@@ -5,7 +5,6 @@
 #ifndef GLYNTH_LEXER_H
 #define GLYNTH_LEXER_H
 
-
 #include "Tokens.h"
 
 #include <string>
@@ -14,14 +13,13 @@
 #include <fstream>
 #include <filesystem>
 
-
 class Lexer {
 
 public:
 
     Lexer(const std::string &str, int pos = 0) :
-            lexingStr(str),
-            lexingPos(pos) {
+        lexingStr(str),
+        lexingPos(pos) {
     }
 
     virtual ~Lexer() {
@@ -50,6 +48,7 @@ public:
         for (auto it = tokens.begin(); it != tokens.end(); ++it) {
             tokenListFile << (int) it->first << "\t" << it->second << std::endl;
         }
+        tokenListFile.close();
     }
 
 

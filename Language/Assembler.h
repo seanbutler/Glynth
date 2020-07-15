@@ -6,20 +6,46 @@
 #define GLYNTH_ASSEMBLER_H
 
 #include <vector>
+#include <filesystem>
+#include <iostream>
+#include <fstream>
+
 #include "Instructions.h"
 
 class Assembler {
 
 public:
-    Assembler() {}
+    Assembler(std::string AS) : assemblyStr(AS) {}
     virtual ~Assembler() {}
 
-    std::vector<int> GetBinaryInstructions() {
+    INS ScanInstruction();
+
+    void Scan() {
+        INS result;
+        do {
+            result = ScanInstruction();
+        } while (result != INS::END_OF_FILE && result != INS::ERROR);
+    }
+
+    std::vector<int> GetInstructions() {
+        return this->instructions;
+    }
+
+    void OutputInstructionList(std::string F) {
+        std::ofstream instructionListFile;
+        std::string filename = std::filesystem::path(F);
+        filename += std::string(".instr");
+        instructionListFile.open(filename);
+
+        for (auto I : instructions) {
+            instructionListFile << (int) I << std::endl;
+        }
+    }
+
+    void GenerateTestBinaryInstructions() {
 
         int A = 1;
         int B = 2;
-
-        std::vector<int> instructions;
 
         instructions.push_back((int) INS::PUSH);
         instructions.push_back(A);
@@ -54,8 +80,12 @@ public:
 
         instructions.push_back((int) INS::HALT);
 
-        return instructions;
     }
+
+    std::string assemblyStr;
+    int assemblyPos = 0;
+    unsigned int currentLine = 0;
+    std::vector<int> instructions;
 
 };
 

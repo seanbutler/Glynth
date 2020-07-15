@@ -29,7 +29,7 @@ public:
     ASTNode() { id = uid++; }
     virtual ~ASTNode() {}
     virtual void print() = 0;
-    virtual void diag(unsigned int parentID) = 0;
+    virtual std::string diag(unsigned int parentID) = 0;
     virtual std::string eval() = 0;
     unsigned int id;
 };
@@ -45,7 +45,7 @@ public:
 
     std::string &getName() { return name; }
     virtual void print();
-    virtual void diag(unsigned int parentID);
+    virtual std::string diag(unsigned int parentID);
     virtual std::string eval();
 
 private:
@@ -60,7 +60,7 @@ class VariableDeclarationAST : public ASTNode {
 public:
     VariableDeclarationAST(IdentifierAST *I) : identifier(I) {}
     virtual void print();
-    virtual void diag(unsigned int parentID);
+    virtual std::string diag(unsigned int parentID);
     virtual std::string eval();
 
 private:
@@ -78,7 +78,7 @@ public:
     std::vector<ASTNode *> statements;
     BlockAST() {};
     virtual void print();
-    virtual void diag(unsigned int parentID);
+    virtual std::string diag(unsigned int parentID);
     virtual std::string eval();
 
 private:
@@ -101,7 +101,7 @@ public:
     std::string &getName() { return name; }
 
     virtual void print();
-    virtual void diag(unsigned int parentID);
+    virtual std::string diag(unsigned int parentID);
     virtual std::string eval();
 
 private:
@@ -122,7 +122,7 @@ public:
 
     std::string &getName() { return name; }
     virtual void print();
-    virtual void diag(unsigned int parentID);
+    virtual std::string diag(unsigned int parentID);
     virtual std::string eval();
 
 private:
@@ -131,6 +131,7 @@ private:
 
 
 // ------------------------------------------------------------------------
+
 // AssignmentStatementAST -
 
 class AssignmentStatementAST : public ASTNode {
@@ -142,7 +143,7 @@ public:
     AssignmentStatementAST(ASTNode *I, ASTNode *E) : identifier(I), expression(E) {}
     std::string &getName() { return name; }
     virtual void print();
-    virtual void diag(unsigned int parentID);
+    virtual std::string diag(unsigned int parentID);
     virtual std::string eval();
 
 private:
@@ -150,6 +151,7 @@ private:
 };
 
 // ------------------------------------------------------------------------
+
 // NumberAST -
 
 class NumberAST : public ASTNode {
@@ -161,7 +163,7 @@ public:
 
     std::string &getName() { return name; }
     virtual void print();
-    virtual void diag(unsigned int parentID);
+    virtual std::string diag(unsigned int parentID);
     virtual std::string eval();
 
 private:
@@ -183,7 +185,7 @@ public:
 
     std::string &getName() { return name; }
     virtual void print();
-    virtual void diag(unsigned int parentID);
+    virtual std::string diag(unsigned int parentID);
     virtual std::string eval();
 
 private:

@@ -40,6 +40,8 @@ public:
     std::vector<ASTNode *> abstractSyntaxTree;
 
     bool OutputAsm(std::string filename);
+    std::string GetAsm();
+
 
 };
 
