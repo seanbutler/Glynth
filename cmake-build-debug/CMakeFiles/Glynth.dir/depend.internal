@@ -9,6 +9,9 @@ CMakeFiles/Glynth.dir/Language/Assembler.cpp.o
  /home/sean/Projects/Glynth/Language/Assembler.cpp
  /home/sean/Projects/Glynth/Language/Assembler.h
  /home/sean/Projects/Glynth/Language/Instructions.h
+CMakeFiles/Glynth.dir/Language/Instructions.cpp.o
+ /home/sean/Projects/Glynth/Language/Instructions.cpp
+ /home/sean/Projects/Glynth/Language/Instructions.h
 CMakeFiles/Glynth.dir/Language/Lexer.cpp.o
  /home/sean/Projects/Glynth/Language/Lexer.cpp
  /home/sean/Projects/Glynth/Language/Lexer.h

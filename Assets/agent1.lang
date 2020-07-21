@@ -1,12 +1,13 @@
-var state;
-state = 0;
+var posx;
+posx = 100;
 
-var health;
-health = 0;
+var posy;
+posy = 200;
 
-while ( health > 0 ) {
-    if (state == 0) {
-        state = 1;
-    }
+var posz;
+posz = 300;
+
+while ( posx < 200 ) {
+    posx = posx + 1;
 }
 

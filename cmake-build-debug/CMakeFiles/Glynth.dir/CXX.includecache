@@ -15,17 +15,23 @@ sstream
 -
 Tokens.h
 /home/sean/Projects/Glynth/Language/Tokens.h
+uuid/uuid.h
+-
 
 /home/sean/Projects/Glynth/Language/Assembler.cpp
 Assembler.h
 /home/sean/Projects/Glynth/Language/Assembler.h
 string
 -
+algorithm
+-
 iostream
 -
 
 /home/sean/Projects/Glynth/Language/Assembler.h
 vector
+-
+map
 -
 filesystem
 -

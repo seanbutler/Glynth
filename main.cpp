@@ -23,14 +23,14 @@ int main(int argc, char **argv) {
     parser.OutputTreeDiagram(filename);
     parser.OutputAsm(filename);
 
-//    Assembler assembler(parser.GetAsm());
-//    assembler.Scan();
-//    assembler.OutputInstructionList(filename);
+    Assembler assembler(parser.GetAsm());
+    assembler.Scan();
+    assembler.OutputInstructionList(filename);
 
 //    assembler.GenerateTestBinaryInstructions();
 
-//    VM virtualMachine(assembler.GetInstructions());
-//    virtualMachine.Execute();
+    VM virtualMachine(assembler.GetInstructions());
+    virtualMachine.Execute();
 
     return 0;
 }

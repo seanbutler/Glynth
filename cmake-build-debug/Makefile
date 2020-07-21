@@ -177,6 +177,33 @@ Language/Assembler.cpp.s:
 	$(MAKE) -f CMakeFiles/Glynth.dir/build.make CMakeFiles/Glynth.dir/Language/Assembler.cpp.s
 .PHONY : Language/Assembler.cpp.s
 
+Language/Instructions.o: Language/Instructions.cpp.o
+
+.PHONY : Language/Instructions.o
+
+# target to build an object file
+Language/Instructions.cpp.o:
+	$(MAKE) -f CMakeFiles/Glynth.dir/build.make CMakeFiles/Glynth.dir/Language/Instructions.cpp.o
+.PHONY : Language/Instructions.cpp.o
+
+Language/Instructions.i: Language/Instructions.cpp.i
+
+.PHONY : Language/Instructions.i
+
+# target to preprocess a source file
+Language/Instructions.cpp.i:
+	$(MAKE) -f CMakeFiles/Glynth.dir/build.make CMakeFiles/Glynth.dir/Language/Instructions.cpp.i
+.PHONY : Language/Instructions.cpp.i
+
+Language/Instructions.s: Language/Instructions.cpp.s
+
+.PHONY : Language/Instructions.s
+
+# target to generate assembly for a file
+Language/Instructions.cpp.s:
+	$(MAKE) -f CMakeFiles/Glynth.dir/build.make CMakeFiles/Glynth.dir/Language/Instructions.cpp.s
+.PHONY : Language/Instructions.cpp.s
+
 Language/Lexer.o: Language/Lexer.cpp.o
 
 .PHONY : Language/Lexer.o
@@ -300,6 +327,9 @@ help:
 	@echo "... Language/Assembler.o"
 	@echo "... Language/Assembler.i"
 	@echo "... Language/Assembler.s"
+	@echo "... Language/Instructions.o"
+	@echo "... Language/Instructions.i"
+	@echo "... Language/Instructions.s"
 	@echo "... Language/Lexer.o"
 	@echo "... Language/Lexer.i"
 	@echo "... Language/Lexer.s"

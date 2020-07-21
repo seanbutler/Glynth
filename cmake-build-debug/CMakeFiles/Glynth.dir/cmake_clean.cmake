@@ -1,6 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/Glynth.dir/Language/AST.cpp.o"
   "CMakeFiles/Glynth.dir/Language/Assembler.cpp.o"
+  "CMakeFiles/Glynth.dir/Language/Instructions.cpp.o"
   "CMakeFiles/Glynth.dir/Language/Lexer.cpp.o"
   "CMakeFiles/Glynth.dir/Language/Parser.cpp.o"
   "CMakeFiles/Glynth.dir/Language/VirtualMachine.cpp.o"

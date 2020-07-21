@@ -4,14 +4,19 @@
 
 #include "Instructions.h"
 
-std::array<std::string, 22> instructionNames = {
+char* instructionNames[] = {
         "NOP",
         "HALT",
+        "YIELD",
         "PUSH",
         "POP",
 
         "SAVE",
         "LOAD",
+
+        "JMP",
+        "BRT",
+        "BRF",
 
         "ADD",
         "SUB",
@@ -30,8 +35,9 @@ std::array<std::string, 22> instructionNames = {
         "OUTPUT",
         "INPUT",
 
-        "JMP",
-        "BRT",
-        "BRF",
-        "YIELD"
+        "NUMBER",
+        "ADDRESS",
+        "LABEL",
+        "END_OF_FILE",
+        "ERROR"
 };

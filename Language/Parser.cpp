@@ -463,21 +463,14 @@ bool Parser::OutputTreeDiagram(std::string filename) {
 
 bool Parser::OutputAsm(std::string filename) {
 
-    std::ofstream asmFile;
-    std::string diagramFilename = std::filesystem::path(filename);
-    diagramFilename += std::string(".asm");
-    asmFile.open(diagramFilename);
+    std::ofstream outFile;
+    std::string outFilename = std::filesystem::path(filename);
+    outFilename += std::string(".asm");
+    outFile.open(outFilename);
 
-    std::cout.rdbuf(asmFile.rdbuf());
+    outFile << GetAsm();
+    outFile.close();
 
-    std::string assemblyCode;
-
-    for (auto N : abstractSyntaxTree) {
-        if (N) {
-            assemblyCode += N->eval();
-        }
-    }
-    std::cout << assemblyCode;
     return true;
 }
 
@@ -491,6 +484,7 @@ std::string Parser::GetAsm() {
             assemblyCode += N->eval();
         }
     }
+
     return  assemblyCode;
 }
 

@@ -8,6 +8,8 @@
 #include <string>
 #include <array>
 
+
+
 enum class INS : int {
     NOP = 0,
     HALT,
@@ -39,10 +41,13 @@ enum class INS : int {
     OUTPUT,
     INPUT,
 
-
     NUMBER,
+    ADDRESS,
+    LABEL,
     END_OF_FILE,
     ERROR
 };
+
+extern char* instructionNames[];
 
 #endif //GLYNTH_INSTRUCTIONS_H

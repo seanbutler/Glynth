@@ -15,9 +15,8 @@
 class VM {
 
 public:
-    VM(std::vector<int> I)
-            : running(true), instructions(I) {
-        for (int n = 0; n < 128; n++) {
+    VM(std::vector<int> I) : running(true), instructions(I) {
+        for (int n = 0; n < 16; n++) {
             data.push_back(0);
         }
         programCounter = 0;

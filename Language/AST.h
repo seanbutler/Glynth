@@ -10,17 +10,29 @@
 #include <sstream>
 #include "Tokens.h"
 
+#include <uuid/uuid.h>
+
 // ------------------------------------------------------------------------
 
-static int jmpLabel = 0;
-static std::string generateJumpLabel() {
-    std::ostringstream label;
-    label<<"JumpLabel"<<jmpLabel++;
-    return label.str();
+const std::string CONSANANTS = "BCDFGHJKLMNPQRSTVWXYZ";
+const std::string VOWELS = "AEIOU";
+
+static std::string pronouncableRandomString(unsigned int l=8){
+    std::string uuid = std::string(l,' ');
+//    srand (time(NULL));
+
+    for(int i=0;i<l-1;i+=2){
+        uuid[i] = CONSANANTS[rand() % 21];
+        uuid[i+1] = VOWELS[rand() % 5];
+    }
+    return uuid;
 }
-
 // ------------------------------------------------------------------------
 
+
+static std::string getUniqueIdentifier();
+
+// ------------------------------------------------------------------------
 
 static unsigned int uid = 1;
 
@@ -42,7 +54,6 @@ class IdentifierAST : public ASTNode {
 
 public:
     IdentifierAST(const std::string &N) : name(N) {}
-
     std::string &getName() { return name; }
     virtual void print();
     virtual std::string diag(unsigned int parentID);
@@ -50,7 +61,6 @@ public:
 
 private:
     std::string name;
-
 };
 
 // ------------------------------------------------------------------------
@@ -83,7 +93,6 @@ public:
 
 private:
     std::vector<ASTNode *> children;
-
 };
 
 // ------------------------------------------------------------------------

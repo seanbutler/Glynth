@@ -5,7 +5,21 @@
 #include "Tokens.h"
 #include "AST.h"
 #include <iostream>
-#include <fstream>
+
+#include <iomanip>
+
+// ---------------------------------------------------------------------------
+
+unsigned long guid = 0;
+
+static std::string getUniqueIdentifier(){
+
+    std::stringstream res;
+    res << "LABEL" << std::setfill ('0') << std::setw (4);
+    res << guid++;
+    return  res.str();
+}
+
 
 // ---------------------------------------------------------------------------
 
@@ -26,7 +40,7 @@ std::string VariableDeclarationAST::diag(unsigned int parentID) {
 std::string VariableDeclarationAST::eval() {
     std::string str = "";
     str += "\n; DECLARE " + this->identifier->getName() + "\n";
-    str += "\tNOP\n";
+//    str += "\tNOP\n";
     return str;
 }
 
@@ -45,7 +59,7 @@ std::string IdentifierAST::diag(unsigned int parentID) {
 
 std::string IdentifierAST::eval() {
     std::string str = "";
-    str += "\tLOAD " + name + "\n";
+    str += "\tLOAD $" + name + "\n";
     return str;
 }
 
@@ -65,7 +79,6 @@ std::string BlockAST::diag(unsigned int parentID) {
     for (auto S : statements) {
         str += S->diag(ASTNode::id);
     }
-
     return str;
 }
 
@@ -82,13 +95,11 @@ std::string BlockAST::eval() {
 
 void IfStatementAST::print() {
     std::cout << "if: \"" << name << "\"" << std::endl;
-
     this->expression->print();
     this->block->print();
 }
 
 std::string IfStatementAST::diag(unsigned int parentID) {
-
     std::string str;
     str += "node" + std::to_string(ASTNode::id) + " [ label = \"if:\"];\n";
     str += "node" + std::to_string(parentID) + " -> node" + std::to_string(ASTNode::id) + ";\n";
@@ -104,13 +115,12 @@ std::string IfStatementAST::eval() {
     str += "\n; IF EXPRESSION ""\n";
     str += this->expression->eval();
 
-    std::string label = generateJumpLabel();
+    std::string label = getUniqueIdentifier();
 
-    str += "\tBRF " + label + "\n";
+    str += "\tBRF @" + label + "\n";
     str += "\n; IF BLOCK\n";
     str += this->block->eval();
     str += label + ":\n";
-
     return str;
 }
 
@@ -137,18 +147,18 @@ std::string WhileStatementAST::diag(unsigned int parentID) {
 
 std::string WhileStatementAST::eval() {
 
-    std::string label1 = generateJumpLabel();
-    std::string label2 = generateJumpLabel();
+    std::string label1 = getUniqueIdentifier();
+    std::string label2 = getUniqueIdentifier();
 
     std::string str = "";
     str += "\n; WHILE \n";
 
     str += label1 + ":\n";
     str += this->expression->eval();
-    str += "\tBRF " + label2 + "\n";
+    str += "\tBRF @" + label2 + "\n";
     str += "\n; WHILE BLOCK\n";
     str += this->block->eval();
-    str += "\tJMP " + label1 + "\n";
+    str += "\tJMP @" + label1 + "\n";
     str += label2 + ":\n";
     return str;
 }

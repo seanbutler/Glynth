@@ -6,6 +6,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_CHECK_CXX
   "/home/sean/Projects/Glynth/Language/AST.cpp" "/home/sean/Projects/Glynth/cmake-build-debug/CMakeFiles/Glynth.dir/Language/AST.cpp.o"
   "/home/sean/Projects/Glynth/Language/Assembler.cpp" "/home/sean/Projects/Glynth/cmake-build-debug/CMakeFiles/Glynth.dir/Language/Assembler.cpp.o"
+  "/home/sean/Projects/Glynth/Language/Instructions.cpp" "/home/sean/Projects/Glynth/cmake-build-debug/CMakeFiles/Glynth.dir/Language/Instructions.cpp.o"
   "/home/sean/Projects/Glynth/Language/Lexer.cpp" "/home/sean/Projects/Glynth/cmake-build-debug/CMakeFiles/Glynth.dir/Language/Lexer.cpp.o"
   "/home/sean/Projects/Glynth/Language/Parser.cpp" "/home/sean/Projects/Glynth/cmake-build-debug/CMakeFiles/Glynth.dir/Language/Parser.cpp.o"
   "/home/sean/Projects/Glynth/Language/VirtualMachine.cpp" "/home/sean/Projects/Glynth/cmake-build-debug/CMakeFiles/Glynth.dir/Language/VirtualMachine.cpp.o"

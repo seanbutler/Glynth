@@ -9,7 +9,32 @@ void VM::Execute() {
     bool running = true;
 
     while (running) {
+
+        std::cout << "pc = " << programCounter << " instr = " << instructionNames[getCurrentInstruction()] << std::endl;
+
+        std::cout << "instr = ";
+        for(auto E : this->instructions) {
+            std::cout << E << " ";
+        }
+        std::cout << std::endl;
+
+        std::cout << "data = ";
+        for(auto E : this->data) {
+            std::cout << E << " ";
+        }
+        std::cout << std::endl;
+
+        std::cout << "stacktop = " ;
+
+        if ( stack.size() )
+            std::cout << stack.top();
+        else
+            std::cout << "(unknown)";
+
+        std::cout << std::endl;
+
         switch ((INS)getCurrentInstruction()) {
+
             case INS::NOP : {
                 // Do Nothing
                 break;
@@ -37,7 +62,7 @@ void VM::Execute() {
                 stack.pop();
                 int b = stack.top();
                 stack.pop();
-                stack.push(a + b);
+                stack.push(b + a);
                 break;
             }
 
@@ -92,6 +117,54 @@ void VM::Execute() {
                 break;
             }
 
+            case INS::LT: {
+                int a = stack.top();
+                this->stack.pop();
+                int b = stack.top();
+                this->stack.pop();
+                if (b < a)
+                    this->stack.push(1);
+                else
+                    this->stack.push(0);
+                break;
+            }
+
+            case INS::LTE: {
+                int a = stack.top();
+                this->stack.pop();
+                int b = stack.top();
+                this->stack.pop();
+                if (b <= a)
+                    this->stack.push(1);
+                else
+                    this->stack.push(0);
+                break;
+            }
+
+            case INS::GT: {
+                int a = stack.top();
+                this->stack.pop();
+                int b = stack.top();
+                this->stack.pop();
+                if (b > a)
+                    this->stack.push(1);
+                else
+                    this->stack.push(0);
+                break;
+            }
+
+            case INS::GTE: {
+                int a = stack.top();
+                this->stack.pop();
+                int b = stack.top();
+                this->stack.pop();
+                if (b >= a)
+                    this->stack.push(1);
+                else
+                    this->stack.push(0);
+                break;
+            }
+
             case INS::RAND : {
                 int param = this->stack.top();
                 this->stack.pop();
@@ -101,14 +174,15 @@ void VM::Execute() {
             }
 
             case INS::OUTPUT : {
-                std::cout << "VMOUT " << this->stack.top() << std::endl;
+                std::cout << "OUTPUT " << this->stack.top() << std::endl;
                 this->stack.pop();
                 break;
             }
 
-//            case INS::INPUT : {
-//                break;
-//            }
+            case INS::INPUT : {
+                std::cout << "INPUT - not implemented" << std::endl;
+                break;
+            }
 
             case INS::SAVE: {
                 int val = stack.top();
@@ -136,25 +210,49 @@ void VM::Execute() {
             }
 
             case INS::BRT: {
-
                 int a = stack.top();
                 this->stack.pop();
 
                 incrProgramCounter();
                 int addr = getCurrentInstruction();
 
-                if (a) {
+                std::cout << "INS::BRT " << a << " " << addr << std::endl;
+
+                if (a!=0) {
                     programCounter = addr-1;
                 }
                 break;
             }
 
+            case INS::BRF: {
+                int a = stack.top();
+                this->stack.pop();
+
+                incrProgramCounter();
+                int addr = getCurrentInstruction();
+
+                std::cout << "INS::BRF " << a << " " << addr;
+
+                if (a==0) {
+                    programCounter = addr-1;
+                }
+                std::cout << " " << programCounter << std::endl;
+                break;
+            }
+
+            case INS::END_OF_FILE: {
+                running = false;
+                break;
+            }
+
             default: {
-                std::cerr << "Unknown Instruction" << std::endl;
-                std::cerr << "pc = " << programCounter << " instr = " << getCurrentInstruction() << std::endl;
+                std::cerr << "Unknown Instruction pc = " << programCounter << " instr = " << getCurrentInstruction() << std::endl;
+                running = false;
             }
 
         }
+
         incrProgramCounter();
+        std::cout << std::endl;
     }
 }

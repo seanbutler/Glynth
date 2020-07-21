@@ -6,6 +6,8 @@
 #define GLYNTH_ASSEMBLER_H
 
 #include <vector>
+#include <map>
+
 #include <filesystem>
 #include <iostream>
 #include <fstream>
@@ -25,6 +27,12 @@ public:
         do {
             result = ScanInstruction();
         } while (result != INS::END_OF_FILE && result != INS::ERROR);
+
+        std::cout << "Dump Labels Map" << std::endl;
+        DumpLabelsMap();
+
+        std::cout << "Dump Data Map" << std::endl;
+        DumpDataMap();
     }
 
     std::vector<int> GetInstructions() {
@@ -38,9 +46,22 @@ public:
         instructionListFile.open(filename);
 
         for (auto I : instructions) {
-            instructionListFile << (int) I << std::endl;
+            instructionListFile << (int) I << "\n";
         }
     }
+
+    void DumpLabelsMap() {
+        for (auto E : labels) {
+            std::cout << "L " << E.first << " " << E.second << "\n";
+        }
+    }
+
+    void DumpDataMap() {
+        for (auto E : data) {
+            std::cout << "D " << E.first << " " << E.second << "\n";
+        }
+    }
+
 
     void GenerateTestBinaryInstructions() {
 
@@ -79,7 +100,6 @@ public:
         instructions.push_back((int) 8);
 
         instructions.push_back((int) INS::HALT);
-
     }
 
     std::string assemblyStr;
@@ -87,6 +107,10 @@ public:
     unsigned int currentLine = 0;
     std::vector<int> instructions;
 
+    std::vector<std::string> identifiers;
+
+    std::map<std::string, int> labels;
+    std::map<std::string, int> data;
 };
 
 #endif //PLYNTH_ASSEMBLER_H

@@ -226,11 +226,26 @@ Glynth_BINARY_DIR:STATIC=/home/sean/Projects/Glynth/cmake-build-debug
 //Value Computed by CMake
 Glynth_SOURCE_DIR:STATIC=/home/sean/Projects/Glynth
 
+//The directory containing a CMake configuration file for LibUUID.
+LibUUID_DIR:PATH=LibUUID_DIR-NOTFOUND
+
 //Path to a program.
 ProcessorCount_cmd_nproc:FILEPATH=/usr/bin/nproc
 
 //Path to a program.
 ProcessorCount_cmd_sysctl:FILEPATH=/usr/sbin/sysctl
+
+//The directory containing a CMake configuration file for UUID.
+UUID_DIR:PATH=UUID_DIR-NOTFOUND
+
+//The directory containing a CMake configuration file for libuuid.
+libuuid_DIR:PATH=libuuid_DIR-NOTFOUND
+
+//The directory containing a CMake configuration file for uuid-dev.
+uuid-dev_DIR:PATH=uuid-dev_DIR-NOTFOUND
+
+//The directory containing a CMake configuration file for uuid.
+uuid_DIR:PATH=uuid_DIR-NOTFOUND
 
 
 ########################

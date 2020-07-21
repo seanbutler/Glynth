@@ -51,7 +51,6 @@ public:
         tokenListFile.close();
     }
 
-
 private:
     std::string lexingStr;
     int lexingPos = 0;

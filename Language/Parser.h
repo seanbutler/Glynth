@@ -42,7 +42,6 @@ public:
     bool OutputAsm(std::string filename);
     std::string GetAsm();
 
-
 };
 
 #endif //GLYNTH_PARSER_H
