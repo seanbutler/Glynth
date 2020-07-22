@@ -4,10 +4,12 @@
 CMakeFiles/Glynth.dir/Language/AST.cpp.o: ../Language/AST.cpp
 CMakeFiles/Glynth.dir/Language/AST.cpp.o: ../Language/AST.h
 CMakeFiles/Glynth.dir/Language/AST.cpp.o: ../Language/Tokens.h
+CMakeFiles/Glynth.dir/Language/AST.cpp.o: ../Language/metainstructions.h
 
 CMakeFiles/Glynth.dir/Language/Assembler.cpp.o: ../Language/Assembler.cpp
 CMakeFiles/Glynth.dir/Language/Assembler.cpp.o: ../Language/Assembler.h
 CMakeFiles/Glynth.dir/Language/Assembler.cpp.o: ../Language/Instructions.h
+CMakeFiles/Glynth.dir/Language/Assembler.cpp.o: ../Language/metainstructions.h
 
 CMakeFiles/Glynth.dir/Language/Instructions.cpp.o: ../Language/Instructions.cpp
 CMakeFiles/Glynth.dir/Language/Instructions.cpp.o: ../Language/Instructions.h

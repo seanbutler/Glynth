@@ -5,10 +5,12 @@ CMakeFiles/Glynth.dir/Language/AST.cpp.o
  /home/sean/Projects/Glynth/Language/AST.cpp
  /home/sean/Projects/Glynth/Language/AST.h
  /home/sean/Projects/Glynth/Language/Tokens.h
+ /home/sean/Projects/Glynth/Language/metainstructions.h
 CMakeFiles/Glynth.dir/Language/Assembler.cpp.o
  /home/sean/Projects/Glynth/Language/Assembler.cpp
  /home/sean/Projects/Glynth/Language/Assembler.h
  /home/sean/Projects/Glynth/Language/Instructions.h
+ /home/sean/Projects/Glynth/Language/metainstructions.h
 CMakeFiles/Glynth.dir/Language/Instructions.cpp.o
  /home/sean/Projects/Glynth/Language/Instructions.cpp
  /home/sean/Projects/Glynth/Language/Instructions.h

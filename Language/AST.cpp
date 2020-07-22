@@ -4,8 +4,9 @@
 
 #include "Tokens.h"
 #include "AST.h"
-#include <iostream>
+#include "metainstructions.h"
 
+#include <iostream>
 #include <iomanip>
 
 // ---------------------------------------------------------------------------
@@ -39,7 +40,8 @@ std::string VariableDeclarationAST::diag(unsigned int parentID) {
 
 std::string VariableDeclarationAST::eval() {
     std::string str = "";
-    str += "\n; DECLARE " + this->identifier->getName() + "\n";
+    str += "\n";
+    str += COMMENT + " DECLARE " + this->identifier->getName() + "\n";
 //    str += "\tNOP\n";
     return str;
 }
@@ -59,7 +61,7 @@ std::string IdentifierAST::diag(unsigned int parentID) {
 
 std::string IdentifierAST::eval() {
     std::string str = "";
-    str += "\tLOAD $" + name + "\n";
+    str += "\tLOAD " + VARIABLE + name + "\n";
     return str;
 }
 
@@ -83,11 +85,11 @@ std::string BlockAST::diag(unsigned int parentID) {
 }
 
 std::string BlockAST::eval() {
-    std::string str = "; BEGIN BLOCK\n";
+    std::string str = COMMENT + " BEGIN BLOCK\n";
     for (auto S  : statements) {
         str += S->eval();
     }
-    str += "\n; END BLOCK\n";
+    str += "\n" + COMMENT +  " END BLOCK\n";
     return str;
 }
 
@@ -112,15 +114,15 @@ std::string IfStatementAST::diag(unsigned int parentID) {
 std::string IfStatementAST::eval() {
     std::string str = "";
 
-    str += "\n; IF EXPRESSION ""\n";
+    str += "\n" + COMMENT + " IF EXPRESSION ""\n";
     str += this->expression->eval();
 
     std::string label = getUniqueIdentifier();
 
     str += "\tBRF @" + label + "\n";
-    str += "\n; IF BLOCK\n";
+    str += "\n" + COMMENT + "IF BLOCK\n";
     str += this->block->eval();
-    str += label + ":\n";
+    str += LOCATION + label + "\n";
     return str;
 }
 
@@ -151,15 +153,16 @@ std::string WhileStatementAST::eval() {
     std::string label2 = getUniqueIdentifier();
 
     std::string str = "";
-    str += "\n; WHILE \n";
+    str += "\n" + COMMENT + " WHILE \n";
 
-    str += label1 + ":\n";
+    str += LOCATION + label1 + "\n";
     str += this->expression->eval();
-    str += "\tBRF @" + label2 + "\n";
-    str += "\n; WHILE BLOCK\n";
+    str += "\tBRF " + DESTINATION + label2 + "\n";
+    str += "\n" + COMMENT + " WHILE BLOCK\n";
     str += this->block->eval();
-    str += "\tJMP @" + label1 + "\n";
-    str += label2 + ":\n";
+    str += "\tJMP " + DESTINATION + label1 + "\n";
+    str += LOCATION + label2 + "\n";
+
     return str;
 }
 
@@ -179,7 +182,7 @@ std::string AssignmentStatementAST::diag(unsigned int parentID) {
 }
 
 std::string AssignmentStatementAST::eval() {
-    std::string str = "\n; Assignment Statement \n";
+    std::string str = "\n" + COMMENT + " Assignment Statement \n";
     str += this->expression->eval();
     // TODO - NASTY HACK HERE - we edit out the LOAD and insert a SAVE instead!!!
     str += "\tSAVE " + this->identifier->eval().substr(6);

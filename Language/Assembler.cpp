@@ -2,10 +2,15 @@
 // Created by sean on 09/07/2020.
 //
 
+#include "metainstructions.h"
+
+
 #include "Assembler.h"
 #include <string>
 #include <algorithm>
 #include <iostream>
+
+
 
 INS Assembler::ScanInstruction() {
 
@@ -27,7 +32,7 @@ INS Assembler::ScanInstruction() {
     //
     // comments begin with a semicolon (;) skip them
     //
-    if (currentChar == ';') {
+    if (currentChar == '#') {
         do {
             currentChar = assemblyStr[assemblyPos++];
         } while (currentChar != '\n');
@@ -163,23 +168,23 @@ INS Assembler::ScanInstruction() {
             return INS::BRF;
         }
 
-        if (tokenString.back() == ':') {
-            // declaration of a location in the instructions (a label)
-            labels.insert(std::make_pair(tokenString, this->instructions.size()));
-            return INS::LABEL;
-        }
-
-        if (tokenString[0] == '@') {
-            // reference to a location in the instructions (again a label)
-            this->instructions.push_back((int) INS::NOP);
-            labels.insert(std::make_pair(tokenString, this->instructions.size()));
-            return INS::LABEL;
-        }
-
-        // otherwise we are a data address label i.e. a variable
-        this->instructions.push_back((int) INS::NOP);
-        data.insert(std::make_pair(tokenString, data.size()));
-        return INS::ADDRESS;
+//        if (tokenString.back() == ':') {
+//            // declaration of a location in the instructions (a label)
+//            labels.insert(std::make_pair(tokenString, this->instructions.size()));
+//            return INS::LABEL;
+//        }
+//
+//        if (tokenString[0] == '@') {
+//            // reference to a location in the instructions (again a label)
+//            this->instructions.push_back((int) INS::NOP);
+//            labels.insert(std::make_pair(tokenString, this->instructions.size()));
+//            return INS::LABEL;
+//        }
+//
+//        // otherwise we are a data address label i.e. a variable
+//        this->instructions.push_back((int) INS::NOP);
+//        data.insert(std::make_pair(tokenString, data.size()));
+//        return INS::ADDRESS;
     }
 
     //
@@ -205,9 +210,9 @@ INS Assembler::ScanInstruction() {
     }
 
     //
-    // %LABELS (they indicate jump destinations, no instructions emitted, instead add them to a map)
+    // :LABELS (they indicate jump destinations, no instructions emitted, instead add them to a map)
     //
-    if (currentChar == '%') {
+    if (currentChar == ':') {
 
         // starting a new token ...
         std::string tokenString;
@@ -230,11 +235,9 @@ INS Assembler::ScanInstruction() {
     }
 
     //
-    // @LABELS they placeholders for addresses to be jumped to, emit a NOP (or NaN) for now and patch them up later
+    // @LABELS addresses to be jumped to, emit a NOP (or NaN) for now and patch them up later
     //
     if (currentChar == '@') {
-
-        // add it to a map indexed on the string
 
         // starting a new token ... probably an instruction address
         std::string tokenString;
@@ -253,7 +256,9 @@ INS Assembler::ScanInstruction() {
         // add it to a map indexed on the string
         std::cout << "asm got @ label\t\t" << tokenString << "\n";
 
-
+        // reference to a location in the instructions (again a label)
+        this->instructions.push_back((int) INS::NOP);
+        labels.insert(std::make_pair(tokenString, this->instructions.size()));
         return INS::LABEL;
     }
 
