@@ -1,0 +1,43 @@
+digraph G {
+node2 [ label = "defvar:" ];
+node0 -> node2;
+node1 [ label = "posx"];
+node2 -> node1;
+node5 [ label = "assign:"];
+node0 -> node5;
+node3 [ label = "posx"];
+node5 -> node3;
+node4 [ label = "number: 10"];
+node5 -> node4;
+node7 [ label = "defvar:" ];
+node0 -> node7;
+node6 [ label = "posy"];
+node7 -> node6;
+node10 [ label = "assign:"];
+node0 -> node10;
+node8 [ label = "posy"];
+node10 -> node8;
+node9 [ label = "number: 20"];
+node10 -> node9;
+node20 [ label = "while:"];
+node0 -> node20;
+node11 [ label = "posy"];
+node13 -> node11;
+node13 [ label = "opr: <"];
+node12 [ label = "number: 30"];
+node13 -> node12;
+node20 -> node13;
+node14 [ label = "block:" ];
+node20 -> node14;
+node19 [ label = "assign:"];
+node14 -> node19;
+node15 [ label = "posy"];
+node19 -> node15;
+node16 [ label = "posy"];
+node18 -> node16;
+node18 [ label = "opr: +"];
+node17 [ label = "number: 1"];
+node18 -> node17;
+node19 -> node18;
+
+}

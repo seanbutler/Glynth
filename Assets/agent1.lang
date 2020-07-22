@@ -1,13 +1,9 @@
 var posx;
-posx = 100;
+posx = 10;
 
 var posy;
-posy = 200;
+posy = 20;
 
-var posz;
-posz = 300;
-
-while ( posx < 200 ) {
-    posx = posx + 1;
+while ( posy < 30 ) {
+    posy = posy + 1;
 }
-

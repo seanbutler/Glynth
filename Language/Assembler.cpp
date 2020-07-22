@@ -4,13 +4,10 @@
 
 #include "metainstructions.h"
 
-
 #include "Assembler.h"
 #include <string>
 #include <algorithm>
 #include <iostream>
-
-
 
 INS Assembler::ScanInstruction() {
 
@@ -32,7 +29,7 @@ INS Assembler::ScanInstruction() {
     //
     // comments begin with a semicolon (;) skip them
     //
-    if (currentChar == '#') {
+    if (currentChar == COMMENT[0]) {
         do {
             currentChar = assemblyStr[assemblyPos++];
         } while (currentChar != '\n');
@@ -168,23 +165,6 @@ INS Assembler::ScanInstruction() {
             return INS::BRF;
         }
 
-//        if (tokenString.back() == ':') {
-//            // declaration of a location in the instructions (a label)
-//            labels.insert(std::make_pair(tokenString, this->instructions.size()));
-//            return INS::LABEL;
-//        }
-//
-//        if (tokenString[0] == '@') {
-//            // reference to a location in the instructions (again a label)
-//            this->instructions.push_back((int) INS::NOP);
-//            labels.insert(std::make_pair(tokenString, this->instructions.size()));
-//            return INS::LABEL;
-//        }
-//
-//        // otherwise we are a data address label i.e. a variable
-//        this->instructions.push_back((int) INS::NOP);
-//        data.insert(std::make_pair(tokenString, data.size()));
-//        return INS::ADDRESS;
     }
 
     //
@@ -210,15 +190,15 @@ INS Assembler::ScanInstruction() {
     }
 
     //
-    // :LABELS (they indicate jump destinations, no instructions emitted, instead add them to a map)
+    // %LABELS - they indicate data addresses
+    // add them to a map and insert their memory address here)
     //
-    if (currentChar == ':') {
+    if (currentChar == VARIABLE[0]) {
 
         // starting a new token ...
         std::string tokenString;
 
-        // get the next character
-        tokenString += currentChar;
+        // starting from the next character so we lose the LOCATION PREFIX
         currentChar = assemblyStr[assemblyPos++];
 
         // scan forward letters and underscore
@@ -228,22 +208,56 @@ INS Assembler::ScanInstruction() {
         }
         --assemblyPos;
 
-        std::cout << "asm got op/lab\t\t" << tokenString << std::endl;
+        std::cout << "asm got : label\t\t" << tokenString << std::endl;
 
-        labels.insert(std::make_pair(tokenString, this->instructions.size()));
+        std::pair<std::map<std::string,int>::iterator,bool> ret;
+
+        ret = data.insert(std::make_pair(tokenString, data.size()));
+        if ( ret.second ) {
+            std::cout << "element " << tokenString << " inserted at address " << ret.first->second << '\n';
+        } else  {
+            std::cout << "element " << tokenString << " already existed at address " << ret.first->second << '\n';
+        }
+        this->instructions.push_back(ret.first->second);
+
+        return INS::LABEL;
+    }
+
+
+
+    //
+    // :LABELS (they indicate jump destinations, no instructions emitted, instead add them to a map)
+    //
+    if (currentChar == LOCATION[0]) {
+
+        // starting a new token ...
+        std::string tokenString;
+
+        // starting from the next character so we lose the LOCATION PREFIX
+        currentChar = assemblyStr[assemblyPos++];
+
+        // scan forward letters and underscore
+        while (isalnum(currentChar) || currentChar == '_') {
+            tokenString += currentChar;
+            currentChar = assemblyStr[assemblyPos++];
+        }
+        --assemblyPos;
+
+        std::cout << "asm got : label\t\t" << tokenString << std::endl;
+
+        labels.insert(std::make_pair(tokenString, this->instructions.size()+1));
         return INS::LABEL;
     }
 
     //
     // @LABELS addresses to be jumped to, emit a NOP (or NaN) for now and patch them up later
     //
-    if (currentChar == '@') {
+    if (currentChar == DESTINATION[0]) {
 
         // starting a new token ... probably an instruction address
         std::string tokenString;
 
-        // get the next character
-        tokenString += currentChar;
+        // starting from the next character so we lose the DESTINATION PREFIX
         currentChar = assemblyStr[assemblyPos++];
 
         // scan forward letters, numbers and underscores only
@@ -256,13 +270,11 @@ INS Assembler::ScanInstruction() {
         // add it to a map indexed on the string
         std::cout << "asm got @ label\t\t" << tokenString << "\n";
 
-        // reference to a location in the instructions (again a label)
+        // reference to a location in the instructions
         this->instructions.push_back((int) INS::NOP);
         labels.insert(std::make_pair(tokenString, this->instructions.size()));
         return INS::LABEL;
     }
-
-
 
     //
     // other symbols...

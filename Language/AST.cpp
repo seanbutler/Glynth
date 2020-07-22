@@ -16,7 +16,7 @@ unsigned long guid = 0;
 static std::string getUniqueIdentifier(){
 
     std::stringstream res;
-    res << "LABEL" << std::setfill ('0') << std::setw (4);
+    res << "LAB_" << std::setfill ('0') << std::setw (4);
     res << guid++;
     return  res.str();
 }

@@ -23,6 +23,7 @@ public:
     INS ScanInstruction();
 
     void Scan() {
+
         INS result;
         do {
             result = ScanInstruction();
