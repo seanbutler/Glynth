@@ -1,6 +1,8 @@
 #include <iostream>
 #include <fstream>
 
+#include "./Engine/Engine.h"
+
 #include "./Language/Lexer.h"
 #include "./Language/Parser.h"
 #include "./Language/Assembler.h"
@@ -9,7 +11,10 @@
 int main(int argc, char **argv) {
     std::cout << "GLYNTH - Game Language Program Synthesis" << std::endl;
 
-    std::string filename = "Assets/agent1.lang";
+
+    Engine engine;
+
+    std::string filename = "Assets/agent2.lang";
     std::ifstream sourceFile(filename);
     std::string sourceString((std::istreambuf_iterator<char>(sourceFile)), std::istreambuf_iterator<char>());
     std::cout << sourceString << std::endl;
@@ -32,5 +37,6 @@ int main(int argc, char **argv) {
     VM virtualMachine(assembler.GetInstructions());
     virtualMachine.Execute();
 
+    engine.MainLoop();
     return 0;
 }
