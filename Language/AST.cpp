@@ -95,6 +95,34 @@ std::string BlockAST::eval() {
 
 // ---------------------------------------------------------------------------
 
+void OutputAST::print() {
+    std::cout << "output: \"" << name << "\"" << std::endl;
+    this->expression->print();
+}
+
+std::string OutputAST::diag(unsigned int parentID) {
+    std::string str;
+    str += "node" + std::to_string(ASTNode::id) + " [ label = \"output:\"];\n";
+    str += "node" + std::to_string(parentID) + " -> node" + std::to_string(ASTNode::id) + ";\n";
+
+    str += this->expression->diag(ASTNode::id);
+    return str;
+}
+
+std::string OutputAST::eval() {
+    std::string str = "";
+
+    str += "\n" + COMMENT + " OUTPUT EXPRESSION\n";
+    str += this->expression->eval();
+
+    str += "\tOUTPUT \n";
+    return str;
+}
+
+
+// ---------------------------------------------------------------------------
+
+
 void IfStatementAST::print() {
     std::cout << "if: \"" << name << "\"" << std::endl;
     this->expression->print();
@@ -128,6 +156,7 @@ std::string IfStatementAST::eval() {
 
 
 // ---------------------------------------------------------------------------
+
 
 void WhileStatementAST::print() {
     std::cout << "while: \"" << name << "\"" << std::endl;

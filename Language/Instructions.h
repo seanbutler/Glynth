@@ -8,8 +8,6 @@
 #include <string>
 #include <array>
 
-
-
 enum class INS : int {
     NOP = 0,
     HALT,

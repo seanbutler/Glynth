@@ -97,6 +97,29 @@ private:
     std::vector<ASTNode *> children;
 };
 
+
+// ------------------------------------------------------------------------
+
+// OutputAST - statements like "output(expression);"
+
+class OutputAST : public ASTNode {
+
+public:
+    ASTNode *expression;
+
+    OutputAST(ASTNode *E) : expression(E){}
+
+    std::string &getName() { return name; }
+
+    virtual void print();
+    virtual std::string diag(unsigned int parentID);
+    virtual std::string eval();
+
+private:
+    std::string name;
+};
+
+
 // ------------------------------------------------------------------------
 
 // IfStatementAST - statements like "if(expression){statements}"

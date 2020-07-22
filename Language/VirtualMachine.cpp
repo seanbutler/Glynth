@@ -5,11 +5,13 @@
 #include "Instructions.h"
 #include "VirtualMachine.h"
 
+//#define DEBUG
+
 void VM::Execute() {
     bool running = true;
 
     while (running) {
-
+#ifdef DEBUG
         std::cout << "pc = " << programCounter << " instr = " << instructionNames[getCurrentInstruction()] << std::endl;
 
         std::cout << "instr = ";
@@ -32,7 +34,7 @@ void VM::Execute() {
             std::cout << "(unknown)";
 
         std::cout << std::endl;
-
+#endif
         switch ((INS)getCurrentInstruction()) {
 
             case INS::NOP : {
@@ -45,6 +47,8 @@ void VM::Execute() {
                 running = false;
                 break;
             }
+
+
 
             case INS::PUSH : {
                 incrProgramCounter();
@@ -231,12 +235,10 @@ void VM::Execute() {
                 incrProgramCounter();
                 int addr = getCurrentInstruction();
 
-                std::cout << "INS::BRF " << a << " " << addr;
-
                 if (a==0) {
                     programCounter = addr-1;
                 }
-                std::cout << " " << programCounter << std::endl;
+//                std::cout << " " << programCounter << std::endl;
                 break;
             }
 
@@ -253,6 +255,6 @@ void VM::Execute() {
         }
 
         incrProgramCounter();
-        std::cout << std::endl;
+//        std::cout << std::endl;
     }
 }

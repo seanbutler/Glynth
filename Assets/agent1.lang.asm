@@ -1,32 +1,60 @@
 
-# DECLARE posx
+# Assignment Statement 
+	PUSH 128
+	SAVE %max
 
 # Assignment Statement 
-	PUSH 10
-	SAVE %posx
-
-# DECLARE posy
+	PUSH 0
+	SAVE %min
 
 # Assignment Statement 
-	PUSH 20
-	SAVE %posy
+	PUSH 1
+	SAVE %pos
 
 # WHILE 
-:LAB_0000
-	LOAD %posy
-	PUSH 30
+:LBL_0000
+	LOAD %pos
+	LOAD %max
 	LT
-	BRF @LAB_0001
+	BRF @LBL_0001
 
 # WHILE BLOCK
 # BEGIN BLOCK
 
+# OUTPUT EXPRESSION
+	LOAD %pos
+	OUTPUT 
+
 # Assignment Statement 
-	LOAD %posy
-	PUSH 1
-	ADD
-	SAVE %posy
+	LOAD %pos
+	PUSH 2
+	MUL
+	SAVE %pos
 
 # END BLOCK
-	JMP @LAB_0000
-:LAB_0001
+	JMP @LBL_0000
+:LBL_0001
+
+# WHILE 
+:LBL_0002
+	LOAD %pos
+	LOAD %min
+	GT
+	BRF @LBL_0003
+
+# WHILE BLOCK
+# BEGIN BLOCK
+
+# OUTPUT EXPRESSION
+	LOAD %pos
+	OUTPUT 
+
+# Assignment Statement 
+	LOAD %pos
+	PUSH 1
+	SUB
+	SAVE %pos
+
+# END BLOCK
+	JMP @LBL_0002
+:LBL_0003

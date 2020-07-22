@@ -41,6 +41,11 @@ ASTNode *Parser::ParseStatement() {
 
     switch (currentToken.first) {
 
+
+        case Token::KEYWORD_OUTPUT: {
+            return ParseOutput();
+        }
+
         case Token::KEYWORD_VAR: {
             return ParseVariableDeclaration();
         }
@@ -149,6 +154,35 @@ ASTNode *Parser::ParseBlock() {
         }
     } while (newNode != nullptr);
     return block;
+}
+
+// ----------------------------------------------------------------------
+
+ASTNode *Parser::ParseOutput() {
+
+    Token tokenType = currentToken.first;
+    std::string tokenString = currentToken.second;
+
+    std::cout << "Parser::ParseOutput tokenType = " << (int) tokenType
+              << " " << tokenString << std::endl;
+
+    getNextToken();
+
+    if (currentToken.first != Token::SYM_ASSIGN) {
+        std::cerr << "ERROR Parser::ParseOutput() - Unrecognised Token Before Statement Expression, Expected Left Parenthesis."
+                  << std::endl;
+        return nullptr;
+    }
+
+    getNextToken();
+
+    ASTNode *expr = this->ParseExpression();
+
+//    getNextToken();
+
+    OutputAST *outputStatement = new OutputAST(expr);
+
+    return outputStatement;
 }
 
 // ----------------------------------------------------------------------

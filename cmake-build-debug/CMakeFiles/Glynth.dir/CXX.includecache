@@ -6,33 +6,27 @@
 
 #IncludeRegexTransform: 
 
-/home/sean/Projects/Glynth/Language/AST.cpp
-Tokens.h
-/home/sean/Projects/Glynth/Language/Tokens.h
-AST.h
-/home/sean/Projects/Glynth/Language/AST.h
-metainstructions.h
-/home/sean/Projects/Glynth/Language/metainstructions.h
-iostream
+/home/sean/Projects/Glynth/Language/Instructions.h
+string
 -
-iomanip
+array
 -
 
-/home/sean/Projects/Glynth/Language/AST.h
+/home/sean/Projects/Glynth/Language/VirtualMachine.cpp
+Instructions.h
+/home/sean/Projects/Glynth/Language/Instructions.h
+VirtualMachine.h
+/home/sean/Projects/Glynth/Language/VirtualMachine.h
+
+/home/sean/Projects/Glynth/Language/VirtualMachine.h
 string
 -
 vector
 -
-sstream
+stack
 -
-Tokens.h
-/home/sean/Projects/Glynth/Language/Tokens.h
-uuid/uuid.h
+iostream
 -
-
-/home/sean/Projects/Glynth/Language/Tokens.h
-
-/home/sean/Projects/Glynth/Language/metainstructions.h
-string
--
+Instructions.h
+/home/sean/Projects/Glynth/Language/Instructions.h
 

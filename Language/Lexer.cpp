@@ -50,12 +50,15 @@ Token Lexer::ScanToken() {
 //        } else if (tokenString == "return") {
 //            tokens.push_back(std::make_pair(Token::KEYWORD_RETURN, tokenString));
 //            return Token::KEYWORD_RETURN;
-//        } else if (tokenString == "yield") {
-//            tokens.push_back(std::make_pair(Token::KEYWORD_YIELD, tokenString));
-//            return Token::KEYWORD_YIELD;
-//        } else if (tokenString == "exit") {
-//            tokens.push_back(std::make_pair(Token::KEYWORD_EXIT, tokenString));
-//            return Token::KEYWORD_EXIT;
+        } else if (tokenString == "yield") {
+            tokens.push_back(std::make_pair(Token::KEYWORD_YIELD, tokenString));
+            return Token::KEYWORD_YIELD;
+        } else if (tokenString == "exit") {
+            tokens.push_back(std::make_pair(Token::KEYWORD_EXIT, tokenString));
+            return Token::KEYWORD_EXIT;
+        } else if (tokenString == "output") {
+            tokens.push_back(std::make_pair(Token::KEYWORD_OUTPUT, tokenString));
+            return Token::KEYWORD_OUTPUT;
         }
         tokens.push_back(std::make_pair(Token::IDENTIFIER, tokenString));
         return Token::IDENTIFIER;
@@ -182,10 +185,10 @@ Token Lexer::ScanToken() {
             return Token::SYM_COLON;
         }
 
-        case '#': {
-            tokens.push_back(std::make_pair(Token::SYM_HASH, "#"));
-            return Token::SYM_HASH;
-        }
+//        case '#': {
+//            tokens.push_back(std::make_pair(Token::SYM_HASH, "#"));
+//            return Token::SYM_HASH;
+//        }
 
         default: {
             return Token::ERROR;

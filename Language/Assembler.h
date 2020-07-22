@@ -42,7 +42,6 @@ public:
 
     }
 
-
     void PatchUpJumps() {
         // go through the jump locations a patch in the correct addresses
 

@@ -1,9 +1,16 @@
-var posx;
-posx = 20;
+max = 128;
+min = 0;
 
-var posy;
-posy = 10;
+pos = 1;
 
-while ( posy < posx ) {
-    posy = posy + 1;
+while ( pos < max ) {
+    output = pos;
+    pos = pos * 2;
 }
+
+while ( pos > min ) {
+    output = pos;
+    pos = pos - 1;
+}
+
+
