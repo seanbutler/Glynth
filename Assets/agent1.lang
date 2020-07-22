@@ -1,9 +1,9 @@
 var posx;
-posx = 10;
+posx = 20;
 
 var posy;
-posy = 20;
+posy = 10;
 
-while ( posy < 30 ) {
+while ( posy < posx ) {
     posy = posy + 1;
 }
