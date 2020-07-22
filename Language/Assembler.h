@@ -29,11 +29,31 @@ public:
             result = ScanInstruction();
         } while (result != INS::END_OF_FILE && result != INS::ERROR);
 
-        std::cout << "Dump Labels Map" << std::endl;
+        std::cout << std::endl << "Dump Labels Map" << std::endl;
         DumpLabelsMap();
 
-        std::cout << "Dump Data Map" << std::endl;
+        std::cout << std::endl << "Dump Jumps Map" << std::endl;
+        DumpJumpsMap();
+
+        std::cout << std::endl << "Dump Data Map" << std::endl;
         DumpDataMap();
+
+        PatchUpJumps();
+
+    }
+
+
+    void PatchUpJumps() {
+        // go through the jump locations a patch in the correct addresses
+
+        std::cout << "Patching Jumps " << std::endl;
+        for(auto J : jumps) {
+            std::cout << "Patch " << J.first << " " << J.second ;
+            std::cout << " to " << labels[J.second] << std::endl;
+
+            instructions[J.first] = labels[J.second];
+        }
+        std::cout << std::endl;
     }
 
     std::vector<int> GetInstructions() {
@@ -53,16 +73,21 @@ public:
 
     void DumpLabelsMap() {
         for (auto E : labels) {
-            std::cout << "L " << E.first << " " << E.second << "\n";
+            std::cout << "L " << E.first << " " << E.second << std::endl;
+        }
+    }
+
+    void DumpJumpsMap() {
+        for (auto E : jumps) {
+            std::cout << "J " << E.first << " " << E.second << std::endl;
         }
     }
 
     void DumpDataMap() {
         for (auto E : data) {
-            std::cout << "D " << E.first << " " << E.second << "\n";
+            std::cout << "D " << E.first << " " << E.second << std::endl;
         }
     }
-
 
     void GenerateTestBinaryInstructions() {
 
@@ -111,6 +136,7 @@ public:
     std::vector<std::string> identifiers;
 
     std::map<std::string, int> labels;
+    std::map<int, std::string> jumps;
     std::map<std::string, int> data;
 };
 

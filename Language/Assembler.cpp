@@ -208,7 +208,7 @@ INS Assembler::ScanInstruction() {
         }
         --assemblyPos;
 
-        std::cout << "asm got : label\t\t" << tokenString << std::endl;
+        std::cout << "asm got "<< VARIABLE << " label\t\t" << tokenString << std::endl;
 
         std::pair<std::map<std::string,int>::iterator,bool> ret;
 
@@ -223,10 +223,9 @@ INS Assembler::ScanInstruction() {
         return INS::LABEL;
     }
 
-
-
     //
-    // :LABELS (they indicate jump destinations, no instructions emitted, instead add them to a map)
+    // :LABELS (they indicate jump destinations, no instructions emitted,
+    //          instead add these addresses to a map with the label string)
     //
     if (currentChar == LOCATION[0]) {
 
@@ -245,7 +244,7 @@ INS Assembler::ScanInstruction() {
 
         std::cout << "asm got : label\t\t" << tokenString << std::endl;
 
-        labels.insert(std::make_pair(tokenString, this->instructions.size()+1));
+        labels.insert(std::make_pair(tokenString, this->instructions.size()));
         return INS::LABEL;
     }
 
@@ -271,8 +270,8 @@ INS Assembler::ScanInstruction() {
         std::cout << "asm got @ label\t\t" << tokenString << "\n";
 
         // reference to a location in the instructions
-        this->instructions.push_back((int) INS::NOP);
-        labels.insert(std::make_pair(tokenString, this->instructions.size()));
+        jumps.insert(std::make_pair(this->instructions.size(), tokenString));
+        this->instructions.push_back((int) -999999);
         return INS::LABEL;
     }
 
