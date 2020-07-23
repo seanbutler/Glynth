@@ -49,26 +49,6 @@ void Engine::MainLoop()
         entityScheduler.Render(&window);
         window.display();
 
-
-//        sf::Event guiEvent;
-//        while (guiWindow.pollEvent(event)) {
-//            if (event.type == sf::Event::Closed) {
-//                guiWindow.close();
-//            }
-//        }
-
-//        sf::Text text;
-//
-//        text.setFont(font); // font is a sf::Font
-//        text.setString("Hello world");
-//        text.setCharacterSize(128); // in pixels, not points!
-//        text.setScale(1.0/24.0, 1.0/24.0);
-//
-//        text.setFillColor(sf::Color::White);
-//        text.setStyle(sf::Text::Bold | sf::Text::Underlined);
-//        guiWindow.clear(sf::Color(64, 64, 64, 255));
-//        guiWindow.draw(text);
-//        guiWindow.display();
     }
 }
 

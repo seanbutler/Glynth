@@ -32,8 +32,8 @@ public:
         }
     }
 
+    // TODO - this should be a map so we can id and retrieve specific entities
     std::vector<Entity*> entities;
 };
-
 
 #endif //SYNTH_SCHEDULER_H

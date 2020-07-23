@@ -5,7 +5,7 @@
 		<Option title="Glynth"/>
 		<Option makefile_is_custom="1"/>
 		<Option compiler="gcc"/>
-		<Option virtualFolders="CMake Files\;"/>
+		<Option virtualFolders="CMake Files\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\..\;CMake Files\..\..\..\..\;CMake Files\..\..\..\..\usr\;CMake Files\..\..\..\..\usr\lib\;CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\;CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\;CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\SFML\;"/>
 		<Build>
 			<Target title="all">
 				<Option working_dir="/home/sean/Projects/Glynth/cmake-build-debug"/>
@@ -84,6 +84,30 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/sean/Projects/Glynth/Engine/Engine.cpp">
+			<Option target="Glynth"/>
+		</Unit>
+		<Unit filename="/home/sean/Projects/Glynth/Engine/Engine.h">
+			<Option target="Glynth"/>
+		</Unit>
+		<Unit filename="/home/sean/Projects/Glynth/Engine/Entity.cpp">
+			<Option target="Glynth"/>
+		</Unit>
+		<Unit filename="/home/sean/Projects/Glynth/Engine/Entity.h">
+			<Option target="Glynth"/>
+		</Unit>
+		<Unit filename="/home/sean/Projects/Glynth/Engine/Input.cpp">
+			<Option target="Glynth"/>
+		</Unit>
+		<Unit filename="/home/sean/Projects/Glynth/Engine/Input.h">
+			<Option target="Glynth"/>
+		</Unit>
+		<Unit filename="/home/sean/Projects/Glynth/Engine/Scheduler.cpp">
+			<Option target="Glynth"/>
+		</Unit>
+		<Unit filename="/home/sean/Projects/Glynth/Engine/Scheduler.h">
+			<Option target="Glynth"/>
+		</Unit>
 		<Unit filename="/home/sean/Projects/Glynth/Language/AST.cpp">
 			<Option target="Glynth"/>
 		</Unit>
@@ -128,6 +152,21 @@
 		</Unit>
 		<Unit filename="/home/sean/Projects/Glynth/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/home/sean/Projects/Glynth/../../../../usr/lib/x86_64-linux-gnu/cmake/SFML/SFMLConfig.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\SFML\"/>
+		</Unit>
+		<Unit filename="/home/sean/Projects/Glynth/../../../../usr/lib/x86_64-linux-gnu/cmake/SFML/SFMLConfigDependencies.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\SFML\"/>
+		</Unit>
+		<Unit filename="/home/sean/Projects/Glynth/../../../../usr/lib/x86_64-linux-gnu/cmake/SFML/SFMLConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\SFML\"/>
+		</Unit>
+		<Unit filename="/home/sean/Projects/Glynth/../../../../usr/lib/x86_64-linux-gnu/cmake/SFML/SFMLSharedTargets-none.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\SFML\"/>
+		</Unit>
+		<Unit filename="/home/sean/Projects/Glynth/../../../../usr/lib/x86_64-linux-gnu/cmake/SFML/SFMLSharedTargets.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\SFML\"/>
 		</Unit>
 	</Project>
 </CodeBlocks_project_file>

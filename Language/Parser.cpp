@@ -333,20 +333,21 @@ ASTNode *Parser::ParseExpression() {
                 std::cout << "Parser::ParseExpression() op = " << (int) currentToken.first << " " << currentToken.second
                           << std::endl;
                 if (!opStack.empty()) {
-//                    // get the last operator
-//                    Token op = opStack.pop();
-//
-//                    // get the last two values
-//                    ASTNode* right = valueStack.top();
-//                    valueStack.pop();
-//
-//                    ASTNode *left = valueStack.top();
-//                    valueStack.pop();
-//
-//                    // construct a binary op ast node
-//                    // TODO construct operator Node here...
-//                    ASTNode *binOpNode = nullptr; // new OperandAST(opStack.pop(), , )
-//                    valueStack.push(binOpNode);
+                    // get the last operator
+                    Token op = opStack.top();
+                    opStack.pop();
+
+                    // get the last two values
+                    ASTNode* right = valueStack.top();
+                    valueStack.pop();
+
+                    ASTNode *left = valueStack.top();
+                    valueStack.pop();
+
+                    // construct a binary op ast node
+                    // TODO construct operator Node here...
+                    ASTNode *binOpNode = new BinOperandAST(op, left, right);
+                    valueStack.push(binOpNode);
                 }
 
                 opStack.push(currentToken.first);

@@ -1,29 +1,13 @@
 
-var state;
-var health;
-state = 0;
+n=48;
 
-while(lives>0)
-{
-    if (state == 0 ) {
-        health = 100;
-        state = 1;
-    }
+a = 1;
+b = 0;
 
-    while(hello == world) {
-        gosh = gee;
-    }
-
-    if (state == 1 ) {
-        coins = coins + 1;
-        if (health == 0 ) {
-            state = 2;
-        }
-    }
-
-    if (state == 2 ) {
-        if (health == 0 ) {
-            state = 2;
-        }
-    }
+while ( n > 0 ) {
+    result = a + b;
+    a = b;
+    b = result;
+    output = result;
+    n = n - 1;
 }

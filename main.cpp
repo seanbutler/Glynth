@@ -11,10 +11,9 @@
 int main(int argc, char **argv) {
     std::cout << "GLYNTH - Game Language Program Synthesis" << std::endl;
 
+//    Engine engine;
 
-    Engine engine;
-
-    std::string filename = "Assets/agent2.lang";
+    std::string filename = "Assets/agent3.lang";
     std::ifstream sourceFile(filename);
     std::string sourceString((std::istreambuf_iterator<char>(sourceFile)), std::istreambuf_iterator<char>());
     std::cout << sourceString << std::endl;
@@ -32,11 +31,11 @@ int main(int argc, char **argv) {
     assembler.Scan();
     assembler.OutputInstructionList(filename);
 
-//    assembler.GenerateTestBinaryInstructions();
+    assembler.GenerateTestBinaryInstructions();
 
     VM virtualMachine(assembler.GetInstructions());
     virtualMachine.Execute();
 
-    engine.MainLoop();
+//    engine.MainLoop();
     return 0;
 }

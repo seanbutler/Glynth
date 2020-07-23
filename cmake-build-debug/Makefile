@@ -39,10 +39,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /snap/clion/114/bin/cmake/linux/bin/cmake
+CMAKE_COMMAND = /snap/clion/121/bin/cmake/linux/bin/cmake
 
 # The command to remove a file.
-RM = /snap/clion/114/bin/cmake/linux/bin/cmake -E remove -f
+RM = /snap/clion/121/bin/cmake/linux/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -59,7 +59,7 @@ CMAKE_BINARY_DIR = /home/sean/Projects/Glynth/cmake-build-debug
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/snap/clion/114/bin/cmake/linux/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/snap/clion/121/bin/cmake/linux/bin/cmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -70,7 +70,7 @@ rebuild_cache/fast: rebuild_cache
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/snap/clion/114/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+	/snap/clion/121/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -122,6 +122,114 @@ Glynth: cmake_check_build_system
 Glynth/fast:
 	$(MAKE) -f CMakeFiles/Glynth.dir/build.make CMakeFiles/Glynth.dir/build
 .PHONY : Glynth/fast
+
+Engine/Engine.o: Engine/Engine.cpp.o
+
+.PHONY : Engine/Engine.o
+
+# target to build an object file
+Engine/Engine.cpp.o:
+	$(MAKE) -f CMakeFiles/Glynth.dir/build.make CMakeFiles/Glynth.dir/Engine/Engine.cpp.o
+.PHONY : Engine/Engine.cpp.o
+
+Engine/Engine.i: Engine/Engine.cpp.i
+
+.PHONY : Engine/Engine.i
+
+# target to preprocess a source file
+Engine/Engine.cpp.i:
+	$(MAKE) -f CMakeFiles/Glynth.dir/build.make CMakeFiles/Glynth.dir/Engine/Engine.cpp.i
+.PHONY : Engine/Engine.cpp.i
+
+Engine/Engine.s: Engine/Engine.cpp.s
+
+.PHONY : Engine/Engine.s
+
+# target to generate assembly for a file
+Engine/Engine.cpp.s:
+	$(MAKE) -f CMakeFiles/Glynth.dir/build.make CMakeFiles/Glynth.dir/Engine/Engine.cpp.s
+.PHONY : Engine/Engine.cpp.s
+
+Engine/Entity.o: Engine/Entity.cpp.o
+
+.PHONY : Engine/Entity.o
+
+# target to build an object file
+Engine/Entity.cpp.o:
+	$(MAKE) -f CMakeFiles/Glynth.dir/build.make CMakeFiles/Glynth.dir/Engine/Entity.cpp.o
+.PHONY : Engine/Entity.cpp.o
+
+Engine/Entity.i: Engine/Entity.cpp.i
+
+.PHONY : Engine/Entity.i
+
+# target to preprocess a source file
+Engine/Entity.cpp.i:
+	$(MAKE) -f CMakeFiles/Glynth.dir/build.make CMakeFiles/Glynth.dir/Engine/Entity.cpp.i
+.PHONY : Engine/Entity.cpp.i
+
+Engine/Entity.s: Engine/Entity.cpp.s
+
+.PHONY : Engine/Entity.s
+
+# target to generate assembly for a file
+Engine/Entity.cpp.s:
+	$(MAKE) -f CMakeFiles/Glynth.dir/build.make CMakeFiles/Glynth.dir/Engine/Entity.cpp.s
+.PHONY : Engine/Entity.cpp.s
+
+Engine/Input.o: Engine/Input.cpp.o
+
+.PHONY : Engine/Input.o
+
+# target to build an object file
+Engine/Input.cpp.o:
+	$(MAKE) -f CMakeFiles/Glynth.dir/build.make CMakeFiles/Glynth.dir/Engine/Input.cpp.o
+.PHONY : Engine/Input.cpp.o
+
+Engine/Input.i: Engine/Input.cpp.i
+
+.PHONY : Engine/Input.i
+
+# target to preprocess a source file
+Engine/Input.cpp.i:
+	$(MAKE) -f CMakeFiles/Glynth.dir/build.make CMakeFiles/Glynth.dir/Engine/Input.cpp.i
+.PHONY : Engine/Input.cpp.i
+
+Engine/Input.s: Engine/Input.cpp.s
+
+.PHONY : Engine/Input.s
+
+# target to generate assembly for a file
+Engine/Input.cpp.s:
+	$(MAKE) -f CMakeFiles/Glynth.dir/build.make CMakeFiles/Glynth.dir/Engine/Input.cpp.s
+.PHONY : Engine/Input.cpp.s
+
+Engine/Scheduler.o: Engine/Scheduler.cpp.o
+
+.PHONY : Engine/Scheduler.o
+
+# target to build an object file
+Engine/Scheduler.cpp.o:
+	$(MAKE) -f CMakeFiles/Glynth.dir/build.make CMakeFiles/Glynth.dir/Engine/Scheduler.cpp.o
+.PHONY : Engine/Scheduler.cpp.o
+
+Engine/Scheduler.i: Engine/Scheduler.cpp.i
+
+.PHONY : Engine/Scheduler.i
+
+# target to preprocess a source file
+Engine/Scheduler.cpp.i:
+	$(MAKE) -f CMakeFiles/Glynth.dir/build.make CMakeFiles/Glynth.dir/Engine/Scheduler.cpp.i
+.PHONY : Engine/Scheduler.cpp.i
+
+Engine/Scheduler.s: Engine/Scheduler.cpp.s
+
+.PHONY : Engine/Scheduler.s
+
+# target to generate assembly for a file
+Engine/Scheduler.cpp.s:
+	$(MAKE) -f CMakeFiles/Glynth.dir/build.make CMakeFiles/Glynth.dir/Engine/Scheduler.cpp.s
+.PHONY : Engine/Scheduler.cpp.s
 
 Language/AST.o: Language/AST.cpp.o
 
@@ -321,6 +429,18 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... Glynth"
+	@echo "... Engine/Engine.o"
+	@echo "... Engine/Engine.i"
+	@echo "... Engine/Engine.s"
+	@echo "... Engine/Entity.o"
+	@echo "... Engine/Entity.i"
+	@echo "... Engine/Entity.s"
+	@echo "... Engine/Input.o"
+	@echo "... Engine/Input.i"
+	@echo "... Engine/Input.s"
+	@echo "... Engine/Scheduler.o"
+	@echo "... Engine/Scheduler.i"
+	@echo "... Engine/Scheduler.s"
 	@echo "... Language/AST.o"
 	@echo "... Language/AST.i"
 	@echo "... Language/AST.s"
