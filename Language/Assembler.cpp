@@ -56,7 +56,7 @@ INS Assembler::ScanInstruction() {
         }
         --assemblyPos;
 
-        std::cout << "asm got op/lab\t\t" << tokenString << std::endl;
+//        std::cout << "asm got op/lab\t\t" << tokenString << std::endl;
 
         // TODO - turn this whole logic into a lookup or polymorphism
 
@@ -183,7 +183,7 @@ INS Assembler::ScanInstruction() {
         }
         --assemblyPos;
 
-        std::cout << "asm got number\t\t" << numberStr << "\n";
+//        std::cout << "asm got number\t\t" << numberStr << "\n";
 
         this->instructions.push_back(std::stoi(numberStr));
         return INS::NUMBER;
@@ -208,15 +208,15 @@ INS Assembler::ScanInstruction() {
         }
         --assemblyPos;
 
-        std::cout << "asm got "<< VARIABLE << " label\t\t" << tokenString << std::endl;
+//        std::cout << "asm got "<< VARIABLE << " label\t\t" << tokenString << std::endl;
 
         std::pair<std::map<std::string,int>::iterator,bool> ret;
 
         ret = data.insert(std::make_pair(tokenString, data.size()));
         if ( ret.second ) {
-            std::cout << "element " << tokenString << " inserted at address " << ret.first->second << '\n';
+//            std::cout << "element " << tokenString << " inserted at address " << ret.first->second << '\n';
         } else  {
-            std::cout << "element " << tokenString << " already existed at address " << ret.first->second << '\n';
+//            std::cout << "element " << tokenString << " already existed at address " << ret.first->second << '\n';
         }
         this->instructions.push_back(ret.first->second);
 
@@ -242,7 +242,7 @@ INS Assembler::ScanInstruction() {
         }
         --assemblyPos;
 
-        std::cout << "asm got : label\t\t" << tokenString << std::endl;
+//        std::cout << "asm got : label\t\t" << tokenString << std::endl;
 
         labels.insert(std::make_pair(tokenString, this->instructions.size()));
         return INS::LABEL;
@@ -267,7 +267,7 @@ INS Assembler::ScanInstruction() {
         --assemblyPos;
 
         // add it to a map indexed on the string
-        std::cout << "asm got @ label\t\t" << tokenString << "\n";
+//        std::cout << "asm got @ label\t\t" << tokenString << "\n";
 
         // reference to a location in the instructions
         jumps.insert(std::make_pair(this->instructions.size(), tokenString));

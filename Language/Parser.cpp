@@ -34,10 +34,10 @@ bool Parser::parse() {
 
 ASTNode *Parser::ParseStatement() {
 
-    std::cout << "\nParser::ParseStatement "
-              << (int) currentToken.first << " "
-              << currentToken.second
-              << std::endl;
+//    std::cout << "\nParser::ParseStatement "
+//              << (int) currentToken.first << " "
+//              << currentToken.second
+//              << std::endl;
 
     switch (currentToken.first) {
 
@@ -111,9 +111,9 @@ ASTNode *Parser::ParseVariableDeclaration() {
     Token tokenType = currentToken.first;
     std::string tokenString = currentToken.second;
 
-    std::cout << "Parser::ParseVariableDeclaration "
-              << (int) tokenType << " "
-              << tokenString << std::endl;
+//    std::cout << "Parser::ParseVariableDeclaration "
+//              << (int) tokenType << " "
+//              << tokenString << std::endl;
 
     IdentifierAST *ident = nullptr;
     ASTNode *var = nullptr;
@@ -163,8 +163,8 @@ ASTNode *Parser::ParseOutput() {
     Token tokenType = currentToken.first;
     std::string tokenString = currentToken.second;
 
-    std::cout << "Parser::ParseOutput tokenType = " << (int) tokenType
-              << " " << tokenString << std::endl;
+//    std::cout << "Parser::ParseOutput tokenType = " << (int) tokenType
+//              << " " << tokenString << std::endl;
 
     getNextToken();
 
@@ -192,8 +192,8 @@ ASTNode *Parser::ParseIfStatement() {
     Token tokenType = currentToken.first;
     std::string tokenString = currentToken.second;
 
-    std::cout << "Parser::ParseIfStatement tokenType = " << (int) tokenType
-              << " " << tokenString << std::endl;
+//    std::cout << "Parser::ParseIfStatement tokenType = " << (int) tokenType
+//              << " " << tokenString << std::endl;
 
     getNextToken();
 
@@ -242,8 +242,8 @@ ASTNode *Parser::ParseWhileStatement() {
     Token tokenType = currentToken.first;
     std::string tokenString = currentToken.second;
 
-    std::cout << "Parser::ParseWhileStatement tokenType = " << (int) tokenType
-              << " " << tokenString << std::endl;
+//    std::cout << "Parser::ParseWhileStatement tokenType = " << (int) tokenType
+//              << " " << tokenString << std::endl;
 
     getNextToken();
 
@@ -289,8 +289,8 @@ ASTNode *Parser::ParseWhileStatement() {
 
 ASTNode *Parser::ParseExpression() {
 
-    std::cout << "Parser::ParseExpression() currentToken = " << (int) currentToken.first << " " << currentToken.second
-              << std::endl;
+//    std::cout << "Parser::ParseExpression() currentToken = " << (int) currentToken.first << " " << currentToken.second
+//              << std::endl;
 
     std::stack<ASTNode *> valueStack;
     std::stack<Token> opStack;
@@ -330,8 +330,8 @@ ASTNode *Parser::ParseExpression() {
             case Token::OP_SUB:
             case Token::OP_MUL:
             case Token::OP_DIV: {
-                std::cout << "Parser::ParseExpression() op = " << (int) currentToken.first << " " << currentToken.second
-                          << std::endl;
+//                std::cout << "Parser::ParseExpression() op = " << (int) currentToken.first << " " << currentToken.second
+//                          << std::endl;
                 if (!opStack.empty()) {
                     // get the last operator
                     Token op = opStack.top();
@@ -405,8 +405,9 @@ ASTNode *Parser::ParseParenExpression() {
 
     getNextToken();  // eat '('
 
-    std::cout << "Parser::ParseParenExpression currentToken = " << (int) currentToken.first << " "
-              << currentToken.second << std::endl;
+//    std::cout << "Parser::ParseParenExpression currentToken = " << (int) currentToken.first << " "
+//              << currentToken.second << std::endl;
+
     ASTNode *expr = nullptr;
     expr = ParseExpression();
 
@@ -424,9 +425,9 @@ ASTNode *Parser::ParseParenExpression() {
 
 ASTNode *Parser::ParseAssignmentStatement() {
 
-    std::cout << "Parser::ParseAssignmentStatement ID currentToken = "
-              << (int) currentToken.first << " "
-              << currentToken.second << std::endl;
+//    std::cout << "Parser::ParseAssignmentStatement ID currentToken = "
+//              << (int) currentToken.first << " "
+//              << currentToken.second << std::endl;
 
     // parse identifier
     ASTNode *identifierNode = ParseIdentifier();
@@ -441,8 +442,8 @@ ASTNode *Parser::ParseAssignmentStatement() {
         return nullptr;
     }
 
-    std::cout << "Parser::ParseAssignmentStatement currentToken = " << (int) currentToken.first << " \'"
-              << currentToken.second << "\'" << std::endl;
+//    std::cout << "Parser::ParseAssignmentStatement currentToken = " << (int) currentToken.first << " \'"
+//              << currentToken.second << "\'" << std::endl;
 
     getNextToken();
 
@@ -458,15 +459,15 @@ ASTNode *Parser::ParseAssignmentStatement() {
 // ----------------------------------------------------------------------
 
 IdentifierAST *Parser::ParseIdentifier() {
-    std::cout << "Parser::ParseIdentifier currentToken = " << (int) currentToken.first << " '" << currentToken.second
-              << "' " << std::endl;
+//    std::cout << "Parser::ParseIdentifier currentToken = " << (int) currentToken.first << " '" << currentToken.second
+//              << "' " << std::endl;
     IdentifierAST *identifierNode = new IdentifierAST(currentToken.second);
     return identifierNode;
 }
 
 ASTNode *Parser::ParseNumber() {
-    std::cout << "Parser::ParseNumber currentToken = " << (int) currentToken.first << " '" << currentToken.second
-              << "' " << std::endl;
+//    std::cout << "Parser::ParseNumber currentToken = " << (int) currentToken.first << " '" << currentToken.second
+//              << "' " << std::endl;
     ASTNode *numberNode = new NumberAST(atoi(currentToken.second.c_str()));
     return numberNode;
 }
