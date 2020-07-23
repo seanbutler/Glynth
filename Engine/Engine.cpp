@@ -48,7 +48,6 @@ void Engine::MainLoop()
         window.clear(sf::Color(255, 255, 255, 255));
         entityScheduler.Render(&window);
         window.display();
-
     }
 }
 

@@ -41,6 +41,20 @@ ASTNode *Parser::ParseStatement() {
 
     switch (currentToken.first) {
 
+        case Token::KEYWORD_YIELD: {
+            ASTNode* node = new YieldAST();
+            getNextToken();
+            return node;
+        }
+
+//        case Token::KEYWORD_EXIT: {
+//            return new ExitAST();
+//        }
+
+
+        case Token::KEYWORD_EXIT: {
+//            return ParseOutput();
+        }
 
         case Token::KEYWORD_OUTPUT: {
             return ParseOutput();
@@ -155,6 +169,7 @@ ASTNode *Parser::ParseBlock() {
     } while (newNode != nullptr);
     return block;
 }
+
 
 // ----------------------------------------------------------------------
 

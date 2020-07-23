@@ -1,41 +1,41 @@
 #include <iostream>
 #include <fstream>
-
-#include "./Engine/Engine.h"
+#include<stdlib.h>
+#include<time.h>
 
 #include "./Language/Lexer.h"
 #include "./Language/Parser.h"
 #include "./Language/Assembler.h"
 #include "./Language/VirtualMachine.h"
 
+#include "./Engine/Engine.h"
+
+#include "./Simulation/Agent.h"
+
+
 int main(int argc, char **argv) {
     std::cout << "GLYNTH - Game Language Program Synthesis" << std::endl;
 
-//    Engine engine;
+    Engine engine;
 
-    std::string filename = "Assets/agent3.lang";
-    std::ifstream sourceFile(filename);
-    std::string sourceString((std::istreambuf_iterator<char>(sourceFile)), std::istreambuf_iterator<char>());
-    std::cout << sourceString << std::endl;
+    srand(time(NULL));
 
-    Lexer lexer(sourceString);
-    lexer.Scan();
-    lexer.OutputTokenList(filename);
 
-    Parser parser(lexer.GetTokenList());
-    parser.parse();
-    parser.OutputTreeDiagram(filename);
-    parser.OutputAsm(filename);
+    Agent* tmpAgent1Ptr = new Agent("./Assets/agent1.lang", sf::Color(255, 64, 0));
+    engine.entityScheduler.entities.push_back((Entity*)tmpAgent1Ptr);
+    tmpAgent1Ptr->SetAlienVar("x", (int)rand()%32);
+    tmpAgent1Ptr->SetAlienVar("y", (int)rand()%32);
 
-    Assembler assembler(parser.GetAsm());
-    assembler.Scan();
-    assembler.OutputInstructionList(filename);
+    Agent* tmpAgent2Ptr = new Agent("./Assets/agent2.lang", sf::Color(32, 255, 32));
+    engine.entityScheduler.entities.push_back((Entity*)tmpAgent2Ptr);
+    tmpAgent2Ptr->SetAlienVar("x", (int)rand()%32);
+    tmpAgent2Ptr->SetAlienVar("y", (int)rand()%32);
 
-    assembler.GenerateTestBinaryInstructions();
+    Agent* tmpAgent3Ptr = new Agent("./Assets/agent3.lang", sf::Color(0, 64, 255));
+    engine.entityScheduler.entities.push_back((Entity*)tmpAgent3Ptr);
+    tmpAgent3Ptr->SetAlienVar("x", (int)rand()%32);
+    tmpAgent3Ptr->SetAlienVar("y", (int)rand()%32);
 
-    VM virtualMachine(assembler.GetInstructions());
-    virtualMachine.Execute();
-
-//    engine.MainLoop();
+    engine.MainLoop();
     return 0;
 }

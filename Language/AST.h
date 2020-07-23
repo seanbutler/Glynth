@@ -21,7 +21,6 @@ const std::string VOWELS = "AEIOU";
 
 static std::string pronouncableRandomString(unsigned int l=8){
     std::string uuid = std::string(l,' ');
-//    srand (time(NULL));
 
     for(int i=0;i<l-1;i+=2){
         uuid[i] = CONSANANTS[rand() % 21];
@@ -226,6 +225,31 @@ private:
     std::string name;
 };
 
+
+
+
+
 // ------------------------------------------------------------------------
+
+// YieldAST -
+
+class YieldAST : public ASTNode {
+
+public:
+    YieldAST() {}
+
+    std::string &getName() { return name; }
+    virtual void print();
+    virtual std::string diag(unsigned int parentID);
+    virtual std::string eval();
+
+private:
+    std::string name;
+};
+
+
+// ------------------------------------------------------------------------
+
+
 
 #endif //GLYNTH_AST_H

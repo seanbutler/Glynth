@@ -409,3 +409,23 @@ std::string BinOperandAST::eval() {
     }
     return str;
 }
+
+// ---------------------------------------------------------------------------
+
+void YieldAST::print() {
+    std::cout << "yield" << std::endl;
+}
+
+std::string YieldAST::diag(unsigned int parentID) {
+    std::string str;
+    str += "node" + std::to_string(ASTNode::id) + " [ label = \"yield: \"];\n";
+    str += "node" + std::to_string(parentID) + " -> node" + std::to_string(ASTNode::id) + ";\n";
+    return str;
+}
+
+std::string YieldAST::eval() {
+    std::string str = "\tYIELD\n";
+    return str;
+}
+
+// ---------------------------------------------------------------------------

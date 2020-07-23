@@ -27,6 +27,8 @@ public:
 
 private:
     bool running;
+    bool done;
+
     std::vector<int> instructions;
     std::vector<int> data;
     std::stack<int> stack;

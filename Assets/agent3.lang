@@ -1,8 +1,11 @@
-a = 2;
-b = 3;
-c = 4;
-d = 5;
 
-if ( a * b + c * d == 50 ) {
-    output = 1;
+lives = 10;
+output = 1;
+
+while ( lives > 0 ) {
+    output = 2;
+    lives = lives - 1;
+    yield;
 }
+
+output = 3;
