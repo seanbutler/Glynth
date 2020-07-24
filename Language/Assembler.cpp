@@ -85,6 +85,16 @@ INS Assembler::ScanInstruction() {
             return INS::LOAD;
         }
 
+//        if (tokenString.compare("SAVEALIEN") == 0) {
+//            this->instructions.push_back((int) INS::SAVEALIEN);
+//            return INS::SAVEALIEN;
+//        }
+//
+//        if (tokenString.compare("LOADALIEN") == 0) {
+//            this->instructions.push_back((int) INS::LOADALIEN);
+//            return INS::LOADALIEN;
+//        }
+
         if (tokenString.compare("PUSH") == 0) {
             this->instructions.push_back((int) INS::PUSH);
             return INS::PUSH;
@@ -151,6 +161,15 @@ INS Assembler::ScanInstruction() {
             this->instructions.push_back((int) INS::INPUT);
             return INS::INPUT;
         }
+
+        if (tokenString.compare("MOVE") == 0) {
+            this->instructions.push_back((int) INS::MOVE);
+            return INS::MOVE;
+        }
+//        if (tokenString.compare("TURN") == 0) {
+//            this->instructions.push_back((int) INS::TURN);
+//            return INS::TURN;
+//        }
 
         if (tokenString.compare("JMP") == 0) {
             this->instructions.push_back((int) INS::JMP);

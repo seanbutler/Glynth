@@ -21,8 +21,6 @@ public:
     unsigned int w, h, pixel_scale, scale;
 
     sf::RenderWindow window;
-//    sf::RenderWindow guiWindow;
-//    sf::Font font;
 
     float deltaTime;
     sf::Clock clock;

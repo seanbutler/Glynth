@@ -36,7 +36,8 @@ public:
     ASTNode *ParseParenExpression();
     ASTNode *ParseAssignmentStatement();
     ASTNode *ParseOutput();
-
+    ASTNode *ParseMove();
+    ASTNode *ParseTurn();
 
     bool OutputTreeDiagram(std::string filename);
     std::vector<ASTNode *> abstractSyntaxTree;

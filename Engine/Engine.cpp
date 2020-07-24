@@ -10,23 +10,13 @@ Engine::Engine(unsigned int W, unsigned int H, unsigned int PS, unsigned int SC)
 ,   h(H)
 ,   pixel_scale(PS)
 ,   scale(SC)
-        ,   window(sf::VideoMode(w, h),
-                   "game window!",
-                   sf::Style::Titlebar | sf::Style::Close)
-//,   guiWindow(sf::VideoMode(w, h),
-//           "gui window!",
-//           sf::Style::Titlebar | sf::Style::Resize)
+,   window(sf::VideoMode(w, h),
+           "GLYNTH",
+           sf::Style::Titlebar | sf::Style::Close)
+
 {
     window.setSize(sf::Vector2u(w*pixel_scale,h*pixel_scale));
     window.setFramerateLimit(16);
-
-//    if (!font.loadFromFile("./Assets/open-sans.light.ttf"))
-//    {
-//        std::cout << "ERROR - font missing" << std::endl;
-//    }
-//
-//    guiWindow.setSize(sf::Vector2u(640,480));
-//    guiWindow.setFramerateLimit(60);
 }
 
 void Engine::MainLoop()

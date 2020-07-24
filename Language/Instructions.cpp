@@ -14,6 +14,9 @@ char* instructionNames[] = {
         "SAVE",
         "LOAD",
 
+        "SAVEALIEN",
+        "LOADALIEN",
+
         "JMP",
         "BRT",
         "BRF",
@@ -34,10 +37,16 @@ char* instructionNames[] = {
 
         "OUTPUT",
         "INPUT",
+        "MOVE",
+        "TURN",
+
+
 
         "NUMBER",
         "ADDRESS",
         "LABEL",
+
+
         "END_OF_FILE",
         "ERROR"
 };

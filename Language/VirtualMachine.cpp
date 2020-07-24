@@ -7,10 +7,11 @@
 
 //#define DEBUG
 
-void VM::Execute() {
+void VM::Execute(unsigned int slice) {
+    running = slice;
     if ( ! done ) {
-        running = true;
-        while (running) {
+        while (running > 0) {
+            running--;
     #ifdef DEBUG
             std::cout << "pc = " << programCounter << " instr = " << instructionNames[getCurrentInstruction()] << std::endl;
 
@@ -184,7 +185,7 @@ void VM::Execute() {
                 }
 
                 case INS::OUTPUT : {
-                    std::cout << "OUTPUT " << this->stack.top() << std::endl;
+                    std::cout << "out... " << this->stack.top() << std::endl;
                     this->stack.pop();
                     break;
                 }
@@ -194,10 +195,61 @@ void VM::Execute() {
                     break;
                 }
 
+                case INS::MOVE : {
+                    int dir = this->stack.top() % 4;
+
+                    if (dir == 0) {
+                        this->alien[1] -= 1;
+                    }
+                    else if (dir == 1) {
+                        this->alien[0] += 1;
+                    }
+                    else if (dir == 2) {
+                        this->alien[1] += 1;
+                    }
+                    else if (dir == 3) {
+                        this->alien[0] -= 1;
+                    }
+
+                    this->stack.pop();
+                    break;
+                }
+
+                case INS::TURN : {
+                    int dir = this->stack.top();
+
+                    if (dir == 0) {
+                        this->alien[2] += 1;
+                    }
+
+                    if (dir == 1) {
+                        this->alien[2] -= 1;
+                    }
+
+                    this->stack.pop();
+                    break;
+                }
+
+                case INS::SAVEALIEN: {
+                    int val = stack.top();
+                    stack.pop();
+                    incrProgramCounter();
+                    int addr = getCurrentInstruction();
+                    alien[addr] = (val%32)+1;
+                    break;
+                }
+
+                case INS::LOADALIEN: {
+                    incrProgramCounter();
+                    int addr = getCurrentInstruction();
+                    int val = alien[addr];
+                    stack.push(val);
+                    break;
+                }
+
                 case INS::SAVE: {
                     int val = stack.top();
                     stack.pop();
-
                     incrProgramCounter();
                     int addr = getCurrentInstruction();
                     data[addr] = val;
@@ -226,7 +278,7 @@ void VM::Execute() {
                     incrProgramCounter();
                     int addr = getCurrentInstruction();
 
-                    std::cout << "INS::BRT " << a << " " << addr << std::endl;
+//                    std::cout << "INS::BRT " << a << " " << addr << std::endl;
 
                     if (a!=0) {
                         programCounter = addr-1;
@@ -249,13 +301,15 @@ void VM::Execute() {
                 }
 
                 case INS::END_OF_FILE: {
-                    running = false;
+                    running = 0;
+                    done = true;
                     break;
                 }
 
                 default: {
                     std::cerr << "Unknown Instruction pc = " << programCounter << " instr = " << getCurrentInstruction() << std::endl;
-                    running = false;
+                    running = 0;
+                    done = true;
                 }
 
             }

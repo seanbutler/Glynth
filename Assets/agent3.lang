@@ -1,11 +1,14 @@
+direction = 0;
 
-lives = 10;
-output = 1;
+lives = 1;
 
-while ( lives > 0 ) {
-    output = 2;
-    lives = lives - 1;
-    yield;
+while(lives)
+{
+    moves = 10;
+    while ( moves > 0 )
+    {
+        moves = moves - 1;
+        move(direction+1);
+    }
+    direction = direction + 1;
 }
-
-output = 3;

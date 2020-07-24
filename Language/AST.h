@@ -66,6 +66,24 @@ private:
 
 // ------------------------------------------------------------------------
 
+// AlienAST - statements like "var a"
+
+class AlienAST : public ASTNode {
+
+public:
+    AlienAST(const std::string &N) : name(N) {}
+    std::string &getName() { return name; }
+    virtual void print();
+    virtual std::string diag(unsigned int parentID);
+    virtual std::string eval();
+
+private:
+    std::string name;
+};
+
+
+// ------------------------------------------------------------------------
+
 class VariableDeclarationAST : public ASTNode {
 
 public:
@@ -117,6 +135,29 @@ public:
 private:
     std::string name;
 };
+
+
+// ------------------------------------------------------------------------
+
+// MoveAST - statements like "move(expression);"
+
+class MoveAST : public ASTNode {
+
+public:
+    ASTNode *expression;
+
+    MoveAST(ASTNode *E) : expression(E){}
+
+    std::string &getName() { return name; }
+
+    virtual void print();
+    virtual std::string diag(unsigned int parentID);
+    virtual std::string eval();
+
+private:
+    std::string name;
+};
+
 
 
 // ------------------------------------------------------------------------
@@ -224,9 +265,6 @@ public:
 private:
     std::string name;
 };
-
-
-
 
 
 // ------------------------------------------------------------------------

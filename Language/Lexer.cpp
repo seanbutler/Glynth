@@ -20,7 +20,7 @@ Token Lexer::ScanToken() {
     //
     // token, probably keyword maybe identifier
     //
-    if (isalpha(currentChar)) {
+    if (isalpha(currentChar) ) {
 
         // starting a new token ... probably a keyword
         std::string tokenString;
@@ -57,12 +57,46 @@ Token Lexer::ScanToken() {
             tokens.push_back(std::make_pair(Token::KEYWORD_EXIT, tokenString));
             return Token::KEYWORD_EXIT;
         } else if (tokenString == "output") {
+            // TODO make this an alien variable rather than a special command?
             tokens.push_back(std::make_pair(Token::KEYWORD_OUTPUT, tokenString));
             return Token::KEYWORD_OUTPUT;
         }
+        else if (tokenString == "move") {
+            tokens.push_back(std::make_pair(Token::KEYWORD_MOVE, tokenString));
+            return Token::KEYWORD_MOVE;
+        }
+        else if (tokenString == "turn") {
+            tokens.push_back(std::make_pair(Token::KEYWORD_TURN, tokenString));
+            return Token::KEYWORD_TURN;
+        }
+
         tokens.push_back(std::make_pair(Token::IDENTIFIER, tokenString));
         return Token::IDENTIFIER;
     }
+
+    //
+    // alien variable (interface with the simulation, like posx, posy, r, g, b etc)
+    //
+//    if ( currentChar == '$' ) {
+//
+//        // starting a new token... probably a keyword
+//        std::string tokenString;
+//
+//        // get the next character
+//        tokenString += currentChar;
+//        currentChar = lexingStr[lexingPos++];
+//
+//        // scan forward letters only
+//        while (isalpha(currentChar) ) {
+//            tokenString += currentChar;
+//            currentChar = lexingStr[lexingPos++];
+//        }
+//        --lexingPos;
+//
+//        tokens.push_back(std::make_pair(Token::IDENTIFIER, tokenString));
+//        return Token::IDENTIFIER;
+//    }
+
 
     //
     // numbers

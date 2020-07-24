@@ -16,6 +16,8 @@ enum class Token : int {
 //    KEYWORD_RETURN,
 //    KEYWORD_INPUT,
     KEYWORD_OUTPUT,
+    KEYWORD_MOVE,
+    KEYWORD_TURN,
 
     IDENTIFIER,
     NUMBER,

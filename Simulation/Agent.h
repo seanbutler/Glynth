@@ -15,13 +15,11 @@ class Agent : public Entity {
 public:
     Agent(std::string F, sf::Color C) : Entity()
     {
-//        std::string filename = "Assets/agent3.lang";
         std::cout << "Agent::Agent (" << F << ")" << std::endl;
-//        alienVars["x"] = 0;
-//        alienVars["y"] = 0;
 
         std::ifstream sourceFile(F);
         std::string sourceString((std::istreambuf_iterator<char>(sourceFile)), std::istreambuf_iterator<char>());
+
 //        std::cout << sourceString << std::endl;
 
         Lexer lexer(sourceString);
@@ -39,27 +37,36 @@ public:
 
         assembler.GenerateTestBinaryInstructions();
 
-        virtualMachine = new VM(assembler.GetInstructions());
+        virtualMachine = new VM(assembler.GetInstructions(), alienVars);
 
         rectangle.setFillColor(C);
         rectangle.setSize(sf::Vector2f (1, 1));
     }
 
     virtual void Render(sf::RenderWindow *W){
-        rectangle.setPosition(alienVars["x"], alienVars["y"]);
-        W->draw(rectangle);
+        if (!virtualMachine->done){
+            rectangle.setPosition(alienVars[0], alienVars[1]);
+            W->draw(rectangle);
+        }
     }
 
-    void SetAlienVar(std::string name, int value) {
-        alienVars[name] = value;
+    void SetAlienVar(int id, int value) {
+        alienVars[id] = value;
+    }
+
+    int GetAlienVar(int id) {
+        return alienVars[id];
     }
 
     virtual void Update(float deltaTime) {
-        virtualMachine->Execute();
+        if (!virtualMachine->done) {
+            virtualMachine->Execute(10);
+        }
     };
 
     sf::RectangleShape rectangle;
-    std::map<std::string, int> alienVars;
+
+    std::array<int, 32> alienVars;
 
     VM* virtualMachine;
 };

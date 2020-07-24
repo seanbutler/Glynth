@@ -23,18 +23,18 @@ int main(int argc, char **argv) {
 
     Agent* tmpAgent1Ptr = new Agent("./Assets/agent1.lang", sf::Color(255, 64, 0));
     engine.entityScheduler.entities.push_back((Entity*)tmpAgent1Ptr);
-    tmpAgent1Ptr->SetAlienVar("x", (int)rand()%32);
-    tmpAgent1Ptr->SetAlienVar("y", (int)rand()%32);
+    tmpAgent1Ptr->SetAlienVar(0, 8 + (int)rand()%16);
+    tmpAgent1Ptr->SetAlienVar(1, 8 + (int)rand()%16);
 
     Agent* tmpAgent2Ptr = new Agent("./Assets/agent2.lang", sf::Color(32, 255, 32));
     engine.entityScheduler.entities.push_back((Entity*)tmpAgent2Ptr);
-    tmpAgent2Ptr->SetAlienVar("x", (int)rand()%32);
-    tmpAgent2Ptr->SetAlienVar("y", (int)rand()%32);
+    tmpAgent2Ptr->SetAlienVar(0, 8 + (int)rand()%16);
+    tmpAgent2Ptr->SetAlienVar(1, 8 + (int)rand()%16);
 
     Agent* tmpAgent3Ptr = new Agent("./Assets/agent3.lang", sf::Color(0, 64, 255));
     engine.entityScheduler.entities.push_back((Entity*)tmpAgent3Ptr);
-    tmpAgent3Ptr->SetAlienVar("x", (int)rand()%32);
-    tmpAgent3Ptr->SetAlienVar("y", (int)rand()%32);
+    tmpAgent3Ptr->SetAlienVar(0, 8 + (int)rand()%16);
+    tmpAgent3Ptr->SetAlienVar(1, 8 + (int)rand()%16);
 
     engine.MainLoop();
     return 0;

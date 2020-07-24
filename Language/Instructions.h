@@ -18,6 +18,9 @@ enum class INS : int {
     SAVE,
     LOAD,
 
+    SAVEALIEN,
+    LOADALIEN,
+
     JMP,
     BRT,
     BRF,
@@ -38,10 +41,13 @@ enum class INS : int {
 
     OUTPUT,
     INPUT,
+    MOVE,
+    TURN,
 
     NUMBER,
     ADDRESS,
     LABEL,
+
     END_OF_FILE,
     ERROR
 };

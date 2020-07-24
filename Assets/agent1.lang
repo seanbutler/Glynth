@@ -1,16 +1,8 @@
-max = 128;
-min = 0;
-
-pos = 1;
-
-while ( pos < max ) {
-    output = pos;
-    pos = pos * 2;
+life = 8;
+direction = 0;
+while(life>0)
+{
+    life = life - 1;
+    move(direction);
 }
-
-while ( pos > min ) {
-    output = pos;
-    pos = pos - 1;
-}
-
-
+output = 99;

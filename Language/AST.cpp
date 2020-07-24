@@ -65,6 +65,27 @@ std::string IdentifierAST::eval() {
     return str;
 }
 
+
+// ---------------------------------------------------------------------------
+
+void AlienAST::print() {
+    std::cout << "var: \"" << name << "\"" << std::endl;
+}
+
+std::string AlienAST::diag(unsigned int parentID) {
+    std::string str = "";
+    str += "node" + std::to_string(ASTNode::id) + " [ label = \"" + name + "\"];\n";
+    str += "node" + std::to_string(parentID) + " -> node" + std::to_string(ASTNode::id) + ";\n";
+    return str;
+}
+
+std::string AlienAST::eval() {
+    std::string str = "";
+    str += "\tLOADALIEN " + VARIABLE + name + "\n";
+    return str;
+}
+
+
 // ---------------------------------------------------------------------------
 
 void BlockAST::print() {
@@ -119,6 +140,33 @@ std::string OutputAST::eval() {
     return str;
 }
 
+
+
+// ---------------------------------------------------------------------------
+
+void MoveAST::print() {
+    std::cout << "move: \"" << name << "\"" << std::endl;
+    this->expression->print();
+}
+
+std::string MoveAST::diag(unsigned int parentID) {
+    std::string str;
+    str += "node" + std::to_string(ASTNode::id) + " [ label = \"move:\"];\n";
+    str += "node" + std::to_string(parentID) + " -> node" + std::to_string(ASTNode::id) + ";\n";
+
+    str += this->expression->diag(ASTNode::id);
+    return str;
+}
+
+std::string MoveAST::eval() {
+    std::string str = "";
+
+    str += "\n" + COMMENT + " MOVE FUNC (builtin)\n";
+    str += this->expression->eval();
+
+    str += "\tMOVE \n";
+    return str;
+}
 
 // ---------------------------------------------------------------------------
 
@@ -226,7 +274,7 @@ void NumberAST::print() {
 
 std::string NumberAST::diag(unsigned int parentID) {
     std::string str;
-    str += "node" + std::to_string(ASTNode::id) + " [ label = \"number: " + std::to_string(val) + "\"];\n";
+    str += "node" + std::to_string(ASTNode::id) + " [ label = \"" + std::to_string(val) + "\"];\n";
     str += "node" + std::to_string(parentID) + " -> node" + std::to_string(ASTNode::id) + ";\n";
     return str;
 }
@@ -341,7 +389,7 @@ std::string BinOperandAST::diag(unsigned int parentID) {
             break;
     }
 
-    str += "node" + std::to_string(ASTNode::id) + " [ label = \"opr: " + opStr + "\"];\n";
+    str += "node" + std::to_string(ASTNode::id) + " [ label = \"op: " + opStr + "\"];\n";
     str += rhs->diag(ASTNode::id);
     str += "node" + std::to_string(parentID) + " -> node" + std::to_string(ASTNode::id) + ";\n";
     return str;

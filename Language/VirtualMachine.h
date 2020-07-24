@@ -9,13 +9,18 @@
 #include <vector>
 #include <stack>
 #include <iostream>
+#include <map>
 
 #include "Instructions.h"
 
 class VM {
 
 public:
-    VM(std::vector<int> I) : running(true), instructions(I) {
+    VM(std::vector<int> I, std::array<int, 32> & alienVars)
+    : running(true)
+    , instructions(I)
+    , alien(alienVars)
+    {
         for (int n = 0; n < 16; n++) {
             data.push_back(0);
         }
@@ -25,13 +30,16 @@ public:
     ~VM() {
     }
 
-private:
-    bool running;
+    unsigned int running;
     bool done;
+
+private:
 
     std::vector<int> instructions;
     std::vector<int> data;
     std::stack<int> stack;
+
+    std::array<int, 32> & alien;
 
     int programCounter = 0;
 
@@ -53,7 +61,7 @@ public:
         }
     }
 
-    void Execute();
+    void Execute(unsigned int slice);
 };
 
 

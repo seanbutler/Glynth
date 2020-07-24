@@ -47,18 +47,21 @@ ASTNode *Parser::ParseStatement() {
             return node;
         }
 
-//        case Token::KEYWORD_EXIT: {
-//            return new ExitAST();
-//        }
-
-
         case Token::KEYWORD_EXIT: {
-//            return ParseOutput();
+//            return ExitAST();
         }
 
         case Token::KEYWORD_OUTPUT: {
             return ParseOutput();
         }
+
+        case Token::KEYWORD_MOVE: {
+            return ParseMove();
+        }
+
+//        case Token::KEYWORD_TURN: {
+//            return ParseTurn();
+//        }
 
         case Token::KEYWORD_VAR: {
             return ParseVariableDeclaration();
@@ -184,7 +187,7 @@ ASTNode *Parser::ParseOutput() {
     getNextToken();
 
     if (currentToken.first != Token::SYM_ASSIGN) {
-        std::cerr << "ERROR Parser::ParseOutput() - Unrecognised Token Before Statement Expression, Expected Left Parenthesis."
+        std::cerr << "ERROR Parser::ParseOutput() - Unrecognised Token Before Statement Expression, Expected Assign."
                   << std::endl;
         return nullptr;
     }
@@ -199,6 +202,67 @@ ASTNode *Parser::ParseOutput() {
 
     return outputStatement;
 }
+
+// ----------------------------------------------------------------------
+
+ASTNode *Parser::ParseMove() {
+
+    Token tokenType = currentToken.first;
+    std::string tokenString = currentToken.second;
+
+//    std::cout << "Parser::ParseMove tokenType = " << (int) tokenType
+//              << " " << tokenString << std::endl;
+
+    getNextToken();
+
+    if (currentToken.first != Token::SYM_LPAREN) {
+        std::cerr << "ERROR Parser::ParseMove() - Unrecognised Token Before Move Expression, Expected Left Parenthesis."
+                  << std::endl;
+        return nullptr;
+    }
+
+    getNextToken();
+
+    ASTNode *expr = this->ParseExpression();
+
+    getNextToken();
+
+    MoveAST *statement = new MoveAST(expr);
+
+    return statement;
+}
+
+
+
+// ----------------------------------------------------------------------
+
+//ASTNode *Parser::ParseTurn() {
+//
+//    Token tokenType = currentToken.first;
+//    std::string tokenString = currentToken.second;
+//
+////    std::cout << "Parser::ParseTurn tokenType = " << (int) tokenType
+////              << " " << tokenString << std::endl;
+//
+//    getNextToken();
+//
+//    if (currentToken.first != Token::SYM_LPAREN) {
+//        std::cerr << "ERROR Parser::ParseTurn() - Unrecognised Token Before Turn Expression, Expected Left Parenthesis."
+//                  << std::endl;
+//        return nullptr;
+//    }
+//
+//    getNextToken();
+//
+//    ASTNode *expr = this->ParseExpression();
+//
+////    getNextToken();
+//
+//    TurnAST *statement = new TurnAST(expr);
+//
+//    return statement;
+//}
+
 
 // ----------------------------------------------------------------------
 
