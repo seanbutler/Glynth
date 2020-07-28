@@ -1,8 +1,0 @@
-life = 8;
-direction = 0;
-while(life>0)
-{
-    life = life - 1;
-    move(direction);
-}
-output = 99;

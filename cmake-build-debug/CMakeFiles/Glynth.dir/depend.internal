@@ -54,4 +54,10 @@ CMakeFiles/Glynth.dir/main.cpp.o
  /home/sean/Projects/Glynth/Language/Tokens.h
  /home/sean/Projects/Glynth/Language/VirtualMachine.h
  /home/sean/Projects/Glynth/Simulation/Agent.h
+ /home/sean/Projects/Glynth/Simulation/ForestEnvironment.h
+ /home/sean/Projects/Glynth/Simulation/MazeEnvironment.h
+ /home/sean/Projects/Glynth/Simulation/WallEnvironment.h
+ /home/sean/Projects/Glynth/Utils/Forest.h
+ /home/sean/Projects/Glynth/Utils/Maze.h
+ /home/sean/Projects/Glynth/Utils/Walls.h
  /home/sean/Projects/Glynth/main.cpp

@@ -15,7 +15,7 @@
 
 class Engine {
 public:
-    Engine(unsigned int W = 32, unsigned int H = 32, unsigned int PS = 24, unsigned int SC = 16);
+    Engine(unsigned int W = 32, unsigned int H = 32, unsigned int PS = 16, unsigned int SC = 16);
     virtual ~Engine();
 
     unsigned int w, h, pixel_scale, scale;

@@ -147,6 +147,9 @@
 		<Unit filename="/home/sean/Projects/Glynth/Language/VirtualMachine.h">
 			<Option target="Glynth"/>
 		</Unit>
+		<Unit filename="/home/sean/Projects/Glynth/Utils/Maze.h">
+			<Option target="Glynth"/>
+		</Unit>
 		<Unit filename="/home/sean/Projects/Glynth/main.cpp">
 			<Option target="Glynth"/>
 		</Unit>

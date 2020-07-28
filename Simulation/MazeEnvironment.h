@@ -25,17 +25,21 @@ public:
         for (unsigned int row = 0; row<height; row++) {
             for (unsigned int col = 0; col<width; col++) {
                 if (maze.wall(row, col)) {
-                    rectangle.setPosition((row*2), (col*2));
+
+                    rectangle.setPosition((row), (col));
                     W->draw(rectangle);
 
-                    rectangle.setPosition((row*2+1), (col*2));
-                    W->draw(rectangle);
-
-                    rectangle.setPosition((row*2), (col*2+1));
-                    W->draw(rectangle);
-
-                    rectangle.setPosition((row*2+1), (col*2+1));
-                    W->draw(rectangle);
+//                    rectangle.setPosition((row*2), (col*2));
+//                    W->draw(rectangle);
+//
+//                    rectangle.setPosition((row*2+1), (col*2));
+//                    W->draw(rectangle);
+//
+//                    rectangle.setPosition((row*2), (col*2+1));
+//                    W->draw(rectangle);
+//
+//                    rectangle.setPosition((row*2+1), (col*2+1));
+//                    W->draw(rectangle);
                 }
             }
         }

@@ -11,9 +11,90 @@
 // a specific version of a game entity which has AI
 //
 
+enum class AgentTypeEnum {
+    Player,
+    Goal,
+    Healing,
+    Hurtful,
+    Wall
+};
+
+class AgentType {
+public:
+    AgentType(AgentTypeEnum AT, sf::Color C)
+    : agentType(AT)
+    , colour(C) {
+
+    }
+
+    AgentTypeEnum Type(){ return agentType;}
+    sf::Color  Colour(){ return colour;}
+
+protected:
+    const AgentTypeEnum agentType;
+    const sf::Color colour;
+};
+
+
+class PlayerAgentType : public AgentType {
+    // Grey is anonymous, like a good player character
+public:
+    PlayerAgentType()
+    : AgentType(AgentTypeEnum::Player, sf::Color(128, 128, 128))
+    {
+
+    }
+};
+
+class GoalAgentType : public AgentType {
+    // Nice Sky Colour for Escape?
+public:
+    GoalAgentType()
+    : AgentType(AgentTypeEnum::Goal, sf::Color(192, 255, 255))
+    {
+
+    }
+};
+
+class HealingAgentType : public AgentType {
+    // Green, Like a Healthpack
+public:
+    HealingAgentType()
+    : AgentType(AgentTypeEnum::Healing, sf::Color(32, 255, 32))
+    {
+
+    }
+};
+
+class HurtfulAgentType : public AgentType {
+    // Red is Danger
+public:
+    HurtfulAgentType()
+    : AgentType(AgentTypeEnum::Hurtful, sf::Color(255, 32, 32))
+    {
+
+    }
+};
+
+
+class WallAgentType : public AgentType {
+    // Walls are Black
+public:
+    WallAgentType()
+            : AgentType(AgentTypeEnum::Wall, sf::Color(0, 0, 0))
+    {
+
+    }
+};
+
+
+
+
 class Agent : public Entity {
 public:
-    Agent(std::string F, sf::Color C) : Entity()
+    Agent(std::string F, AgentType AT)
+    : Entity()
+    , agenttype(AT)
     {
         std::cout << "Agent::Agent (" << F << ")" << std::endl;
 
@@ -39,7 +120,7 @@ public:
 
         virtualMachine = new VM(assembler.GetInstructions(), alienVars);
 
-        rectangle.setFillColor(C);
+        rectangle.setFillColor(agenttype.Colour());
         rectangle.setSize(sf::Vector2f (1, 1));
     }
 
@@ -64,6 +145,7 @@ public:
         }
     };
 
+    AgentType agenttype;
     sf::RectangleShape rectangle;
 
     std::array<int, 32> alienVars;

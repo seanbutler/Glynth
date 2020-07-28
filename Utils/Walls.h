@@ -30,12 +30,12 @@ public:
             int topMargin = 1 + (rand() % ((height/2) - 1));
             int leftMargin = 1 + (rand() % (width - 1));
 
-            Wall('V', topMargin, leftMargin, height - 2*topMargin);
+            Wall('V', topMargin, leftMargin, height/2);
 
             leftMargin = 1 + (rand() % ((height/2) - 1));
             topMargin = 1 + (rand() % (width - 1));
 
-            Wall('H', topMargin, leftMargin, width - 2*leftMargin);
+            Wall('H', topMargin, leftMargin, width/2);
         }
 
     }

@@ -15,6 +15,7 @@ add_executable(Glynth main.cpp
         Language/AST.cpp Language/AST.h
         Language/Assembler.cpp Language/Assembler.h
         Language/VirtualMachine.cpp Language/VirtualMachine.h
+        Utils/Maze.h
         )
 
 

@@ -53,5 +53,11 @@ CMakeFiles/Glynth.dir/main.cpp.o: ../Language/Parser.h
 CMakeFiles/Glynth.dir/main.cpp.o: ../Language/Tokens.h
 CMakeFiles/Glynth.dir/main.cpp.o: ../Language/VirtualMachine.h
 CMakeFiles/Glynth.dir/main.cpp.o: ../Simulation/Agent.h
+CMakeFiles/Glynth.dir/main.cpp.o: ../Simulation/ForestEnvironment.h
+CMakeFiles/Glynth.dir/main.cpp.o: ../Simulation/MazeEnvironment.h
+CMakeFiles/Glynth.dir/main.cpp.o: ../Simulation/WallEnvironment.h
+CMakeFiles/Glynth.dir/main.cpp.o: ../Utils/Forest.h
+CMakeFiles/Glynth.dir/main.cpp.o: ../Utils/Maze.h
+CMakeFiles/Glynth.dir/main.cpp.o: ../Utils/Walls.h
 CMakeFiles/Glynth.dir/main.cpp.o: ../main.cpp
 

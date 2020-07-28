@@ -1,27 +1,66 @@
-## High Level Criteria for Quality Game Entities
+# High Level Criteria for Quality Game Entities
 
-### In Arcade Games
+## Environment
 
-#### Player
+#### Generation Strategies
 
-Can perceive the entire visible level. Doesnt need to interrogate (say via raycasts). This is not a simulation the player sees the arena like a seagull or a drone.
+ - Use Randomised depth first search to carve out a maze
+ - Randomly place few long walls
+ - Randomly place single blocks
 
-- Reaches the Goal/Exit
-- Has multiple healths
-- When low health gets health
+#### Navigation
+
+## Simple Arcade Games
+
+#### All Agent Characteristics
+
+- Cannot pass through walls
+- Exists at coords in the world.
+
+#### Player Characteristics
+
+**Required Characteristics**
+
+- Can perceive (nearly) the whole visible level, radius will do. Doesnt need to interrogate (say via ray casts). This is not a simulation the player sees the arena like a seagull or a drone. So can tell direction and distance to specific interesting elements like the goal once Goal has been onscreen Goal.
+
+- Is movable
+
+**Optional Characteristics**
+
+- Reaches a Goal coords to win
+
+- Has scalar health. WHen health reaches zero loses
+
+- Has scalar points. Reaches a Score to win
+
+- When low health finds and collects health
 - Avoids Damage
 
 #### Enemy
 
-- Has range to its perception
-- Has range to its movement
+**Given/Unavoidable Characteristics**
+
+- Has start/anchor point
+    Set Anchor()
+
+- Has limits/range/flaws to its perception
+        
+- Has limits/range to its movement
+    If Distance From Anchor > Range
+
+**Derived**
+
 - Interacts with the Player at least once on a playthrough
 - Hurts or Hinders the Player
 - Rewards the Player on its Death
 - Has predictable Repetitive Behaviour
 - Vulnerable to Damage
 
-#### Dorkey Challenge
+#### Goal
+
+Once entity has been in range of me they always know where I am.
+
+#### Door-Key Challenge
 
 **Door**
 

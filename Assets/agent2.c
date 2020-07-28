@@ -1,14 +1,12 @@
-direction = 0;
+direction = 3;
 
-lives = 1;
-
-while(lives)
+while(1)
 {
-    moves = 10;
+    moves = 8;
     while ( moves > 0 )
     {
         moves = moves - 1;
-        move(direction+1);
+        move(direction);
     }
     direction = direction + 1;
 }
