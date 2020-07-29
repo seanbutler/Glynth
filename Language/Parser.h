@@ -23,6 +23,11 @@ public:
     std::pair<Token, std::string> &getNextToken()               { return currentToken = tokens[position++]; }
     std::pair<Token, std::string> &lookAhead(int offset = 1)    { return tokens[position + offset]; }
 
+
+// TODO MOVE THIS OUTSIDE THE PARSER
+//  bool SaveAST(std::string filename);
+//    bool LoadAST(std::string filename);
+
     bool parse();
 
     ASTNode *ParseStatement();
@@ -40,11 +45,13 @@ public:
     ASTNode *ParseTurn();
 
     bool OutputTreeDiagram(std::string filename);
-    std::vector<ASTNode *> abstractSyntaxTree;
-
+    bool OutputASTJSON(std::string filename);
     bool OutputAsm(std::string filename);
     std::string GetAsm();
 
+
+private:
+    std::vector<ASTNode *> abstractSyntaxTree;
 };
 
 #endif //GLYNTH_PARSER_H

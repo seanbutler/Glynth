@@ -21,11 +21,48 @@ static std::string getUniqueIdentifier(){
     return  res.str();
 }
 
+// ---------------------------------------------------------------------------
+//
+//bool ASTFiler::SaveAST(std::string filename) {
+//
+//    std::ofstream treeFile;
+//    std::string treeFileName = std::filesystem::path(filename);
+//    treeFileName += std::string(".ast");
+//    treeFile.open(treeFileName);
+//
+//    treeFile << "digraph G {" << std::endl;
+//    for (auto N : abstractSyntaxTree) {
+//        if (N) {
+//            treeFile << N->diag(0);
+//        }
+//    }
+//
+//    treeFile.close();
+//    return true;
+//}
+//
+//bool ASTFiler::LoadAST(std::string filename) {
+//}
 
 // ---------------------------------------------------------------------------
 
-void VariableDeclarationAST::print() {
-    std::cout << "var: " << std::endl;
+std::string ASTNode::print() {
+    std::string str = "";
+//    str = "\n\"node\" : {\n";
+//    str += "\"id\" : " + std::to_string(id) +",\n";
+    return str;
+}
+
+
+// ---------------------------------------------------------------------------
+
+std::string VariableDeclarationAST::print() {
+    std::string str = "declaration: {";
+    str += ASTNode::print();
+    str += "\n\"type\" = \"defvar\"";
+
+    str += this->identifier->print();
+    return str;
 }
 
 std::string VariableDeclarationAST::diag(unsigned int parentID) {
@@ -42,14 +79,18 @@ std::string VariableDeclarationAST::eval() {
     std::string str = "";
     str += "\n";
     str += COMMENT + " DECLARE " + this->identifier->getName() + "\n";
-//    str += "\tNOP\n";
     return str;
 }
 
 // ---------------------------------------------------------------------------
 
-void IdentifierAST::print() {
-    std::cout << "var: \"" << name << "\"" << std::endl;
+std::string IdentifierAST::print() {
+
+    std::string str = "identifier: {";
+    str += ASTNode::print();
+    str += "\n\"value\" : \""+name+"\",";
+    str += "}";
+    return str;
 }
 
 std::string IdentifierAST::diag(unsigned int parentID) {
@@ -68,8 +109,13 @@ std::string IdentifierAST::eval() {
 
 // ---------------------------------------------------------------------------
 
-void AlienAST::print() {
-    std::cout << "var: \"" << name << "\"" << std::endl;
+std::string AlienAST::print() {
+    std::string str = "alienvar: {";
+    str = ASTNode::print();
+    str += "alienvar: \"" + name + "\"";
+    str += "}\n";
+
+    return str;
 }
 
 std::string AlienAST::diag(unsigned int parentID) {
@@ -85,14 +131,19 @@ std::string AlienAST::eval() {
     return str;
 }
 
-
 // ---------------------------------------------------------------------------
 
-void BlockAST::print() {
-    std::cout << "node" << ASTNode::id << " [ label = \"block:\" ];" << std::endl;
+std::string BlockAST::print() {
+    std::string str = "\"block\" : {\n";
+
+    str = ASTNode::print();
+    str += "label = \"block:\";";
+
     for (auto S : statements) {
-        S->print();
+        str += S->print();
     }
+    str += "}\n";
+    return str;
 }
 
 std::string BlockAST::diag(unsigned int parentID) {
@@ -116,9 +167,15 @@ std::string BlockAST::eval() {
 
 // ---------------------------------------------------------------------------
 
-void OutputAST::print() {
-    std::cout << "output: \"" << name << "\"" << std::endl;
-    this->expression->print();
+std::string OutputAST::print() {
+    std::string str;
+    str = ASTNode::print();
+    str +=  "output: \"" + name + "\"";
+    str += this->expression->print();
+
+    str += "}\n";
+    return str;
+
 }
 
 std::string OutputAST::diag(unsigned int parentID) {
@@ -140,13 +197,16 @@ std::string OutputAST::eval() {
     return str;
 }
 
-
-
 // ---------------------------------------------------------------------------
 
-void MoveAST::print() {
-    std::cout << "move: \"" << name << "\"" << std::endl;
-    this->expression->print();
+std::string MoveAST::print() {
+    std::string str;
+    str = ASTNode::print();
+    str +=  "move: \"" + name + "\"";
+    str += this->expression->print();
+    str += "}\n";
+
+    return str;
 }
 
 std::string MoveAST::diag(unsigned int parentID) {
@@ -170,11 +230,14 @@ std::string MoveAST::eval() {
 
 // ---------------------------------------------------------------------------
 
-
-void IfStatementAST::print() {
-    std::cout << "if: \"" << name << "\"" << std::endl;
-    this->expression->print();
-    this->block->print();
+std::string IfStatementAST::print() {
+    std::string str;
+    str = ASTNode::print();
+    str +=  "if: \"" + name + "\"";
+    str += this->expression->print();
+    str += this->block->print();
+    str += "}\n";
+    return str;
 }
 
 std::string IfStatementAST::diag(unsigned int parentID) {
@@ -202,15 +265,20 @@ std::string IfStatementAST::eval() {
     return str;
 }
 
-
 // ---------------------------------------------------------------------------
 
+std::string WhileStatementAST::print() {
+    std::string str;
+    str = ASTNode::print();
 
-void WhileStatementAST::print() {
-    std::cout << "while: \"" << name << "\"" << std::endl;
+    str +=  "while: \"" + name + "\"" ;
 
-    this->expression->print();
-    this->block->print();
+    str += this->expression->print();
+    str += this->block->print();
+
+    str += "}\n";
+
+    return str;
 }
 
 std::string WhileStatementAST::diag(unsigned int parentID) {
@@ -245,8 +313,15 @@ std::string WhileStatementAST::eval() {
 
 // ---------------------------------------------------------------------------
 
-void AssignmentStatementAST::print() {
-    std::cout << "assign: \"" << name << "\"" << std::endl;
+std::string AssignmentStatementAST::print() {
+    std::string str;
+    str += "\"assign\" : {\n";
+    str += ASTNode::print();
+
+    str += this->identifier->print();
+    str += this->expression->print();
+    str += "\n}\n";
+    return str;
 }
 
 std::string AssignmentStatementAST::diag(unsigned int parentID) {
@@ -268,8 +343,12 @@ std::string AssignmentStatementAST::eval() {
 
 // ---------------------------------------------------------------------------
 
-void NumberAST::print() {
-    std::cout << "number: \"" << val << "\"" << std::endl;
+std::string NumberAST::print() {
+    std::string str;
+    str = ASTNode::print();
+    str +=  "\"number\" : \"" + std::to_string(val) + "\"";
+    str +=  "}\n";
+    return str;
 }
 
 std::string NumberAST::diag(unsigned int parentID) {
@@ -288,7 +367,12 @@ std::string NumberAST::eval() {
 
 // ---------------------------------------------------------------------------
 
-void BinOperandAST::print() {
+std::string BinOperandAST::print() {
+
+    std::string str;
+
+    str = ASTNode::print();
+    str += "\type\" : \"expression\"";
 
     std::string opStr;
 
@@ -334,10 +418,12 @@ void BinOperandAST::print() {
             break;
     }
 
-    std::cout << "opr: " << opStr << std::endl;
+    str +=  "opr: " + opStr ;
 
-    lhs->print();
-    rhs->print();
+    str += lhs->print();
+    str += rhs->print();
+
+    return str;
 }
 
 std::string BinOperandAST::diag(unsigned int parentID) {
@@ -460,8 +546,12 @@ std::string BinOperandAST::eval() {
 
 // ---------------------------------------------------------------------------
 
-void YieldAST::print() {
-    std::cout << "yield" << std::endl;
+std::string YieldAST::print() {
+    std::string str;
+    str = ASTNode::print();
+
+    str += "yield";
+    return str;
 }
 
 std::string YieldAST::diag(unsigned int parentID) {

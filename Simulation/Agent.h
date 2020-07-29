@@ -88,7 +88,7 @@ public:
 };
 
 
-
+// ----------------------------------------------------------------------
 
 class Agent : public Entity {
 public:
@@ -109,8 +109,13 @@ public:
 
         Parser parser(lexer.GetTokenList());
         parser.parse();
+
+        // THIS IS WHERE WE WOULD DO THE MUTATIONS...
+
         parser.OutputTreeDiagram(F);
         parser.OutputAsm(F);
+
+        parser.OutputASTJSON(F);
 
         Assembler assembler(parser.GetAsm());
         assembler.Scan();
@@ -152,5 +157,8 @@ public:
 
     VM* virtualMachine;
 };
+
+// ----------------------------------------------------------------------
+
 
 #endif //GLYNTH_AGENT_H

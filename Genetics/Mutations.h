@@ -5,11 +5,21 @@
 #ifndef GLYNTH_MUTATIONS_H
 #define GLYNTH_MUTATIONS_H
 
-class Mutation {
-    // a mutation is a type of change that can occur over a tree
+// ----------------------------------------------------------------------
 
+class Mutation {
+
+    // a mutation is a type of change that can occur over a tree
+    // some mutations occur within a node (PointMutation),
+    // others grow the tree, others substitute tree parts
+
+public:
+    ASTNode* Mutate()=0
 };
 
+// ----------------------------------------------------------------------
+
+class PointMutation : public Mutation {
 
 // In point mutation, a random node is selected and the primitive
 // stored there is replaced with a different random primitive of the same arity
@@ -28,47 +38,69 @@ class Mutation {
 //  perhaps statements inside a block can be shuffled?
 //      reorder within the same block, preserving some basis of existing logic
 
-
-class PointMutation : public Mutation {
 public:
-    PointMutation(ASTNode* T) {
-
+    Mutate(ASTNode* T) {
     }
-
 };
 
+// ----------------------------------------------------------------------
 
-class ComparisonMutation : public PointMutation {
-public:
-    ComparisonMutation(ASTNode* T) {
-
-    }
-
-};
+//
+// NUMBER MUTATION
+//
+// any  number can be tweaked into another number
 
 class NumberMutation : public PointMutation {
+    // SET TO ARBITRARY RANDOM NUMBER, let the context handle the result
 public:
-    NumberMutation(ASTNode* T) {
-
+    void Mutate(ASTNode* T) {
+        T->val = rand();
     }
-
 };
 
 class NudgeNumberMutation : public NumberMutation {
+    // PLUS ONE, MINUS ONE, OR NOTHING +1, 0, -1
 public:
-    NudgeNumberMutation(ASTNode* T) {
-
+    void Mutate(ASTNumber* T) {
+        T->val += (rand()%3)-1;
     }
-
 };
 
-class RandNumberMutation : public NumberMutation {
+class LargeOrganicNumberMutation : public NumberMutation {
+    // RANDOM OFFSET IN THE ORDER OF THE NUMBER ITSELF i.e. +N or -N
 public:
-    RandNumberMutation(ASTNode* T) {
-
+    void Mutate(ASTNode* T) {
+        T->val += (rand()%T.val)-(rand()%T.val);
     }
-
 };
 
+// ----------------------------------------------------------------------
+
+//
+// MATH MUTATION
+//
+// a maths op can be tweaked into another, with limits...
+//      an +-*/ can be tweaked into another  +-*/
+//      an > >= == <= < can be tweaked into another > >= == <= <
+
+//class MathMutation : public PointMutation {
+//public:
+//    Mutate(ASTNode* T) {
+//    }
+//};
+//
+//class MathOpMutation : public MathMutation {
+//public:
+//    Mutate(ASTNode* T) {
+//    }
+//};
+//
+//class MathCompMutation : public MathMutation {
+//public:
+//    Mutate(ASTNode* T) {
+//    }
+//};
+
+// ----------------------------------------------------------------------
 
 #endif //GLYNTH_MUTATIONS_H

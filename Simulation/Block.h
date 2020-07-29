@@ -11,6 +11,8 @@
 // a static version of a game entity which has no behaviour but only visuals and collision
 //
 
+// TODO - move me to the engine, as I;m not even an agent
+
 class Block : public Entity {
 public:
     Block(sf::Color C) : Entity()

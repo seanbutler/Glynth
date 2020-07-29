@@ -554,8 +554,6 @@ ASTNode *Parser::ParseNumber() {
 
 // ----------------------------------------------------------------------
 
-unsigned int ufid;
-
 bool Parser::OutputTreeDiagram(std::string filename) {
 
     std::ofstream diagramFile;
@@ -573,6 +571,29 @@ bool Parser::OutputTreeDiagram(std::string filename) {
     diagramFile.close();
     return true;
 }
+
+// ----------------------------------------------------------------------
+
+bool Parser::OutputASTJSON(std::string filename) {
+
+    std::ofstream outFile;
+    std::string outFilename = std::filesystem::path(filename);
+    outFilename += std::string(".json");
+    outFile.open(outFilename);
+
+    unsigned int indent = 0;
+
+    outFile << "\"AST\" : [" << std::endl;
+    for (auto N : abstractSyntaxTree) {
+        if (N) {
+            outFile << N->print();
+        }
+    }
+    outFile << std::endl << "]\n" << std::endl;
+    outFile.close();
+    return true;
+}
+
 
 // ----------------------------------------------------------------------
 
