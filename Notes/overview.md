@@ -53,3 +53,9 @@ Compiler which outputs bytecode and various intermediary files for a simple virt
     - Inc Global/Alien Variables
     - Factory Classes
  - Specific Game Entities necessary for GP for games
+
+### Utils/
+
+- Independent ADTs not tied to our code but used.
+- e.g. Maze Generator which operate over simple data types like arrays of bools.
+
