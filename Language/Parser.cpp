@@ -588,7 +588,9 @@ bool Parser::OutputASTJSON(std::string filename) {
         if (N) {
             outFile << "\n{\n" << std::endl;
             outFile << N->print();
-            outFile << "\n},\n" << std::endl;
+            outFile << "\n}\n" << std::endl;
+            if (N != abstractSyntaxTree.back())
+                outFile << ",\n" << std::endl;
         }
     }
     outFile << std::endl << "]\n" << std::endl;

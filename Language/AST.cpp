@@ -85,10 +85,8 @@ std::string VariableDeclarationAST::eval() {
 
 std::string IdentifierAST::print() {
 
-    std::string str = "\"identifier\" : {";
-    str += ASTNode::print();
-    str += "\n\"name\" : \""+name+"\"";
-    str += "\n}";
+    std::string str = "\"identifier\" : ";
+    str += "\"" + name + "\"";
     return str;
 }
 
@@ -134,16 +132,13 @@ std::string AlienAST::eval() {
 std::string BlockAST::print() {
     std::string str;
 
-//    str = "\"block\" : {\n";
-//    str = ASTNode::print();
-//    str += "label = \"block:\";";
-
-//    str += "\"statements\" : [\n";
     for (auto S : statements) {
         str += S->print();
-        str += ",\n";
+        if ( S != statements.back())
+        {
+            str += ",\n";
+        }
     }
-//    str += "]\n";
     return str;
 }
 
@@ -275,12 +270,11 @@ std::string WhileStatementAST::print() {
 //    str += "{\n";
     str +=  "\"while\" : {\n" ;
 
-    str +=  "\"expression\": {\n" ;
     str += this->expression->print();
     str +=  "},\n\"block\": {\n" ;
     str += this->block->print();
 
-    str += "},\n";
+    str += "}\n";
 
     return str;
 }
