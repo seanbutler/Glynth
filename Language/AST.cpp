@@ -60,7 +60,6 @@ std::string VariableDeclarationAST::print() {
     std::string str = "declaration: {";
     str += ASTNode::print();
     str += "\n\"type\" = \"defvar\"";
-
     str += this->identifier->print();
     return str;
 }
@@ -76,7 +75,7 @@ std::string VariableDeclarationAST::diag(unsigned int parentID) {
 }
 
 std::string VariableDeclarationAST::eval() {
-    std::string str = "";
+    std::string str;
     str += "\n";
     str += COMMENT + " DECLARE " + this->identifier->getName() + "\n";
     return str;
@@ -86,10 +85,10 @@ std::string VariableDeclarationAST::eval() {
 
 std::string IdentifierAST::print() {
 
-    std::string str = "identifier: {";
+    std::string str = "\"identifier\" : {";
     str += ASTNode::print();
-    str += "\n\"value\" : \""+name+"\",";
-    str += "}";
+    str += "\n\"name\" : \""+name+"\"";
+    str += "\n}";
     return str;
 }
 
@@ -106,12 +105,11 @@ std::string IdentifierAST::eval() {
     return str;
 }
 
-
 // ---------------------------------------------------------------------------
 
 std::string AlienAST::print() {
     std::string str = "alienvar: {";
-    str = ASTNode::print();
+//    str = ASTNode::print();
     str += "alienvar: \"" + name + "\"";
     str += "}\n";
 
@@ -134,15 +132,18 @@ std::string AlienAST::eval() {
 // ---------------------------------------------------------------------------
 
 std::string BlockAST::print() {
-    std::string str = "\"block\" : {\n";
+    std::string str;
 
-    str = ASTNode::print();
-    str += "label = \"block:\";";
+//    str = "\"block\" : {\n";
+//    str = ASTNode::print();
+//    str += "label = \"block:\";";
 
+//    str += "\"statements\" : [\n";
     for (auto S : statements) {
         str += S->print();
+        str += ",\n";
     }
-    str += "}\n";
+//    str += "]\n";
     return str;
 }
 
@@ -202,7 +203,7 @@ std::string OutputAST::eval() {
 std::string MoveAST::print() {
     std::string str;
     str = ASTNode::print();
-    str +=  "move: \"" + name + "\"";
+    str +=  "\"move\" : {\n";
     str += this->expression->print();
     str += "}\n";
 
@@ -271,12 +272,15 @@ std::string WhileStatementAST::print() {
     std::string str;
     str = ASTNode::print();
 
-    str +=  "while: \"" + name + "\"" ;
+//    str += "{\n";
+    str +=  "\"while\" : {\n" ;
 
+    str +=  "\"expression\": {\n" ;
     str += this->expression->print();
+    str +=  "},\n\"block\": {\n" ;
     str += this->block->print();
 
-    str += "}\n";
+    str += "},\n";
 
     return str;
 }
@@ -315,11 +319,12 @@ std::string WhileStatementAST::eval() {
 
 std::string AssignmentStatementAST::print() {
     std::string str;
-    str += "\"assign\" : {\n";
-    str += ASTNode::print();
+    str += "\"assignment\" : { \n";
+//    str += ASTNode::print();
 
-    str += this->identifier->print();
-    str += this->expression->print();
+    str += identifier->print();
+    str += ",\n";
+    str += expression->print();
     str += "\n}\n";
     return str;
 }
@@ -344,10 +349,8 @@ std::string AssignmentStatementAST::eval() {
 // ---------------------------------------------------------------------------
 
 std::string NumberAST::print() {
-    std::string str;
-    str = ASTNode::print();
-    str +=  "\"number\" : \"" + std::to_string(val) + "\"";
-    str +=  "}\n";
+    std::string str = "";
+    str +=  "\"number\" : " + std::to_string(val) ;
     return str;
 }
 
@@ -372,7 +375,7 @@ std::string BinOperandAST::print() {
     std::string str;
 
     str = ASTNode::print();
-    str += "\type\" : \"expression\"";
+    str += "\"expression\" : { \n";
 
     std::string opStr;
 
@@ -418,10 +421,18 @@ std::string BinOperandAST::print() {
             break;
     }
 
-    str +=  "opr: " + opStr ;
+    str +=  "\"operand\" : \"" + opStr + "\",\n" ;
 
+    str += "\"lhs\" : {\n";
     str += lhs->print();
+    str += "\n},\n";
+
+    str += "\"rhs\" : {\n";
     str += rhs->print();
+    str += "\n}\n";
+
+    str += "}\n";
+
 
     return str;
 }
