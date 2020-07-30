@@ -48,8 +48,6 @@ static std::string getUniqueIdentifier(){
 
 std::string ASTNode::print() {
     std::string str = "";
-//    str = "\n\"node\" : {\n";
-//    str += "\"id\" : " + std::to_string(id) +",\n";
     return str;
 }
 
@@ -67,9 +65,9 @@ std::string VariableDeclarationAST::print() {
 std::string VariableDeclarationAST::diag(unsigned int parentID) {
 
     std::string str = "";
-    str += "node" + std::to_string(ASTNode::id) + " [ label = \"defvar:\" ];\n";
-    str += "node" + std::to_string(parentID) + " -> node" + std::to_string(ASTNode::id) + ";\n";
-    str += this->identifier->diag(ASTNode::id);
+    str += "node" + std::to_string(ASTNode::getID()) + " [ label = \"defvar:\" ];\n";
+    str += "node" + std::to_string(parentID) + " -> node" + std::to_string(ASTNode::getID()) + ";\n";
+    str += this->identifier->diag(ASTNode::getID());
     return str;
 
 }
@@ -86,20 +84,20 @@ std::string VariableDeclarationAST::eval() {
 std::string IdentifierAST::print() {
 
     std::string str = "\"identifier\" : ";
-    str += "\"" + name + "\"";
+    str += "\"" + getName() + "\"";
     return str;
 }
 
 std::string IdentifierAST::diag(unsigned int parentID) {
     std::string str = "";
-    str += "node" + std::to_string(ASTNode::id) + " [ label = \"" + name + "\"];\n";
-    str += "node" + std::to_string(parentID) + " -> node" + std::to_string(ASTNode::id) + ";\n";
+    str += "node" + std::to_string(ASTNode::getID()) + " [ label = \"" + getName() + "\"];\n";
+    str += "node" + std::to_string(parentID) + " -> node" + std::to_string(ASTNode::getID()) + ";\n";
     return str;
 }
 
 std::string IdentifierAST::eval() {
     std::string str = "";
-    str += "\tLOAD " + VARIABLE + name + "\n";
+    str += "\tLOAD " + VARIABLE + getName() + "\n";
     return str;
 }
 
@@ -108,7 +106,7 @@ std::string IdentifierAST::eval() {
 std::string AlienAST::print() {
     std::string str = "alienvar: {";
 //    str = ASTNode::print();
-    str += "alienvar: \"" + name + "\"";
+    str += "alienvar: \"" + getName() + "\"";
     str += "}\n";
 
     return str;
@@ -116,14 +114,14 @@ std::string AlienAST::print() {
 
 std::string AlienAST::diag(unsigned int parentID) {
     std::string str = "";
-    str += "node" + std::to_string(ASTNode::id) + " [ label = \"" + name + "\"];\n";
-    str += "node" + std::to_string(parentID) + " -> node" + std::to_string(ASTNode::id) + ";\n";
+    str += "node" + std::to_string(ASTNode::getID()) + " [ label = \"" + getName() + "\"];\n";
+    str += "node" + std::to_string(parentID) + " -> node" + std::to_string(ASTNode::getID()) + ";\n";
     return str;
 }
 
 std::string AlienAST::eval() {
     std::string str = "";
-    str += "\tLOADALIEN " + VARIABLE + name + "\n";
+    str += "\tLOADALIEN " + VARIABLE + getName() + "\n";
     return str;
 }
 
@@ -144,10 +142,10 @@ std::string BlockAST::print() {
 
 std::string BlockAST::diag(unsigned int parentID) {
     std::string str = "";
-    str += "node" + std::to_string(ASTNode::id) + " [ label = \"block:\" ];\n";
-    str += "node" + std::to_string(parentID) + " -> node" + std::to_string(ASTNode::id) + ";\n";
+    str += "node" + std::to_string(ASTNode::getID()) + " [ label = \"block:\" ];\n";
+    str += "node" + std::to_string(parentID) + " -> node" + std::to_string(ASTNode::getID()) + ";\n";
     for (auto S : statements) {
-        str += S->diag(ASTNode::id);
+        str += S->diag(ASTNode::getID());
     }
     return str;
 }
@@ -174,10 +172,10 @@ std::string OutputAST::print() {
 
 std::string OutputAST::diag(unsigned int parentID) {
     std::string str;
-    str += "node" + std::to_string(ASTNode::id) + " [ label = \"output:\"];\n";
-    str += "node" + std::to_string(parentID) + " -> node" + std::to_string(ASTNode::id) + ";\n";
+    str += "node" + std::to_string(ASTNode::getID()) + " [ label = \"output:\"];\n";
+    str += "node" + std::to_string(parentID) + " -> node" + std::to_string(ASTNode::getID()) + ";\n";
 
-    str += this->expression->diag(ASTNode::id);
+    str += this->expression->diag(ASTNode::getID());
     return str;
 }
 
@@ -205,10 +203,10 @@ std::string MoveAST::print() {
 
 std::string MoveAST::diag(unsigned int parentID) {
     std::string str;
-    str += "node" + std::to_string(ASTNode::id) + " [ label = \"move:\"];\n";
-    str += "node" + std::to_string(parentID) + " -> node" + std::to_string(ASTNode::id) + ";\n";
+    str += "node" + std::to_string(ASTNode::getID()) + " [ label = \"move:\"];\n";
+    str += "node" + std::to_string(parentID) + " -> node" + std::to_string(ASTNode::getID()) + ";\n";
 
-    str += this->expression->diag(ASTNode::id);
+    str += this->expression->diag(ASTNode::getID());
     return str;
 }
 
@@ -227,7 +225,7 @@ std::string MoveAST::eval() {
 std::string IfStatementAST::print() {
     std::string str;
     str = ASTNode::print();
-    str +=  "if: \"" + name + "\"";
+    str +=  "if: \"" + getName() + "\"";
     str += this->expression->print();
     str += this->block->print();
     str += "}\n";
@@ -236,11 +234,11 @@ std::string IfStatementAST::print() {
 
 std::string IfStatementAST::diag(unsigned int parentID) {
     std::string str;
-    str += "node" + std::to_string(ASTNode::id) + " [ label = \"if:\"];\n";
-    str += "node" + std::to_string(parentID) + " -> node" + std::to_string(ASTNode::id) + ";\n";
+    str += "node" + std::to_string(getID()) + " [ label = \"if:\"];\n";
+    str += "node" + std::to_string(parentID) + " -> node" + std::to_string(getID()) + ";\n";
 
-    str += this->expression->diag(ASTNode::id);
-    str += this->block->diag(ASTNode::id);
+    str += this->expression->diag(getID());
+    str += this->block->diag(getID());
     return str;
 }
 
@@ -279,11 +277,11 @@ std::string WhileStatementAST::print() {
 
 std::string WhileStatementAST::diag(unsigned int parentID) {
     std::string str;
-    str += "node" + std::to_string(ASTNode::id) + " [ label = \"while:\"];\n";
-    str += "node" + std::to_string(parentID) + " -> node" + std::to_string(ASTNode::id) + ";\n";
+    str += "node" + std::to_string(getID()) + " [ label = \"while:\"];\n";
+    str += "node" + std::to_string(parentID) + " -> node" + std::to_string(getID()) + ";\n";
 
-    str += this->expression->diag(ASTNode::id);
-    str += this->block->diag(ASTNode::id);
+    str += this->expression->diag(getID());
+    str += this->block->diag(getID());
 
     return str;
 }
@@ -323,10 +321,10 @@ std::string AssignmentStatementAST::print() {
 
 std::string AssignmentStatementAST::diag(unsigned int parentID) {
     std::string str;
-    str += "node" + std::to_string(ASTNode::id) + " [ label = \"assign:\"];\n";
-    str += "node" + std::to_string(parentID) + " -> node" + std::to_string(ASTNode::id) + ";\n";
-    str += this->identifier->diag(ASTNode::id);
-    str += this->expression->diag(ASTNode::id);
+    str += "node" + std::to_string(getID()) + " [ label = \"assign:\"];\n";
+    str += "node" + std::to_string(parentID) + " -> node" + std::to_string(getID()) + ";\n";
+    str += this->identifier->diag(getID());
+    str += this->expression->diag(getID());
     return str;
 }
 
@@ -348,8 +346,8 @@ std::string NumberAST::print() {
 
 std::string NumberAST::diag(unsigned int parentID) {
     std::string str;
-    str += "node" + std::to_string(ASTNode::id) + " [ label = \"" + std::to_string(val) + "\"];\n";
-    str += "node" + std::to_string(parentID) + " -> node" + std::to_string(ASTNode::id) + ";\n";
+    str += "node" + std::to_string(getID()) + " [ label = \"" + std::to_string(val) + "\"];\n";
+    str += "node" + std::to_string(parentID) + " -> node" + std::to_string(getID()) + ";\n";
     return str;
 }
 
@@ -432,7 +430,7 @@ std::string BinOperandAST::print() {
 std::string BinOperandAST::diag(unsigned int parentID) {
 
     std::string str;
-    str += lhs->diag(ASTNode::id);
+    str += lhs->diag(getID());
 
     std::string opStr;
 
@@ -478,9 +476,9 @@ std::string BinOperandAST::diag(unsigned int parentID) {
             break;
     }
 
-    str += "node" + std::to_string(ASTNode::id) + " [ label = \"op: " + opStr + "\"];\n";
-    str += rhs->diag(ASTNode::id);
-    str += "node" + std::to_string(parentID) + " -> node" + std::to_string(ASTNode::id) + ";\n";
+    str += "node" + std::to_string(getID()) + " [ label = \"op: " + opStr + "\"];\n";
+    str += rhs->diag(getID());
+    str += "node" + std::to_string(parentID) + " -> node" + std::to_string(getID()) + ";\n";
     return str;
 }
 
@@ -559,8 +557,8 @@ std::string YieldAST::print() {
 
 std::string YieldAST::diag(unsigned int parentID) {
     std::string str;
-    str += "node" + std::to_string(ASTNode::id) + " [ label = \"yield: \"];\n";
-    str += "node" + std::to_string(parentID) + " -> node" + std::to_string(ASTNode::id) + ";\n";
+    str += "node" + std::to_string(getID()) + " [ label = \"yield: \"];\n";
+    str += "node" + std::to_string(parentID) + " -> node" + std::to_string(getID()) + ";\n";
     return str;
 }
 
