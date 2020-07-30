@@ -38,6 +38,8 @@ protected:
 
 class PlayerAgentType : public AgentType {
     // Grey is anonymous, like a good player character
+    // Movable
+    // Hurtable
 public:
     PlayerAgentType()
     : AgentType(AgentTypeEnum::Player, sf::Color(128, 128, 128))
@@ -48,6 +50,7 @@ public:
 
 class GoalAgentType : public AgentType {
     // Nice Sky Colour for Escape?
+    // End of Game
 public:
     GoalAgentType()
     : AgentType(AgentTypeEnum::Goal, sf::Color(192, 255, 255))
@@ -58,6 +61,7 @@ public:
 
 class HealingAgentType : public AgentType {
     // Green, Like a Healthpack
+    // Touch and it heals you
 public:
     HealingAgentType()
     : AgentType(AgentTypeEnum::Healing, sf::Color(32, 255, 32))
@@ -68,6 +72,7 @@ public:
 
 class HurtfulAgentType : public AgentType {
     // Red is Danger
+    // Touch and it hurts you
 public:
     HurtfulAgentType()
     : AgentType(AgentTypeEnum::Hurtful, sf::Color(255, 32, 32))
@@ -79,6 +84,7 @@ public:
 
 class WallAgentType : public AgentType {
     // Walls are Black
+    // Impassible
 public:
     WallAgentType()
             : AgentType(AgentTypeEnum::Wall, sf::Color(0, 0, 0))

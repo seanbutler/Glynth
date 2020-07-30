@@ -39,7 +39,7 @@ static unsigned int uid = 1;
 class ASTNode {
 public:
     ASTNode() { id = uid++; }
-    virtual ~ASTNode() {}
+    virtual ~ASTNode() = default;
 
     virtual std::string print();                                // USED FOR SIMPLE SERIALIZATION
     virtual std::string diag(unsigned int parentID) = 0;        // USED FOR GENERATING THE GV FILE...
@@ -53,7 +53,7 @@ public:
 class IdentifierAST : public ASTNode {
 
 public:
-    IdentifierAST(const std::string &N) : name(N) {}
+    explicit IdentifierAST(const std::string &N) : name(N) {}
     virtual std::string print();
     virtual std::string diag(unsigned int parentID);
     virtual std::string eval();
@@ -69,7 +69,7 @@ public:
 class AlienAST : public ASTNode {
 
 public:
-    AlienAST(const std::string &N) : name(N) {}
+    explicit AlienAST(const std::string &N) : name(N) {}
     std::string &getName() { return name; }
     virtual std::string print();
     virtual std::string diag(unsigned int parentID);
@@ -85,7 +85,7 @@ private:
 class VariableDeclarationAST : public ASTNode {
 
 public:
-    VariableDeclarationAST(IdentifierAST *I) : identifier(I) {}
+    explicit VariableDeclarationAST(IdentifierAST *I) : identifier(I) {}
     virtual std::string print();
     virtual std::string diag(unsigned int parentID);
     virtual std::string eval();
@@ -103,7 +103,7 @@ class BlockAST : public ASTNode {
 
 public:
     std::vector<ASTNode *> statements;
-    BlockAST() {};
+    BlockAST() = default;
     virtual std::string print();
     virtual std::string diag(unsigned int parentID);
     virtual std::string eval();
@@ -122,14 +122,11 @@ public:
 
     OutputAST(ASTNode *E) : expression(E){}
 
-    std::string &getName() { return name; }
-
     virtual std::string print();
     virtual std::string diag(unsigned int parentID);
     virtual std::string eval();
 
 private:
-    std::string name;
 };
 
 
@@ -216,8 +213,6 @@ public:
     virtual std::string eval();
 
 private:
-    std::string &getName() { return name; }
-    std::string name;
 };
 
 // ------------------------------------------------------------------------
@@ -231,13 +226,11 @@ public:
 
     NumberAST(int V) : val(V) {}
 
-    std::string &getName() { return name; }
     virtual std::string print();
     virtual std::string diag(unsigned int parentID);
     virtual std::string eval();
 
 private:
-    std::string name;
 };
 
 // ------------------------------------------------------------------------
@@ -249,19 +242,16 @@ class BinOperandAST : public ASTNode {
 public:
     BinOperandAST(Token O, ASTNode *L, ASTNode *R) : op(O), lhs(L), rhs(R) {}
 
-    Token op;
-    ASTNode *lhs;
-    ASTNode *rhs;
-
-    std::string &getName() { return name; }
     virtual std::string print();
     virtual std::string diag(unsigned int parentID);
     virtual std::string eval();
 
-private:
-    std::string name;
-};
+    Token op;
+    ASTNode *lhs;
+    ASTNode *rhs;
 
+private:
+};
 
 // ------------------------------------------------------------------------
 
@@ -270,20 +260,12 @@ private:
 class YieldAST : public ASTNode {
 
 public:
-    YieldAST() {}
-
-    std::string &getName() { return name; }
+    YieldAST() = default;
     virtual std::string print();
     virtual std::string diag(unsigned int parentID);
     virtual std::string eval();
-
-private:
-    std::string name;
 };
 
-
 // ------------------------------------------------------------------------
-
-
 
 #endif //GLYNTH_AST_H

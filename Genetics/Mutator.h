@@ -5,46 +5,62 @@
 #ifndef GLYNTH_MUTATOR_H
 #define GLYNTH_MUTATOR_H
 
-// ----------------------------------------------------------------------
+#include "./Mutations.h"
 
-class Mutator {
+namespace Genetics {
 
-    // a parameterised tree walker/visitor
-    // visits each node in a tree
+    // ----------------------------------------------------------------------
 
-public:
-    Mutator(MutationScheme S, Mutation M)
-    : mutationScheme(M)
-    , mutation(M){
+    class Mutation {
 
-    }
+    public:
+        Mutation() = default;
+        ~Mutation() = default;
 
-    void Mutate(ASTNode* tree) {
+        virtual bool Condition(ASTNode& node) = 0;
+        virtual void Effect(ASTNode& node) = 0;
+    };
 
-    }
 
-private:
-    MutationScheme* mutationScheme;
-    Mutation* mutation;
+    class NumberMutation : public Mutation {
+
+    public:
+        virtual bool Condition(ASTNode& node) {
+            if ( (rand() / RAND_MAX) >= probability ) {
+                this->Effect(node);
+            }
+        };
+        virtual void Effect(ASTNode& node) {
+            static_cast<NumberAST&>(node).val = rand();
+        };
+
+    private:
+        const float probability = 0.5;
+    };
+
+    // ----------------------------------------------------------------------
+
+    class Mutator {
+
+        // a parameterised tree walker/visitor
+        // visits each node in a tree
+
+    public:
+        Mutator(const Mutation & M)
+            : mutation(M) {
+        }
+
+        void Mutate(ASTNode* tree) {
+        }
+
+    private:
+        const Mutation& mutation;
+    };
+
+
 };
 
 // ----------------------------------------------------------------------
 
-class MutationScheme {
-
-public:
-    MutationScheme(float P, unsigned int MIN, unsigned int MAX)
-    : probability(P)
-    , minDepth(MIN)
-    , maxDepth(MAX) {
-
-    }
-
-private:
-    float probability;
-    int minDepth, maxDepth;
-};
-
-// ----------------------------------------------------------------------
 
 #endif //GLYNTH_MUTATOR_H

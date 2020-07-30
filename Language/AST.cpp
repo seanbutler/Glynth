@@ -166,12 +166,10 @@ std::string BlockAST::eval() {
 std::string OutputAST::print() {
     std::string str;
     str = ASTNode::print();
-    str +=  "output: \"" + name + "\"";
+    str +=  "output: ";
     str += this->expression->print();
-
     str += "}\n";
     return str;
-
 }
 
 std::string OutputAST::diag(unsigned int parentID) {

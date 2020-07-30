@@ -34,15 +34,15 @@ int main(int argc, char **argv) {
     ForestEnvironment* environment2 = new ForestEnvironment(32, 32);
     engine.entityScheduler.entities.push_back((Engine::Entity*)environment2);
 
-//    Agent* goalAgentPtr = new Agent("./Assets/goal.c", GoalAgentType());
-//    engine.entityScheduler.entities.push_back((Entity*)goalAgentPtr);
-//    goalAgentPtr->SetAlienVar(0, 24 + (int)rand()%8);
-//    goalAgentPtr->SetAlienVar(1, 24 + (int)rand()%8);
+    Agent* goalAgentPtr = new Agent("./Assets/goal.c", GoalAgentType());
+    engine.entityScheduler.entities.push_back((Engine::Entity*)goalAgentPtr);
+    goalAgentPtr->SetAlienVar(0, 24 + (int)rand()%8);
+    goalAgentPtr->SetAlienVar(1, 24 + (int)rand()%8);
 
-//    Agent* playerAgentPtr = new Agent("./Assets/player.c", PlayerAgentType());
-//    engine.entityScheduler.entities.push_back((Entity*)playerAgentPtr);
-//    playerAgentPtr->SetAlienVar(0, 2 + (int)rand()%4);
-//    playerAgentPtr->SetAlienVar(1, 2 + (int)rand()%4);
+    Agent* playerAgentPtr = new Agent("./Assets/player.c", PlayerAgentType());
+    engine.entityScheduler.entities.push_back((Engine::Entity*)playerAgentPtr);
+    playerAgentPtr->SetAlienVar(0, 2 + (int)rand()%4);
+    playerAgentPtr->SetAlienVar(1, 2 + (int)rand()%4);
 
     Agent* tmpAgent2Ptr = new Agent("./Assets/agent2.c", HurtfulAgentType());
     engine.entityScheduler.entities.push_back((Engine::Entity*)tmpAgent2Ptr);

@@ -2,24 +2,22 @@
 // Created by sean on 28/07/2020.
 //
 
+#include "../Language/AST.h"
+
 #ifndef GLYNTH_MUTATIONS_H
 #define GLYNTH_MUTATIONS_H
 
-// ----------------------------------------------------------------------
+namespace Genetics {
 
-class Mutation {
+// ----------------------------------------------------------------------
 
     // a mutation is a type of change that can occur over a tree
     // some mutations occur within a node (PointMutation),
     // others grow the tree, others substitute tree parts
 
-public:
-    ASTNode* Mutate()=0
-};
 
 // ----------------------------------------------------------------------
 
-class PointMutation : public Mutation {
 
 // In point mutation, a random node is selected and the primitive
 // stored there is replaced with a different random primitive of the same arity
@@ -38,10 +36,6 @@ class PointMutation : public Mutation {
 //  perhaps statements inside a block can be shuffled?
 //      reorder within the same block, preserving some basis of existing logic
 
-public:
-    Mutate(ASTNode* T) {
-    }
-};
 
 // ----------------------------------------------------------------------
 
@@ -50,29 +44,29 @@ public:
 //
 // any  number can be tweaked into another number
 
-class NumberMutation : public PointMutation {
-    // SET TO ARBITRARY RANDOM NUMBER, let the context handle the result
-public:
-    void Mutate(ASTNode* T) {
-        T->val = rand();
-    }
-};
+//    class NumberMutation :  {
+//        // SET TO ARBITRARY RANDOM NUMBER, let the context handle the result
+//    public:
+//        void Mutate(NumberAST & T) {
+//            T.val = rand();
+//        }
+//    };
 
-class NudgeNumberMutation : public NumberMutation {
-    // PLUS ONE, MINUS ONE, OR NOTHING +1, 0, -1
-public:
-    void Mutate(ASTNumber* T) {
-        T->val += (rand()%3)-1;
-    }
-};
+//    class NudgeNumberMutation : public NumberMutation {
+//        // PLUS ONE, MINUS ONE, OR NOTHING +1, 0, -1
+//    public:
+//        void Mutate(NumberAST & T) {
+//            T.val += (rand()%3)-1;
+//        }
+//    };
 
-class LargeOrganicNumberMutation : public NumberMutation {
-    // RANDOM OFFSET IN THE ORDER OF THE NUMBER ITSELF i.e. +N or -N
-public:
-    void Mutate(ASTNode* T) {
-        T->val += (rand()%T.val)-(rand()%T.val);
-    }
-};
+//    class DistNumberMutation : public NumberMutation {
+//        // RANDOM OFFSET IN THE ORDER OF THE NUMBER ITSELF i.e. +N or -N
+//    public:
+//        void Mutate(NumberAST& T) {
+//            T.val += (rand()%T.val)-(rand()%T.val);
+//        }
+//    };
 
 // ----------------------------------------------------------------------
 
@@ -102,5 +96,9 @@ public:
 //};
 
 // ----------------------------------------------------------------------
+
+
+}
+
 
 #endif //GLYNTH_MUTATIONS_H
