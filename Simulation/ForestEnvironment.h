@@ -7,7 +7,7 @@
 
 #include "../Utils/Forest.h"
 
-class ForestEnvironment : public Entity {
+class ForestEnvironment : public Engine::Entity {
 
 public:
     ForestEnvironment(unsigned int W, unsigned int H)
@@ -39,7 +39,7 @@ public:
 
 private:
     unsigned int width, height;
-    Forest trees;
+    util::Forest trees;
     sf::RectangleShape rectangle;
 };
 

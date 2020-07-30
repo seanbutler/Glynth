@@ -5,9 +5,9 @@ set(CMAKE_CXX_STANDARD 17)
 
 add_executable(Glynth main.cpp
         Engine/Engine.cpp Engine/Engine.h
-        Engine/Entity.cpp Engine/Entity.h
-        Engine/Input.cpp Engine/Input.h
-        Engine/Scheduler.cpp Engine/Scheduler.h
+        Engine/Entity.h
+        Engine/Input.h
+        Engine/Scheduler.h
         Language/Lexer.cpp Language/Lexer.h
         Language/Parser.cpp Language/Parser.h
         Language/Tokens.h

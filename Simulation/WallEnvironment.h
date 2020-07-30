@@ -7,11 +7,11 @@
 
 #include "../Utils/Walls.h"
 
-class WallEnvironment : public Entity {
+class WallEnvironment : public Engine::Entity {
 
 public:
     WallEnvironment(char D, unsigned int W, unsigned int H)
-            :   Entity()
+            :   Engine::Entity()
             ,   width(W)
             ,   height(H)
             ,   walls(D, W, H)
@@ -39,7 +39,7 @@ public:
 
 private:
     unsigned int width, height;
-    Walls walls;
+    util::Walls walls;
     sf::RectangleShape rectangle;
 };
 

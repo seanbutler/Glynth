@@ -90,19 +90,10 @@
 		<Unit filename="/home/sean/Projects/Glynth/Engine/Engine.h">
 			<Option target="Glynth"/>
 		</Unit>
-		<Unit filename="/home/sean/Projects/Glynth/Engine/Entity.cpp">
-			<Option target="Glynth"/>
-		</Unit>
 		<Unit filename="/home/sean/Projects/Glynth/Engine/Entity.h">
 			<Option target="Glynth"/>
 		</Unit>
-		<Unit filename="/home/sean/Projects/Glynth/Engine/Input.cpp">
-			<Option target="Glynth"/>
-		</Unit>
 		<Unit filename="/home/sean/Projects/Glynth/Engine/Input.h">
-			<Option target="Glynth"/>
-		</Unit>
-		<Unit filename="/home/sean/Projects/Glynth/Engine/Scheduler.cpp">
 			<Option target="Glynth"/>
 		</Unit>
 		<Unit filename="/home/sean/Projects/Glynth/Engine/Scheduler.h">

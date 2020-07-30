@@ -7,7 +7,7 @@
 
 #include "../Utils/Maze.h"
 
-class MazeEnvironment : public Entity {
+class MazeEnvironment : public Engine::Entity {
 public:
     MazeEnvironment(unsigned int W, unsigned int H)
     :   Entity()
@@ -51,7 +51,7 @@ public:
 
 private:
     unsigned int width, height;
-    Maze maze;
+    util::Maze maze;
     sf::RectangleShape rectangle;
 };
 #endif //GLYNTH_MAZEENVIRONMENT_H

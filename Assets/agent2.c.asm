@@ -1,12 +1,14 @@
 
 # Assignment Statement 
-	PUSH 3
+	PUSH 2
+	PUSH 1
+	ADD
 	SAVE %direction
 
 # WHILE 
-:LBL_0008
+:LBL_0000
 	PUSH 1
-	BRF @LBL_0009
+	BRF @LBL_0001
 
 # WHILE BLOCK
 # BEGIN BLOCK
@@ -16,11 +18,11 @@
 	SAVE %moves
 
 # WHILE 
-:LBL_0010
+:LBL_0002
 	LOAD %moves
 	PUSH 0
 	GT
-	BRF @LBL_0011
+	BRF @LBL_0003
 
 # WHILE BLOCK
 # BEGIN BLOCK
@@ -36,8 +38,8 @@
 	MOVE 
 
 # END BLOCK
-	JMP @LBL_0010
-:LBL_0011
+	JMP @LBL_0002
+:LBL_0003
 
 # Assignment Statement 
 	LOAD %direction
@@ -46,5 +48,5 @@
 	SAVE %direction
 
 # END BLOCK
-	JMP @LBL_0008
-:LBL_0009
+	JMP @LBL_0000
+:LBL_0001

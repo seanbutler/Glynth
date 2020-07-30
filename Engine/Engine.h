@@ -13,21 +13,27 @@
 
 #include "Scheduler.h"
 
-class Engine {
-public:
-    Engine(unsigned int W = 32, unsigned int H = 32, unsigned int PS = 16, unsigned int SC = 16);
-    virtual ~Engine();
+namespace Engine {
 
-    unsigned int w, h, pixel_scale, scale;
+    class Engine {
+    public:
+        Engine(unsigned int W = 32, unsigned int H = 32, unsigned int PS = 16, unsigned int SC = 16);
+        virtual ~Engine();
 
-    sf::RenderWindow window;
+        unsigned int w, h, pixel_scale, scale;
 
-    float deltaTime;
-    sf::Clock clock;
-    std::shared_ptr<sf::View> view;
+        sf::RenderWindow window;
 
-    virtual void MainLoop();
-    Scheduler entityScheduler;
+        float deltaTime;
+        sf::Clock clock;
+        std::shared_ptr<sf::View> view;
+
+        virtual void MainLoop();
+        Scheduler entityScheduler;
+    };
+
+
+
 };
 
 #endif //SYNTH_ENGINE_H

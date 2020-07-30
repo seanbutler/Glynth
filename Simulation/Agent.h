@@ -90,7 +90,7 @@ public:
 
 // ----------------------------------------------------------------------
 
-class Agent : public Entity {
+class Agent : public Engine::Entity {
 public:
     Agent(std::string F, AgentType AT)
     : Entity()

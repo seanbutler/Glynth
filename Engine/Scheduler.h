@@ -10,30 +10,34 @@
 
 #include "Entity.h"
 
-class Scheduler {
+namespace Engine {
 
-public:
-    Scheduler() {}
-    virtual ~Scheduler() {}
+    class Scheduler {
 
-    virtual void Update(float deltaTime)
-    {
-        for (auto entity : entities)
+    public:
+        Scheduler() {}
+        virtual ~Scheduler() {}
+
+        virtual void Update(float deltaTime)
         {
-            entity->Update(deltaTime);
+            for (auto entity : entities)
+            {
+                entity->Update(deltaTime);
+            }
         }
-    }
 
-    virtual void Render(sf::RenderWindow *W)
-    {
-        for (auto entity : entities)
+        virtual void Render(sf::RenderWindow *W)
         {
-            entity->Render(W);
+            for (auto entity : entities)
+            {
+                entity->Render(W);
+            }
         }
-    }
 
-    // TODO - this should be a map so we can id and retrieve specific entities
-    std::vector<Entity*> entities;
+        // TODO - this should be a map so we can id and retrieve specific entities
+        std::vector<Entity*> entities;
+    };
+
 };
 
 #endif //SYNTH_SCHEDULER_H
