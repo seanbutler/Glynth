@@ -32,8 +32,6 @@ namespace Engine {
         Scheduler entityScheduler;
     };
 
-
-
 };
 
 #endif //SYNTH_ENGINE_H

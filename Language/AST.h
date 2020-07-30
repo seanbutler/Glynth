@@ -38,7 +38,8 @@ static unsigned int uid = 1;
 
 class ASTNode {
 public:
-    ASTNode(const std::string & N="") : name(N) { id = uid++; }
+//    ASTNode(const std::string & N="") : name(N) { id = uid++; }
+    ASTNode(const std::string & N="") : id(uid++), name(N) {}
 
     virtual ~ASTNode() = default;
 
@@ -68,8 +69,6 @@ public:
     virtual std::string diag(unsigned int parentID);
     virtual std::string eval();
 
-//    std::string &getName() { return name; }
-//    std::string name;
 };
 
 // ------------------------------------------------------------------------
@@ -79,15 +78,10 @@ public:
 class AlienAST : public ASTNode {
 
 public:
-//    explicit AlienAST(const std::string &N) {}
-//    explicit AlienAST(const std::string &N) : name(N) {}
-//    std::string &getName() { return name; }
     virtual std::string print();
     virtual std::string diag(unsigned int parentID);
     virtual std::string eval();
 
-private:
-//    std::string name;
 };
 
 
@@ -172,14 +166,9 @@ public:
 
     IfStatementAST(ASTNode *E, ASTNode *B) : ASTNode(""), expression(E), block(B) {}
 
-//    std::string &getName() { return name; }
-
     virtual std::string print();
     virtual std::string diag(unsigned int parentID);
     virtual std::string eval();
-
-private:
-//    std::string name;
 };
 
 // ------------------------------------------------------------------------
@@ -194,13 +183,10 @@ public:
 
     WhileStatementAST(ASTNode *E, ASTNode *B) : ASTNode(""), expression(E), block(B) {}
 
-//    std::string &getName() { return name; }
     virtual std::string print();
     virtual std::string diag(unsigned int parentID);
     virtual std::string eval();
 
-private:
-//    std::string name;
 };
 
 
@@ -219,7 +205,6 @@ public:
     virtual std::string diag(unsigned int parentID);
     virtual std::string eval();
 
-private:
 };
 
 // ------------------------------------------------------------------------

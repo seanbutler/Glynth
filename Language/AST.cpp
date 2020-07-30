@@ -51,7 +51,6 @@ std::string ASTNode::print() {
     return str;
 }
 
-
 // ---------------------------------------------------------------------------
 
 std::string VariableDeclarationAST::print() {
@@ -63,13 +62,11 @@ std::string VariableDeclarationAST::print() {
 }
 
 std::string VariableDeclarationAST::diag(unsigned int parentID) {
-
     std::string str = "";
     str += "node" + std::to_string(ASTNode::getID()) + " [ label = \"defvar:\" ];\n";
     str += "node" + std::to_string(parentID) + " -> node" + std::to_string(ASTNode::getID()) + ";\n";
     str += this->identifier->diag(ASTNode::getID());
     return str;
-
 }
 
 std::string VariableDeclarationAST::eval() {
@@ -82,7 +79,6 @@ std::string VariableDeclarationAST::eval() {
 // ---------------------------------------------------------------------------
 
 std::string IdentifierAST::print() {
-
     std::string str = "\"identifier\" : ";
     str += "\"" + getName() + "\"";
     return str;
@@ -105,10 +101,8 @@ std::string IdentifierAST::eval() {
 
 std::string AlienAST::print() {
     std::string str = "alienvar: {";
-//    str = ASTNode::print();
     str += "alienvar: \"" + getName() + "\"";
     str += "}\n";
-
     return str;
 }
 
@@ -174,17 +168,14 @@ std::string OutputAST::diag(unsigned int parentID) {
     std::string str;
     str += "node" + std::to_string(ASTNode::getID()) + " [ label = \"output:\"];\n";
     str += "node" + std::to_string(parentID) + " -> node" + std::to_string(ASTNode::getID()) + ";\n";
-
     str += this->expression->diag(ASTNode::getID());
     return str;
 }
 
 std::string OutputAST::eval() {
     std::string str = "";
-
     str += "\n" + COMMENT + " OUTPUT EXPRESSION\n";
     str += this->expression->eval();
-
     str += "\tOUTPUT \n";
     return str;
 }
@@ -197,7 +188,6 @@ std::string MoveAST::print() {
     str +=  "\"move\" : {\n";
     str += this->expression->print();
     str += "}\n";
-
     return str;
 }
 
@@ -205,17 +195,14 @@ std::string MoveAST::diag(unsigned int parentID) {
     std::string str;
     str += "node" + std::to_string(ASTNode::getID()) + " [ label = \"move:\"];\n";
     str += "node" + std::to_string(parentID) + " -> node" + std::to_string(ASTNode::getID()) + ";\n";
-
     str += this->expression->diag(ASTNode::getID());
     return str;
 }
 
 std::string MoveAST::eval() {
     std::string str = "";
-
     str += "\n" + COMMENT + " MOVE FUNC (builtin)\n";
     str += this->expression->eval();
-
     str += "\tMOVE \n";
     return str;
 }
@@ -236,7 +223,6 @@ std::string IfStatementAST::diag(unsigned int parentID) {
     std::string str;
     str += "node" + std::to_string(getID()) + " [ label = \"if:\"];\n";
     str += "node" + std::to_string(parentID) + " -> node" + std::to_string(getID()) + ";\n";
-
     str += this->expression->diag(getID());
     str += this->block->diag(getID());
     return str;
@@ -244,12 +230,9 @@ std::string IfStatementAST::diag(unsigned int parentID) {
 
 std::string IfStatementAST::eval() {
     std::string str = "";
-
     str += "\n" + COMMENT + " IF EXPRESSION ""\n";
     str += this->expression->eval();
-
     std::string label = getUniqueIdentifier();
-
     str += "\tBRF @" + label + "\n";
     str += "\n" + COMMENT + "IF BLOCK\n";
     str += this->block->eval();
@@ -263,13 +246,10 @@ std::string WhileStatementAST::print() {
     std::string str;
     str = ASTNode::print();
 
-//    str += "{\n";
     str +=  "\"while\" : {\n" ;
-
     str += this->expression->print();
     str +=  "},\n\"block\": {\n" ;
     str += this->block->print();
-
     str += "}\n";
 
     return str;

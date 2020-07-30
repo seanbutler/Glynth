@@ -50,7 +50,8 @@ namespace Genetics {
             : mutation(M) {
         }
 
-        void Mutate(ASTNode* tree) {
+        void Mutate(ASTNode* node) {
+
         }
 
     private:
@@ -61,6 +62,5 @@ namespace Genetics {
 };
 
 // ----------------------------------------------------------------------
-
 
 #endif //GLYNTH_MUTATOR_H
