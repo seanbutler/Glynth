@@ -16,17 +16,27 @@
 class Parser {
 
 public:
-    Parser(const std::vector<std::pair<Token, std::string>> &T) : tokens(T) {}
-    std::vector<std::pair<Token, std::string>> tokens;
-    std::pair<Token, std::string> currentToken;
-    unsigned int position = 0;
+//    Parser(const std::vector<std::pair<Token, std::string>> &T) : tokens(T) {}
+    Parser() {
+
+    }
+
+    void SetTokens(const std::vector<std::pair<Token, std::string>> &T) {
+        tokens = T;
+    }
+
+
     std::pair<Token, std::string> &getNextToken()               { return currentToken = tokens[position++]; }
     std::pair<Token, std::string> &lookAhead(int offset = 1)    { return tokens[position + offset]; }
 
+    unsigned int position = 0;
+    std::vector<std::pair<Token, std::string>> tokens;
+    std::pair<Token, std::string> currentToken;
 
 // TODO MOVE THIS OUTSIDE THE PARSER
-//  bool SaveAST(std::string filename);
-//    bool LoadAST(std::string filename);
+
+// bool SaveAST(std::string filename);
+// bool LoadAST(std::string filename);
 
     bool parse();
 
@@ -49,7 +59,6 @@ public:
     bool OutputASTJSON(std::string filename);
     bool OutputAsm(std::string filename);
     std::string GetAsm();
-
 
 private:
     std::vector<ASTNode *> abstractSyntaxTree;

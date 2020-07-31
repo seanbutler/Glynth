@@ -17,9 +17,16 @@ class Lexer {
 
 public:
 
-    Lexer(const std::string &str, int pos = 0) :
-        lexingStr(str),
-        lexingPos(pos) {
+//    Lexer(const std::string &str, int pos = 0) :
+//        lexingStr(str),
+//        lexingPos(pos) {
+//    }
+
+    Lexer()=default;
+
+    void SetSourceString(const std::string &S, unsigned int P = 0){
+        lexingStr = S;
+        lexingPos = P;
     }
 
     virtual ~Lexer() {
@@ -53,7 +60,7 @@ public:
 
 private:
     std::string lexingStr;
-    int lexingPos = 0;
+    unsigned int lexingPos = 0;
     unsigned int currentLine = 0;
     std::vector<std::pair<Token, std::string>> tokens;
 };

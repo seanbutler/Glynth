@@ -199,16 +199,19 @@ void VM::Execute(unsigned int slice) {
                     int dir = this->stack.top() % 4;
 
                     if (dir == 0) {
-                        this->alien[1] -= 1;
+                        alienVars->set(1, alienVars->get(1) - 1);
                     }
                     else if (dir == 1) {
-                        this->alien[0] += 1;
+                        alienVars->set(0, alienVars->get(0) + 1);
+//                        this->alien[0] += 1;
                     }
                     else if (dir == 2) {
-                        this->alien[1] += 1;
+                        alienVars->set(1, alienVars->get(1) + 1);
+//                        this->alien[1] += 1;
                     }
                     else if (dir == 3) {
-                        this->alien[0] -= 1;
+                        alienVars->set(0, alienVars->get(0) - 1);
+//                        this->alien[0] -= 1;
                     }
 
                     this->stack.pop();
@@ -219,11 +222,11 @@ void VM::Execute(unsigned int slice) {
                     int dir = this->stack.top();
 
                     if (dir == 0) {
-                        this->alien[2] += 1;
+//                        this->alien[2] += 1;
                     }
 
                     if (dir == 1) {
-                        this->alien[2] -= 1;
+//                        this->alien[2] -= 1;
                     }
 
                     this->stack.pop();
@@ -235,14 +238,17 @@ void VM::Execute(unsigned int slice) {
                     stack.pop();
                     incrProgramCounter();
                     int addr = getCurrentInstruction();
-                    alien[addr] = (val%32)+1;
+                    alienVars->set(addr, (val%32)+1);
+//                    alien[addr] = (val%32)+1;
                     break;
                 }
 
                 case INS::LOADALIEN: {
                     incrProgramCounter();
                     int addr = getCurrentInstruction();
-                    int val = alien[addr];
+                    int val;
+//                    val = alien[addr];
+                    val = alienVars->get(addr);
                     stack.push(val);
                     break;
                 }

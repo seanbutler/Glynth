@@ -6,6 +6,8 @@
 #define GLYNTH_AGENT_H
 
 #include "../Engine/Entity.h"
+#include "AlienVars.h"
+#include "../Language/VirtualMachine.h"
 
 //
 // a specific version of a game entity which has AI
@@ -93,6 +95,7 @@ public:
 };
 
 
+
 // ----------------------------------------------------------------------
 
 class Agent : public Engine::Entity {
@@ -106,20 +109,20 @@ public:
         std::ifstream sourceFile(F);
         std::string sourceString((std::istreambuf_iterator<char>(sourceFile)), std::istreambuf_iterator<char>());
 
-//        std::cout << sourceString << std::endl;
-
-        Lexer lexer(sourceString);
+        lexer.SetSourceString(sourceString, 0);
         lexer.Scan();
         lexer.OutputTokenList(F);
 
-        Parser parser(lexer.GetTokenList());
+        parser.SetTokens(lexer.GetTokenList());
         parser.parse();
+
+//        parser.OutputTreeDiagram(F);
 
         // THIS IS WHERE WE WOULD DO THE MUTATIONS...
 
+
         parser.OutputTreeDiagram(F);
         parser.OutputAsm(F);
-
         parser.OutputASTJSON(F);
 
         Assembler assembler(parser.GetAsm());
@@ -128,39 +131,42 @@ public:
 
         assembler.GenerateTestBinaryInstructions();
 
-        virtualMachine = new VM(assembler.GetInstructions(), alienVars);
+        virtualMachine.Initialise(assembler.GetInstructions(), &alienVars);
 
         rectangle.setFillColor(agenttype.Colour());
         rectangle.setSize(sf::Vector2f (1, 1));
     }
 
     virtual void Render(sf::RenderWindow *W){
-        if (!virtualMachine->done){
-            rectangle.setPosition(alienVars[0], alienVars[1]);
+        if (!virtualMachine.done){
+            rectangle.setPosition(alienVars.get(0), alienVars.get(1));
             W->draw(rectangle);
         }
     }
 
     void SetAlienVar(int id, int value) {
-        alienVars[id] = value;
+        alienVars.set(id, value);
     }
 
     int GetAlienVar(int id) {
-        return alienVars[id];
+        return alienVars.get(id);
     }
 
     virtual void Update(float deltaTime) {
-        if (!virtualMachine->done) {
-            virtualMachine->Execute(10);
+        if (!virtualMachine.done) {
+            virtualMachine.Execute(10);
         }
     };
 
     AgentType agenttype;
     sf::RectangleShape rectangle;
 
-    std::array<int, 32> alienVars;
+    AlienVars alienVars;
 
-    VM* virtualMachine;
+    Lexer lexer;
+    Parser parser;
+
+    VM virtualMachine;
 };
 
 // ----------------------------------------------------------------------

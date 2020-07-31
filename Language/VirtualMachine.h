@@ -11,16 +11,32 @@
 #include <iostream>
 #include <map>
 
+//#include "../Simulation/Agent.h"
+#include "../Simulation/AlienVars.h"
 #include "Instructions.h"
 
 class VM {
 
 public:
-    VM(std::vector<int> I, std::array<int, 32> & alienVars)
-    : running(true)
-    , instructions(I)
-    , alien(alienVars)
+//    VM(std::vector<int> I, std::array<int, 32> & alienVars)
+//    : running(true)
+//    , instructions(I)
+//    , alien(alienVars)
+//    {
+//        for (int n = 0; n < 16; n++) {
+//            data.push_back(0);
+//        }
+//
+//    }
+
+    VM()  { }
+
+    void Initialise(std::vector<int> I, AlienVars * AV)
     {
+        running = true;
+        instructions = I;
+        alienVars = AV;
+
         for (int n = 0; n < 16; n++) {
             data.push_back(0);
         }
@@ -39,7 +55,7 @@ private:
     std::vector<int> data;
     std::stack<int> stack;
 
-    std::array<int, 32> & alien;
+    AlienVars * alienVars;
 
     int programCounter = 0;
 

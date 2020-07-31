@@ -55,21 +55,18 @@ public:
     std::string &getName()  { return name; }
 
     int getNumber()         { return number; }
-    void setNumber(int N)         { number = N; }
+    void setNumber(int N)   { number = N; }
 
     virtual std::string print();                                // USED FOR SIMPLE SERIALIZATION
     virtual std::string diag(unsigned int parentID) = 0;        // USED FOR GENERATING THE GV FILE...
     virtual std::string eval() = 0;                             // USED FOR EMITTING THE ACTUAL INSTRUCTIONS...
 
-
-
     std::vector<ASTNode*>children;
+
 private:
     unsigned int id;
     std::string name;
     int number;
-
-
 };
 
 // ------------------------------------------------------------------------

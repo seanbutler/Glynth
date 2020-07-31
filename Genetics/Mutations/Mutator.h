@@ -5,7 +5,7 @@
 #ifndef GLYNTH_MUTATOR_H
 #define GLYNTH_MUTATOR_H
 
-#include "./Mutations.h"
+#include "./Mutator.h"
 
 namespace Genetics {
 
@@ -70,7 +70,7 @@ namespace Genetics {
     public:
         Mutagen() {}
 
-        void SetMutation(Mutation& M) {
+        void AddMutation(Mutation& M) {
             mutation = M;
         }
 

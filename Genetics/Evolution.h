@@ -7,6 +7,7 @@
 
 #include <vector>
 #include "../Simulation/Agent.h"
+#include "./Mutations/Mutator.h"
 
 // ----------------------------------------------------------------------
 
@@ -26,21 +27,20 @@ namespace Genetics {
     class Evolution {
     public:
         Evolution() {}
-
         virtual ~Evolution() {}
 
-        const unsigned int MAX_POPULATION_SIZE = 32;
+//        void InitialisePopulation() {}
+//        void RandomizePopulation()  {}
 
-        void InitialisePopulation() {
-            if (population.individuals.size() < MAX_POPULATION_SIZE) {
-
-            }
+        void MutatePopulation()  {
+            Mutagen mutagen;
+            RandomizeNumberMutation mutation;
+            mutagen.AddMutation(mutation);
+//            mutagen.Apply(population.individuals[0].);
         }
 
+//        void AssessFitness()        {}
 
-        void RandomizePopulation() {}
-
-        void AssessFitness() {}
 
     public:
         Population population;
