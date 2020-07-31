@@ -35,7 +35,6 @@ protected:
     const sf::Color colour;
 };
 
-
 class PlayerAgentType : public AgentType {
     // Grey is anonymous, like a good player character
     // Movable
@@ -53,7 +52,7 @@ class GoalAgentType : public AgentType {
     // End of Game
 public:
     GoalAgentType()
-    : AgentType(AgentTypeEnum::Goal, sf::Color(192, 255, 255))
+    : AgentType(AgentTypeEnum::Goal, sf::Color(128, 192, 255))
     {
 
     }

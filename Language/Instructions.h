@@ -37,12 +37,15 @@ enum class INS : int {
     LT,
     LTE,
 
-    RAND,
-
     OUTPUT,
     INPUT,
+
+    // these take 1 parameter and dont return, but have side effects in the alien vars
     MOVE,
     TURN,
+
+    // these take no parameters but returns a value
+    RAND,
 
     NUMBER,
     ADDRESS,

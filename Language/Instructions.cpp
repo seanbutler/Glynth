@@ -33,14 +33,13 @@ char* instructionNames[] = {
         "LT",
         "LTE",
 
-        "RAND",
-
         "OUTPUT",
         "INPUT",
+
         "MOVE",
         "TURN",
 
-
+        "RAND",
 
         "NUMBER",
         "ADDRESS",

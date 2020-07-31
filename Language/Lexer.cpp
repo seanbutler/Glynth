@@ -69,7 +69,10 @@ Token Lexer::ScanToken() {
             tokens.push_back(std::make_pair(Token::KEYWORD_TURN, tokenString));
             return Token::KEYWORD_TURN;
         }
-
+        else if (tokenString == "rand") {
+            tokens.push_back(std::make_pair(Token::KEYWORD_RAND, tokenString));
+            return Token::KEYWORD_RAND;
+        }
         tokens.push_back(std::make_pair(Token::IDENTIFIER, tokenString));
         return Token::IDENTIFIER;
     }

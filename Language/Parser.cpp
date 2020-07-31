@@ -63,6 +63,12 @@ ASTNode *Parser::ParseStatement() {
 //            return ParseTurn();
 //        }
 
+        case Token::KEYWORD_RAND: {
+            return ParseRandFunc();
+        }
+
+
+
         case Token::KEYWORD_VAR: {
             return ParseVariableDeclaration();
         }
@@ -166,7 +172,7 @@ ASTNode *Parser::ParseBlock() {
     do {
         newNode = this->ParseStatement();
         if (newNode != nullptr) {
-            block->statements.push_back(newNode);
+            block->children.push_back(newNode);
             getNextToken();
         }
     } while (newNode != nullptr);
@@ -241,7 +247,7 @@ ASTNode *Parser::ParseMove() {
 //    Token tokenType = currentToken.first;
 //    std::string tokenString = currentToken.second;
 //
-////    std::cout << "Parser::ParseTurn tokenType = " << (int) tokenType
+//    std::cout << "Parser::ParseTurn tokenType = " << (int) tokenType
 ////              << " " << tokenString << std::endl;
 //
 //    getNextToken();
@@ -263,6 +269,34 @@ ASTNode *Parser::ParseMove() {
 //    return statement;
 //}
 
+// ----------------------------------------------------------------------
+
+ASTNode *Parser::ParseRandFunc() {
+
+    Token tokenType = currentToken.first;
+    std::string tokenString = currentToken.second;
+
+//    std::cout << "Parser::ParseRandFunc tokenType = " << (int) tokenType
+//              << " " << tokenString << std::endl;
+
+    getNextToken();
+
+    if (currentToken.first != Token::SYM_LPAREN) {
+        std::cerr << "ERROR Parser::ParseRandFunc() - Unrecognised Token Before Move Expression, Expected Left Parenthesis."
+                  << std::endl;
+        return nullptr;
+    }
+
+    getNextToken();
+
+//    ASTNode *expr = this->ParseExpression();
+
+//    getNextToken();
+
+    RandFuncAST *statement = new RandFuncAST();
+
+    return statement;
+}
 
 // ----------------------------------------------------------------------
 

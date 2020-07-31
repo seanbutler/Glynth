@@ -43,6 +43,7 @@ public:
     ASTNode *ParseOutput();
     ASTNode *ParseMove();
     ASTNode *ParseTurn();
+    ASTNode *ParseRandFunc();
 
     bool OutputTreeDiagram(std::string filename);
     bool OutputASTJSON(std::string filename);

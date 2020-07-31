@@ -2,7 +2,7 @@
 // Created by sean on 28/07/2020.
 //
 
-#include "../Language/AST.h"
+#include "../../Language/AST.h"
 
 #ifndef GLYNTH_MUTATIONS_H
 #define GLYNTH_MUTATIONS_H

@@ -1,8 +1,8 @@
-direction = 0;
+direction = 3;
 
 while(1)
 {
-    moves = 5;
+    moves = 8;
     while ( moves > 0 )
     {
         moves = moves - 1;

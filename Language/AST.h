@@ -34,28 +34,41 @@ static std::string getUniqueIdentifier();
 
 // ------------------------------------------------------------------------
 
+// class NodeType  enum : int {
+//    Node,
+//    Identifier,
+//    AlienVar,
+//    VariableDeclaration,
+//
+//};
+
+// ------------------------------------------------------------------------
+
 static unsigned int uid = 1;
 
 class ASTNode {
 public:
-//    ASTNode(const std::string & N="") : name(N) { id = uid++; }
     ASTNode(const std::string & N="") : id(uid++), name(N) {}
-
     virtual ~ASTNode() = default;
 
-    unsigned int getID() { return id;}
+    unsigned int getID()    { return id; }
+    std::string &getName()  { return name; }
+
+    int getNumber()         { return number; }
+    void setNumber(int N)         { number = N; }
 
     virtual std::string print();                                // USED FOR SIMPLE SERIALIZATION
     virtual std::string diag(unsigned int parentID) = 0;        // USED FOR GENERATING THE GV FILE...
     virtual std::string eval() = 0;                             // USED FOR EMITTING THE ACTUAL INSTRUCTIONS...
 
-    std::string &getName()  { return name; }
-    int getNumber()         { return number; }
 
+
+    std::vector<ASTNode*>children;
 private:
     unsigned int id;
     std::string name;
     int number;
+
 
 };
 
@@ -68,29 +81,30 @@ public:
     virtual std::string print();
     virtual std::string diag(unsigned int parentID);
     virtual std::string eval();
-
 };
 
 // ------------------------------------------------------------------------
 
-// AlienAST - statements like "var a"
-
-class AlienAST : public ASTNode {
+class AlienVarAST : public ASTNode {
 
 public:
     virtual std::string print();
     virtual std::string diag(unsigned int parentID);
     virtual std::string eval();
-
 };
-
 
 // ------------------------------------------------------------------------
 
 class VariableDeclarationAST : public ASTNode {
 
 public:
-    explicit VariableDeclarationAST(IdentifierAST *I) : ASTNode(""),identifier(I) {}
+    explicit VariableDeclarationAST(IdentifierAST *I)
+        : ASTNode()
+        , identifier(I)
+    {
+        ASTNode::children.push_back(I);
+    }
+
     virtual std::string print();
     virtual std::string diag(unsigned int parentID);
     virtual std::string eval();
@@ -102,28 +116,33 @@ private:
 
 // ------------------------------------------------------------------------
 
-// BlockAST - for lists of statements between { and } tokens
-
 class BlockAST : public ASTNode {
 
 public:
-    std::vector<ASTNode *> statements;
-    BlockAST() = default;
+    BlockAST()
+        : ASTNode()
+    {
+
+    }
+
     virtual std::string print();
     virtual std::string diag(unsigned int parentID);
     virtual std::string eval();
 
+//    std::vector<ASTNode *> statements;
 };
 
-
 // ------------------------------------------------------------------------
-
-// OutputAST - statements like "output(expression);"
 
 class OutputAST : public ASTNode {
 
 public:
-    OutputAST(ASTNode *E) : ASTNode(""), expression(E){}
+    OutputAST(ASTNode *E)
+        : ASTNode()
+        , expression(E)
+    {
+        ASTNode::children.push_back(E);
+    }
 
     virtual std::string print();
     virtual std::string diag(unsigned int parentID);
@@ -133,77 +152,105 @@ private:
     ASTNode *expression;
 };
 
-
 // ------------------------------------------------------------------------
-
-// MoveAST - statements like "move(expression);"
 
 class MoveAST : public ASTNode {
 
 public:
+    MoveAST(ASTNode *E)
+        : ASTNode()
+    {
+        children.push_back(E);
+    }
 
-    MoveAST(ASTNode *E) : ASTNode(""), expression(E){}
+    virtual std::string print();
+    virtual std::string diag(unsigned int parentID);
+    virtual std::string eval();
+
+    ASTNode * getExpression()   { return children[0];}
+};
+
+
+class RandFuncAST : public ASTNode {
+
+public:
+    RandFuncAST()
+        : ASTNode()
+    {
+    }
 
     virtual std::string print();
     virtual std::string diag(unsigned int parentID);
     virtual std::string eval();
 
 private:
-    ASTNode *expression;
 };
 
 
 
 // ------------------------------------------------------------------------
-
-// IfStatementAST - statements like "if(expression){statements}"
 
 class IfStatementAST : public ASTNode {
 
 public:
-    ASTNode *expression;
-    ASTNode *block;
-
-    IfStatementAST(ASTNode *E, ASTNode *B) : ASTNode(""), expression(E), block(B) {}
+    IfStatementAST(ASTNode *E, ASTNode *B)
+        : ASTNode()
+    {
+        children.push_back(E);
+        children.push_back(B);
+    }
 
     virtual std::string print();
     virtual std::string diag(unsigned int parentID);
     virtual std::string eval();
+
+    ASTNode * getExpression()   { return children[0];}
+    ASTNode * getBlock()        { return children[1];}
+
+private:
+
+
 };
 
 // ------------------------------------------------------------------------
-
-// WhileStatementAST - statements like "while(expression){statements}"
 
 class WhileStatementAST : public ASTNode {
 
 public:
-    ASTNode *expression;
-    ASTNode *block;
-
-    WhileStatementAST(ASTNode *E, ASTNode *B) : ASTNode(""), expression(E), block(B) {}
+    WhileStatementAST(ASTNode *E, ASTNode *B)
+    : ASTNode()
+    {
+        children.push_back(E);
+        children.push_back(B);
+    }
 
     virtual std::string print();
     virtual std::string diag(unsigned int parentID);
     virtual std::string eval();
 
+    ASTNode * getExpression()   { return children[0];}
+    ASTNode * getBlock()        { return children[1];}
 };
 
 
 // ------------------------------------------------------------------------
 
-// AssignmentStatementAST -
-
 class AssignmentStatementAST : public ASTNode {
 
 public:
-    ASTNode *identifier;
-    ASTNode *expression;
+    AssignmentStatementAST(ASTNode *I, ASTNode *E)
+        : ASTNode()
+    {
+        children.push_back(I);
+        children.push_back(E);
+    }
 
-    AssignmentStatementAST(ASTNode *I, ASTNode *E) : ASTNode(""), identifier(I), expression(E) {}
     virtual std::string print();
     virtual std::string diag(unsigned int parentID);
     virtual std::string eval();
+
+    ASTNode * getIdentifier(){return children[0];}
+    ASTNode * getExpression(){return children[1];}
 
 };
 
@@ -214,15 +261,14 @@ public:
 class NumberAST : public ASTNode {
 
 public:
-    int val;
-
-    NumberAST(int V) : ASTNode(""), val(V) {}
+    NumberAST(int V) : ASTNode() {
+        setNumber(V);
+    }
 
     virtual std::string print();
     virtual std::string diag(unsigned int parentID);
     virtual std::string eval();
 
-private:
 };
 
 // ------------------------------------------------------------------------
@@ -232,7 +278,7 @@ private:
 class BinOperandAST : public ASTNode {
 
 public:
-    BinOperandAST(Token O, ASTNode *L, ASTNode *R) : ASTNode(""), op(O), lhs(L), rhs(R) {}
+    BinOperandAST(Token O, ASTNode *L, ASTNode *R) : ASTNode(), op(O), lhs(L), rhs(R) {}
 
     virtual std::string print();
     virtual std::string diag(unsigned int parentID);
