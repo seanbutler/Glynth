@@ -13,81 +13,78 @@ namespace Genetics {
 
     class Mutation {
 
-    public:
-        Mutation() = default;
-        ~Mutation() = default;
-
-        virtual bool Condition(ASTNode& node) = 0;
-        virtual void Effect(ASTNode& node) = 0;
-    };
-
-    class NumberMutation : public Mutation {
+        /// Declares all the interfaces/methods for the mutators
 
     public:
-        virtual bool Condition(ASTNode& node) {
-            return ((rand() / RAND_MAX) >= probability);
-        };
+        virtual void Apply(ASTNode* node) {};
 
-        virtual void Effect(ASTNode& node) {
-            static_cast<NumberAST&>(node).val = rand();
-        };
+        virtual void Apply(IdentifierAST* node) {};
+        virtual void Apply(AlienVarAST* node) {};
+        virtual void Apply(VariableDeclarationAST* node) {};
 
-    private:
-        const float probability = 0.5;
-    };
+        virtual void Apply(IfStatementAST* node) {};
+        virtual void Apply(WhileStatementAST* node) {};
+        virtual void Apply(AssignmentStatementAST* node) {};
 
-    // ----------------------------------------------------------------------
+        virtual void Apply(BlockAST* node) {};
 
-    class NullMutator {
+        virtual void Apply(OutputAST* node) {};
+        virtual void Apply(MoveAST* node) {};
 
-        // Declares all the interfaces/methods for the mutators
+        virtual void Apply(NumberAST* node) {};
+        virtual void Apply(BinOperandAST* node) {};
 
-    public:
-        virtual void Mutate(ASTNode& node) {};
+        virtual void Apply(YieldAST* node) {};
 
-        virtual void Mutate(IdentifierAST& node) {};
-        virtual void Mutate(AlienVarAST& node) {};
-        virtual void Mutate(VariableDeclarationAST& node) {};
-
-        virtual void Mutate(IfStatementAST& node) {};
-        virtual void Mutate(WhileStatementAST& node) {};
-        virtual void Mutate(AssignmentStatementAST& node) {};
-
-        virtual void Mutate(BlockAST& node) {};
-
-        virtual void Mutate(OutputAST& node) {};
-        virtual void Mutate(MoveAST& node) {};
-
-        virtual void Mutate(NumberAST& node) {};
-        virtual void Mutate(BinOperandAST& node) {};
-
-        virtual void Mutate(YieldAST& node) {};
-
-//        virtual void Mutate(StdFuncAST& node) {};
-//        virtual void Mutate(RandAST& node) {};
-
+//        virtual void Apply(StdFuncAST* node) {};
+//        virtual void Apply(RandAST* node) {};
 
     };
 
     // Terminals...
 
-    class RandomizeNumberMutator : public NullMutator {
-        /// Overwrites the existing value (number) with an integer generated from rand()
-        virtual void Mutate(NumberAST& node) {
-            node.val = rand();
+    class RandomizeNumberMutation : public Mutation {
+
+        // TODO MAYBE THIS SHOULD BE PART OF THE MUTAGEN RATHER THAN THE MUTATION
+        const float probability = 0.5;
+        virtual bool Condition(NumberAST& node) {
+            return ((rand() / RAND_MAX) >= probability);
+        };
+
+        virtual void Effect(NumberAST& node) {
+            /// Overwrites the existing value (number) with an integer generated from rand()
+            node.setNumber(rand());
+        };
+
+        virtual void Apply(NumberAST& node) {
+            if ( Condition(node) ) {
+                Effect(node);
+            }
         };
     };
 
     // ----------------------------------------------------------------------
 
-    // Non Terminals...
+    class Mutagen {
+        /// Passes over the tree and applies appropriate Mutations to each node
+    public:
+        Mutagen() {}
 
-    class BlockShufflerMutator : public NullMutator {
-        /// Rearranges the order of the statements within a block ()
-        virtual void Mutate(BlockAST& node) {
+        void SetMutation(Mutation& M) {
+            mutation = M;
+        }
 
-        };
+        void Apply(ASTNode* node) {
+            this->mutation.Apply(node);
+            for(auto c : node->children) {
+                this->Apply(c);
+            }
+        }
+
+    public:
+        Mutation mutation;
     };
+
 
 };
 
