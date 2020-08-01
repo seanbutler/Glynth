@@ -6,8 +6,14 @@
 #define GLYNTH_AGENT_H
 
 #include "../Engine/Entity.h"
-#include "AlienVars.h"
+
+#include "../Language/Lexer.h"
+#include "../Language/Parser.h"
+#include "../Language/Assembler.h"
 #include "../Language/VirtualMachine.h"
+
+#include "AlienVars.h"
+
 
 //
 // a specific version of a game entity which has AI
@@ -94,47 +100,42 @@ public:
     }
 };
 
-
-
 // ----------------------------------------------------------------------
 
 class Agent : public Engine::Entity {
 public:
-    Agent(std::string F, AgentType AT)
+    Agent(AgentType AT)
     : Entity()
-    , agenttype(AT)
-    {
-        std::cout << "Agent::Agent (" << F << ")" << std::endl;
+    , agenttype(AT) {
+        std::cout << "Agent::Agent ()" << std::endl;
+        rectangle.setFillColor(agenttype.Colour());
+        rectangle.setSize(sf::Vector2f (1, 1));
+    }
 
-        std::ifstream sourceFile(F);
+    virtual void Compile(std::string F) {
+        srcFilename = F;
+        std::ifstream sourceFile(srcFilename);
         std::string sourceString((std::istreambuf_iterator<char>(sourceFile)), std::istreambuf_iterator<char>());
 
         lexer.SetSourceString(sourceString, 0);
         lexer.Scan();
-        lexer.OutputTokenList(F);
+        lexer.OutputTokenList(srcFilename);
 
         parser.SetTokens(lexer.GetTokenList());
         parser.parse();
 
-//        parser.OutputTreeDiagram(F);
+//        parser.OutputTreeDiagram(srcFilename);
+//        parser.OutputAsm(srcFilename);
+//        parser.OutputASTJSON(srcFilename);
+    }
 
-        // THIS IS WHERE WE WOULD DO THE MUTATIONS...
-
-
-        parser.OutputTreeDiagram(F);
-        parser.OutputAsm(F);
-        parser.OutputASTJSON(F);
-
-        Assembler assembler(parser.GetAsm());
-        assembler.Scan();
-        assembler.OutputInstructionList(F);
+    virtual void Assemble()
+    {
+        assembler.Scan(parser.GetAsm());
+        assembler.OutputInstructionList(srcFilename);
 
         assembler.GenerateTestBinaryInstructions();
-
         virtualMachine.Initialise(assembler.GetInstructions(), &alienVars);
-
-        rectangle.setFillColor(agenttype.Colour());
-        rectangle.setSize(sf::Vector2f (1, 1));
     }
 
     virtual void Render(sf::RenderWindow *W){
@@ -158,18 +159,19 @@ public:
         }
     };
 
+    std::string srcFilename;
     AgentType agenttype;
     sf::RectangleShape rectangle;
 
-    AlienVars alienVars;
-
     Lexer lexer;
     Parser parser;
-
+    Assembler assembler;
     VM virtualMachine;
+
+    AlienVars alienVars;
+
 };
 
 // ----------------------------------------------------------------------
-
 
 #endif //GLYNTH_AGENT_H

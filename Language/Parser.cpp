@@ -138,7 +138,8 @@ ASTNode *Parser::ParseVariableDeclaration() {
 //              << (int) tokenType << " "
 //              << tokenString << std::endl;
 
-    IdentifierAST *ident = nullptr;
+//    IdentifierAST *ident = nullptr;
+    ASTNode *ident = nullptr;
     ASTNode *var = nullptr;
 
     if (currentToken.first == Token::IDENTIFIER) {
@@ -571,7 +572,7 @@ ASTNode *Parser::ParseAssignmentStatement() {
 
 // ----------------------------------------------------------------------
 
-IdentifierAST *Parser::ParseIdentifier() {
+ASTNode *Parser::ParseIdentifier() {
 //    std::cout << "Parser::ParseIdentifier currentToken = " << (int) currentToken.first << " '" << currentToken.second
 //              << "' " << std::endl;
     IdentifierAST *identifierNode = new IdentifierAST(currentToken.second);

@@ -6,6 +6,9 @@
 #include "AST.h"
 #include "metainstructions.h"
 
+#include "../Genetics/Mutations/MutationVisitor.h"
+#include "../Genetics/Mutations/Mutagen.h"
+
 #include <iostream>
 #include <iomanip>
 
@@ -53,6 +56,12 @@ std::string ASTNode::print() {
 
 // ---------------------------------------------------------------------------
 
+
+void VariableDeclarationAST::Accept( Genetics::MutationVisitor *visitor) const {
+    visitor->Visit_VariableDeclarationAST(this);
+};
+
+
 std::string VariableDeclarationAST::print() {
     std::string str = "declaration: {";
     str += ASTNode::print();
@@ -77,6 +86,10 @@ std::string VariableDeclarationAST::eval() {
 }
 
 // ---------------------------------------------------------------------------
+
+void IdentifierAST::Accept( Genetics::MutationVisitor *visitor) const {
+    visitor->Visit_IdentifierAST(this);
+};
 
 std::string IdentifierAST::print() {
     std::string str = "\"identifier\" : ";
@@ -121,6 +134,10 @@ std::string AlienVarAST::eval() {
 
 // ---------------------------------------------------------------------------
 
+void BlockAST::Accept( Genetics::MutationVisitor *visitor) const  {
+    visitor->Visit_BlockAST(this);
+};
+
 std::string BlockAST::print() {
     std::string str;
 
@@ -155,11 +172,15 @@ std::string BlockAST::eval() {
 
 // ---------------------------------------------------------------------------
 
+void OutputAST::Accept( Genetics::MutationVisitor *visitor) const {
+    visitor->Visit_OutputAST(this);
+};
+
 std::string OutputAST::print() {
     std::string str;
     str = ASTNode::print();
     str +=  "output: ";
-    str += this->expression->print();
+    str += this->getExpression()->print();
     str += "}\n";
     return str;
 }
@@ -168,19 +189,23 @@ std::string OutputAST::diag(unsigned int parentID) {
     std::string str;
     str += "node" + std::to_string(ASTNode::getID()) + " [ label = \"output:\"];\n";
     str += "node" + std::to_string(parentID) + " -> node" + std::to_string(ASTNode::getID()) + ";\n";
-    str += this->expression->diag(ASTNode::getID());
+    str += this->getExpression()->diag(ASTNode::getID());
     return str;
 }
 
 std::string OutputAST::eval() {
     std::string str = "";
     str += "\n" + COMMENT + " OUTPUT EXPRESSION\n";
-    str += this->expression->eval();
+    str += this->getExpression()->eval();
     str += "\tOUTPUT \n";
     return str;
 }
 
 // ---------------------------------------------------------------------------
+
+void MoveAST::Accept( Genetics::MutationVisitor *visitor) const {
+    visitor->Visit_MoveAST(this);
+};
 
 std::string MoveAST::print() {
     std::string str;
@@ -210,6 +235,11 @@ std::string MoveAST::eval() {
 
 // ---------------------------------------------------------------------------
 
+
+void RandFuncAST::Accept( Genetics::MutationVisitor *visitor) const{
+    visitor->Visit_RandFuncAST(this);
+};
+
 std::string RandFuncAST::print() {
     std::string str;
     str = ASTNode::print();
@@ -236,6 +266,11 @@ std::string RandFuncAST::eval() {
 }
 
 // ---------------------------------------------------------------------------
+
+void IfStatementAST::Accept( Genetics::MutationVisitor *visitor) const {
+    visitor->Visit_IfStatementAST(this);
+};
+
 
 std::string IfStatementAST::print() {
     std::string str;
@@ -273,6 +308,11 @@ std::string IfStatementAST::eval() {
 }
 
 // ---------------------------------------------------------------------------
+
+void WhileStatementAST::Accept( Genetics::MutationVisitor *visitor) const {
+    visitor->Visit_WhileStatementAST(this);
+};
+
 
 std::string WhileStatementAST::print() {
     std::string str;
@@ -319,6 +359,10 @@ std::string WhileStatementAST::eval() {
 
 // ---------------------------------------------------------------------------
 
+void AssignmentStatementAST::Accept( Genetics::MutationVisitor *visitor) const {
+    visitor->Visit_AssignmentStatementAST(this);
+};
+
 std::string AssignmentStatementAST::print() {
     std::string str;
     str += "\"assignment\" : { \n";
@@ -350,6 +394,11 @@ std::string AssignmentStatementAST::eval() {
 
 // ---------------------------------------------------------------------------
 
+void NumberAST::Accept( Genetics::MutationVisitor *visitor) const {
+    visitor->Visit_NumberAST(this);
+};
+
+
 std::string NumberAST::print() {
     std::string str;
     str =  "\"number\" : " + std::to_string(getNumber()) ;
@@ -371,6 +420,10 @@ std::string NumberAST::eval() {
 }
 
 // ---------------------------------------------------------------------------
+
+void BinOperandAST::Accept( Genetics::MutationVisitor *visitor) const {
+    visitor->Visit_BinOperandAST(this);
+};
 
 std::string BinOperandAST::print() {
 
@@ -558,6 +611,10 @@ std::string BinOperandAST::eval() {
 }
 
 // ---------------------------------------------------------------------------
+
+void YieldAST::Accept( Genetics::MutationVisitor *visitor) const {
+    visitor->Visit_YieldAST(this);
+};
 
 std::string YieldAST::print() {
     std::string str;

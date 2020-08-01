@@ -2,12 +2,12 @@
 // Created by sean on 30/07/2020.
 //
 
-#ifndef GLYNTH_EVOLUTION_H
-#define GLYNTH_EVOLUTION_H
+#pragma once
 
 #include <vector>
 #include "../Simulation/Agent.h"
-#include "./Mutations/Mutator.h"
+#include "./Mutations/Mutagen.h"
+//#include "./Mutations/Mutator.h"
 
 // ----------------------------------------------------------------------
 
@@ -25,21 +25,25 @@ namespace Genetics {
 // ----------------------------------------------------------------------
 
     class Evolution {
+
     public:
-        Evolution() {}
-        virtual ~Evolution() {}
+        Evolution()             {}
+        virtual ~Evolution()    {}
 
 //        void InitialisePopulation() {}
 //        void RandomizePopulation()  {}
 
         void MutatePopulation()  {
             Mutagen mutagen;
-            RandomizeNumberMutation mutation;
-            mutagen.AddMutation(mutation);
-//            mutagen.Apply(population.individuals[0].);
+//            RandomizeNumberMutation mutation;
+//            mutagen.AddMutation(&mutation);
+//
+//            for(auto I : population.individuals) {
+//                mutagen.Apply(I->parser.abstractSyntaxTree[0]);
+//            }
         }
 
-//        void AssessFitness()        {}
+//        void AssessFitness()          {}
 
 
     public:
@@ -49,5 +53,3 @@ namespace Genetics {
 // ----------------------------------------------------------------------
 
 }
-
-#endif //GLYNTH_EVOLUTION_H

@@ -17,26 +17,27 @@
 class Assembler {
 
 public:
-    Assembler(std::string AS) : assemblyStr(AS) {}
+//    Assembler(std::string AS) : assemblyStr(AS) {}
+    Assembler(){}
     virtual ~Assembler() {}
 
     INS ScanInstruction();
 
-    void Scan() {
-
+    void Scan(std::string AS) {
+        assemblyStr = AS;
         INS result;
         do {
             result = ScanInstruction();
         } while (result != INS::END_OF_FILE && result != INS::ERROR);
 
-        std::cout << std::endl << "Dump Labels Map" << std::endl;
-        DumpLabelsMap();
-
-        std::cout << std::endl << "Dump Jumps Map" << std::endl;
-        DumpJumpsMap();
-
-        std::cout << std::endl << "Dump Data Map" << std::endl;
-        DumpDataMap();
+//        std::cout << std::endl << "Dump Labels Map" << std::endl;
+//        DumpLabelsMap();
+//
+//        std::cout << std::endl << "Dump Jumps Map" << std::endl;
+//        DumpJumpsMap();
+//
+//        std::cout << std::endl << "Dump Data Map" << std::endl;
+//        DumpDataMap();
 
         PatchUpJumps();
 

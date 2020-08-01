@@ -2,45 +2,24 @@
 // Created by sean on 17/06/2020.
 //
 
-#ifndef GLYNTH_AST_H
-#define GLYNTH_AST_H
+#pragma once
 
+#include <uuid/uuid.h>
 #include <string>
 #include <vector>
 #include <sstream>
+
 #include "Tokens.h"
 
-#include <uuid/uuid.h>
+//#include "../Genetics/Evolution.h"
+//#include "../Genetics/Mutations/Mutator.h"
+//#include "../Genetics/Mutations/Mutagen.h"
 
-
-// ------------------------------------------------------------------------
-
-//const std::string CONSANANTS = "BCDFGHJKLMNPQRSTVWXYZ";
-//const std::string VOWELS = "AEIOU";
-//
-//static std::string pronouncableRandomString(unsigned int l=8){
-//    std::string uuid = std::string(l,' ');
-//
-//    for(int i=0;i<l-1;i+=2){
-//        uuid[i] = CONSANANTS[rand() % 21];
-//        uuid[i+1] = VOWELS[rand() % 5];
-//    }
-//    return uuid;
-//}
-
-// ------------------------------------------------------------------------
+namespace Genetics {
+    class MutationVisitor;
+}
 
 static std::string getUniqueIdentifier();
-
-// ------------------------------------------------------------------------
-
-// class NodeType  enum : int {
-//    Node,
-//    Identifier,
-//    AlienVar,
-//    VariableDeclaration,
-//
-//};
 
 // ------------------------------------------------------------------------
 
@@ -48,8 +27,13 @@ static unsigned int uid = 1;
 
 class ASTNode {
 public:
-    ASTNode(const std::string & N="") : id(uid++), name(N) {}
+    ASTNode(const std::string & N="") : id(uid++), name(N), number(0){
+
+    }
+
     virtual ~ASTNode() = default;
+
+    virtual void Accept( Genetics::MutationVisitor* visitor) const {};
 
     unsigned int getID()    { return id; }
     std::string &getName()  { return name; }
@@ -75,6 +59,9 @@ class IdentifierAST : public ASTNode {
 
 public:
     explicit IdentifierAST(const std::string &N) : ASTNode(N) {}
+
+    virtual void Accept( Genetics::MutationVisitor *visitor) const override ;
+
     virtual std::string print();
     virtual std::string diag(unsigned int parentID);
     virtual std::string eval();
@@ -95,19 +82,21 @@ public:
 class VariableDeclarationAST : public ASTNode {
 
 public:
-    explicit VariableDeclarationAST(IdentifierAST *I)
+    explicit VariableDeclarationAST(ASTNode *I)
         : ASTNode()
         , identifier(I)
     {
         ASTNode::children.push_back(I);
     }
 
+    virtual void Accept( Genetics::MutationVisitor *visitor) const override;
+
     virtual std::string print();
     virtual std::string diag(unsigned int parentID);
     virtual std::string eval();
 
 private:
-    IdentifierAST *identifier;
+    ASTNode *identifier;
 };
 
 
@@ -122,9 +111,11 @@ public:
 
     }
 
-    virtual std::string print();
-    virtual std::string diag(unsigned int parentID);
-    virtual std::string eval();
+    virtual void Accept( Genetics::MutationVisitor *visitor) const override;
+
+    virtual std::string print() override;
+    virtual std::string diag(unsigned int parentID) override;
+    virtual std::string eval() override;
 
 //    std::vector<ASTNode *> statements;
 };
@@ -136,17 +127,18 @@ class OutputAST : public ASTNode {
 public:
     OutputAST(ASTNode *E)
         : ASTNode()
-        , expression(E)
     {
         ASTNode::children.push_back(E);
     }
+
+    virtual void Accept( Genetics::MutationVisitor *visitor) const override;
 
     virtual std::string print();
     virtual std::string diag(unsigned int parentID);
     virtual std::string eval();
 
-private:
-    ASTNode *expression;
+    ASTNode * getExpression()   { return children[0];}
+
 };
 
 // ------------------------------------------------------------------------
@@ -157,8 +149,10 @@ public:
     MoveAST(ASTNode *E)
         : ASTNode()
     {
-        children.push_back(E);
+        ASTNode::children.push_back(E);
     }
+
+    virtual void Accept( Genetics::MutationVisitor *visitor) const override;
 
     virtual std::string print();
     virtual std::string diag(unsigned int parentID);
@@ -175,6 +169,8 @@ public:
         : ASTNode()
     {
     }
+
+    virtual void Accept( Genetics::MutationVisitor *visitor) const override;
 
     virtual std::string print();
     virtual std::string diag(unsigned int parentID);
@@ -196,6 +192,8 @@ public:
         children.push_back(E);
         children.push_back(B);
     }
+
+    virtual void Accept( Genetics::MutationVisitor *visitor) const override;
 
     virtual std::string print();
     virtual std::string diag(unsigned int parentID);
@@ -221,6 +219,8 @@ public:
         children.push_back(B);
     }
 
+    virtual void Accept( Genetics::MutationVisitor *visitor) const override;
+
     virtual std::string print();
     virtual std::string diag(unsigned int parentID);
     virtual std::string eval();
@@ -242,6 +242,7 @@ public:
         children.push_back(E);
     }
 
+    virtual void Accept( Genetics::MutationVisitor *visitor) const override;
     virtual std::string print();
     virtual std::string diag(unsigned int parentID);
     virtual std::string eval();
@@ -262,6 +263,9 @@ public:
         setNumber(V);
     }
 
+    virtual void Accept( Genetics::MutationVisitor *visitor) const override ;
+
+
     virtual std::string print();
     virtual std::string diag(unsigned int parentID);
     virtual std::string eval();
@@ -276,6 +280,8 @@ class BinOperandAST : public ASTNode {
 
 public:
     BinOperandAST(Token O, ASTNode *L, ASTNode *R) : ASTNode(), op(O), lhs(L), rhs(R) {}
+
+    virtual void Accept( Genetics::MutationVisitor *visitor) const override ;
 
     virtual std::string print();
     virtual std::string diag(unsigned int parentID);
@@ -295,7 +301,10 @@ private:
 class YieldAST : public ASTNode {
 
 public:
-    YieldAST() = default;
+    YieldAST() : ASTNode() { }
+
+    virtual void Accept( Genetics::MutationVisitor *visitor) const override;
+
     virtual std::string print();
     virtual std::string diag(unsigned int parentID);
     virtual std::string eval();
@@ -303,4 +312,3 @@ public:
 
 // ------------------------------------------------------------------------
 
-#endif //GLYNTH_AST_H

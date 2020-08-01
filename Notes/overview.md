@@ -25,7 +25,7 @@ Simple SFML Entity Scheduler Framework for realtime applications like games. Wor
 Tree Operations Which can be applied to nodes or tree to adjust their contents.
  - Mutator
      - Applies a mutation over a tree according to a scheme
- - Mutation
+ - MutationVisitor
      - Specific Change, e.g. adjust a number up or down by 1
  - Scheme
      - Probability and other constraints which limit the application of a mutation

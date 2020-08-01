@@ -17,11 +17,6 @@ class Lexer {
 
 public:
 
-//    Lexer(const std::string &str, int pos = 0) :
-//        lexingStr(str),
-//        lexingPos(pos) {
-//    }
-
     Lexer()=default;
 
     void SetSourceString(const std::string &S, unsigned int P = 0){
