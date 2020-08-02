@@ -4,18 +4,24 @@
 
 #include "MutationVisitor.h"
 #include <random>
+#include <iostream>
 
 namespace Genetics {
 
     // ----------------------------------------------------------------------
 
-    void RandomizeNumberMutation::Effect(NumberAST& node) {
-        /// Overwrites the existing value (number) with an integer generated from rand()
-        node.setNumber(rand());
+    // TODO MAYBE THIS SHOULD BE PART OF THE MUTAGEN RATHER THAN THE MUTATION?
+    bool RandomizeNumberMutation::Condition(const NumberAST* node) const  {
+        const float probability = 0.5;
+        return (((float)rand() / (float)RAND_MAX) <= probability);
     };
 
-    void RandomizeNumberMutation::Apply(NumberAST& node) {
-        if ( Condition(node) ) {
+    void RandomizeNumberMutation::Effect(NumberAST* node) {
+        node->setNumber( node->getNumber() + (  (rand() % 3)-1   ) );
+    };
+
+    void RandomizeNumberMutation::Visit_NumberAST(NumberAST* node)  {
+        if (Condition(node) ) {
             Effect(node);
         }
     };

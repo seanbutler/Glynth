@@ -6,15 +6,18 @@
 
 #include <random>
 
-class MutationVisitor;
+
 class ASTNode;
 
+
 namespace Genetics {
+
+    class MutationVisitor;
 
     class Mutagen {
         /// Passes over the tree and applies appropriate Mutations to each node
     public:
-        Mutagen() {}
+        Mutagen() : mutationVisitor(nullptr) {}
 
         void AddMutation(MutationVisitor* MV) {
             mutationVisitor = MV;
@@ -23,7 +26,7 @@ namespace Genetics {
         void Apply(ASTNode* node);
 
     public:
-        MutationVisitor *mutationVisitor;
+        MutationVisitor* mutationVisitor;
     };
 
 };

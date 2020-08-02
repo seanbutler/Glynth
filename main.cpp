@@ -23,7 +23,7 @@ int main(int argc, char **argv) {
     Engine::Engine engine(32, 32);
     Genetics::Evolution evolution;
 
-    srand(time(NULL));
+    srand(time(nullptr));
 
 //    MazeEnvironment* environment = new MazeEnvironment(32, 32);
 //    engine.entityScheduler.entities.push_back((Entity*)environment);
@@ -48,17 +48,25 @@ int main(int argc, char **argv) {
 //    playerAgentPtr->SetAlienVar(1, 2 + (int)rand()%4);
 
     Agent* tmpAgent2Ptr;
-    for (int n=0;n<4;n++){
-        tmpAgent2Ptr = new Agent( HurtfulAgentType());
+    for (int n=0;n<16;n++) {
+        tmpAgent2Ptr = new Agent(HurtfulAgentType());
         tmpAgent2Ptr->Compile("./Assets/agent2.c");
-        tmpAgent2Ptr->Assemble();
 
-        engine.entityScheduler.entities.push_back((Engine::Entity*)tmpAgent2Ptr);
+//        evolution.population.individuals.push_back(tmpAgent2Ptr);
+
+
+        evolution.MutateIndividual(tmpAgent2Ptr);
+
+        tmpAgent2Ptr->Assemble();
         tmpAgent2Ptr->SetAlienVar(0, 8 + (int)rand()%16);
         tmpAgent2Ptr->SetAlienVar(1, 8 + (int)rand()%16);
 
-        evolution.population.individuals.push_back(tmpAgent2Ptr);
+        engine.entityScheduler.entities.push_back((Engine::Entity*)tmpAgent2Ptr);
     }
+
+
+//    evolution.MutatePopulation(); // LETS TRY MUTATING EACH INDIVIDUAL IN SITU INSTEAD OF TEH WHOLE POPYLATION
+
 
 //    Agent* tmpAgent3Ptr;
 //    for (int n=0;n<4;n++){
@@ -69,7 +77,6 @@ int main(int argc, char **argv) {
 //
 //        evolution.population.individuals.push_back(tmpAgent3Ptr);
 //    }
-
 
 //    evolution.MutatePopulation();
 

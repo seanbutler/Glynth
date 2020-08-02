@@ -124,9 +124,9 @@ public:
         parser.SetTokens(lexer.GetTokenList());
         parser.parse();
 
-//        parser.OutputTreeDiagram(srcFilename);
-//        parser.OutputAsm(srcFilename);
-//        parser.OutputASTJSON(srcFilename);
+        parser.OutputTreeDiagram(srcFilename);
+        parser.OutputAsm(srcFilename);
+        parser.OutputASTJSON(srcFilename);
     }
 
     virtual void Assemble()

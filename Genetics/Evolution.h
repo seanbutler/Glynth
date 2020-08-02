@@ -7,6 +7,7 @@
 #include <vector>
 #include "../Simulation/Agent.h"
 #include "./Mutations/Mutagen.h"
+#include "Mutations/MutationVisitor.h"
 //#include "./Mutations/Mutator.h"
 
 // ----------------------------------------------------------------------
@@ -32,16 +33,9 @@ namespace Genetics {
 
 //        void InitialisePopulation() {}
 //        void RandomizePopulation()  {}
+//        void MutatePopulation();
 
-        void MutatePopulation()  {
-            Mutagen mutagen;
-//            RandomizeNumberMutation mutation;
-//            mutagen.AddMutation(&mutation);
-//
-//            for(auto I : population.individuals) {
-//                mutagen.Apply(I->parser.abstractSyntaxTree[0]);
-//            }
-        }
+        void MutateIndividual(Agent* agent);
 
 //        void AssessFitness()          {}
 

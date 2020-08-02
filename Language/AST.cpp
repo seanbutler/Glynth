@@ -50,14 +50,14 @@ static std::string getUniqueIdentifier(){
 // ---------------------------------------------------------------------------
 
 std::string ASTNode::print() {
-    std::string str = "";
+    std::string str;
     return str;
 }
 
 // ---------------------------------------------------------------------------
 
 
-void VariableDeclarationAST::Accept( Genetics::MutationVisitor *visitor) const {
+void VariableDeclarationAST::Accept( Genetics::MutationVisitor *visitor) {
     visitor->Visit_VariableDeclarationAST(this);
 };
 
@@ -87,7 +87,7 @@ std::string VariableDeclarationAST::eval() {
 
 // ---------------------------------------------------------------------------
 
-void IdentifierAST::Accept( Genetics::MutationVisitor *visitor) const {
+void IdentifierAST::Accept( Genetics::MutationVisitor *visitor) {
     visitor->Visit_IdentifierAST(this);
 };
 
@@ -134,7 +134,7 @@ std::string AlienVarAST::eval() {
 
 // ---------------------------------------------------------------------------
 
-void BlockAST::Accept( Genetics::MutationVisitor *visitor) const  {
+void BlockAST::Accept( Genetics::MutationVisitor *visitor)  {
     visitor->Visit_BlockAST(this);
 };
 
@@ -172,7 +172,7 @@ std::string BlockAST::eval() {
 
 // ---------------------------------------------------------------------------
 
-void OutputAST::Accept( Genetics::MutationVisitor *visitor) const {
+void OutputAST::Accept( Genetics::MutationVisitor *visitor) {
     visitor->Visit_OutputAST(this);
 };
 
@@ -203,7 +203,7 @@ std::string OutputAST::eval() {
 
 // ---------------------------------------------------------------------------
 
-void MoveAST::Accept( Genetics::MutationVisitor *visitor) const {
+void MoveAST::Accept( Genetics::MutationVisitor *visitor)  {
     visitor->Visit_MoveAST(this);
 };
 
@@ -236,7 +236,7 @@ std::string MoveAST::eval() {
 // ---------------------------------------------------------------------------
 
 
-void RandFuncAST::Accept( Genetics::MutationVisitor *visitor) const{
+void RandFuncAST::Accept( Genetics::MutationVisitor *visitor) {
     visitor->Visit_RandFuncAST(this);
 };
 
@@ -267,7 +267,7 @@ std::string RandFuncAST::eval() {
 
 // ---------------------------------------------------------------------------
 
-void IfStatementAST::Accept( Genetics::MutationVisitor *visitor) const {
+void IfStatementAST::Accept( Genetics::MutationVisitor *visitor)  {
     visitor->Visit_IfStatementAST(this);
 };
 
@@ -309,7 +309,7 @@ std::string IfStatementAST::eval() {
 
 // ---------------------------------------------------------------------------
 
-void WhileStatementAST::Accept( Genetics::MutationVisitor *visitor) const {
+void WhileStatementAST::Accept( Genetics::MutationVisitor *visitor)  {
     visitor->Visit_WhileStatementAST(this);
 };
 
@@ -359,7 +359,7 @@ std::string WhileStatementAST::eval() {
 
 // ---------------------------------------------------------------------------
 
-void AssignmentStatementAST::Accept( Genetics::MutationVisitor *visitor) const {
+void AssignmentStatementAST::Accept( Genetics::MutationVisitor *visitor)  {
     visitor->Visit_AssignmentStatementAST(this);
 };
 
@@ -394,10 +394,9 @@ std::string AssignmentStatementAST::eval() {
 
 // ---------------------------------------------------------------------------
 
-void NumberAST::Accept( Genetics::MutationVisitor *visitor) const {
+void NumberAST::Accept( Genetics::MutationVisitor *visitor) {
     visitor->Visit_NumberAST(this);
 };
-
 
 std::string NumberAST::print() {
     std::string str;
@@ -421,7 +420,7 @@ std::string NumberAST::eval() {
 
 // ---------------------------------------------------------------------------
 
-void BinOperandAST::Accept( Genetics::MutationVisitor *visitor) const {
+void BinOperandAST::Accept( Genetics::MutationVisitor *visitor)  {
     visitor->Visit_BinOperandAST(this);
 };
 
@@ -612,7 +611,7 @@ std::string BinOperandAST::eval() {
 
 // ---------------------------------------------------------------------------
 
-void YieldAST::Accept( Genetics::MutationVisitor *visitor) const {
+void YieldAST::Accept( Genetics::MutationVisitor *visitor) {
     visitor->Visit_YieldAST(this);
 };
 

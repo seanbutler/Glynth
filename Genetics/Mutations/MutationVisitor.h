@@ -29,23 +29,24 @@ namespace Genetics {
 
     class MutationVisitor {
 
-        /// Declares all the interfaces/methods for the mutators
+    /// Declares all the interfaces/methods for the mutators
 
     public:
 //        virtual void Visit(ASTNode* node) {};
 
-        virtual void Visit_IdentifierAST(const IdentifierAST* node) const  {};
-        virtual void Visit_VariableDeclarationAST(const VariableDeclarationAST* node) const {};
-        virtual void Visit_YieldAST(const YieldAST* node) const {};
-        virtual void Visit_BlockAST(const BlockAST* node)const {};
-        virtual void Visit_OutputAST(const OutputAST* node) const {};
-        virtual void Visit_MoveAST(const MoveAST* node) const{};
-        virtual void Visit_RandFuncAST(const RandFuncAST* node) const{};
-        virtual void Visit_IfStatementAST(const IfStatementAST* node) const{};
-        virtual void Visit_WhileStatementAST(const WhileStatementAST* node) const{};
-        virtual void Visit_BinOperandAST(const BinOperandAST* node)const {};
-        virtual void Visit_AssignmentStatementAST(const AssignmentStatementAST* node)const  {};
-        virtual void Visit_NumberAST(const NumberAST* node) const {};
+        virtual void Visit_IdentifierAST( IdentifierAST* node)   {};
+        virtual void Visit_VariableDeclarationAST( VariableDeclarationAST* node)  {};
+        virtual void Visit_YieldAST( YieldAST* node)  {};
+        virtual void Visit_BlockAST( BlockAST* node) {};
+        virtual void Visit_OutputAST( OutputAST* node)  {};
+        virtual void Visit_MoveAST( MoveAST* node) {};
+        virtual void Visit_RandFuncAST( RandFuncAST* node) {};
+        virtual void Visit_IfStatementAST( IfStatementAST* node) {};
+        virtual void Visit_WhileStatementAST( WhileStatementAST* node) {};
+        virtual void Visit_BinOperandAST( BinOperandAST* node) {};
+        virtual void Visit_AssignmentStatementAST( AssignmentStatementAST* node) {};
+
+        virtual void Visit_NumberAST(NumberAST* node) {};
 
 //        const virtual void Visit_AlienVarAST(const AlienVarAST* node) {};
 //        const virtual void Visit_OutputAST(const OutputAST* node) {};
@@ -54,15 +55,11 @@ namespace Genetics {
     };
 
     class RandomizeNumberMutation : public MutationVisitor {
+    public:
+        virtual bool Condition(const NumberAST* node) const;
+        virtual void Effect(NumberAST* node);
+        virtual void Visit_NumberAST(NumberAST* node) override;
 
-        // TODO MAYBE THIS SHOULD BE PART OF THE MUTAGEN RATHER THAN THE MUTATION
-        virtual bool Condition(NumberAST& node) {
-            const float probability = 0.5;
-            return ((rand() / RAND_MAX) >= probability);
-        };
-
-        virtual void Effect(NumberAST& node);
-        virtual void Apply(NumberAST& node);
     };
 
 };
