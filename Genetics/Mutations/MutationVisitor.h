@@ -43,10 +43,11 @@ namespace Genetics {
         virtual void Visit_RandFuncAST( RandFuncAST* node) {};
         virtual void Visit_IfStatementAST( IfStatementAST* node) {};
         virtual void Visit_WhileStatementAST( WhileStatementAST* node) {};
-        virtual void Visit_BinOperandAST( BinOperandAST* node) {};
         virtual void Visit_AssignmentStatementAST( AssignmentStatementAST* node) {};
+        virtual void Visit_ExpressionAST( AssignmentStatementAST* node) {};
 
-        virtual void Visit_NumberAST(NumberAST* node) {};
+        virtual void Visit_BinOperandAST( BinOperandAST* node){};
+        virtual void Visit_NumberAST(NumberAST* node){};
 
 //        const virtual void Visit_AlienVarAST(const AlienVarAST* node) {};
 //        const virtual void Visit_OutputAST(const OutputAST* node) {};
@@ -56,10 +57,49 @@ namespace Genetics {
 
     class RandomizeNumberMutation : public MutationVisitor {
     public:
+        RandomizeNumberMutation(const float P)
+        : probability(P) {
+        }
+
+    public:
         virtual bool Condition(const NumberAST* node) const;
         virtual void Effect(NumberAST* node);
         virtual void Visit_NumberAST(NumberAST* node) override;
 
+    private:
+        const float probability;
+    };
+
+
+    class RandomizeComparisonMutation : public MutationVisitor {
+    public:
+        RandomizeComparisonMutation(const float P)
+            : probability(P) {
+        }
+
+    public:
+        virtual bool Condition(const BinOperandAST* node) const;
+        virtual void Effect(BinOperandAST* node);
+        virtual void Visit_BinOperandAST(BinOperandAST* node) override;
+
+    private:
+        const float probability;
+
+    };
+
+    class RandomizeArithmeticMutation : public MutationVisitor {
+    public:
+        RandomizeArithmeticMutation(const float P)
+            : probability(P) {
+        }
+
+    public:
+        virtual bool Condition(const BinOperandAST* node) const;
+        virtual void Effect(BinOperandAST* node);
+        virtual void Visit_BinOperandAST(BinOperandAST* node) override;
+
+    private:
+        const float probability;
     };
 
 };

@@ -35,6 +35,7 @@ add_executable(Glynth main.cpp
         Genetics/Mutations/Mutagen.h
         Genetics/Mutations/Mutagen.cpp
         Utils/Maze.h
+
         )
 
 

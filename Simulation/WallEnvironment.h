@@ -20,9 +20,11 @@ public:
         rectangle.setFillColor(sf::Color(0, 0, 0));
     }
 
-    virtual ~WallEnvironment() {}
+    virtual ~WallEnvironment() {
 
-    virtual void Render(sf::RenderWindow *W){
+    }
+
+    virtual void Render(sf::RenderWindow *W) {
         for (unsigned int row = 0; row<height; row++) {
             for (unsigned int col = 0; col<width; col++) {
                 if (walls.occupied(col, row)) {

@@ -56,11 +56,9 @@ std::string ASTNode::print() {
 
 // ---------------------------------------------------------------------------
 
-
 void VariableDeclarationAST::Accept( Genetics::MutationVisitor *visitor) {
     visitor->Visit_VariableDeclarationAST(this);
 };
-
 
 std::string VariableDeclarationAST::print() {
     std::string str = "declaration: {";
@@ -174,7 +172,7 @@ std::string BlockAST::eval() {
 
 void OutputAST::Accept( Genetics::MutationVisitor *visitor) {
     visitor->Visit_OutputAST(this);
-};
+}
 
 std::string OutputAST::print() {
     std::string str;
@@ -205,7 +203,7 @@ std::string OutputAST::eval() {
 
 void MoveAST::Accept( Genetics::MutationVisitor *visitor)  {
     visitor->Visit_MoveAST(this);
-};
+}
 
 std::string MoveAST::print() {
     std::string str;

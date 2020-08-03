@@ -16,32 +16,31 @@ namespace Genetics {
 
     using Individual = Agent;
 
-// ----------------------------------------------------------------------
+    // ----------------------------------------------------------------------
 
     class Population {
     public:
         std::vector<Individual *> individuals;
     };
 
-// ----------------------------------------------------------------------
+    // ----------------------------------------------------------------------
 
     class Evolution {
 
     public:
-        Evolution()             {}
-        virtual ~Evolution()    {}
-
-//        void InitialisePopulation() {}
-//        void RandomizePopulation()  {}
-//        void MutatePopulation();
+        Evolution()                         {}
+        virtual ~Evolution()                {}
 
         void MutateIndividual(Agent* agent);
 
-//        void AssessFitness()          {}
+//        void InitialisePopulation()       {}
+//        void RandomizePopulation()        {}
+//        void MutatePopulation();
+//        void AssessFitness()              {}
 
 
     public:
-        Population population;
+//        Population population;
     };
 
 // ----------------------------------------------------------------------

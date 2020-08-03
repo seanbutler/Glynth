@@ -2,7 +2,7 @@ direction = 3;
 
 while(1)
 {
-    moves = 8;
+    moves = 4;
     while ( moves > 0 )
     {
         moves = moves - 1;

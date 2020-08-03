@@ -9,6 +9,7 @@
 #include "./Language/VirtualMachine.h"
 
 #include "./Engine/Engine.h"
+#include "./Engine/Entity.h"
 
 #include "./Simulation/Agent.h"
 #include "./Simulation/MazeEnvironment.h"
@@ -28,10 +29,11 @@ int main(int argc, char **argv) {
 //    MazeEnvironment* environment = new MazeEnvironment(32, 32);
 //    engine.entityScheduler.entities.push_back((Entity*)environment);
 
-//    WallEnvironment* environment1 = new WallEnvironment('V', 32, 32);
-//    engine.entityScheduler.entities.push_back((Entity*)environment1);
-//    WallEnvironment* environment2 = new WallEnvironment('H', 32, 32);
-//    engine.entityScheduler.entities.push_back((Entity*)environment2);
+    WallEnvironment* environment1 = new WallEnvironment('V', 32, 32);
+    engine.entityScheduler.entities.push_back((Engine::Entity*)environment1);
+
+    WallEnvironment* environment2 = new WallEnvironment('H', 32, 32);
+    engine.entityScheduler.entities.push_back((Engine::Entity*)environment2);
 
 //    ForestEnvironment* environment2 = new ForestEnvironment(32, 32);
 //    engine.entityScheduler.entities.push_back((Engine::Entity*)environment2);
@@ -48,13 +50,11 @@ int main(int argc, char **argv) {
 //    playerAgentPtr->SetAlienVar(1, 2 + (int)rand()%4);
 
     Agent* tmpAgent2Ptr;
-    for (int n=0;n<16;n++) {
+    for (int n=0;n<4;n++) {
         tmpAgent2Ptr = new Agent(HurtfulAgentType());
         tmpAgent2Ptr->Compile("./Assets/agent2.c");
 
 //        evolution.population.individuals.push_back(tmpAgent2Ptr);
-
-
         evolution.MutateIndividual(tmpAgent2Ptr);
 
         tmpAgent2Ptr->Assemble();
@@ -64,9 +64,7 @@ int main(int argc, char **argv) {
         engine.entityScheduler.entities.push_back((Engine::Entity*)tmpAgent2Ptr);
     }
 
-
 //    evolution.MutatePopulation(); // LETS TRY MUTATING EACH INDIVIDUAL IN SITU INSTEAD OF TEH WHOLE POPYLATION
-
 
 //    Agent* tmpAgent3Ptr;
 //    for (int n=0;n<4;n++){

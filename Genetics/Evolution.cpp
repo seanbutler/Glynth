@@ -8,13 +8,17 @@ namespace Genetics {
 
     void Evolution::MutateIndividual(Agent* agent)
     {
-        MutationVisitor* mutation = new RandomizeNumberMutation();
 
         Mutagen mutagen;
-        mutagen.AddMutation(mutation);
+//        mutagen.AddMutation(new RandomizeComparisonMutation(0.5));
+//        mutagen.AddMutation(new RandomizeNumberMutation(0.5));
+        mutagen.AddMutation(new RandomizeArithmeticMutation(0.5));
 
         for (auto node : agent->parser.abstractSyntaxTree ) {
             mutagen.Apply(node);
+            for( auto child : node->children) {
+                mutagen.Apply(child);
+            }
         }
     }
 

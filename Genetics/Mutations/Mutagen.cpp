@@ -10,10 +10,13 @@ namespace Genetics {
 
     void Mutagen::Apply(ASTNode *node) {
 
-        node->Accept(mutationVisitor);
-        for (ASTNode *c : node->children) {
-            c->Accept(mutationVisitor);
+        for(MutationVisitor* M : this->mutations) {
+            node->Accept(M);
+            for (auto *c : node->children) {
+                c->Accept(M);
+            }
         }
+
     }
 };
 

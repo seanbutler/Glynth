@@ -4,10 +4,11 @@
 
 #pragma once
 
-#include <uuid/uuid.h>
+//#include <uuid/uuid.h>
 #include <string>
 #include <vector>
 #include <sstream>
+#include <iostream>
 
 #include "Tokens.h"
 
@@ -33,7 +34,9 @@ public:
 
     virtual ~ASTNode() = default;
 
-    virtual void Accept( Genetics::MutationVisitor* visitor)  {};
+    virtual void Accept( Genetics::MutationVisitor* visitor)  {
+        std::cout << "Accept( Genetics::MutationVisitor* visitor)" << std::endl;
+    };
 
     unsigned int getID()            { return id; }
     std::string &getName()          { return name; }

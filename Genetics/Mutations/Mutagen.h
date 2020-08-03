@@ -17,16 +17,22 @@ namespace Genetics {
     class Mutagen {
         /// Passes over the tree and applies appropriate Mutations to each node
     public:
-        Mutagen() : mutationVisitor(nullptr) {}
+        Mutagen()
+//        : mutationVisitor(nullptr)
+        {
+
+        }
 
         void AddMutation(MutationVisitor* MV) {
-            mutationVisitor = MV;
+//            mutationVisitor = MV;
+            mutations.push_back(MV);
         }
 
         void Apply(ASTNode* node);
 
     public:
-        MutationVisitor* mutationVisitor;
+//        MutationVisitor* mutationVisitor;
+        std::vector<MutationVisitor*> mutations;
     };
 
 };
