@@ -32,6 +32,7 @@ namespace Genetics {
         virtual ~Evolution()                {}
 
         void MutateIndividual(Agent* agent);
+        void MutateNodeAndChildren(ASTNode* node, Mutagen& mutagen);
 
 //        void InitialisePopulation()       {}
 //        void RandomizePopulation()        {}
