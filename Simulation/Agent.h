@@ -120,7 +120,7 @@ public:
         lexer.SetSourceString(sourceString, 0);
         lexer.Scan();
         lexer.OutputTokenList(srcFilename);
-
+        lexer.OutputTokenListWithLines(srcFilename);
         parser.SetTokens(lexer.GetTokenList());
         parser.parse();
 
