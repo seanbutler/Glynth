@@ -1,0 +1,99 @@
+[
+
+
+{
+
+"assignment" : { 
+"identifier" : "max_moves",
+"number" : 4
+}
+
+}
+
+,
+
+
+{
+
+"assignment" : { 
+"identifier" : "spin",
+"number" : 1
+}
+
+}
+
+,
+
+
+{
+
+"assignment" : { 
+"identifier" : "direction",
+"number" : 0
+}
+
+}
+
+,
+
+
+{
+
+"while" : {
+"number" : 1},
+"block": {
+"assignment" : { 
+"identifier" : "moves",
+"identifier" : "max_moves"
+}
+,
+"while" : {
+"expression" : { 
+"operand" : ">",
+"lhs" : {
+"identifier" : "moves"
+},
+"rhs" : {
+"number" : 0
+}
+}
+},
+"block": {
+"assignment" : { 
+"identifier" : "moves",
+"expression" : { 
+"operand" : "-",
+"lhs" : {
+"identifier" : "moves"
+},
+"rhs" : {
+"number" : 1
+}
+}
+
+}
+,
+"move" : {
+"identifier" : "direction"}
+}
+,
+"assignment" : { 
+"identifier" : "direction",
+"expression" : { 
+"operand" : "+",
+"lhs" : {
+"identifier" : "direction"
+},
+"rhs" : {
+"identifier" : "spin"
+}
+}
+
+}
+}
+
+}
+
+
+]
+

@@ -99,6 +99,24 @@
 		<Unit filename="/home/sean/Projects/Glynth/Engine/Scheduler.h">
 			<Option target="Glynth"/>
 		</Unit>
+		<Unit filename="/home/sean/Projects/Glynth/Genetics/Evolution.cpp">
+			<Option target="Glynth"/>
+		</Unit>
+		<Unit filename="/home/sean/Projects/Glynth/Genetics/Evolution.h">
+			<Option target="Glynth"/>
+		</Unit>
+		<Unit filename="/home/sean/Projects/Glynth/Genetics/Mutations/Mutagen.cpp">
+			<Option target="Glynth"/>
+		</Unit>
+		<Unit filename="/home/sean/Projects/Glynth/Genetics/Mutations/Mutagen.h">
+			<Option target="Glynth"/>
+		</Unit>
+		<Unit filename="/home/sean/Projects/Glynth/Genetics/Mutations/MutationVisitor.cpp">
+			<Option target="Glynth"/>
+		</Unit>
+		<Unit filename="/home/sean/Projects/Glynth/Genetics/Mutations/MutationVisitor.h">
+			<Option target="Glynth"/>
+		</Unit>
 		<Unit filename="/home/sean/Projects/Glynth/Language/AST.cpp">
 			<Option target="Glynth"/>
 		</Unit>

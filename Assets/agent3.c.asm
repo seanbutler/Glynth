@@ -1,26 +1,34 @@
 
 # Assignment Statement 
+	PUSH 8
+	SAVE %max_moves
+
+# Assignment Statement 
+	PUSH 2
+	SAVE %spin
+
+# Assignment Statement 
 	PUSH 0
 	SAVE %direction
 
 # WHILE 
-:LBL_0008
+:LBL_0248
 	PUSH 1
-	BRF @LBL_0009
+	BRF @LBL_0249
 
 # WHILE BLOCK
 # BEGIN BLOCK
 
 # Assignment Statement 
-	PUSH 5
+	LOAD %max_moves
 	SAVE %moves
 
 # WHILE 
-:LBL_0010
+:LBL_0250
 	LOAD %moves
 	PUSH 0
 	GT
-	BRF @LBL_0011
+	BRF @LBL_0251
 
 # WHILE BLOCK
 # BEGIN BLOCK
@@ -36,15 +44,15 @@
 	MOVE 
 
 # END BLOCK
-	JMP @LBL_0010
-:LBL_0011
+	JMP @LBL_0250
+:LBL_0251
 
 # Assignment Statement 
 	LOAD %direction
-	PUSH 1
+	LOAD %spin
 	ADD
 	SAVE %direction
 
 # END BLOCK
-	JMP @LBL_0008
-:LBL_0009
+	JMP @LBL_0248
+:LBL_0249

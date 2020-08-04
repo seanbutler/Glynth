@@ -6,6 +6,34 @@ CMakeFiles/Glynth.dir/Engine/Engine.cpp.o: ../Engine/Engine.h
 CMakeFiles/Glynth.dir/Engine/Engine.cpp.o: ../Engine/Entity.h
 CMakeFiles/Glynth.dir/Engine/Engine.cpp.o: ../Engine/Scheduler.h
 
+CMakeFiles/Glynth.dir/Genetics/Evolution.cpp.o: ../Engine/Entity.h
+CMakeFiles/Glynth.dir/Genetics/Evolution.cpp.o: ../Genetics/Evolution.cpp
+CMakeFiles/Glynth.dir/Genetics/Evolution.cpp.o: ../Genetics/Evolution.h
+CMakeFiles/Glynth.dir/Genetics/Evolution.cpp.o: ../Genetics/Mutations/Mutagen.h
+CMakeFiles/Glynth.dir/Genetics/Evolution.cpp.o: ../Genetics/Mutations/MutationVisitor.h
+CMakeFiles/Glynth.dir/Genetics/Evolution.cpp.o: ../Language/AST.h
+CMakeFiles/Glynth.dir/Genetics/Evolution.cpp.o: ../Language/Assembler.h
+CMakeFiles/Glynth.dir/Genetics/Evolution.cpp.o: ../Language/Instructions.h
+CMakeFiles/Glynth.dir/Genetics/Evolution.cpp.o: ../Language/Lexer.h
+CMakeFiles/Glynth.dir/Genetics/Evolution.cpp.o: ../Language/Parser.h
+CMakeFiles/Glynth.dir/Genetics/Evolution.cpp.o: ../Language/Tokens.h
+CMakeFiles/Glynth.dir/Genetics/Evolution.cpp.o: ../Language/VirtualMachine.h
+CMakeFiles/Glynth.dir/Genetics/Evolution.cpp.o: ../Simulation/Agent.h
+CMakeFiles/Glynth.dir/Genetics/Evolution.cpp.o: ../Simulation/AlienVars.h
+
+CMakeFiles/Glynth.dir/Genetics/Mutations/Mutagen.cpp.o: ../Genetics/Mutations/Mutagen.cpp
+CMakeFiles/Glynth.dir/Genetics/Mutations/Mutagen.cpp.o: ../Genetics/Mutations/Mutagen.h
+CMakeFiles/Glynth.dir/Genetics/Mutations/Mutagen.cpp.o: ../Genetics/Mutations/MutationVisitor.h
+CMakeFiles/Glynth.dir/Genetics/Mutations/Mutagen.cpp.o: ../Language/AST.h
+CMakeFiles/Glynth.dir/Genetics/Mutations/Mutagen.cpp.o: ../Language/Tokens.h
+
+CMakeFiles/Glynth.dir/Genetics/Mutations/MutationVisitor.cpp.o: ../Genetics/Mutations/MutationVisitor.cpp
+CMakeFiles/Glynth.dir/Genetics/Mutations/MutationVisitor.cpp.o: ../Genetics/Mutations/MutationVisitor.h
+CMakeFiles/Glynth.dir/Genetics/Mutations/MutationVisitor.cpp.o: ../Language/AST.h
+CMakeFiles/Glynth.dir/Genetics/Mutations/MutationVisitor.cpp.o: ../Language/Tokens.h
+
+CMakeFiles/Glynth.dir/Language/AST.cpp.o: ../Genetics/Mutations/Mutagen.h
+CMakeFiles/Glynth.dir/Language/AST.cpp.o: ../Genetics/Mutations/MutationVisitor.h
 CMakeFiles/Glynth.dir/Language/AST.cpp.o: ../Language/AST.cpp
 CMakeFiles/Glynth.dir/Language/AST.cpp.o: ../Language/AST.h
 CMakeFiles/Glynth.dir/Language/AST.cpp.o: ../Language/Tokens.h
@@ -31,10 +59,14 @@ CMakeFiles/Glynth.dir/Language/Parser.cpp.o: ../Language/Tokens.h
 CMakeFiles/Glynth.dir/Language/VirtualMachine.cpp.o: ../Language/Instructions.h
 CMakeFiles/Glynth.dir/Language/VirtualMachine.cpp.o: ../Language/VirtualMachine.cpp
 CMakeFiles/Glynth.dir/Language/VirtualMachine.cpp.o: ../Language/VirtualMachine.h
+CMakeFiles/Glynth.dir/Language/VirtualMachine.cpp.o: ../Simulation/AlienVars.h
 
 CMakeFiles/Glynth.dir/main.cpp.o: ../Engine/Engine.h
 CMakeFiles/Glynth.dir/main.cpp.o: ../Engine/Entity.h
 CMakeFiles/Glynth.dir/main.cpp.o: ../Engine/Scheduler.h
+CMakeFiles/Glynth.dir/main.cpp.o: ../Genetics/Evolution.h
+CMakeFiles/Glynth.dir/main.cpp.o: ../Genetics/Mutations/Mutagen.h
+CMakeFiles/Glynth.dir/main.cpp.o: ../Genetics/Mutations/MutationVisitor.h
 CMakeFiles/Glynth.dir/main.cpp.o: ../Language/AST.h
 CMakeFiles/Glynth.dir/main.cpp.o: ../Language/Assembler.h
 CMakeFiles/Glynth.dir/main.cpp.o: ../Language/Instructions.h
@@ -43,6 +75,7 @@ CMakeFiles/Glynth.dir/main.cpp.o: ../Language/Parser.h
 CMakeFiles/Glynth.dir/main.cpp.o: ../Language/Tokens.h
 CMakeFiles/Glynth.dir/main.cpp.o: ../Language/VirtualMachine.h
 CMakeFiles/Glynth.dir/main.cpp.o: ../Simulation/Agent.h
+CMakeFiles/Glynth.dir/main.cpp.o: ../Simulation/AlienVars.h
 CMakeFiles/Glynth.dir/main.cpp.o: ../Simulation/ForestEnvironment.h
 CMakeFiles/Glynth.dir/main.cpp.o: ../Simulation/MazeEnvironment.h
 CMakeFiles/Glynth.dir/main.cpp.o: ../Simulation/WallEnvironment.h

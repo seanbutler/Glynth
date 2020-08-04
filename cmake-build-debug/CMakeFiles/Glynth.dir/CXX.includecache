@@ -6,3 +6,25 @@
 
 #IncludeRegexTransform: 
 
+/home/sean/Projects/Glynth/Language/Lexer.cpp
+Lexer.h
+/home/sean/Projects/Glynth/Language/Lexer.h
+
+/home/sean/Projects/Glynth/Language/Lexer.h
+Tokens.h
+/home/sean/Projects/Glynth/Language/Tokens.h
+string
+-
+vector
+-
+iostream
+-
+fstream
+-
+filesystem
+-
+tuple
+-
+
+/home/sean/Projects/Glynth/Language/Tokens.h
+
