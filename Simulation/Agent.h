@@ -121,7 +121,8 @@ public:
         lexer.Scan();
         lexer.OutputTokenList(srcFilename);
         lexer.OutputTokenListWithLines(srcFilename);
-        parser.SetTokens(lexer.GetTokenList());
+//        parser.SetTokens(lexer.GetTokenList());
+        parser.SetTokensWithLines(lexer.GetTokenListWithLines());
         parser.parse();
 
         parser.OutputTreeDiagram(srcFilename);

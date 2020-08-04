@@ -129,7 +129,8 @@ Token Lexer::ScanToken() {
             currentChar = lexingStr[lexingPos++];
         }
         --lexingPos;
-        tokens.push_back(std::make_pair(Token::NUMBER, numberStr));
+//        tokens.push_back(std::make_pair(Token::NUMBER, numberStr));
+        tokensWithLine.push_back(std::make_tuple(Token::NUMBER, numberStr, currentLine));
         return Token::NUMBER;
     }
 

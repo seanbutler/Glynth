@@ -43,6 +43,10 @@ public:
         return tokens;
     }
 
+    std::vector<std::tuple<Token, std::string, int>> GetTokenListWithLines() {
+        return tokensWithLine;
+    }
+
     void OutputTokenList(std::string filename) {
         std::ofstream tokenListFile;
         std::string tokenListFilename = std::filesystem::path(filename);
@@ -61,9 +65,13 @@ public:
         tokenListFile.open(tokenListFilename);
 //        for (auto it = tokensWithLine.begin(); it != tokensWithLine.end(); ++it) {
         for (int i = 0; i < tokensWithLine.size(); i++) {
-            tokenListFile << (int) std::get<2>(tokensWithLine[i])
-                        << "\t" << (int) std::get<0>(tokensWithLine[i])
-                        << "\t" <<  std::get<1>(tokensWithLine[i]) << std::endl;
+            tokenListFile
+                    << (int) std::get<0>(tokensWithLine[i])
+                    << "\t"
+                    << std::get<1>(tokensWithLine[i])
+                    << "\t"
+                    << (int) std::get<2>(tokensWithLine[i])
+                    << std::endl;
         }
         tokenListFile.close();
     }
@@ -73,7 +81,7 @@ private:
     unsigned int lexingPos = 0;
     unsigned int currentLine = 0;
     std::vector<std::pair<Token, std::string>> tokens;
-    std::vector<std::tuple<Token, std::string, unsigned int>> tokensWithLine;
+    std::vector<std::tuple<Token, std::string, int>> tokensWithLine;
 };
 
 
