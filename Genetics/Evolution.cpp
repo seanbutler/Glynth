@@ -10,15 +10,21 @@ namespace Genetics {
     {
 
         Mutagen mutagen;
-//        mutagen.AddMutation(new RandomizeComparisonMutation(0.5));
-//        mutagen.AddMutation(new RandomizeNumberMutation(0.5));
-        mutagen.AddMutation(new RandomizeArithmeticMutation(0.5));
+        mutagen.AddMutation(new RandomizeComparisonMutation(0.5));
+        //mutagen.AddMutation(new RandomizeNumberMutation(0.5));
+        //mutagen.AddMutation(new RandomizeArithmeticMutation(0.5));
 
         for (auto node : agent->parser.abstractSyntaxTree ) {
-            mutagen.Apply(node);
-            for( auto child : node->children) {
-                mutagen.Apply(child);
-            }
+            MutateNodeAndChildren(node, mutagen);
+        }
+    }
+
+    void Evolution::MutateNodeAndChildren(ASTNode *node, Mutagen& mutagen)
+    {
+        mutagen.Apply(node);
+        for(auto node : node->children)
+        {
+            MutateNodeAndChildren(node, mutagen);
         }
     }
 
