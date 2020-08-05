@@ -12,6 +12,40 @@
 
 // ----------------------------------------------------------------------
 
+void Parser::ReportIssue(const std::string & typeStr,
+                         const std::string & problemStr,
+                         const std::string & contextStr,
+                         const std::string & expectedStr) {
+
+    std::cerr << "PARSER " << typeStr
+              << " Line (" << std::get<2>(currentTokenWithLine) << ") - "
+              << problemStr;
+
+    if ( contextStr != "" ) {
+        std::cerr << " in " << contextStr;
+    }
+
+    if ( std::get<1>(currentTokenWithLine) != "") {
+        std::cerr << ". Near \"" << std::get<1>(currentTokenWithLine) << "\"";
+    }
+
+    if ( expectedStr != "" ) {
+        std::cerr << ", expected " << expectedStr;
+    }
+
+    std::cerr << "." << std::endl;
+}
+
+void Parser::ReportError(const std::string & problemStr, const std::string & contextStr, const std::string & expectedStr ) {
+    ReportIssue("ERROR", problemStr, contextStr, expectedStr);
+    exit(0);
+}
+
+void Parser::ReportWarning(const std::string & problemStr, const std::string & contextStr, const std::string & expectedStr ) {
+    ReportIssue("WARNING", problemStr, contextStr, expectedStr);
+}
+
+
 bool Parser::parse() {
 
     getNextToken();
@@ -40,7 +74,6 @@ ASTNode *Parser::ParseStatement() {
                 << (int) std::get<2>(currentTokenWithLine) << " "
                 << std::endl;
 
-//    switch (currentToken.first)
     switch (std::get<0>(currentTokenWithLine)) {
 
         case Token::KEYWORD_YIELD: {
@@ -86,21 +119,13 @@ ASTNode *Parser::ParseStatement() {
             if (aheadTokenType == Token::SYM_ASSIGN) {
                 return ParseAssignmentStatement();
             } else {
-                std::cerr << "WARNING : Parser::ParseStatement() - Bare Identifier Outside Expression or Assignment "
-                            << (int) std::get<0>(currentTokenWithLine) << " "
-                            << std::get<1>(currentTokenWithLine)
-                            << std::endl;
+                ReportError("Identifier Outside Expression or Assignment" );
                 return nullptr;
             }
         }
 
         case Token::SYM_RBRACES: {
-            std::cerr << "WARNING : Parser::ParseStatement() - Skipping Extra Braces "
-//                      << (int) currentToken.first << " "
-//                      << currentToken.second
-                        << (int) std::get<0>(currentTokenWithLine) << " "
-                        << std::get<1>(currentTokenWithLine)
-                        << std::endl;
+            ReportWarning("Skipping Extra Braces" );
             return nullptr;
         }
 
@@ -113,17 +138,16 @@ ASTNode *Parser::ParseStatement() {
 //        }
 
         case Token::END_OF_FILE: {
-            std::cerr << "WARNING : Parser::ParseStatement() - EOF " << std::endl;
+            ReportWarning("End Of File" );
+
+//            std::cerr << "PARSER WARNING : Parser::ParseStatement() - EOF "
+//                    << " at Line " << std::get<2>(currentTokenWithLine)
+//                    << std::endl;
             return nullptr;
         }
 
         default: {
-            std::cerr << "ERROR : Parser::ParseStatement() - Unrecognised Token "
-//                      << (int) currentToken.first << " "
-//                      << currentToken.second
-                        << (int) std::get<0>(currentTokenWithLine) << " "
-                        << std::get<1>(currentTokenWithLine)
-                        << std::endl;
+            ReportError("Unrecognised Token" );
             return nullptr;
         }
     }
@@ -154,15 +178,20 @@ ASTNode *Parser::ParseVariableDeclaration() {
         ident = ParseIdentifier();
         var = new VariableDeclarationAST(ident);
     } else {
-        std::cerr << "ERROR : Parser::ParseVariableDeclaration() - Unrecognised Token in Variable Declaration Found "
-                  << std::get<1>(currentTokenWithLine) << " Expected Token::IDENTIFIER" << std::endl;
+        ReportError("Unrecognised Token",  "Variable Declaration", "Only Alpha then Alpha Numeric allowed");
+
+//        std::cerr << "ERROR : Parser::ParseVariableDeclaration() - Unrecognised Token in Variable Declaration Found "
+//                  << std::get<1>(currentTokenWithLine) << " Expected Token::IDENTIFIER" << std::endl;
     }
 
     getNextToken();
 
     if (std::get<0>(currentTokenWithLine) != Token::SYM_SEMICOLON) {
-        std::cerr << "ERROR Parser::ParseVariableDeclaration() - Unrecognised Token in Variable Declaration Found "
-                  << std::get<1>(currentTokenWithLine) << " Expected ;" << std::endl;
+
+        ReportError("Unrecognised Token",  "Variable Declaration", ";");
+
+//        std::cerr << "ERROR Parser::ParseVariableDeclaration() - Unrecognised Token in Variable Declaration Found "
+//                  << std::get<1>(currentTokenWithLine) << " Expected ;" << std::endl;
     }
 
     return var;
@@ -202,8 +231,18 @@ ASTNode *Parser::ParseOutput() {
     getNextToken();
 
     if (std::get<0>(currentTokenWithLine) != Token::SYM_ASSIGN) {
-        std::cerr << "ERROR Parser::ParseOutput() - Unrecognised Token Before Statement Expression, Expected Assign."
-                  << std::endl;
+//        std::cerr << "ERROR Parser::ParseOutput() - Unrecognised Token Before Statement Expression, Expected Assign."
+//                  << std::endl;
+
+//        std::cerr << "PARSER ERROR : Parser::ParseOutput() - Unrecognised Token \""
+//                    << std::get<1>(currentTokenWithLine) << "\""
+//                    << "Before Statement Expression, Expected Assign \""
+//                    << " at Line " << std::get<2>(currentTokenWithLine)
+//                    << std::endl;
+
+        ReportError("Unrecognised Token",  "Before Statement Expression", "Expected Assign");
+
+
         return nullptr;
     }
 
@@ -231,8 +270,18 @@ ASTNode *Parser::ParseMove() {
     getNextToken();
 
     if (std::get<0>(currentTokenWithLine) != Token::SYM_LPAREN) {
-        std::cerr << "ERROR Parser::ParseMove() - Unrecognised Token Before Move Expression, Expected Left Parenthesis."
-                  << std::endl;
+//        std::cerr << "ERROR Parser::ParseMove() - Unrecognised Token Before Move Expression, Expected Left Parenthesis."
+//                  << std::endl;
+
+//        std::cerr << "PARSER ERROR Parser::ParseMove() - Unrecognised Token \""
+//                  << std::get<1>(currentTokenWithLine) << "\""
+//                  << "Before Statement Expression, Left Parenthesis \""
+//                  << " at Line " << std::get<2>(currentTokenWithLine)
+//                  << std::endl;
+
+        ReportError("Unrecognised Token",  "Before Statement Expression, Left Parenthesis");
+
+
         return nullptr;
     }
 
@@ -262,8 +311,18 @@ ASTNode *Parser::ParseRandFunc() {
     getNextToken();
 
     if (std::get<0>(currentTokenWithLine) != Token::SYM_LPAREN) {
-        std::cerr << "ERROR Parser::ParseRandFunc() - Unrecognised Token Before Move Expression, Expected Left Parenthesis."
-                  << std::endl;
+//        std::cerr << "ERROR Parser::ParseRandFunc() - Unrecognised Token Before Statement Expression, Expected Left Parenthesis."
+//                  << std::endl;
+
+//        std::cerr << "PARSER ERROR Parser::ParseRandFunc() - Unrecognised Token \""
+//                  << std::get<1>(currentTokenWithLine) << "\""
+//                  << "Before Statement Expression, Left Parenthesis \""
+//                  << " at Line " << std::get<2>(currentTokenWithLine)
+//                  << std::endl;
+
+        ReportError("Unrecognised Token",  "Before Statement Expression, Left Parenthesis");
+
+
         return nullptr;
     }
 
@@ -291,8 +350,11 @@ ASTNode *Parser::ParseIfStatement() {
     getNextToken();
 
     if (std::get<0>(currentTokenWithLine) != Token::SYM_LPAREN) {
-        std::cerr << "ERROR Parser::ParseIfStatement() -  Unrecognised Token Before If Statement Expression, Expected Left Parenthesis."
-                << std::endl;
+//        std::cerr << "ERROR Parser::ParseIfStatement() -  Unrecognised Token Before If Statement Expression, Expected Left Parenthesis."
+//                << std::endl;
+
+        ReportError("Unrecognised Token",  "Before If Statement Expression", "Left Parenthesis");
+
         return nullptr;
     }
 
@@ -310,8 +372,11 @@ ASTNode *Parser::ParseIfStatement() {
     getNextToken();
 
     if (std::get<0>(currentTokenWithLine) != Token::SYM_LBRACES) {
-        std::cerr << "ERROR Parser::ParseIfStatement() - Unrecognised Token Before If Statement Block, Expected Left Braces '{'."
-                << std::endl;
+//        std::cerr << "ERROR Parser::ParseIfStatement() - Unrecognised Token Before If Statement Block, Expected Left Braces '{'."
+//                << std::endl;
+
+        ReportError("Unrecognised Token",  "Before If Statement Block", "Left Braces");
+
         return nullptr;
     }
 
@@ -320,8 +385,11 @@ ASTNode *Parser::ParseIfStatement() {
     IfStatementAST *ifStatement = new IfStatementAST(cond, block);
 
     if (std::get<0>(currentTokenWithLine) != Token::SYM_RBRACES) {
-        std::cerr << "ERROR Parser::ParseIfStatement() - Unrecognised Token After If Statement Block, Expected Left Braces '}'."
-                << std::endl;
+//        std::cerr << "ERROR Parser::ParseIfStatement() - Unrecognised Token After If Statement Block, Expected Left Braces '}'."
+//                << std::endl;
+
+        ReportError("Unrecognised Token",  "After If Statement Block", "Left Braces");
+
         return nullptr;
     }
 
@@ -341,8 +409,11 @@ ASTNode *Parser::ParseWhileStatement() {
     getNextToken();
 
     if (std::get<0>(currentTokenWithLine) != Token::SYM_LPAREN) {
-        std::cerr << "ERROR Parser::ParseWhileStatement() -  Unrecognised Token Before While Statement Expression, Expected Left Parenthesis."
-                << std::endl;
+//        std::cerr << "ERROR Parser::ParseWhileStatement() -  Unrecognised Token Before While Statement Expression, Expected Left Parenthesis."
+//                << std::endl;
+
+        ReportError("Unrecognised Token",  "Before While Statement Expression", "Left Parenthesis");
+
         return nullptr;
     }
 
@@ -360,8 +431,11 @@ ASTNode *Parser::ParseWhileStatement() {
     getNextToken();
 
     if (std::get<0>(currentTokenWithLine) != Token::SYM_LBRACES) {
-        std::cerr << "ERROR Parser::ParseWhileStatement() - Unrecognised Token Before While Statement Block \'"
-                  << std::get<1>(currentTokenWithLine) << "\'Expected Left Braces '}'." << std::endl;
+//        std::cerr << "ERROR Parser::ParseWhileStatement() - Unrecognised Token Before While Statement Block \'"
+//                  << std::get<1>(currentTokenWithLine) << "\'Expected Left Braces '}'." << std::endl;
+
+        ReportError("Unrecognised Token",  "Before While Statement Block", "Left Braces '{'");
+
         return nullptr;
     }
 
@@ -370,8 +444,11 @@ ASTNode *Parser::ParseWhileStatement() {
     WhileStatementAST *whileStatement = new WhileStatementAST(cond, block);
 
     if (std::get<0>(currentTokenWithLine) != Token::SYM_RBRACES) {
-        std::cerr << "ERROR Parser::ParseWhileStatement() - Unrecognised Token After While Statement Block \'"
-                  << std::get<1>(currentTokenWithLine) << "\'Expected Right Braces '}'." << std::endl;
+//        std::cerr << "ERROR Parser::ParseWhileStatement() - Unrecognised Token After While Statement Block \'"
+//                  << std::get<1>(currentTokenWithLine) << "\'Expected Right Braces '}'." << std::endl;
+
+        ReportError("Unrecognised Token",  "After While Statement Block", "Right Braces '}'");
+
         return nullptr;
     }
 
@@ -382,11 +459,11 @@ ASTNode *Parser::ParseWhileStatement() {
 
 ASTNode *Parser::ParseExpression() {
 
-    std::cout << "Parser::ParseExpression() currentToken = "
-            << (int) std::get<0>(currentTokenWithLine) << " "
-            <<  std::get<1>(currentTokenWithLine) << " "
-            << (int) std::get<2>(currentTokenWithLine)
-              << std::endl;
+//    std::cout << "Parser::ParseExpression() currentToken = "
+//            << (int) std::get<0>(currentTokenWithLine) << " "
+//            <<  std::get<1>(currentTokenWithLine) << " "
+//            << (int) std::get<2>(currentTokenWithLine)
+//              << std::endl;
 
     std::stack<ASTNode *> valueStack;
     std::stack<Token> opStack;
@@ -476,7 +553,9 @@ ASTNode *Parser::ParseExpression() {
                 if (!valueStack.empty()) {
                     return valueStack.top();
                 } else {
-                    std::cout << "empty expression!" << std::endl;
+//                    std::cout << "empty expression!" << std::endl;
+                    ReportWarning("Empty Expression. Which is weird, though possibly intentional");
+
                     return nullptr;
                 }
                 break;
@@ -484,11 +563,14 @@ ASTNode *Parser::ParseExpression() {
 
             default: {
                 // anything else means an error of some kind, perhaps?
-                std::cerr << "ERROR : Unrecognised Token in Expression got ("
-                          << (int) std::get<0>(currentTokenWithLine) << ") \'"
-                          << std::get<1>(currentTokenWithLine)
-                          << "\' expected identifier, operand or number."
-                          << std::endl;
+//                std::cerr << "ERROR : Unrecognised Token in Expression got ("
+//                          << (int) std::get<0>(currentTokenWithLine) << ") \'"
+//                          << std::get<1>(currentTokenWithLine)
+//                          << "\' expected identifier, operand or number."
+//                          << std::endl;
+
+                ReportError("Unrecognised Token", "In Expression");
+
                 return nullptr;
             }
         }
@@ -510,9 +592,12 @@ ASTNode *Parser::ParseParenExpression() {
     expr = ParseExpression();
 
     if (std::get<0>(currentTokenWithLine) != Token::SYM_RPAREN) {
-        std::cerr << "ERROR : Parser::ParseParenExpression - Unrecognised Token after Expression got "
-                  << (int) std::get<0>(currentTokenWithLine) << ") "
-                  << std::get<2>(currentTokenWithLine) << " expected \')\'." << std::endl;
+//        std::cerr << "ERROR : Parser::ParseParenExpression - Unrecognised Token after Expression got "
+//                  << (int) std::get<0>(currentTokenWithLine) << ") "
+//                  << std::get<2>(currentTokenWithLine) << " expected \')\'." << std::endl;
+
+        ReportError("Unrecognised Token", "after Expression", "Expected Right Parenthesis");
+
     }
 
     getNextToken();  // eat ')'
@@ -534,9 +619,12 @@ ASTNode *Parser::ParseAssignmentStatement() {
 
     // parse assignment operator
     if (std::get<0>(currentTokenWithLine) != Token::SYM_ASSIGN) {
-        std::cerr
-                << "ERROR Parser::ParseAssignmentStatement Unrecognised Token in Assignment Statement, Expected Assignment."
-                << std::endl;
+//        std::cerr
+//                << "ERROR Parser::ParseAssignmentStatement Unrecognised Token in Assignment Statement, Expected Assignment."
+//                << std::endl;
+
+        ReportError("Unrecognised Token", "in Assignment Statement", "Expected Assignment '='.");
+
         return nullptr;
     }
 

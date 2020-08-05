@@ -72,12 +72,30 @@ public:
     ASTNode* ParseTurn();
     ASTNode* ParseRandFunc();
 
+
+
     bool OutputTreeDiagram(std::string filename);
     bool OutputASTJSON(std::string filename);
     bool OutputAsm(std::string filename);
     std::string GetAsm();
 
     std::vector<ASTNode *> abstractSyntaxTree;
+
+
+private:
+    void ReportIssue(const std::string & typeStr,
+                     const std::string & problemStr,
+                     const std::string & contextStr = "",
+                     const std::string & expectedStr = "");
+
+    void ReportError(const std::string & problemStr,
+                     const std::string & contextStr = "",
+                     const std::string & expectedStr = "" );
+
+    void ReportWarning(const std::string & problemStr,
+                       const std::string & contextStr = "",
+                       const std::string & expectedStr = "");
+
 };
 
 //#endif //GLYNTH_PARSER_H

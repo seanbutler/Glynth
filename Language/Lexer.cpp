@@ -238,7 +238,8 @@ Token Lexer::ScanToken() {
                 ++lexingPos;
                 return Token::OP_NE;
             }
-            std::cerr << "ERROR Tokenizer Error at Line " << currentLine << " Expected Character " << currentChar << std::endl;
+
+            std::cerr << "TOKENIZER ERROR at Line " << currentLine << " Got " << currentChar << std::endl;
             return Token::ERROR;
         }
 
@@ -278,7 +279,7 @@ Token Lexer::ScanToken() {
 //        }
 
         default: {
-            std::cerr << "ERROR Tokenizer Error at Line " << currentLine << " Expected Character " << currentChar << std::endl;
+            std::cerr << "TOKENIZER WARNING Line (" << currentLine << ") Possibly '" << currentChar << "'" << std::endl;
             return Token::ERROR;
         }
     }

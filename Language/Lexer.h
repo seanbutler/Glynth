@@ -79,7 +79,7 @@ public:
 private:
     std::string lexingStr;
     unsigned int lexingPos = 0;
-    unsigned int currentLine = 0;
+    unsigned int currentLine = 1;
     std::vector<std::pair<Token, std::string>> tokens;
     std::vector<std::tuple<Token, std::string, int>> tokensWithLine;
 };
