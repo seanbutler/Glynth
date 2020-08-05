@@ -67,24 +67,28 @@ int main(int argc, char **argv) {
         }
 
 
-        engine.entityScheduler.entities.push_back((Engine::Entity*)tmpAgent2Ptr);
+
+        engine.entityScheduler.entities.push_back((Engine::Entity*)copy);
+
+
+
     }
 
 //    evolution.MutatePopulation(); // LETS TRY MUTATING EACH INDIVIDUAL IN SITU INSTEAD OF TEH WHOLE POPYLATION
 
-    Agent* tmpAgent3Ptr;
-    for (int n=0;n<16;n++){
-        tmpAgent3Ptr = new Agent(HealingAgentType());
-        tmpAgent3Ptr->Compile("../Assets/agent3.c");
-
-        evolution.MutateIndividual(tmpAgent3Ptr);
-
-        tmpAgent3Ptr->Assemble();
-        tmpAgent3Ptr->SetAlienVar(0, 8 + (int)rand()%16);
-        tmpAgent3Ptr->SetAlienVar(1, 8 + (int)rand()%16);
-
-        engine.entityScheduler.entities.push_back((Engine::Entity*)tmpAgent3Ptr);
-    }
+    //Agent* tmpAgent3Ptr;
+    //for (int n=0;n<16;n++){
+    //    tmpAgent3Ptr = new Agent(HealingAgentType());
+    //    tmpAgent3Ptr->Compile("../Assets/agent3.c");
+//
+    //    evolution.MutateIndividual(tmpAgent3Ptr);
+//
+    //    tmpAgent3Ptr->Assemble();
+    //    tmpAgent3Ptr->SetAlienVar(0, 8 + (int)rand()%16);
+    //    tmpAgent3Ptr->SetAlienVar(1, 8 + (int)rand()%16);
+//
+    //    engine.entityScheduler.entities.push_back((Engine::Entity*)tmpAgent3Ptr);
+    //}
 
 //    evolution.MutatePopulation();
 
