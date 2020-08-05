@@ -68,11 +68,11 @@ bool Parser::parse() {
 
 ASTNode *Parser::ParseStatement() {
 
-    std::cout << "\nParser::ParseStatement "
-                << (int) std::get<0>(currentTokenWithLine) << " "
-                << std::get<1>(currentTokenWithLine) << " "
-                << (int) std::get<2>(currentTokenWithLine) << " "
-                << std::endl;
+//    std::cout << "\nParser::ParseStatement "
+//                << (int) std::get<0>(currentTokenWithLine) << " "
+//                << std::get<1>(currentTokenWithLine) << " "
+//                << (int) std::get<2>(currentTokenWithLine) << " "
+//                << std::endl;
 
     switch (std::get<0>(currentTokenWithLine)) {
 
@@ -487,11 +487,11 @@ ASTNode *Parser::ParseExpression() {
                 break;
             }
 
-//            case Token::SYM_LPAREN: {
-//                valueStack.push(ParseParenExpression());
+            case Token::SYM_LPAREN: {
+                valueStack.push(ParseParenExpression());
 //                getNextToken();
-//                break;
-//            }
+                break;
+            }
 
             case Token::OP_GT:
             case Token::OP_GTE:
@@ -503,8 +503,6 @@ ASTNode *Parser::ParseExpression() {
             case Token::OP_SUB:
             case Token::OP_MUL:
             case Token::OP_DIV: {
-//                std::cout << "Parser::ParseExpression() op = " << (int) currentToken.first << " " << currentToken.second
-//                          << std::endl;
                 if (!opStack.empty()) {
                     // get the last operator
                     Token op = opStack.top();
@@ -529,7 +527,8 @@ ASTNode *Parser::ParseExpression() {
             }
 
             case Token::SYM_RPAREN:
-            case Token::SYM_SEMICOLON: {
+            case Token::SYM_SEMICOLON:
+            {
                 // TODO endof the whole expression so unwind the stack and return?
 
                 while (!opStack.empty()) {
@@ -585,20 +584,12 @@ ASTNode *Parser::ParseParenExpression() {
 
     getNextToken();  // eat '('
 
-//    std::cout << "Parser::ParseParenExpression currentToken = " << (int) currentToken.first << " "
-//              << currentToken.second << std::endl;
-
     ASTNode *expr = nullptr;
     expr = ParseExpression();
 
-    if (std::get<0>(currentTokenWithLine) != Token::SYM_RPAREN) {
-//        std::cerr << "ERROR : Parser::ParseParenExpression - Unrecognised Token after Expression got "
-//                  << (int) std::get<0>(currentTokenWithLine) << ") "
-//                  << std::get<2>(currentTokenWithLine) << " expected \')\'." << std::endl;
-
-        ReportError("Unrecognised Token", "after Expression", "Expected Right Parenthesis");
-
-    }
+//    if (std::get<0>(currentTokenWithLine) != Token::SYM_RPAREN) {
+//        ReportError("Unrecognised Token", "after Expression", "Expected Right Parenthesis");
+//    }
 
     getNextToken();  // eat ')'
     return expr;

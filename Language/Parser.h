@@ -62,7 +62,6 @@ public:
     ASTNode* ParseWhileStatement();
     ASTNode* ParseIfStatement();
     ASTNode* ParseNumber();
-//    IdentifierAST* ParseIdentifier();
     ASTNode* ParseIdentifier();
     ASTNode* ParseExpression();
     ASTNode* ParseParenExpression();

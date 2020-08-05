@@ -36,7 +36,7 @@ public:
     }
 
     virtual void Update(float deltaTime) {
-        std::cout << "Update MazeEnvironment" << std::endl;
+//        std::cout << "Update MazeEnvironment" << std::endl;
     };
 
 private:
