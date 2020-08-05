@@ -52,13 +52,20 @@ int main(int argc, char **argv) {
     Agent* tmpAgent2Ptr;
     for (int n=0;n<16;n++) {
         tmpAgent2Ptr = new Agent(HurtfulAgentType());
-        tmpAgent2Ptr->Compile("./Assets/agent2.c");
+        tmpAgent2Ptr->Compile("../Assets/agent2.c");
 
         evolution.MutateIndividual(tmpAgent2Ptr);
 
         tmpAgent2Ptr->Assemble();
         tmpAgent2Ptr->SetAlienVar(0, 8 + (int)rand()%16);
         tmpAgent2Ptr->SetAlienVar(1, 8 + (int)rand()%16);
+
+        Agent* copy = new Agent(*tmpAgent2Ptr);
+        for(int i = 0; i < tmpAgent2Ptr->parser.abstractSyntaxTree.size(); i++)
+        {
+            copy->parser.abstractSyntaxTree[i] = new ASTNode(*tmpAgent2Ptr->parser.abstractSyntaxTree[i]);
+        }
+
 
         engine.entityScheduler.entities.push_back((Engine::Entity*)tmpAgent2Ptr);
     }
@@ -68,7 +75,7 @@ int main(int argc, char **argv) {
     Agent* tmpAgent3Ptr;
     for (int n=0;n<16;n++){
         tmpAgent3Ptr = new Agent(HealingAgentType());
-        tmpAgent3Ptr->Compile("./Assets/agent3.c");
+        tmpAgent3Ptr->Compile("../Assets/agent3.c");
 
         evolution.MutateIndividual(tmpAgent3Ptr);
 

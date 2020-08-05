@@ -28,13 +28,47 @@ namespace Genetics {
         }
     }
 
-//    void Evolution::MutatePopulation() {
-//        Mutagen mutagen;
-//        MutationVisitor* mutation = new RandomizeNumberMutation();
-//        mutagen.AddMutation(mutation);
-//
-//        for(auto I : population.individuals) {
-//            mutagen.Apply(I->parser.abstractSyntaxTree[0]);
-//        }
-//    }
+    void Evolution::AddIndividual(Agent *newIndividual)
+    {
+        population.emplace_back(newIndividual);
+    }
+
+    std::vector<Agent *> Evolution::GetPopulationAgents()
+    {
+        std::vector<Agent*> returnVec;
+        for(auto I : population) {
+            returnVec.push_back(I.agent);
+        }
+        return returnVec;
+    }
+
+    void Evolution::SetFitnessFunction(const std::function<float(Agent*)>& function)
+    {
+        fitnessFunction = function;
+    }
+
+    void Evolution::MutatePopulation() {
+
+        for(auto I : population) {
+            MutateIndividual(I.agent);
+            I.scored = false;
+        }
+    }
+
+    void Evolution::AssessFitness()
+    {
+        for(auto I : population) {
+            if(I.scored) continue;
+            // Make a copy of the agents state so it can be reverted after fitness test
+            auto varsCopy = I.agent->alienVars.values;
+            I.fitness = fitnessFunction(I.agent);
+            I.agent->alienVars.values = varsCopy;
+            I.scored = true;
+        }
+
+        // Order the population from most to least fit
+        std::sort(population.begin(), population.end(), [](Individual a, Individual b) {
+            return a.fitness > b.fitness;
+        });
+    }
 }

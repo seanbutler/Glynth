@@ -14,13 +14,16 @@
 
 namespace Genetics {
 
-    using Individual = Agent;
 
     // ----------------------------------------------------------------------
 
-    class Population {
+    struct Individual {
     public:
-        std::vector<Individual *> individuals;
+        explicit Individual(Agent* agt) : agent(agt){};
+
+        Agent* agent = nullptr;
+        float fitness = 0;
+        bool scored = false;
     };
 
     // ----------------------------------------------------------------------
@@ -28,20 +31,27 @@ namespace Genetics {
     class Evolution {
 
     public:
-        Evolution()                         {}
-        virtual ~Evolution()                {}
+        Evolution() {}
 
-        void MutateIndividual(Agent* agent);
-        void MutateNodeAndChildren(ASTNode* node, Mutagen& mutagen);
+        virtual ~Evolution() {}
+
+        void MutateIndividual(Agent *agent);
+
+        void MutateNodeAndChildren(ASTNode *node, Mutagen &mutagen);
 
 //        void InitialisePopulation()       {}
 //        void RandomizePopulation()        {}
-//        void MutatePopulation();
-//        void AssessFitness()              {}
+        void MutatePopulation();
+        void AssessFitness();
 
+        void AddIndividual(Agent *newIndividual);
+        void SetFitnessFunction(const std::function<float(Agent*)> &function);
 
-    public:
-//        Population population;
+        std::vector<Agent*> GetPopulationAgents();
+
+    private:
+        std::function<float(Agent*)> fitnessFunction;
+        std::vector<Individual> population;
     };
 
 // ----------------------------------------------------------------------
