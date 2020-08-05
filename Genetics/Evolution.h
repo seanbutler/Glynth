@@ -39,6 +39,9 @@ namespace Genetics {
 
         void MutateNodeAndChildren(ASTNode *node, Mutagen &mutagen);
 
+        Agent* CopyAgent(Agent* original);
+        ASTNode* CopyNodeAndChildren(ASTNode*& original, ASTNode*& copy);
+
 //        void InitialisePopulation()       {}
 //        void RandomizePopulation()        {}
         void MutatePopulation();

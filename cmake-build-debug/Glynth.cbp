@@ -4,181 +4,166 @@
 	<Project>
 		<Option title="Glynth"/>
 		<Option makefile_is_custom="1"/>
-		<Option compiler="gcc"/>
-		<Option virtualFolders="CMake Files\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\..\;CMake Files\..\..\..\..\;CMake Files\..\..\..\..\usr\;CMake Files\..\..\..\..\usr\lib\;CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\;CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\;CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\SFML\;"/>
+		<Option compiler="clang"/>
+		<Option virtualFolders="CMake Files\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="/home/sean/Projects/Glynth/cmake-build-debug"/>
+				<Option working_dir="/home/toby/Desktop/Glynth/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/home/sean/Projects/Glynth/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/sean/Projects/Glynth/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/home/sean/Projects/Glynth/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/home/sean/Projects/Glynth/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -f &quot;/home/toby/Desktop/Glynth/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/toby/Desktop/Glynth/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/toby/Desktop/Glynth/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/toby/Desktop/Glynth/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="/home/sean/Projects/Glynth/cmake-build-debug"/>
+				<Option working_dir="/home/toby/Desktop/Glynth/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/home/sean/Projects/Glynth/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/sean/Projects/Glynth/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/home/sean/Projects/Glynth/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/home/sean/Projects/Glynth/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -f &quot;/home/toby/Desktop/Glynth/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/toby/Desktop/Glynth/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/toby/Desktop/Glynth/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/toby/Desktop/Glynth/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
-				<Option working_dir="/home/sean/Projects/Glynth/cmake-build-debug"/>
+				<Option working_dir="/home/toby/Desktop/Glynth/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/home/sean/Projects/Glynth/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/sean/Projects/Glynth/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/home/sean/Projects/Glynth/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/home/sean/Projects/Glynth/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -f &quot;/home/toby/Desktop/Glynth/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/toby/Desktop/Glynth/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/toby/Desktop/Glynth/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/toby/Desktop/Glynth/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="Glynth">
-				<Option output="/home/sean/Projects/Glynth/cmake-build-debug/Glynth" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/sean/Projects/Glynth/cmake-build-debug"/>
+				<Option output="/home/toby/Desktop/Glynth/cmake-build-debug/Glynth" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/toby/Desktop/Glynth/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
-				<Option compiler="gcc"/>
+				<Option compiler="clang"/>
 				<Compiler>
-					<Add directory="/usr/include/c++/9"/>
-					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
-					<Add directory="/usr/include/c++/9/backward"/>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9"/>
+					<Add directory="/usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/x86_64-linux-gnu/c++/9"/>
+					<Add directory="/usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/backward"/>
 					<Add directory="/usr/local/include"/>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include-fixed"/>
+					<Add directory="/usr/lib/llvm-10/lib/clang/10.0.0/include"/>
 					<Add directory="/usr/include/x86_64-linux-gnu"/>
 					<Add directory="/usr/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/home/sean/Projects/Glynth/cmake-build-debug/Makefile&quot;  VERBOSE=1 Glynth"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/sean/Projects/Glynth/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/home/sean/Projects/Glynth/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/home/sean/Projects/Glynth/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -f &quot;/home/toby/Desktop/Glynth/cmake-build-debug/Makefile&quot;  VERBOSE=1 Glynth"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/toby/Desktop/Glynth/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/toby/Desktop/Glynth/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/toby/Desktop/Glynth/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="Glynth/fast">
-				<Option output="/home/sean/Projects/Glynth/cmake-build-debug/Glynth" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/sean/Projects/Glynth/cmake-build-debug"/>
+				<Option output="/home/toby/Desktop/Glynth/cmake-build-debug/Glynth" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/toby/Desktop/Glynth/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
-				<Option compiler="gcc"/>
+				<Option compiler="clang"/>
 				<Compiler>
-					<Add directory="/usr/include/c++/9"/>
-					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
-					<Add directory="/usr/include/c++/9/backward"/>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9"/>
+					<Add directory="/usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/x86_64-linux-gnu/c++/9"/>
+					<Add directory="/usr/bin/../lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/backward"/>
 					<Add directory="/usr/local/include"/>
-					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include-fixed"/>
+					<Add directory="/usr/lib/llvm-10/lib/clang/10.0.0/include"/>
 					<Add directory="/usr/include/x86_64-linux-gnu"/>
 					<Add directory="/usr/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j8 -f &quot;/home/sean/Projects/Glynth/cmake-build-debug/Makefile&quot;  VERBOSE=1 Glynth/fast"/>
-					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/sean/Projects/Glynth/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j8 -f &quot;/home/sean/Projects/Glynth/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j8 -f &quot;/home/sean/Projects/Glynth/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -f &quot;/home/toby/Desktop/Glynth/cmake-build-debug/Makefile&quot;  VERBOSE=1 Glynth/fast"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/toby/Desktop/Glynth/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/toby/Desktop/Glynth/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/toby/Desktop/Glynth/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/home/sean/Projects/Glynth/Engine/Engine.cpp">
+		<Unit filename="/home/toby/Desktop/Glynth/Engine/Engine.cpp">
 			<Option target="Glynth"/>
 		</Unit>
-		<Unit filename="/home/sean/Projects/Glynth/Engine/Engine.h">
+		<Unit filename="/home/toby/Desktop/Glynth/Engine/Engine.h">
 			<Option target="Glynth"/>
 		</Unit>
-		<Unit filename="/home/sean/Projects/Glynth/Engine/Entity.h">
+		<Unit filename="/home/toby/Desktop/Glynth/Engine/Entity.h">
 			<Option target="Glynth"/>
 		</Unit>
-		<Unit filename="/home/sean/Projects/Glynth/Engine/Input.h">
+		<Unit filename="/home/toby/Desktop/Glynth/Engine/Input.h">
 			<Option target="Glynth"/>
 		</Unit>
-		<Unit filename="/home/sean/Projects/Glynth/Engine/Scheduler.h">
+		<Unit filename="/home/toby/Desktop/Glynth/Engine/Scheduler.h">
 			<Option target="Glynth"/>
 		</Unit>
-		<Unit filename="/home/sean/Projects/Glynth/Genetics/Evolution.cpp">
+		<Unit filename="/home/toby/Desktop/Glynth/Genetics/Evolution.cpp">
 			<Option target="Glynth"/>
 		</Unit>
-		<Unit filename="/home/sean/Projects/Glynth/Genetics/Evolution.h">
+		<Unit filename="/home/toby/Desktop/Glynth/Genetics/Evolution.h">
 			<Option target="Glynth"/>
 		</Unit>
-		<Unit filename="/home/sean/Projects/Glynth/Genetics/Mutations/Mutagen.cpp">
+		<Unit filename="/home/toby/Desktop/Glynth/Genetics/Mutations/Mutagen.cpp">
 			<Option target="Glynth"/>
 		</Unit>
-		<Unit filename="/home/sean/Projects/Glynth/Genetics/Mutations/Mutagen.h">
+		<Unit filename="/home/toby/Desktop/Glynth/Genetics/Mutations/Mutagen.h">
 			<Option target="Glynth"/>
 		</Unit>
-		<Unit filename="/home/sean/Projects/Glynth/Genetics/Mutations/MutationVisitor.cpp">
+		<Unit filename="/home/toby/Desktop/Glynth/Genetics/Mutations/MutationVisitor.cpp">
 			<Option target="Glynth"/>
 		</Unit>
-		<Unit filename="/home/sean/Projects/Glynth/Genetics/Mutations/MutationVisitor.h">
+		<Unit filename="/home/toby/Desktop/Glynth/Genetics/Mutations/MutationVisitor.h">
 			<Option target="Glynth"/>
 		</Unit>
-		<Unit filename="/home/sean/Projects/Glynth/Language/AST.cpp">
+		<Unit filename="/home/toby/Desktop/Glynth/Language/AST.cpp">
 			<Option target="Glynth"/>
 		</Unit>
-		<Unit filename="/home/sean/Projects/Glynth/Language/AST.h">
+		<Unit filename="/home/toby/Desktop/Glynth/Language/AST.h">
 			<Option target="Glynth"/>
 		</Unit>
-		<Unit filename="/home/sean/Projects/Glynth/Language/Assembler.cpp">
+		<Unit filename="/home/toby/Desktop/Glynth/Language/Assembler.cpp">
 			<Option target="Glynth"/>
 		</Unit>
-		<Unit filename="/home/sean/Projects/Glynth/Language/Assembler.h">
+		<Unit filename="/home/toby/Desktop/Glynth/Language/Assembler.h">
 			<Option target="Glynth"/>
 		</Unit>
-		<Unit filename="/home/sean/Projects/Glynth/Language/Instructions.cpp">
+		<Unit filename="/home/toby/Desktop/Glynth/Language/Instructions.cpp">
 			<Option target="Glynth"/>
 		</Unit>
-		<Unit filename="/home/sean/Projects/Glynth/Language/Instructions.h">
+		<Unit filename="/home/toby/Desktop/Glynth/Language/Instructions.h">
 			<Option target="Glynth"/>
 		</Unit>
-		<Unit filename="/home/sean/Projects/Glynth/Language/Lexer.cpp">
+		<Unit filename="/home/toby/Desktop/Glynth/Language/Lexer.cpp">
 			<Option target="Glynth"/>
 		</Unit>
-		<Unit filename="/home/sean/Projects/Glynth/Language/Lexer.h">
+		<Unit filename="/home/toby/Desktop/Glynth/Language/Lexer.h">
 			<Option target="Glynth"/>
 		</Unit>
-		<Unit filename="/home/sean/Projects/Glynth/Language/Parser.cpp">
+		<Unit filename="/home/toby/Desktop/Glynth/Language/Parser.cpp">
 			<Option target="Glynth"/>
 		</Unit>
-		<Unit filename="/home/sean/Projects/Glynth/Language/Parser.h">
+		<Unit filename="/home/toby/Desktop/Glynth/Language/Parser.h">
 			<Option target="Glynth"/>
 		</Unit>
-		<Unit filename="/home/sean/Projects/Glynth/Language/Tokens.h">
+		<Unit filename="/home/toby/Desktop/Glynth/Language/Tokens.h">
 			<Option target="Glynth"/>
 		</Unit>
-		<Unit filename="/home/sean/Projects/Glynth/Language/VirtualMachine.cpp">
+		<Unit filename="/home/toby/Desktop/Glynth/Language/VirtualMachine.cpp">
 			<Option target="Glynth"/>
 		</Unit>
-		<Unit filename="/home/sean/Projects/Glynth/Language/VirtualMachine.h">
+		<Unit filename="/home/toby/Desktop/Glynth/Language/VirtualMachine.h">
 			<Option target="Glynth"/>
 		</Unit>
-		<Unit filename="/home/sean/Projects/Glynth/Utils/Maze.h">
+		<Unit filename="/home/toby/Desktop/Glynth/Utils/Maze.h">
 			<Option target="Glynth"/>
 		</Unit>
-		<Unit filename="/home/sean/Projects/Glynth/main.cpp">
+		<Unit filename="/home/toby/Desktop/Glynth/main.cpp">
 			<Option target="Glynth"/>
 		</Unit>
-		<Unit filename="/home/sean/Projects/Glynth/CMakeLists.txt">
+		<Unit filename="/home/toby/Desktop/Glynth/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
-		</Unit>
-		<Unit filename="/home/sean/Projects/Glynth/../../../../usr/lib/x86_64-linux-gnu/cmake/SFML/SFMLConfig.cmake">
-			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\SFML\"/>
-		</Unit>
-		<Unit filename="/home/sean/Projects/Glynth/../../../../usr/lib/x86_64-linux-gnu/cmake/SFML/SFMLConfigDependencies.cmake">
-			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\SFML\"/>
-		</Unit>
-		<Unit filename="/home/sean/Projects/Glynth/../../../../usr/lib/x86_64-linux-gnu/cmake/SFML/SFMLConfigVersion.cmake">
-			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\SFML\"/>
-		</Unit>
-		<Unit filename="/home/sean/Projects/Glynth/../../../../usr/lib/x86_64-linux-gnu/cmake/SFML/SFMLSharedTargets-none.cmake">
-			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\SFML\"/>
-		</Unit>
-		<Unit filename="/home/sean/Projects/Glynth/../../../../usr/lib/x86_64-linux-gnu/cmake/SFML/SFMLSharedTargets.cmake">
-			<Option virtualFolder="CMake Files\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\SFML\"/>
 		</Unit>
 	</Project>
 </CodeBlocks_project_file>

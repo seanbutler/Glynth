@@ -71,4 +71,19 @@ namespace Genetics {
             return a.fitness > b.fitness;
         });
     }
+
+    Agent * Evolution::CopyAgent(Agent *original)
+    {
+        Agent* copy = new Agent(*original);
+        for(int i = 0; i < original->parser.abstractSyntaxTree.size(); i++)
+        {
+            CopyNodeAndChildren(original->parser.abstractSyntaxTree[i], copy->parser.abstractSyntaxTree[i]);
+        }
+        return copy;
+    }
+
+    ASTNode * Evolution::CopyNodeAndChildren(ASTNode *&original, ASTNode *&copy)
+    {
+
+    }
 }

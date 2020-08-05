@@ -18,6 +18,18 @@
 
 #include "./Genetics/Evolution.h"
 
+static void Test(ASTNode*& orig, ASTNode*& copy)
+{
+    copy = new ASTNode(*orig);
+    if(!orig->children.empty())
+    {
+        for(int i = 0; i < orig->children.size(); i++)
+        {
+            Test(orig->children[i], copy->children[i]);
+        }
+    }
+}
+
 int main(int argc, char **argv) {
     std::cout << "GLYNTH - Game Language Program Synthesis" << std::endl;
 
@@ -64,12 +76,11 @@ int main(int argc, char **argv) {
         copy->Assemble();
         for(int i = 0; i < tmpAgent2Ptr->parser.abstractSyntaxTree.size(); i++)
         {
-            copy->parser.abstractSyntaxTree[i] = new ASTNode(*tmpAgent2Ptr->parser.abstractSyntaxTree[i]);
+            Test(tmpAgent2Ptr->parser.abstractSyntaxTree[i], copy->parser.abstractSyntaxTree[i]);
         }
 
+        delete tmpAgent2Ptr;
         engine.entityScheduler.entities.push_back((Engine::Entity*)copy);
-//        engine.entityScheduler.entities.push_back((Engine::Entity*)tmpAgent2Ptr);
-
     }
 
 //    evolution.MutatePopulation(); // LETS TRY MUTATING EACH INDIVIDUAL IN SITU INSTEAD OF TEH WHOLE POPYLATION
@@ -93,3 +104,4 @@ int main(int argc, char **argv) {
     engine.MainLoop();
     return 0;
 }
+
