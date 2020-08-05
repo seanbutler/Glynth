@@ -36,6 +36,36 @@ int main(int argc, char **argv) {
     Engine::Engine engine(32, 32);
     Genetics::Evolution evolution;
 
+    auto hurtfulInit = [](){
+        auto agent = new Agent(HurtfulAgentType());
+        agent->Compile("../Assets/agent2.c");
+        agent->SetAlienVar(0, 8 + (int)rand()%16);
+        agent->SetAlienVar(1, 8 + (int)rand()%16);
+        return agent;
+    };
+
+    auto hurtfulFitness = [](Agent* agent){
+        return 1;
+    };
+
+    evolution.SetInitFunction(hurtfulInit);
+    evolution.SetFitnessFunction(hurtfulFitness);
+    evolution.InitialisePopulation(10);
+    evolution.RandomizePopulation();
+
+    for(int i = 0; i <0; i++)
+    {
+        evolution.AssessFitness();
+        evolution.GenerateNewPopulation(0.0f, 0.5f, 0.5f);
+    }
+
+    for(auto agent : evolution.GetPopulationAgents())
+    {
+        agent->Assemble();
+        engine.entityScheduler.entities.push_back((Engine::Entity*)agent);
+    }
+
+
     srand(time(nullptr));
 
 //    MazeEnvironment* environment = new MazeEnvironment(32, 32);
@@ -60,28 +90,20 @@ int main(int argc, char **argv) {
 //    evolution.population.individuals.push_back(playerAgentPtr);
 //    playerAgentPtr->SetAlienVar(0, 2 + (int)rand()%4);
 //    playerAgentPtr->SetAlienVar(1, 2 + (int)rand()%4);
-
-    Agent* tmpAgent2Ptr;
-    for (int n=0;n<4;n++) {
-        tmpAgent2Ptr = new Agent(HurtfulAgentType());
-        tmpAgent2Ptr->Compile("./Assets/agent2.c");
-
+//
+//    Agent* tmpAgent2Ptr;
+//    for (int n=0;n<4;n++) {
+//        tmpAgent2Ptr = new Agent(HurtfulAgentType());
+//        tmpAgent2Ptr->Compile("../Assets/agent2.c");
+//
 //        evolution.MutateIndividual(tmpAgent2Ptr);
-
-        tmpAgent2Ptr->Assemble();
-        tmpAgent2Ptr->SetAlienVar(0, 8 + (int)rand()%16);
-        tmpAgent2Ptr->SetAlienVar(1, 8 + (int)rand()%16);
-
-        Agent* copy = new Agent(*tmpAgent2Ptr);
-        copy->Assemble();
-        for(int i = 0; i < tmpAgent2Ptr->parser.abstractSyntaxTree.size(); i++)
-        {
-            Test(tmpAgent2Ptr->parser.abstractSyntaxTree[i], copy->parser.abstractSyntaxTree[i]);
-        }
-
-        delete tmpAgent2Ptr;
-        engine.entityScheduler.entities.push_back((Engine::Entity*)copy);
-    }
+//
+//        tmpAgent2Ptr->Assemble();
+//        tmpAgent2Ptr->SetAlienVar(0, 8 + (int)rand()%16);
+//        tmpAgent2Ptr->SetAlienVar(1, 8 + (int)rand()%16);
+//
+//        engine.entityScheduler.entities.push_back((Engine::Entity*)tmpAgent2Ptr);
+//    }
 
 //    evolution.MutatePopulation(); // LETS TRY MUTATING EACH INDIVIDUAL IN SITU INSTEAD OF TEH WHOLE POPYLATION
 

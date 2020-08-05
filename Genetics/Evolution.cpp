@@ -20,7 +20,7 @@ namespace Genetics {
         //mutagen.AddMutation(new RandomizeNumberMutation(0.5));
         //mutagen.AddMutation(new RandomizeArithmeticMutation(0.5));
 
-        for (auto node : agent->parser.abstractSyntaxTree ) {
+        for (auto &node : agent->parser.abstractSyntaxTree ) {
             MutateNodeAndChildren(node, mutagen);
         }
     }
@@ -28,7 +28,7 @@ namespace Genetics {
     void Evolution::MutateNodeAndChildren(ASTNode *node, Mutagen& mutagen)
     {
         mutagen.Apply(node);
-        for(auto node : node->children)
+        for(auto &node : node->children)
         {
             MutateNodeAndChildren(node, mutagen);
         }
@@ -42,7 +42,7 @@ namespace Genetics {
     std::vector<Agent *> Evolution::GetPopulationAgents()
     {
         std::vector<Agent*> returnVec;
-        for(auto I : population) {
+        for(auto &I : population) {
             returnVec.push_back(I.agent);
         }
         return returnVec;
@@ -54,9 +54,23 @@ namespace Genetics {
         fitnessFunction = function;
     }
 
-    void Evolution::MutatePopulation() {
+    /// Defines the function that will be used to create the agent of each population member
+    void Evolution::SetInitFunction(const std::function<Agent*()> &function)
+    {
+        initFunction = function;
+    }
 
-        for(auto I : population) {
+    /// Fills the population using the function set by SetInitFunction
+    void Evolution::InitialisePopulation(int popSize)
+    {
+        for(int i = 0; i < popSize; i++)
+            population.emplace_back(initFunction());
+    }
+
+    /// Randomises every member of the current population
+    void Evolution::RandomizePopulation()
+    {
+        for(auto &I : population) {
             MutateIndividual(I.agent);
             I.scored = false;
         }
@@ -65,7 +79,7 @@ namespace Genetics {
     /// Calculates a fitness for each individual based on the designated fitness function
     void Evolution::AssessFitness()
     {
-        for(auto I : population) {
+        for(auto &I : population) {
             if(I.scored) continue;
             // Make a copy of the agents state so it can be reverted after fitness test
             auto varsCopy = I.agent->alienVars.values;
@@ -83,6 +97,7 @@ namespace Genetics {
         {
             CopyNodeAndChildren(original->parser.abstractSyntaxTree[i], copy->parser.abstractSyntaxTree[i]);
         }
+
         return copy;
     }
 
@@ -108,7 +123,7 @@ namespace Genetics {
 
         // Use the fitness scores for each population as the weights for a probabilistic generator
         std::vector<int> weights;
-        for(auto pop : population)
+        for(auto &pop : population)
         {
             weights.push_back(pop.fitness);
         }
@@ -146,12 +161,11 @@ namespace Genetics {
             }
         }
 
-        for(auto pop : population)
+        for(auto &pop : population)
         {
             delete pop.agent;
         }
 
         std::copy(newPopulation.begin(), newPopulation.end(), population.begin());
-
     }
 }
