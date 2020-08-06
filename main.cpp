@@ -18,55 +18,42 @@
 
 #include "./Genetics/Evolution.h"
 
-static void Test(ASTNode*& orig, ASTNode*& copy)
-{
-    copy = new ASTNode(*orig);
-    if(!orig->children.empty())
-    {
-        for(int i = 0; i < orig->children.size(); i++)
-        {
-            Test(orig->children[i], copy->children[i]);
-        }
-    }
-}
-
 int main(int argc, char **argv) {
     std::cout << "GLYNTH - Game Language Program Synthesis" << std::endl;
+    srand(time(nullptr));
 
     Engine::Engine engine(32, 32);
     Genetics::Evolution evolution;
 
-    auto hurtfulInit = [](){
-        auto agent = new Agent(HurtfulAgentType());
-        agent->Compile("../Assets/agent2.c");
+    auto hurtfulRand = [](Agent* agent){
         agent->SetAlienVar(0, 8 + (int)rand()%16);
         agent->SetAlienVar(1, 8 + (int)rand()%16);
-        return agent;
     };
 
     auto hurtfulFitness = [](Agent* agent){
+        agent->Update(0);
+        agent->Update(0);
+        agent->Update(0);
         return 1;
     };
 
-    evolution.SetInitFunction(hurtfulInit);
+    evolution.SetRandomiseFunction(hurtfulRand);
     evolution.SetFitnessFunction(hurtfulFitness);
-    evolution.InitialisePopulation(10);
-    evolution.RandomizePopulation();
+    evolution.InitialisePopulation(10,HurtfulAgentType(),"../Assets/agent2.c");
+    evolution.RandomisePopulation();
 
-    for(int i = 0; i <0; i++)
+    for(int i = 0; i <1; i++)
     {
         evolution.AssessFitness();
-        evolution.GenerateNewPopulation(0.0f, 0.5f, 0.5f);
+        evolution.GenerateNewPopulation(0.0f, 0.1f, 0.9f);
     }
 
     for(auto agent : evolution.GetPopulationAgents())
     {
-        agent->Assemble();
         engine.entityScheduler.entities.push_back((Engine::Entity*)agent);
     }
 
 
-    srand(time(nullptr));
 
 //    MazeEnvironment* environment = new MazeEnvironment(32, 32);
 //    engine.entityScheduler.entities.push_back((Entity*)environment);

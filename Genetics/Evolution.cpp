@@ -28,9 +28,9 @@ namespace Genetics {
     void Evolution::MutateNodeAndChildren(ASTNode *node, Mutagen& mutagen)
     {
         mutagen.Apply(node);
-        for(auto &node : node->children)
+        for(auto &n : node->children)
         {
-            MutateNodeAndChildren(node, mutagen);
+            MutateNodeAndChildren(n, mutagen);
         }
     }
 
@@ -55,20 +55,26 @@ namespace Genetics {
     }
 
     /// Defines the function that will be used to create the agent of each population member
-    void Evolution::SetInitFunction(const std::function<Agent*()> &function)
+    void Evolution::SetRandomiseFunction(const std::function<void(Agent*)> &function)
     {
-        initFunction = function;
+        randomiseAgentVars = function;
     }
 
     /// Fills the population using the function set by SetInitFunction
-    void Evolution::InitialisePopulation(int popSize)
+    void Evolution::InitialisePopulation(int popSize, AgentType agentType, const std::string& agentFilePath)
     {
         for(int i = 0; i < popSize; i++)
-            population.emplace_back(initFunction());
+        {
+            auto agent = new Agent(agentType);
+            agent->Compile(agentFilePath);
+            randomiseAgentVars(agent);
+            agent->Assemble();
+            population.emplace_back(agent);
+        }
     }
 
     /// Randomises every member of the current population
-    void Evolution::RandomizePopulation()
+    void Evolution::RandomisePopulation()
     {
         for(auto &I : population) {
             MutateIndividual(I.agent);
@@ -92,19 +98,48 @@ namespace Genetics {
     /// Returns a deep copy of any given agent
     Agent * Evolution::CopyAgent(Agent *original)
     {
-        Agent* copy = new Agent(*original);
+        auto copy = new Agent(*original);
         for(int i = 0; i < original->parser.abstractSyntaxTree.size(); i++)
         {
             CopyNodeAndChildren(original->parser.abstractSyntaxTree[i], copy->parser.abstractSyntaxTree[i]);
         }
-
+        copy->Assemble();
         return copy;
     }
 
     /// Recursive function used to create deep copies of ASTNodes
     void Evolution::CopyNodeAndChildren(ASTNode *&original, ASTNode *&copy)
     {
-        copy = new ASTNode(*original);
+        //copy = new ASTNode(*original);
+        // Temp fix to allow for deep copies
+        if(dynamic_cast<RandFuncAST*>(original))
+            copy = new RandFuncAST(*dynamic_cast<RandFuncAST*>(original));
+        else if(dynamic_cast<BinOperandAST*>(original))
+            copy = new BinOperandAST(*dynamic_cast<BinOperandAST*>(original));
+        else if(dynamic_cast<WhileStatementAST*>(original))
+            copy = new WhileStatementAST(*dynamic_cast<WhileStatementAST*>(original));
+        else if(dynamic_cast<IfStatementAST*>(original))
+            copy = new IfStatementAST(*dynamic_cast<IfStatementAST*>(original));
+        else if(dynamic_cast<AssignmentStatementAST*>(original))
+            copy = new AssignmentStatementAST(*dynamic_cast<AssignmentStatementAST*>(original));
+        else if(dynamic_cast<AlienVarAST*>(original))
+            copy = new AlienVarAST(*dynamic_cast<AlienVarAST*>(original));
+        else if(dynamic_cast<BlockAST*>(original))
+            copy = new BlockAST(*dynamic_cast<BlockAST*>(original));
+        else if(dynamic_cast<IdentifierAST*>(original))
+            copy = new IdentifierAST(*dynamic_cast<IdentifierAST*>(original));
+        else if(dynamic_cast<MoveAST*>(original))
+            copy = new MoveAST(*dynamic_cast<MoveAST*>(original));
+        else if(dynamic_cast<NumberAST*>(original))
+            copy = new NumberAST(*dynamic_cast<NumberAST*>(original));
+        else if(dynamic_cast<OutputAST*>(original))
+            copy = new OutputAST(*dynamic_cast<OutputAST*>(original));
+        else if(dynamic_cast<VariableDeclarationAST*>(original))
+            copy = new VariableDeclarationAST(*dynamic_cast<VariableDeclarationAST*>(original));
+        else if(dynamic_cast<YieldAST*>(original))
+            copy = new YieldAST(*dynamic_cast<YieldAST*>(original));
+        // Temp fix to allow for deep copies
+
         if(!original->children.empty())
         {
             for(int i = 0; i < original->children.size(); i++)
@@ -159,6 +194,7 @@ namespace Genetics {
                     break;
                 }
             }
+            randomiseAgentVars(newPopulation.back().agent);
         }
 
         for(auto &pop : population)
