@@ -49,7 +49,7 @@ namespace Genetics {
         void SetFitnessFunction(const std::function<float(Agent*)> &function);
         void SetRandomiseFunction(const std::function<void(Agent*)> &function);
 
-        std::vector<Agent*> GetPopulationAgents();
+        std::vector<Agent*> GetTopPopulationAgents(float percent);
 
     private:
         std::function<float(Agent*)> fitnessFunction;

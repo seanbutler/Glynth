@@ -31,24 +31,45 @@ int main(int argc, char **argv) {
     };
 
     auto hurtfulFitness = [](Agent* agent){
-        //agent->Update(0);
-        //agent->Update(0);
-        //agent->Update(0);
-        return 1;
+        auto copy = new Agent(*agent);
+        copy->Assemble();
+
+        std::vector<std::pair<int,int>> uniqueLocations;
+        auto startPos = std::pair<int,int>(copy->alienVars.get(0), copy->alienVars.get(1));
+        int furthestDist = 0;
+
+        for(int i = 0; i < 10000; i++)
+        {
+            copy->Update(0);
+            auto newPos = std::pair<int,int>(copy->alienVars.get(0), copy->alienVars.get(1));
+            if((std::find(uniqueLocations.begin(), uniqueLocations.end(), newPos)) == uniqueLocations.end())
+            {
+                uniqueLocations.push_back(newPos);
+                int dist =  abs(startPos.first - newPos.first) + abs(startPos.second - newPos.second);
+                if(dist > furthestDist)
+                {
+                    furthestDist = dist;
+                }
+            }
+        }
+        return uniqueLocations.size() - furthestDist;
     };
 
     evolution.SetRandomiseFunction(hurtfulRand);
     evolution.SetFitnessFunction(hurtfulFitness);
-    evolution.InitialisePopulation(10,HurtfulAgentType(),"../Assets/agent2.c");
+    evolution.InitialisePopulation(200,HurtfulAgentType(),"../Assets/agent2.c");
     evolution.RandomisePopulation();
 
-    for(int i = 0; i <10; i++)
+    int maxGenerations = 30;
+    for(int i = 0; i <maxGenerations; i++)
     {
+        std::cout << "Creating generation " << i+1 << "/" << maxGenerations << "..." << std::endl;
         evolution.AssessFitness();
-        evolution.GenerateNewPopulation(0.0f, 0.1f, 0.9f);
+        evolution.GenerateNewPopulation(0.0f, 0.5f, 0.5f);
     }
-
-    for(auto agent : evolution.GetPopulationAgents())
+    evolution.AssessFitness();
+    
+    for(auto agent : evolution.GetTopPopulationAgents(0.05f))
     {
         agent->Assemble();
         engine.entityScheduler.entities.push_back((Engine::Entity*)agent);

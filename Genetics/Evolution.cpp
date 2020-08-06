@@ -18,7 +18,7 @@ namespace Genetics {
         Mutagen mutagen;
         mutagen.AddMutation(new RandomizeComparisonMutation(0.5));
         //mutagen.AddMutation(new RandomizeNumberMutation(0.5));
-        //mutagen.AddMutation(new RandomizeArithmeticMutation(0.5));
+        mutagen.AddMutation(new RandomizeArithmeticMutation(0.5));
 
         for (auto &node : agent->parser.abstractSyntaxTree ) {
             MutateNodeAndChildren(node, mutagen);
@@ -39,11 +39,18 @@ namespace Genetics {
         population.emplace_back(newIndividual);
     }
 
-    std::vector<Agent *> Evolution::GetPopulationAgents()
+    // Returns the top percent (0-1) of the populations agents
+    std::vector<Agent *> Evolution::GetTopPopulationAgents(float percent)
     {
+        // Order population
+        std::sort(population.begin(), population.end(), [](Individual a, Individual b){
+           return a.fitness > b.fitness;
+        });
+
         std::vector<Agent*> returnVec;
-        for(auto &I : population) {
-            returnVec.push_back(I.agent);
+        returnVec.reserve((float)population.size()*percent);
+        for(int i = 0; i < (int)((float)population.size()*percent); i++) {
+            returnVec.push_back(population[i].agent);
         }
         return returnVec;
     }
@@ -90,6 +97,9 @@ namespace Genetics {
             // Make a copy of the agents state so it can be reverted after fitness test
             auto varsCopy = I.agent->alienVars.values;
             I.fitness = fitnessFunction(I.agent);
+            // Allow even the worst individuals to have a small chance of reproducing
+            if(I.fitness < 1)
+                I.fitness = 1;
             I.agent->alienVars.values = varsCopy;
             I.scored = true;
         }

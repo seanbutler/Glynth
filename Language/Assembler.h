@@ -46,14 +46,14 @@ public:
     void PatchUpJumps() {
         // go through the jump locations a patch in the correct addresses
 
-        std::cout << "Patching Jumps " << std::endl;
+        //std::cout << "Patching Jumps " << std::endl;
         for(auto J : jumps) {
-            std::cout << "Patch " << J.first << " " << J.second ;
-            std::cout << " to " << labels[J.second] << std::endl;
+            //std::cout << "Patch " << J.first << " " << J.second ;
+            //std::cout << " to " << labels[J.second] << std::endl;
 
             instructions[J.first] = labels[J.second];
         }
-        std::cout << std::endl;
+        //std::cout << std::endl;
     }
 
     std::vector<int> GetInstructions() {
