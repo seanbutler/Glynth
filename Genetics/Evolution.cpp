@@ -113,7 +113,7 @@ namespace Genetics {
         // Create the new population one at a time
         for(int i = 0; i < population.size(); i++)
         {
-            // Pick a random (probabilistic) method to create a new population
+            // Pick a probabilistically random method to create a new population
             switch (typeDist(randEngine))
             {
                 // Crossover
@@ -141,6 +141,7 @@ namespace Genetics {
                 }
             }
             randomiseAgentVars(newPopulation.back().agent);
+            newPopulation.back().scored = false;
         }
 
         for(auto &pop : population)
