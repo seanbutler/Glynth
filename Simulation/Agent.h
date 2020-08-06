@@ -112,6 +112,19 @@ public:
         rectangle.setSize(sf::Vector2f (1, 1));
     }
 
+    Agent(Agent &rhs)
+    : agenttype(rhs.agenttype.Type(), rhs.agenttype.Colour()),
+        srcFilename(rhs.srcFilename),
+        rectangle(rhs.rectangle),
+        lexer(rhs.lexer),
+        parser(rhs.parser),
+        assembler(rhs.assembler),
+        virtualMachine(rhs.virtualMachine),
+        alienVars(rhs.alienVars)
+    {
+        virtualMachine.SetAliensVarPtr(&alienVars);
+    }
+
     virtual void Compile(std::string F) {
         srcFilename = F;
         std::ifstream sourceFile(srcFilename);

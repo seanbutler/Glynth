@@ -12,6 +12,15 @@
 
 // ----------------------------------------------------------------------
 
+Parser::Parser(Parser &rhs)
+{
+    abstractSyntaxTree = rhs.abstractSyntaxTree;
+    for(int i = 0; i < rhs.abstractSyntaxTree.size(); i++)
+    {
+        CopyNodeAndChildren(rhs.abstractSyntaxTree[i], abstractSyntaxTree[i]);
+    }
+}
+
 bool Parser::parse() {
 
     getNextToken();
@@ -661,6 +670,48 @@ std::string Parser::GetAsm() {
     }
 
     return  assemblyCode;
+}
+
+/// Recursive function used to create deep copies of ASTNodes
+void Parser::CopyNodeAndChildren(ASTNode *&original, ASTNode *&copy)
+{
+    //copy = new ASTNode(*original);
+    //Temp fix to allow for deep copies
+    if(dynamic_cast<RandFuncAST*>(original))
+        copy = new RandFuncAST(*dynamic_cast<RandFuncAST*>(original));
+    else if(dynamic_cast<BinOperandAST*>(original))
+        copy = new BinOperandAST(*dynamic_cast<BinOperandAST*>(original));
+    else if(dynamic_cast<WhileStatementAST*>(original))
+        copy = new WhileStatementAST(*dynamic_cast<WhileStatementAST*>(original));
+    else if(dynamic_cast<IfStatementAST*>(original))
+        copy = new IfStatementAST(*dynamic_cast<IfStatementAST*>(original));
+    else if(dynamic_cast<AssignmentStatementAST*>(original))
+        copy = new AssignmentStatementAST(*dynamic_cast<AssignmentStatementAST*>(original));
+    else if(dynamic_cast<AlienVarAST*>(original))
+        copy = new AlienVarAST(*dynamic_cast<AlienVarAST*>(original));
+    else if(dynamic_cast<BlockAST*>(original))
+        copy = new BlockAST(*dynamic_cast<BlockAST*>(original));
+    else if(dynamic_cast<IdentifierAST*>(original))
+        copy = new IdentifierAST(*dynamic_cast<IdentifierAST*>(original));
+    else if(dynamic_cast<MoveAST*>(original))
+        copy = new MoveAST(*dynamic_cast<MoveAST*>(original));
+    else if(dynamic_cast<NumberAST*>(original))
+        copy = new NumberAST(*dynamic_cast<NumberAST*>(original));
+    else if(dynamic_cast<OutputAST*>(original))
+        copy = new OutputAST(*dynamic_cast<OutputAST*>(original));
+    else if(dynamic_cast<VariableDeclarationAST*>(original))
+        copy = new VariableDeclarationAST(*dynamic_cast<VariableDeclarationAST*>(original));
+    else if(dynamic_cast<YieldAST*>(original))
+        copy = new YieldAST(*dynamic_cast<YieldAST*>(original));
+    //Temp fix to allow for deep copies
+
+    if(!original->children.empty())
+    {
+        for(int i = 0; i < original->children.size(); i++)
+        {
+            CopyNodeAndChildren(original->children[i], copy->children[i]);
+        }
+    }
 }
 
 

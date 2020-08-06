@@ -68,7 +68,6 @@ namespace Genetics {
             auto agent = new Agent(agentType);
             agent->Compile(agentFilePath);
             randomiseAgentVars(agent);
-            agent->Assemble();
             population.emplace_back(agent);
         }
     }
@@ -77,6 +76,7 @@ namespace Genetics {
     void Evolution::RandomisePopulation()
     {
         for(auto &I : population) {
+
             MutateIndividual(I.agent);
             I.scored = false;
         }
@@ -92,60 +92,6 @@ namespace Genetics {
             I.fitness = fitnessFunction(I.agent);
             I.agent->alienVars.values = varsCopy;
             I.scored = true;
-        }
-    }
-
-    /// Returns a deep copy of any given agent
-    Agent * Evolution::CopyAgent(Agent *original)
-    {
-        auto copy = new Agent(*original);
-        for(int i = 0; i < original->parser.abstractSyntaxTree.size(); i++)
-        {
-            CopyNodeAndChildren(original->parser.abstractSyntaxTree[i], copy->parser.abstractSyntaxTree[i]);
-        }
-        copy->Assemble();
-        return copy;
-    }
-
-    /// Recursive function used to create deep copies of ASTNodes
-    void Evolution::CopyNodeAndChildren(ASTNode *&original, ASTNode *&copy)
-    {
-        //copy = new ASTNode(*original);
-        // Temp fix to allow for deep copies
-        if(dynamic_cast<RandFuncAST*>(original))
-            copy = new RandFuncAST(*dynamic_cast<RandFuncAST*>(original));
-        else if(dynamic_cast<BinOperandAST*>(original))
-            copy = new BinOperandAST(*dynamic_cast<BinOperandAST*>(original));
-        else if(dynamic_cast<WhileStatementAST*>(original))
-            copy = new WhileStatementAST(*dynamic_cast<WhileStatementAST*>(original));
-        else if(dynamic_cast<IfStatementAST*>(original))
-            copy = new IfStatementAST(*dynamic_cast<IfStatementAST*>(original));
-        else if(dynamic_cast<AssignmentStatementAST*>(original))
-            copy = new AssignmentStatementAST(*dynamic_cast<AssignmentStatementAST*>(original));
-        else if(dynamic_cast<AlienVarAST*>(original))
-            copy = new AlienVarAST(*dynamic_cast<AlienVarAST*>(original));
-        else if(dynamic_cast<BlockAST*>(original))
-            copy = new BlockAST(*dynamic_cast<BlockAST*>(original));
-        else if(dynamic_cast<IdentifierAST*>(original))
-            copy = new IdentifierAST(*dynamic_cast<IdentifierAST*>(original));
-        else if(dynamic_cast<MoveAST*>(original))
-            copy = new MoveAST(*dynamic_cast<MoveAST*>(original));
-        else if(dynamic_cast<NumberAST*>(original))
-            copy = new NumberAST(*dynamic_cast<NumberAST*>(original));
-        else if(dynamic_cast<OutputAST*>(original))
-            copy = new OutputAST(*dynamic_cast<OutputAST*>(original));
-        else if(dynamic_cast<VariableDeclarationAST*>(original))
-            copy = new VariableDeclarationAST(*dynamic_cast<VariableDeclarationAST*>(original));
-        else if(dynamic_cast<YieldAST*>(original))
-            copy = new YieldAST(*dynamic_cast<YieldAST*>(original));
-        // Temp fix to allow for deep copies
-
-        if(!original->children.empty())
-        {
-            for(int i = 0; i < original->children.size(); i++)
-            {
-                CopyNodeAndChildren(original->children[i], copy->children[i]);
-            }
         }
     }
 
@@ -181,7 +127,7 @@ namespace Genetics {
                 {
                     int copyIndex = probDist(randEngine);
                     newPopulation.push_back(population[copyIndex]);
-                    newPopulation.back().agent = CopyAgent(population[copyIndex].agent);
+                    newPopulation.back().agent = new Agent(*population[copyIndex].agent);
                     break;
                 }
                 // Mutation
@@ -189,7 +135,7 @@ namespace Genetics {
                 {
                     int copyIndex = probDist(randEngine);
                     newPopulation.push_back(population[copyIndex]);
-                    newPopulation.back().agent = CopyAgent(population[copyIndex].agent);
+                    newPopulation.back().agent = new Agent(*population[copyIndex].agent);
                     MutateIndividual(newPopulation.back().agent);
                     break;
                 }

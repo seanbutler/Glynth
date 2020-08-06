@@ -21,6 +21,7 @@ class Parser {
 
 public:
     Parser() = default;
+    Parser(Parser& rhs);
     virtual ~Parser() {}
 
     void SetTokens(const std::vector<std::pair<Token, std::string>> &T) {
@@ -56,6 +57,8 @@ public:
     ASTNode* ParseMove();
     ASTNode* ParseTurn();
     ASTNode* ParseRandFunc();
+
+    void CopyNodeAndChildren(ASTNode*& original, ASTNode*& copy);
 
     bool OutputTreeDiagram(std::string filename);
     bool OutputASTJSON(std::string filename);

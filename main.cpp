@@ -31,9 +31,9 @@ int main(int argc, char **argv) {
     };
 
     auto hurtfulFitness = [](Agent* agent){
-        agent->Update(0);
-        agent->Update(0);
-        agent->Update(0);
+        //agent->Update(0);
+        //agent->Update(0);
+        //agent->Update(0);
         return 1;
     };
 
@@ -42,7 +42,7 @@ int main(int argc, char **argv) {
     evolution.InitialisePopulation(10,HurtfulAgentType(),"../Assets/agent2.c");
     evolution.RandomisePopulation();
 
-    for(int i = 0; i <1; i++)
+    for(int i = 0; i <10; i++)
     {
         evolution.AssessFitness();
         evolution.GenerateNewPopulation(0.0f, 0.1f, 0.9f);
@@ -50,6 +50,7 @@ int main(int argc, char **argv) {
 
     for(auto agent : evolution.GetPopulationAgents())
     {
+        agent->Assemble();
         engine.entityScheduler.entities.push_back((Engine::Entity*)agent);
     }
 

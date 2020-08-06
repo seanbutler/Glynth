@@ -40,9 +40,6 @@ namespace Genetics {
 
         void MutateNodeAndChildren(ASTNode *node, Mutagen &mutagen);
 
-        Agent* CopyAgent(Agent* original);
-        void CopyNodeAndChildren(ASTNode*& original, ASTNode*& copy);
-
         void InitialisePopulation(int popSize, AgentType agentType, const std::string& agentFilePath);
         void RandomisePopulation();
         void AssessFitness();
