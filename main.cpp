@@ -29,11 +29,11 @@ int main(int argc, char **argv) {
 //    MazeEnvironment* environment = new MazeEnvironment(32, 32);
 //    engine.entityScheduler.entities.push_back((Entity*)environment);
 
-    WallEnvironment* environment1 = new WallEnvironment('V', 32, 32);
-    engine.entityScheduler.entities.push_back((Engine::Entity*)environment1);
-
-    WallEnvironment* environment2 = new WallEnvironment('H', 32, 32);
-    engine.entityScheduler.entities.push_back((Engine::Entity*)environment2);
+//    WallEnvironment* environment1 = new WallEnvironment('V', 32, 32);
+//    engine.entityScheduler.entities.push_back((Engine::Entity*)environment1);
+//
+//    WallEnvironment* environment2 = new WallEnvironment('H', 32, 32);
+//    engine.entityScheduler.entities.push_back((Engine::Entity*)environment2);
 
 //    ForestEnvironment* environment2 = new ForestEnvironment(32, 32);
 //    engine.entityScheduler.entities.push_back((Engine::Entity*)environment2);
@@ -49,18 +49,12 @@ int main(int argc, char **argv) {
 //    playerAgentPtr->SetAlienVar(0, 2 + (int)rand()%4);
 //    playerAgentPtr->SetAlienVar(1, 2 + (int)rand()%4);
 
-
-
     Agent* tmpAgent1Ptr;
     tmpAgent1Ptr = new Agent(HurtfulAgentType());
-    tmpAgent1Ptr->Compile("./Assets/agent1.c");
-
-//    evolution.MutateIndividual(tmpAgent1Ptr);
-
+    tmpAgent1Ptr->Compile("../Assets/agent1.c");
     tmpAgent1Ptr->Assemble();
-    tmpAgent1Ptr->SetAlienVar(0, 8 + (int)rand()%16);
-    tmpAgent1Ptr->SetAlienVar(1, 8 + (int)rand()%16);
-
+    tmpAgent1Ptr->SetAlienVar(0, 8 );
+    tmpAgent1Ptr->SetAlienVar(1, 8 );
     engine.entityScheduler.entities.push_back((Engine::Entity*)tmpAgent1Ptr);
 
 
