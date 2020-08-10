@@ -16,7 +16,14 @@ namespace Genetics {
     };
 
     void RandomizeNumberMutation::Effect(NumberAST* node) {
-        node->setNumber( node->getNumber() + (  (rand() % 3)-1   ) );
+        if ( rand()%2 )
+        {
+            node->setNumber( node->getNumber() + 1 );
+        }
+        else
+        {
+            node->setNumber( node->getNumber() - 1 );
+        }
     };
 
     void RandomizeNumberMutation::Visit_NumberAST(NumberAST* node)  {

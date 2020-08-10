@@ -82,7 +82,7 @@ int main(int argc, char **argv) {
 
 //    WallEnvironment* environment1 = new WallEnvironment('V', 32, 32);
 //    engine.entityScheduler.entities.push_back((Engine::Entity*)environment1);
-
+//
 //    WallEnvironment* environment2 = new WallEnvironment('H', 32, 32);
 //    engine.entityScheduler.entities.push_back((Engine::Entity*)environment2);
 

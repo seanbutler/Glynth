@@ -2,9 +2,9 @@
 // Created by sean on 23/07/2020.
 //
 
-#ifndef GLYNTH_AGENT_H
-#define GLYNTH_AGENT_H
+#pragma once
 
+#include <cmath>
 #include "../Engine/Entity.h"
 
 #include "../Language/Lexer.h"
@@ -14,79 +14,130 @@
 
 #include "AlienVars.h"
 
-
 //
 // a specific version of a game entity which has AI
 //
 
-enum class AgentTypeEnum {
-    Player,
-    Goal,
-    Healing,
-    Hurtful,
-    Wall
-};
+// ----------------------------------------------------------------------
+
 
 class AgentType {
 public:
-    AgentType(AgentTypeEnum AT, sf::Color C)
-    : agentType(AT)
-    , colour(C) {
+    AgentType(sf::Color C)
+    :   colour(C) {
 
     }
 
-    AgentTypeEnum Type(){ return agentType;}
-    sf::Color  Colour(){ return colour;}
+    sf::Color  Colour()         { return colour;}
 
 protected:
-    const AgentTypeEnum agentType;
     const sf::Color colour;
 };
 
-class PlayerAgentType : public AgentType {
+// ----------------------------------------------------------------------
+
+class DetectableAgentType : public AgentType {
+
+public:
+    DetectableAgentType(sf::Color C)
+            : AgentType(C)
+    {
+    }
+
+public:
+    unsigned int directionToNearest(int x, int y) {
+
+        unsigned int shortestDistance = INT32_MAX;
+        float distance;
+        unsigned int closest = INT32_MAX;
+
+        for( int n = 0; n< positionTable.size(); n++) {
+
+            distance =  sqrt ( ( ( positionTable[n].first - x ) * ( positionTable[n].first - x ) )
+                               + ( ( positionTable[n].second - y ) * ( positionTable[n].second - y ) ) );
+
+            if ( distance < shortestDistance ) {
+                shortestDistance = distance;
+                closest = n;
+            }
+
+            int unitx = ( positionTable[n].first - x ) / distance;
+            int unity = ( positionTable[n].second - y ) / distance;
+
+            std::cout << "unity = " << unitx << "unity = " << unity << std::endl;
+
+            if ( unitx == -1 && unity == 0 ) return 3;
+            if ( unitx == 0 && unity == -1 ) return 2;
+            if ( unitx == 1 && unity == 0 ) return 1;
+            if ( unitx == 0 && unity == 1 ) return 0;
+        }
+    }
+
+private:
+    static std::vector<std::pair<int, int>> positionTable;
+    std::vector<int> distanceTable;
+
+};
+
+// ----------------------------------------------------------------------
+
+class PlayerAgentType : public DetectableAgentType {
     // Grey is anonymous, like a good player character
-    // Movable
-    // Hurtable
+    // Movable, Hurtable
+    //
 public:
     PlayerAgentType()
-    : AgentType(AgentTypeEnum::Player, sf::Color(128, 128, 128))
+    : DetectableAgentType(sf::Color(128, 128, 128))
     {
 
     }
+
 };
 
-class GoalAgentType : public AgentType {
+// ----------------------------------------------------------------------
+
+class GoalAgentType : public DetectableAgentType {
     // Nice Sky Colour for Escape?
     // End of Game
 public:
     GoalAgentType()
-    : AgentType(AgentTypeEnum::Goal, sf::Color(128, 192, 255))
+        : DetectableAgentType(sf::Color(128, 192, 255))
     {
-
     }
+
 };
 
-class HealingAgentType : public AgentType {
+// ----------------------------------------------------------------------
+
+class HealingAgentType : public DetectableAgentType {
     // Green, Like a Healthpack
     // Touch and it heals you
 public:
     HealingAgentType()
-    : AgentType(AgentTypeEnum::Healing, sf::Color(32, 255, 32))
+            : DetectableAgentType(sf::Color(32, 255, 32))
     {
-
     }
+
+
 };
 
-class HurtfulAgentType : public AgentType {
+// ----------------------------------------------------------------------
+
+
+class HurtfulAgentType : public DetectableAgentType {
     // Red is Danger
     // Touch and it hurts you
 public:
     HurtfulAgentType()
-    : AgentType(AgentTypeEnum::Hurtful, sf::Color(255, 32, 32))
+    : DetectableAgentType(sf::Color(255, 32, 32))
     {
 
     }
+
+
 };
+
+// ----------------------------------------------------------------------
 
 
 class WallAgentType : public AgentType {
@@ -94,10 +145,11 @@ class WallAgentType : public AgentType {
     // Impassible
 public:
     WallAgentType()
-            : AgentType(AgentTypeEnum::Wall, sf::Color(0, 0, 0))
+            : AgentType(sf::Color(0, 0, 0))
     {
 
     }
+
 };
 
 // ----------------------------------------------------------------------
@@ -105,8 +157,8 @@ public:
 class Agent : public Engine::Entity {
 public:
     Agent(AgentType AT)
-    : Entity()
-    , agenttype(AT) {
+            : Entity()
+            , agenttype(AT) {
         std::cout << "Agent::Agent ()" << std::endl;
         rectangle.setFillColor(agenttype.Colour());
         rectangle.setSize(sf::Vector2f (1, 1));
@@ -134,7 +186,8 @@ public:
         lexer.Scan();
         lexer.OutputTokenList(srcFilename);
         lexer.OutputTokenListWithLines(srcFilename);
-        parser.SetTokens(lexer.GetTokenList());
+        //        parser.SetTokens(lexer.GetTokenList());
+        parser.SetTokensWithLines(lexer.GetTokenListWithLines());
         parser.parse();
 
         parser.OutputTreeDiagram(srcFilename);
@@ -186,5 +239,3 @@ public:
 };
 
 // ----------------------------------------------------------------------
-
-#endif //GLYNTH_AGENT_H

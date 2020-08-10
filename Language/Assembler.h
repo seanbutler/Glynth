@@ -90,6 +90,7 @@ public:
     }
 
     void GenerateTestBinaryInstructions() {
+        return;
 
         int A = 1;
         int B = 2;

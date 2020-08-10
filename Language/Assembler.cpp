@@ -27,7 +27,7 @@ INS Assembler::ScanInstruction() {
     }
 
     //
-    // comments begin with a semicolon (;) skip them
+    // comments begin with a semicolon (#) skip them
     //
     if (currentChar == COMMENT[0]) {
         do {
@@ -193,16 +193,15 @@ INS Assembler::ScanInstruction() {
     // number currently turns into a int in the VM
     if (isdigit(currentChar)) {
 
-        std::string numberStr;
+        std::string numberStr = "";
         numberStr += currentChar;
         currentChar = assemblyStr[assemblyPos++];
         while (isdigit(currentChar) || currentChar == '.') {
             numberStr += currentChar;
             currentChar = assemblyStr[assemblyPos++];
         }
-        --assemblyPos;
 
-//        std::cout << "asm got number\t\t" << numberStr << "\n";
+        --assemblyPos;
 
         this->instructions.push_back(std::stoi(numberStr));
         return INS::NUMBER;

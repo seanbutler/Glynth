@@ -129,7 +129,8 @@ Token Lexer::ScanToken() {
             currentChar = lexingStr[lexingPos++];
         }
         --lexingPos;
-        tokens.push_back(std::make_pair(Token::NUMBER, numberStr));
+//        tokens.push_back(std::make_pair(Token::NUMBER, numberStr));
+        tokensWithLine.push_back(std::make_tuple(Token::NUMBER, numberStr, currentLine));
         return Token::NUMBER;
     }
 
@@ -237,7 +238,8 @@ Token Lexer::ScanToken() {
                 ++lexingPos;
                 return Token::OP_NE;
             }
-            std::cerr << "ERROR Tokenizer Error at Line " << currentLine << " Expected Character " << currentChar << std::endl;
+
+            std::cerr << "TOKENIZER ERROR at Line " << currentLine << " Got " << currentChar << std::endl;
             return Token::ERROR;
         }
 
@@ -277,7 +279,7 @@ Token Lexer::ScanToken() {
 //        }
 
         default: {
-            std::cerr << "ERROR Tokenizer Error at Line " << currentLine << " Expected Character " << currentChar << std::endl;
+            std::cerr << "TOKENIZER WARNING Line (" << currentLine << ") Possibly '" << currentChar << "'" << std::endl;
             return Token::ERROR;
         }
     }
