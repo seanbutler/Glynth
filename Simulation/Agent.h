@@ -230,7 +230,7 @@ public:
         auto newAgent = new Agent(*this);
 
         // Find the two slice points
-        ASTNode** a = newAgent->parser.GetRandomASTNode(CompatibilityType::blockStart);
+        ASTNode** a = newAgent->parser.GetRandomASTNode(CompatibilityType::all);
         ASTNode** b = agent->parser.GetRandomASTNode((*a)->GetCompType());
 
         // Replace the nodes after the first slice point with the branch of the second

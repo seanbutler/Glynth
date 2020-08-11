@@ -48,6 +48,7 @@ public:
     };
 
     unsigned int getID()            { return id; }
+    void GenerateNewID()            {id = uid++;}
     std::string &getName()          { return name; }
 
     int getNumber() const           { return number; }

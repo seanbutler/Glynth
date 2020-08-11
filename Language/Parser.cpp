@@ -769,6 +769,7 @@ void Parser::CopyNodeAndChildren(ASTNode *&original, ASTNode *&copy)
         copy = new YieldAST(*dynamic_cast<YieldAST*>(original));
     //Temp fix to allow for deep copies
 
+    copy->GenerateNewID();
     if(!original->children.empty())
     {
         for(int i = 0; i < original->children.size(); i++)
