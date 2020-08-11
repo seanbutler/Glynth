@@ -68,11 +68,14 @@ int main(int argc, char **argv) {
         evolution.GenerateNewPopulation(0.96f, 0.02f, 0.02f);
     }
     evolution.AssessFitness();
-    
+
+    int i =0;
     for(auto agent : evolution.GetTopPopulationAgents(0.05f))
     {
         agent->Assemble();
+        agent->parser.OutputTreeDiagram("/home/toby/agent" + std::to_string(i));
         engine.entityScheduler.entities.push_back((Engine::Entity*)agent);
+        i++;
     }
 
 

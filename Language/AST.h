@@ -27,6 +27,7 @@ enum class CompatibilityType
     none,
     all,
     blockStart,
+    var
 
 };
 
@@ -90,6 +91,11 @@ public:
 class AlienVarAST : public ASTNode {
 
 public:
+    AlienVarAST()
+    {
+        compatibility = CompatibilityType::var;
+    }
+
     virtual std::string print();
     virtual std::string diag(unsigned int parentID);
     virtual std::string eval();
@@ -281,6 +287,7 @@ class NumberAST : public ASTNode {
 
 public:
     NumberAST(int V) : ASTNode() {
+        compatibility = CompatibilityType::var;
         setNumber(V);
     }
 

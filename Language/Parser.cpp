@@ -779,18 +779,18 @@ void Parser::CopyNodeAndChildren(ASTNode *&original, ASTNode *&copy)
 }
 
 /// Returns a random node within the AST
-ASTNode * Parser::GetRandomASTNode(CompatibilityType typeFilter)
+ASTNode ** Parser::GetRandomASTNode(CompatibilityType typeFilter)
 {
-    return GetASTNode(util::RandomNumberGenerator::RandNum(0, CompatibleASTCount(typeFilter)), typeFilter);
+    return GetASTNode(util::RandomNumberGenerator::RandNum(1, CompatibleASTCount(typeFilter)), typeFilter);
 }
 
 /// Returns the nth (index) node in the AST of the given typeFilter
-ASTNode * Parser::GetASTNode(int index, CompatibilityType typeFilter)
+ASTNode ** Parser::GetASTNode(int index, CompatibilityType typeFilter)
 {
     int i = 0;
-    for(auto node : abstractSyntaxTree)
+    for(auto& node : abstractSyntaxTree)
     {
-        ASTNode* result = FindNodeInTree(i, node, index, typeFilter);
+        ASTNode** result = FindNodeInTree(i, node, index, typeFilter);
         if(result != nullptr)
             return result;
     }
@@ -798,17 +798,17 @@ ASTNode * Parser::GetASTNode(int index, CompatibilityType typeFilter)
 }
 
 /// Searches through all of a nodes children to find a given index
-ASTNode * Parser::FindNodeInTree(int &currentIndex, ASTNode* node, int targetIndex, CompatibilityType typeFilter)
+ASTNode ** Parser::FindNodeInTree(int &currentIndex, ASTNode*& node, int targetIndex, CompatibilityType typeFilter)
 {
     if(node->GetCompType() == typeFilter ||
        (typeFilter == CompatibilityType::all && node->GetCompType() != CompatibilityType::none))
         currentIndex++;
 
     if(targetIndex == currentIndex)
-        return node;
-    for(auto n : node->children)
+        return &node;
+    for(auto &n : node->children)
     {
-        ASTNode* result = FindNodeInTree(currentIndex, n, targetIndex, typeFilter);
+        ASTNode** result = FindNodeInTree(currentIndex, n, targetIndex, typeFilter);
         if(result != nullptr)
             return result;
     }

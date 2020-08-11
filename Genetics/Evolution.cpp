@@ -23,6 +23,7 @@ namespace Genetics {
         for (auto &node : agent->parser.abstractSyntaxTree ) {
             MutateNodeAndChildren(node, mutagen);
         }
+
     }
 
     void Evolution::MutateNodeAndChildren(ASTNode *node, Mutagen& mutagen)
@@ -109,6 +110,9 @@ namespace Genetics {
     /// create and replace the current population with a new one
     void Evolution::GenerateNewPopulation(float crossover, float reproduction, float mutation)
     {
+        static int generation = -1;
+        generation++;
+
         std::vector<Individual> newPopulation;
         std::discrete_distribution<int> typeDist {crossover, reproduction, mutation};
 
@@ -121,8 +125,7 @@ namespace Genetics {
         std::discrete_distribution<int> probDist (weights.begin(), weights.end());
 
         // Create the new population one at a time
-        for(int i = 0; i < population.size(); i++)
-        {
+        for(int i = 0; i < population.size(); i++) {
             // Pick a probabilistically random method to create a new population
             switch (typeDist(randEngine))
             {
@@ -130,7 +133,10 @@ namespace Genetics {
                 case 0:
                 {
                     Agent* a = population[probDist(randEngine)].agent;
-                    Agent* b = population[probDist(randEngine)].agent;
+                    Agent* b = nullptr;
+                    do {
+                        b = population[probDist(randEngine)].agent;
+                    } while (*&b == *&a);
                     newPopulation.emplace_back();
                     newPopulation.back().agent = a->Cross(b);
                     break;
