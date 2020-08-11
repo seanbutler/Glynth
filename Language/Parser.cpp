@@ -9,6 +9,7 @@
 
 #include "Parser.h"
 #include "AST.h"
+#include "../Utils/RandomNumberGenerator.h"
 
 // ----------------------------------------------------------------------
 
@@ -775,6 +776,65 @@ void Parser::CopyNodeAndChildren(ASTNode *&original, ASTNode *&copy)
             CopyNodeAndChildren(original->children[i], copy->children[i]);
         }
     }
+}
+
+/// Returns a random node within the AST
+ASTNode * Parser::GetRandomASTNode(CompatibilityType typeFilter)
+{
+    return GetASTNode(util::RandomNumberGenerator::RandNum(0, CompatibleASTCount(typeFilter)), typeFilter);
+}
+
+/// Returns the nth (index) node in the AST of the given typeFilter
+ASTNode * Parser::GetASTNode(int index, CompatibilityType typeFilter)
+{
+    int i = 0;
+    for(auto node : abstractSyntaxTree)
+    {
+        ASTNode* result = FindNodeInTree(i, node, index, typeFilter);
+        if(result != nullptr)
+            return result;
+    }
+    return nullptr;
+}
+
+/// Searches through all of a nodes children to find a given index
+ASTNode * Parser::FindNodeInTree(int &currentIndex, ASTNode* node, int targetIndex, CompatibilityType typeFilter)
+{
+    if(node->GetCompType() == typeFilter ||
+       (typeFilter == CompatibilityType::all && node->GetCompType() != CompatibilityType::none))
+        currentIndex++;
+
+    if(targetIndex == currentIndex)
+        return node;
+    for(auto n : node->children)
+    {
+        ASTNode* result = FindNodeInTree(currentIndex, n, targetIndex, typeFilter);
+        if(result != nullptr)
+            return result;
+    }
+    return nullptr;
+}
+
+/// Returns the number of nodes of a given typeFilter in the current AST
+int Parser::CompatibleASTCount(CompatibilityType typeFilter)
+{
+    int total = 0;
+    for(auto node : abstractSyntaxTree)
+    {
+        CountNodes(total, node, typeFilter);
+    }
+    return total;
+}
+
+/// Searches through all of a nodes children and adds that count to nodeTotal
+void Parser::CountNodes(int &nodeTotal, ASTNode* node, CompatibilityType typeFilter)
+{
+    if(node->GetCompType() == typeFilter ||
+      (typeFilter == CompatibilityType::all && node->GetCompType() != CompatibilityType::none))
+        nodeTotal++;
+
+    for(auto n : node->children)
+        CountNodes(nodeTotal, n, typeFilter);
 }
 
 

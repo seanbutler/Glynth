@@ -129,7 +129,10 @@ namespace Genetics {
                 // Crossover
                 case 0:
                 {
-
+                    Agent* a = population[probDist(randEngine)].agent;
+                    Agent* b = population[probDist(randEngine)].agent;
+                    newPopulation.emplace_back();
+                    newPopulation.back().agent = a->Cross(b);
                     break;
                 }
                 // Reproduction

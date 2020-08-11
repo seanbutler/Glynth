@@ -22,6 +22,14 @@ namespace Genetics {
 
 static std::string getUniqueIdentifier();
 
+enum class CompatibilityType
+{
+    none,
+    all,
+    blockStart,
+
+};
+
 // ------------------------------------------------------------------------
 
 static unsigned int uid = 1;
@@ -43,6 +51,7 @@ public:
 
     int getNumber() const           { return number; }
     void setNumber(int N)           { number = N; }
+    CompatibilityType GetCompType() {return compatibility; };
 
     virtual std::string print();                                // USED FOR SIMPLE SERIALIZATION
     virtual std::string diag(unsigned int parentID) {};        // USED FOR GENERATING THE GV FILE...
@@ -50,10 +59,14 @@ public:
 
     std::vector<ASTNode*>children;
 
+protected:
+    CompatibilityType compatibility = CompatibilityType::none;
+
 private:
     unsigned int id;
     std::string name;
     int number;
+
 };
 
 // ------------------------------------------------------------------------
@@ -61,6 +74,8 @@ private:
 class IdentifierAST : public ASTNode {
 
 public:
+    IdentifierAST() {};
+
     explicit IdentifierAST(const std::string &N) : ASTNode(N) {}
 
     virtual void Accept( Genetics::MutationVisitor *visitor)  override ;
@@ -193,6 +208,7 @@ public:
     IfStatementAST(ASTNode *E, ASTNode *B)
         : ASTNode()
     {
+        compatibility = CompatibilityType::blockStart;
         children.push_back(E);
         children.push_back(B);
     }
@@ -219,6 +235,7 @@ public:
     WhileStatementAST(ASTNode *E, ASTNode *B)
     : ASTNode()
     {
+        compatibility = CompatibilityType::blockStart;
         children.push_back(E);
         children.push_back(B);
     }

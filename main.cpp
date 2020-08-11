@@ -38,7 +38,7 @@ int main(int argc, char **argv) {
         auto startPos = std::pair<int,int>(copy->alienVars.get(0), copy->alienVars.get(1));
         int furthestDist = 0;
 
-        for(int i = 0; i < 10000; i++)
+        for(int i = 0; i < 1000; i++)
         {
             copy->Update(0);
             auto newPos = std::pair<int,int>(copy->alienVars.get(0), copy->alienVars.get(1));
@@ -65,7 +65,7 @@ int main(int argc, char **argv) {
     {
         std::cout << "Creating generation " << i+1 << "/" << maxGenerations << "..." << std::endl;
         evolution.AssessFitness();
-        evolution.GenerateNewPopulation(0.0f, 0.5f, 0.5f);
+        evolution.GenerateNewPopulation(0.96f, 0.02f, 0.02f);
     }
     evolution.AssessFitness();
     
