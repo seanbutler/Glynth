@@ -418,6 +418,15 @@ std::string NumberAST::eval() {
 
 // ---------------------------------------------------------------------------
 
+BinOperandAST::BinOperandAST(Token O, ASTNode *L, ASTNode *R) :
+    ASTNode(), op(O), lhs(L), rhs(R)
+{
+    if(op == Token::OP_ADD || op == Token::OP_SUB || op == Token::OP_MUL || op == Token::OP_DIV)
+        compatibility = CompatibilityType::binArith;
+    else
+        compatibility = CompatibilityType::binComp;
+}
+
 void BinOperandAST::Accept( Genetics::MutationVisitor *visitor)  {
     visitor->Visit_BinOperandAST(this);
 };

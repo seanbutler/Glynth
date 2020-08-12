@@ -45,14 +45,14 @@ int main(int argc, char **argv) {
             if((std::find(uniqueLocations.begin(), uniqueLocations.end(), newPos)) == uniqueLocations.end())
             {
                 uniqueLocations.push_back(newPos);
-                int dist =  abs(startPos.first - newPos.first) + abs(startPos.second - newPos.second);
+                int dist = powf(abs(startPos.first - newPos.first),2) + powf(abs(startPos.second - newPos.second),2);
                 if(dist > furthestDist)
                 {
                     furthestDist = dist;
                 }
             }
         }
-        return uniqueLocations.size() - furthestDist;
+        return (uniqueLocations.size()*4) - furthestDist;
     };
 
     evolution.SetRandomiseFunction(hurtfulRand);

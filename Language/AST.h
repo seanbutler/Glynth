@@ -27,7 +27,11 @@ enum class CompatibilityType
     none,
     all,
     blockStart,
-    var
+    var,
+    binArith,
+    binComp,
+    block,
+    identifier
 
 };
 
@@ -111,6 +115,7 @@ public:
         : ASTNode()
         , identifier(I)
     {
+        compatibility = CompatibilityType::identifier;
         ASTNode::children.push_back(I);
     }
 
@@ -134,7 +139,7 @@ public:
     BlockAST()
         : ASTNode()
     {
-
+        compatibility = CompatibilityType::block;
     }
 
     virtual void Accept( Genetics::MutationVisitor *visitor) ;
@@ -308,7 +313,7 @@ public:
 class BinOperandAST : public ASTNode {
 
 public:
-    BinOperandAST(Token O, ASTNode *L, ASTNode *R) : ASTNode(), op(O), lhs(L), rhs(R) {}
+    BinOperandAST(Token O, ASTNode *L, ASTNode *R);
 
     virtual void Accept( Genetics::MutationVisitor *visitor) override ;
 
