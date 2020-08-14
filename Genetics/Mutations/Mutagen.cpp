@@ -12,9 +12,9 @@ namespace Genetics {
 
         for(MutationVisitor* M : this->mutations) {
             node->Accept(M);
-            for (auto *c : node->children) {
-                c->Accept(M);
-            }
+            //for (auto *c : node->children) {
+            //    c->Accept(M);
+            //}
         }
 
     }

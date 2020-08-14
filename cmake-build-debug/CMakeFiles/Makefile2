@@ -55,19 +55,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /snap/clion/123/bin/cmake/linux/bin/cmake
+CMAKE_COMMAND = /home/toby/Desktop/CLion-2019.3.2/clion-2019.3.2/bin/cmake/linux/bin/cmake
 
 # The command to remove a file.
-RM = /snap/clion/123/bin/cmake/linux/bin/cmake -E rm -f
+RM = /home/toby/Desktop/CLion-2019.3.2/clion-2019.3.2/bin/cmake/linux/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/sean/Projects/Glynth
+CMAKE_SOURCE_DIR = /home/toby/Desktop/Glynth
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/sean/Projects/Glynth/cmake-build-debug
+CMAKE_BINARY_DIR = /home/toby/Desktop/Glynth/cmake-build-debug
 
 #=============================================================================
 # Directory level rules for the build root directory
@@ -94,14 +94,14 @@ clean: CMakeFiles/Glynth.dir/clean
 CMakeFiles/Glynth.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Glynth.dir/build.make CMakeFiles/Glynth.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Glynth.dir/build.make CMakeFiles/Glynth.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/sean/Projects/Glynth/cmake-build-debug/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12 "Built target Glynth"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/toby/Desktop/Glynth/cmake-build-debug/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12 "Built target Glynth"
 .PHONY : CMakeFiles/Glynth.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/Glynth.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/sean/Projects/Glynth/cmake-build-debug/CMakeFiles 12
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/toby/Desktop/Glynth/cmake-build-debug/CMakeFiles 12
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/Glynth.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/sean/Projects/Glynth/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/toby/Desktop/Glynth/cmake-build-debug/CMakeFiles 0
 .PHONY : CMakeFiles/Glynth.dir/rule
 
 # Convenience name for target.

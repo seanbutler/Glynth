@@ -54,19 +54,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /snap/clion/123/bin/cmake/linux/bin/cmake
+CMAKE_COMMAND = /home/toby/Desktop/CLion-2019.3.2/clion-2019.3.2/bin/cmake/linux/bin/cmake
 
 # The command to remove a file.
-RM = /snap/clion/123/bin/cmake/linux/bin/cmake -E rm -f
+RM = /home/toby/Desktop/CLion-2019.3.2/clion-2019.3.2/bin/cmake/linux/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/sean/Projects/Glynth
+CMAKE_SOURCE_DIR = /home/toby/Desktop/Glynth
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/sean/Projects/Glynth/cmake-build-debug
+CMAKE_BINARY_DIR = /home/toby/Desktop/Glynth/cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/Glynth.dir/depend.make
@@ -79,146 +79,146 @@ include CMakeFiles/Glynth.dir/flags.make
 
 CMakeFiles/Glynth.dir/main.cpp.o: CMakeFiles/Glynth.dir/flags.make
 CMakeFiles/Glynth.dir/main.cpp.o: ../main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sean/Projects/Glynth/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Glynth.dir/main.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Glynth.dir/main.cpp.o -c /home/sean/Projects/Glynth/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/toby/Desktop/Glynth/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Glynth.dir/main.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Glynth.dir/main.cpp.o -c /home/toby/Desktop/Glynth/main.cpp
 
 CMakeFiles/Glynth.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Glynth.dir/main.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sean/Projects/Glynth/main.cpp > CMakeFiles/Glynth.dir/main.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/toby/Desktop/Glynth/main.cpp > CMakeFiles/Glynth.dir/main.cpp.i
 
 CMakeFiles/Glynth.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Glynth.dir/main.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sean/Projects/Glynth/main.cpp -o CMakeFiles/Glynth.dir/main.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/toby/Desktop/Glynth/main.cpp -o CMakeFiles/Glynth.dir/main.cpp.s
 
 CMakeFiles/Glynth.dir/Engine/Engine.cpp.o: CMakeFiles/Glynth.dir/flags.make
 CMakeFiles/Glynth.dir/Engine/Engine.cpp.o: ../Engine/Engine.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sean/Projects/Glynth/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Glynth.dir/Engine/Engine.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Glynth.dir/Engine/Engine.cpp.o -c /home/sean/Projects/Glynth/Engine/Engine.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/toby/Desktop/Glynth/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Glynth.dir/Engine/Engine.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Glynth.dir/Engine/Engine.cpp.o -c /home/toby/Desktop/Glynth/Engine/Engine.cpp
 
 CMakeFiles/Glynth.dir/Engine/Engine.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Glynth.dir/Engine/Engine.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sean/Projects/Glynth/Engine/Engine.cpp > CMakeFiles/Glynth.dir/Engine/Engine.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/toby/Desktop/Glynth/Engine/Engine.cpp > CMakeFiles/Glynth.dir/Engine/Engine.cpp.i
 
 CMakeFiles/Glynth.dir/Engine/Engine.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Glynth.dir/Engine/Engine.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sean/Projects/Glynth/Engine/Engine.cpp -o CMakeFiles/Glynth.dir/Engine/Engine.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/toby/Desktop/Glynth/Engine/Engine.cpp -o CMakeFiles/Glynth.dir/Engine/Engine.cpp.s
 
 CMakeFiles/Glynth.dir/Genetics/Evolution.cpp.o: CMakeFiles/Glynth.dir/flags.make
 CMakeFiles/Glynth.dir/Genetics/Evolution.cpp.o: ../Genetics/Evolution.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sean/Projects/Glynth/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/Glynth.dir/Genetics/Evolution.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Glynth.dir/Genetics/Evolution.cpp.o -c /home/sean/Projects/Glynth/Genetics/Evolution.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/toby/Desktop/Glynth/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/Glynth.dir/Genetics/Evolution.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Glynth.dir/Genetics/Evolution.cpp.o -c /home/toby/Desktop/Glynth/Genetics/Evolution.cpp
 
 CMakeFiles/Glynth.dir/Genetics/Evolution.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Glynth.dir/Genetics/Evolution.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sean/Projects/Glynth/Genetics/Evolution.cpp > CMakeFiles/Glynth.dir/Genetics/Evolution.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/toby/Desktop/Glynth/Genetics/Evolution.cpp > CMakeFiles/Glynth.dir/Genetics/Evolution.cpp.i
 
 CMakeFiles/Glynth.dir/Genetics/Evolution.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Glynth.dir/Genetics/Evolution.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sean/Projects/Glynth/Genetics/Evolution.cpp -o CMakeFiles/Glynth.dir/Genetics/Evolution.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/toby/Desktop/Glynth/Genetics/Evolution.cpp -o CMakeFiles/Glynth.dir/Genetics/Evolution.cpp.s
 
 CMakeFiles/Glynth.dir/Genetics/Mutations/MutationVisitor.cpp.o: CMakeFiles/Glynth.dir/flags.make
 CMakeFiles/Glynth.dir/Genetics/Mutations/MutationVisitor.cpp.o: ../Genetics/Mutations/MutationVisitor.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sean/Projects/Glynth/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Glynth.dir/Genetics/Mutations/MutationVisitor.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Glynth.dir/Genetics/Mutations/MutationVisitor.cpp.o -c /home/sean/Projects/Glynth/Genetics/Mutations/MutationVisitor.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/toby/Desktop/Glynth/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Glynth.dir/Genetics/Mutations/MutationVisitor.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Glynth.dir/Genetics/Mutations/MutationVisitor.cpp.o -c /home/toby/Desktop/Glynth/Genetics/Mutations/MutationVisitor.cpp
 
 CMakeFiles/Glynth.dir/Genetics/Mutations/MutationVisitor.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Glynth.dir/Genetics/Mutations/MutationVisitor.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sean/Projects/Glynth/Genetics/Mutations/MutationVisitor.cpp > CMakeFiles/Glynth.dir/Genetics/Mutations/MutationVisitor.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/toby/Desktop/Glynth/Genetics/Mutations/MutationVisitor.cpp > CMakeFiles/Glynth.dir/Genetics/Mutations/MutationVisitor.cpp.i
 
 CMakeFiles/Glynth.dir/Genetics/Mutations/MutationVisitor.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Glynth.dir/Genetics/Mutations/MutationVisitor.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sean/Projects/Glynth/Genetics/Mutations/MutationVisitor.cpp -o CMakeFiles/Glynth.dir/Genetics/Mutations/MutationVisitor.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/toby/Desktop/Glynth/Genetics/Mutations/MutationVisitor.cpp -o CMakeFiles/Glynth.dir/Genetics/Mutations/MutationVisitor.cpp.s
 
 CMakeFiles/Glynth.dir/Genetics/Mutations/Mutagen.cpp.o: CMakeFiles/Glynth.dir/flags.make
 CMakeFiles/Glynth.dir/Genetics/Mutations/Mutagen.cpp.o: ../Genetics/Mutations/Mutagen.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sean/Projects/Glynth/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/Glynth.dir/Genetics/Mutations/Mutagen.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Glynth.dir/Genetics/Mutations/Mutagen.cpp.o -c /home/sean/Projects/Glynth/Genetics/Mutations/Mutagen.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/toby/Desktop/Glynth/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/Glynth.dir/Genetics/Mutations/Mutagen.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Glynth.dir/Genetics/Mutations/Mutagen.cpp.o -c /home/toby/Desktop/Glynth/Genetics/Mutations/Mutagen.cpp
 
 CMakeFiles/Glynth.dir/Genetics/Mutations/Mutagen.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Glynth.dir/Genetics/Mutations/Mutagen.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sean/Projects/Glynth/Genetics/Mutations/Mutagen.cpp > CMakeFiles/Glynth.dir/Genetics/Mutations/Mutagen.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/toby/Desktop/Glynth/Genetics/Mutations/Mutagen.cpp > CMakeFiles/Glynth.dir/Genetics/Mutations/Mutagen.cpp.i
 
 CMakeFiles/Glynth.dir/Genetics/Mutations/Mutagen.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Glynth.dir/Genetics/Mutations/Mutagen.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sean/Projects/Glynth/Genetics/Mutations/Mutagen.cpp -o CMakeFiles/Glynth.dir/Genetics/Mutations/Mutagen.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/toby/Desktop/Glynth/Genetics/Mutations/Mutagen.cpp -o CMakeFiles/Glynth.dir/Genetics/Mutations/Mutagen.cpp.s
 
 CMakeFiles/Glynth.dir/Language/Instructions.cpp.o: CMakeFiles/Glynth.dir/flags.make
 CMakeFiles/Glynth.dir/Language/Instructions.cpp.o: ../Language/Instructions.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sean/Projects/Glynth/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/Glynth.dir/Language/Instructions.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Glynth.dir/Language/Instructions.cpp.o -c /home/sean/Projects/Glynth/Language/Instructions.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/toby/Desktop/Glynth/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/Glynth.dir/Language/Instructions.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Glynth.dir/Language/Instructions.cpp.o -c /home/toby/Desktop/Glynth/Language/Instructions.cpp
 
 CMakeFiles/Glynth.dir/Language/Instructions.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Glynth.dir/Language/Instructions.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sean/Projects/Glynth/Language/Instructions.cpp > CMakeFiles/Glynth.dir/Language/Instructions.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/toby/Desktop/Glynth/Language/Instructions.cpp > CMakeFiles/Glynth.dir/Language/Instructions.cpp.i
 
 CMakeFiles/Glynth.dir/Language/Instructions.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Glynth.dir/Language/Instructions.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sean/Projects/Glynth/Language/Instructions.cpp -o CMakeFiles/Glynth.dir/Language/Instructions.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/toby/Desktop/Glynth/Language/Instructions.cpp -o CMakeFiles/Glynth.dir/Language/Instructions.cpp.s
 
 CMakeFiles/Glynth.dir/Language/Lexer.cpp.o: CMakeFiles/Glynth.dir/flags.make
 CMakeFiles/Glynth.dir/Language/Lexer.cpp.o: ../Language/Lexer.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sean/Projects/Glynth/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/Glynth.dir/Language/Lexer.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Glynth.dir/Language/Lexer.cpp.o -c /home/sean/Projects/Glynth/Language/Lexer.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/toby/Desktop/Glynth/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/Glynth.dir/Language/Lexer.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Glynth.dir/Language/Lexer.cpp.o -c /home/toby/Desktop/Glynth/Language/Lexer.cpp
 
 CMakeFiles/Glynth.dir/Language/Lexer.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Glynth.dir/Language/Lexer.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sean/Projects/Glynth/Language/Lexer.cpp > CMakeFiles/Glynth.dir/Language/Lexer.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/toby/Desktop/Glynth/Language/Lexer.cpp > CMakeFiles/Glynth.dir/Language/Lexer.cpp.i
 
 CMakeFiles/Glynth.dir/Language/Lexer.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Glynth.dir/Language/Lexer.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sean/Projects/Glynth/Language/Lexer.cpp -o CMakeFiles/Glynth.dir/Language/Lexer.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/toby/Desktop/Glynth/Language/Lexer.cpp -o CMakeFiles/Glynth.dir/Language/Lexer.cpp.s
 
 CMakeFiles/Glynth.dir/Language/AST.cpp.o: CMakeFiles/Glynth.dir/flags.make
 CMakeFiles/Glynth.dir/Language/AST.cpp.o: ../Language/AST.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sean/Projects/Glynth/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/Glynth.dir/Language/AST.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Glynth.dir/Language/AST.cpp.o -c /home/sean/Projects/Glynth/Language/AST.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/toby/Desktop/Glynth/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/Glynth.dir/Language/AST.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Glynth.dir/Language/AST.cpp.o -c /home/toby/Desktop/Glynth/Language/AST.cpp
 
 CMakeFiles/Glynth.dir/Language/AST.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Glynth.dir/Language/AST.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sean/Projects/Glynth/Language/AST.cpp > CMakeFiles/Glynth.dir/Language/AST.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/toby/Desktop/Glynth/Language/AST.cpp > CMakeFiles/Glynth.dir/Language/AST.cpp.i
 
 CMakeFiles/Glynth.dir/Language/AST.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Glynth.dir/Language/AST.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sean/Projects/Glynth/Language/AST.cpp -o CMakeFiles/Glynth.dir/Language/AST.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/toby/Desktop/Glynth/Language/AST.cpp -o CMakeFiles/Glynth.dir/Language/AST.cpp.s
 
 CMakeFiles/Glynth.dir/Language/Parser.cpp.o: CMakeFiles/Glynth.dir/flags.make
 CMakeFiles/Glynth.dir/Language/Parser.cpp.o: ../Language/Parser.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sean/Projects/Glynth/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/Glynth.dir/Language/Parser.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Glynth.dir/Language/Parser.cpp.o -c /home/sean/Projects/Glynth/Language/Parser.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/toby/Desktop/Glynth/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/Glynth.dir/Language/Parser.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Glynth.dir/Language/Parser.cpp.o -c /home/toby/Desktop/Glynth/Language/Parser.cpp
 
 CMakeFiles/Glynth.dir/Language/Parser.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Glynth.dir/Language/Parser.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sean/Projects/Glynth/Language/Parser.cpp > CMakeFiles/Glynth.dir/Language/Parser.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/toby/Desktop/Glynth/Language/Parser.cpp > CMakeFiles/Glynth.dir/Language/Parser.cpp.i
 
 CMakeFiles/Glynth.dir/Language/Parser.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Glynth.dir/Language/Parser.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sean/Projects/Glynth/Language/Parser.cpp -o CMakeFiles/Glynth.dir/Language/Parser.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/toby/Desktop/Glynth/Language/Parser.cpp -o CMakeFiles/Glynth.dir/Language/Parser.cpp.s
 
 CMakeFiles/Glynth.dir/Language/Assembler.cpp.o: CMakeFiles/Glynth.dir/flags.make
 CMakeFiles/Glynth.dir/Language/Assembler.cpp.o: ../Language/Assembler.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sean/Projects/Glynth/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/Glynth.dir/Language/Assembler.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Glynth.dir/Language/Assembler.cpp.o -c /home/sean/Projects/Glynth/Language/Assembler.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/toby/Desktop/Glynth/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object CMakeFiles/Glynth.dir/Language/Assembler.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Glynth.dir/Language/Assembler.cpp.o -c /home/toby/Desktop/Glynth/Language/Assembler.cpp
 
 CMakeFiles/Glynth.dir/Language/Assembler.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Glynth.dir/Language/Assembler.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sean/Projects/Glynth/Language/Assembler.cpp > CMakeFiles/Glynth.dir/Language/Assembler.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/toby/Desktop/Glynth/Language/Assembler.cpp > CMakeFiles/Glynth.dir/Language/Assembler.cpp.i
 
 CMakeFiles/Glynth.dir/Language/Assembler.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Glynth.dir/Language/Assembler.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sean/Projects/Glynth/Language/Assembler.cpp -o CMakeFiles/Glynth.dir/Language/Assembler.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/toby/Desktop/Glynth/Language/Assembler.cpp -o CMakeFiles/Glynth.dir/Language/Assembler.cpp.s
 
 CMakeFiles/Glynth.dir/Language/VirtualMachine.cpp.o: CMakeFiles/Glynth.dir/flags.make
 CMakeFiles/Glynth.dir/Language/VirtualMachine.cpp.o: ../Language/VirtualMachine.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sean/Projects/Glynth/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/Glynth.dir/Language/VirtualMachine.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Glynth.dir/Language/VirtualMachine.cpp.o -c /home/sean/Projects/Glynth/Language/VirtualMachine.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/toby/Desktop/Glynth/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object CMakeFiles/Glynth.dir/Language/VirtualMachine.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Glynth.dir/Language/VirtualMachine.cpp.o -c /home/toby/Desktop/Glynth/Language/VirtualMachine.cpp
 
 CMakeFiles/Glynth.dir/Language/VirtualMachine.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Glynth.dir/Language/VirtualMachine.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sean/Projects/Glynth/Language/VirtualMachine.cpp > CMakeFiles/Glynth.dir/Language/VirtualMachine.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/toby/Desktop/Glynth/Language/VirtualMachine.cpp > CMakeFiles/Glynth.dir/Language/VirtualMachine.cpp.i
 
 CMakeFiles/Glynth.dir/Language/VirtualMachine.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Glynth.dir/Language/VirtualMachine.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sean/Projects/Glynth/Language/VirtualMachine.cpp -o CMakeFiles/Glynth.dir/Language/VirtualMachine.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/toby/Desktop/Glynth/Language/VirtualMachine.cpp -o CMakeFiles/Glynth.dir/Language/VirtualMachine.cpp.s
 
 # Object files for target Glynth
 Glynth_OBJECTS = \
@@ -250,7 +250,7 @@ Glynth: CMakeFiles/Glynth.dir/Language/Assembler.cpp.o
 Glynth: CMakeFiles/Glynth.dir/Language/VirtualMachine.cpp.o
 Glynth: CMakeFiles/Glynth.dir/build.make
 Glynth: CMakeFiles/Glynth.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/sean/Projects/Glynth/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Linking CXX executable Glynth"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/toby/Desktop/Glynth/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Linking CXX executable Glynth"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Glynth.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -263,6 +263,6 @@ CMakeFiles/Glynth.dir/clean:
 .PHONY : CMakeFiles/Glynth.dir/clean
 
 CMakeFiles/Glynth.dir/depend:
-	cd /home/sean/Projects/Glynth/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/sean/Projects/Glynth /home/sean/Projects/Glynth /home/sean/Projects/Glynth/cmake-build-debug /home/sean/Projects/Glynth/cmake-build-debug /home/sean/Projects/Glynth/cmake-build-debug/CMakeFiles/Glynth.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/toby/Desktop/Glynth/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/toby/Desktop/Glynth /home/toby/Desktop/Glynth /home/toby/Desktop/Glynth/cmake-build-debug /home/toby/Desktop/Glynth/cmake-build-debug /home/toby/Desktop/Glynth/cmake-build-debug/CMakeFiles/Glynth.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/Glynth.dir/depend
 
