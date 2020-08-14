@@ -4,6 +4,7 @@
 
 #include "Instructions.h"
 #include "VirtualMachine.h"
+#include "../Simulation/Agent.h"
 
 //#define DEBUG
 
@@ -12,7 +13,7 @@ void VM::Execute(unsigned int slice) {
     if ( ! done ) {
         while (running > 0) {
             running--;
-    #ifdef DEBUG
+#ifdef DEBUG
             std::cout << "pc = " << programCounter << " instr = " << instructionNames[getCurrentInstruction()] << std::endl;
 
             std::cout << "instr = ";
@@ -35,7 +36,7 @@ void VM::Execute(unsigned int slice) {
                 std::cout << "(unknown)";
 
             std::cout << std::endl;
-    #endif
+#endif
             switch ((INS)getCurrentInstruction()) {
 
                 case INS::NOP : {
@@ -195,6 +196,18 @@ void VM::Execute(unsigned int slice) {
                     break;
                 }
 
+                case INS::NEAREST : {
+                    int param = this->stack.top() % 4;
+                    int result;
+                    int x = alienVars->get(0);
+                    int y = alienVars->get(1);
+
+//                    directionToNearest(param, x, y);
+
+                    this->stack.push(result);
+                    break;
+                }
+
                 case INS::MOVE : {
                     int dir = this->stack.top() % 4;
 
@@ -203,15 +216,12 @@ void VM::Execute(unsigned int slice) {
                     }
                     else if (dir == 1) {
                         alienVars->set(0, alienVars->get(0) + 1);
-//                        this->alien[0] += 1;
                     }
                     else if (dir == 2) {
                         alienVars->set(1, alienVars->get(1) + 1);
-//                        this->alien[1] += 1;
                     }
                     else if (dir == 3) {
                         alienVars->set(0, alienVars->get(0) - 1);
-//                        this->alien[0] -= 1;
                     }
 
                     this->stack.pop();
@@ -302,7 +312,7 @@ void VM::Execute(unsigned int slice) {
                     if (a==0) {
                         programCounter = addr-1;
                     }
-    //                std::cout << " " << programCounter << std::endl;
+                    //                std::cout << " " << programCounter << std::endl;
                     break;
                 }
 

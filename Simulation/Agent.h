@@ -20,88 +20,43 @@
 
 // ----------------------------------------------------------------------
 
-
 class AgentType {
 public:
     AgentType(sf::Color C)
     :   colour(C) {
-
     }
 
-    sf::Color  Colour()         { return colour;}
+public:
+    sf::Color  Colour() const { return colour; }
 
 protected:
     const sf::Color colour;
-};
-
-// ----------------------------------------------------------------------
-
-class DetectableAgentType : public AgentType {
-
-public:
-    DetectableAgentType(sf::Color C)
-            : AgentType(C)
-    {
-    }
-
-public:
-    unsigned int directionToNearest(int x, int y) {
-
-        unsigned int shortestDistance = INT32_MAX;
-        float distance;
-        unsigned int closest = INT32_MAX;
-
-        for( int n = 0; n< positionTable.size(); n++) {
-
-            distance =  sqrt ( ( ( positionTable[n].first - x ) * ( positionTable[n].first - x ) )
-                               + ( ( positionTable[n].second - y ) * ( positionTable[n].second - y ) ) );
-
-            if ( distance < shortestDistance ) {
-                shortestDistance = distance;
-                closest = n;
-            }
-
-            int unitx = ( positionTable[n].first - x ) / distance;
-            int unity = ( positionTable[n].second - y ) / distance;
-
-            std::cout << "unity = " << unitx << "unity = " << unity << std::endl;
-
-            if ( unitx == -1 && unity == 0 ) return 3;
-            if ( unitx == 0 && unity == -1 ) return 2;
-            if ( unitx == 1 && unity == 0 ) return 1;
-            if ( unitx == 0 && unity == 1 ) return 0;
-        }
-    }
-
-private:
-    static std::vector<std::pair<int, int>> positionTable;
-    std::vector<int> distanceTable;
 
 };
 
 // ----------------------------------------------------------------------
 
-class PlayerAgentType : public DetectableAgentType {
+class PlayerAgentType : public AgentType {
     // Grey is anonymous, like a good player character
-    // Movable, Hurtable
+    // Movable, Hurtable?
     //
 public:
     PlayerAgentType()
-    : DetectableAgentType(sf::Color(128, 128, 128))
+    : AgentType(sf::Color(128, 128, 128))
     {
-
     }
+
 
 };
 
 // ----------------------------------------------------------------------
 
-class GoalAgentType : public DetectableAgentType {
+class GoalAgentType : public AgentType {
     // Nice Sky Colour for Escape?
     // End of Game
 public:
     GoalAgentType()
-        : DetectableAgentType(sf::Color(128, 192, 255))
+        : AgentType(sf::Color(128, 192, 255))
     {
     }
 
@@ -109,31 +64,27 @@ public:
 
 // ----------------------------------------------------------------------
 
-class HealingAgentType : public DetectableAgentType {
+class HealingAgentType : public AgentType {
     // Green, Like a Healthpack
     // Touch and it heals you
 public:
     HealingAgentType()
-            : DetectableAgentType(sf::Color(32, 255, 32))
+    : AgentType(sf::Color(32, 255, 32))
     {
     }
-
 
 };
 
 // ----------------------------------------------------------------------
 
-
-class HurtfulAgentType : public DetectableAgentType {
+class HurtfulAgentType : public AgentType {
     // Red is Danger
     // Touch and it hurts you
 public:
     HurtfulAgentType()
-    : DetectableAgentType(sf::Color(255, 32, 32))
+    : AgentType(sf::Color(255, 32, 32))
     {
-
     }
-
 
 };
 
@@ -145,20 +96,19 @@ class WallAgentType : public AgentType {
     // Impassible
 public:
     WallAgentType()
-            : AgentType(sf::Color(0, 0, 0))
+    : AgentType(sf::Color(0, 0, 0))
     {
-
     }
-
 };
 
 // ----------------------------------------------------------------------
 
 class Agent : public Engine::Entity {
 public:
-    Agent(AgentType AT)
-            : Entity()
-            , agenttype(AT) {
+    Agent(const AgentType & AT)
+    : Entity()
+    , agenttype(AT)
+    {
         std::cout << "Agent::Agent ()" << std::endl;
         rectangle.setFillColor(agenttype.Colour());
         rectangle.setSize(sf::Vector2f (1, 1));
@@ -210,10 +160,11 @@ public:
         if (!virtualMachine.done) {
             virtualMachine.Execute(10);
         }
-    };
+//        agenttype.Colour();
+    }
 
     std::string srcFilename;
-    AgentType agenttype;
+    const AgentType & agenttype;
     sf::RectangleShape rectangle;
 
     Lexer lexer;

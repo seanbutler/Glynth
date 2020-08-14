@@ -47,6 +47,10 @@ enum class INS : int {
     // these take no parameters but returns a value
     RAND,
 
+    // these take one parameter and return one parameter
+    NEAREST,
+
+
     NUMBER,
     ADDRESS,
     LABEL,
