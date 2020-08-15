@@ -1,2 +1,8 @@
 /cmake-build-debug/
 /Documentation/html/
+/Assets/*.asm
+/Assets/*.gv
+/Assets/*.instr
+/Assets/*.json
+/Assets/*.tokAndLine
+/Assets/*.tokens
