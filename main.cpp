@@ -1,95 +1,14 @@
 #include <iostream>
-#include <fstream>
-#include<stdlib.h>
-#include<time.h>
-
-#include "./Language/Lexer.h"
-#include "./Language/Parser.h"
-#include "./Language/Assembler.h"
-#include "./Language/VirtualMachine.h"
 
 #include "./Engine/Engine.h"
-#include "./Engine/Entity.h"
-
-#include "./Simulation/Agent.h"
-#include "./Simulation/MazeEnvironment.h"
-#include "./Simulation/WallEnvironment.h"
-#include "./Simulation/ForestEnvironment.h"
-
-#include "./Genetics/Evolution.h"
+#include "./Test/SeanTest.h"
 
 int main(int argc, char **argv) {
     std::cout << "GLYNTH - Game Language Program Synthesis" << std::endl;
 
-    Engine::Engine engine(32, 32);
-    Genetics::Evolution evolution;
+//    TobyTest::Test1();
 
-    srand(time(nullptr));
+    SeanTest::Test1();
 
-//    MazeEnvironment* environment = new MazeEnvironment(32, 32);
-//    engine.entityScheduler.entities.push_back((Entity*)environment);
-
-//    WallEnvironment* environment1 = new WallEnvironment('V', 32, 32);
-//    engine.entityScheduler.entities.push_back((Engine::Entity*)environment1);
-//
-//    WallEnvironment* environment2 = new WallEnvironment('H', 32, 32);
-//    engine.entityScheduler.entities.push_back((Engine::Entity*)environment2);
-
-//    ForestEnvironment* environment2 = new ForestEnvironment(32, 32);
-//    engine.entityScheduler.entities.push_back((Engine::Entity*)environment2);
-
-//    Agent* goalAgentPtr = new Agent("./Assets/goal.c", GoalAgentType());
-//    engine.entityScheduler.entities.push_back((Engine::Entity*)goalAgentPtr);
-//    goalAgentPtr->SetAlienVar(0, 24 + (int)rand()%8);
-//    goalAgentPtr->SetAlienVar(1, 24 + (int)rand()%8);
-//
-//    Agent* playerAgentPtr = new Agent("./Assets/player.c", PlayerAgentType());
-//    engine.entityScheduler.entities.push_back((Engine::Entity*)playerAgentPtr);
-//    evolution.population.individuals.push_back(playerAgentPtr);
-//    playerAgentPtr->SetAlienVar(0, 2 + (int)rand()%4);
-//    playerAgentPtr->SetAlienVar(1, 2 + (int)rand()%4);
-
-    Agent* tmpAgent1Ptr;
-    tmpAgent1Ptr = new Agent(HurtfulAgentType());
-    tmpAgent1Ptr->Compile("../Assets/agent1.c");
-    tmpAgent1Ptr->Assemble();
-    tmpAgent1Ptr->SetAlienVar(0, 8 );
-    tmpAgent1Ptr->SetAlienVar(1, 8 );
-    engine.entityScheduler.entities.push_back((Engine::Entity*)tmpAgent1Ptr);
-
-
-//    Agent* tmpAgent2Ptr;
-//    for (int n=0;n<16;n++) {
-//        tmpAgent2Ptr = new Agent(HurtfulAgentType());
-//        tmpAgent2Ptr->Compile("./Assets/agent2.c");
-//
-//        evolution.MutateIndividual(tmpAgent2Ptr);
-//
-//        tmpAgent2Ptr->Assemble();
-//        tmpAgent2Ptr->SetAlienVar(0, 8 + (int)rand()%16);
-//        tmpAgent2Ptr->SetAlienVar(1, 8 + (int)rand()%16);
-//
-//        engine.entityScheduler.entities.push_back((Engine::Entity*)tmpAgent2Ptr);
-//    }
-
-//    evolution.MutatePopulation(); // LETS TRY MUTATING EACH INDIVIDUAL IN SITU INSTEAD OF TEH WHOLE POPYLATION
-
-//    Agent* tmpAgent3Ptr;
-//    for (int n=0;n<16;n++){
-//        tmpAgent3Ptr = new Agent(HealingAgentType());
-//        tmpAgent3Ptr->Compile("./Assets/agent3.c");
-//
-//        evolution.MutateIndividual(tmpAgent3Ptr);
-//
-//        tmpAgent3Ptr->Assemble();
-//        tmpAgent3Ptr->SetAlienVar(0, 8 + (int)rand()%16);
-//        tmpAgent3Ptr->SetAlienVar(1, 8 + (int)rand()%16);
-//
-//        engine.entityScheduler.entities.push_back((Engine::Entity*)tmpAgent3Ptr);
-//    }
-
-//    evolution.MutatePopulation();
-
-    engine.MainLoop();
     return 0;
 }
