@@ -419,8 +419,11 @@ std::string NumberAST::eval() {
 // ---------------------------------------------------------------------------
 
 BinOperandAST::BinOperandAST(Token O, ASTNode *L, ASTNode *R) :
-    ASTNode(), op(O), lhs(L), rhs(R)
+    ASTNode(), op(O)
 {
+    children.push_back(L);
+    children.push_back(R);
+
     if(op == Token::OP_ADD || op == Token::OP_SUB || op == Token::OP_MUL || op == Token::OP_DIV)
         compatibility = CompatibilityType::binArith;
     else
@@ -485,11 +488,11 @@ std::string BinOperandAST::print() {
     str +=  "\"operand\" : \"" + opStr + "\",\n" ;
 
     str += "\"lhs\" : {\n";
-    str += lhs->print();
+    str += children[0]->print();
     str += "\n},\n";
 
     str += "\"rhs\" : {\n";
-    str += rhs->print();
+    str += children[1]->print();
     str += "\n}\n";
 
     str += "}\n";
@@ -501,7 +504,7 @@ std::string BinOperandAST::print() {
 std::string BinOperandAST::diag(unsigned int parentID) {
 
     std::string str;
-    str += lhs->diag(getID());
+    str += children[0]->diag(getID());
 
     std::string opStr;
 
@@ -548,7 +551,7 @@ std::string BinOperandAST::diag(unsigned int parentID) {
     }
 
     str += "node" + std::to_string(getID()) + " [ label = \"op: " + opStr + "\"];\n";
-    str += rhs->diag(getID());
+    str += children[1]->diag(getID());
     str += "node" + std::to_string(parentID) + " -> node" + std::to_string(getID()) + ";\n";
     return str;
 }
@@ -558,52 +561,52 @@ std::string BinOperandAST::eval() {
     std::string str = "";
     switch (op) {
         case Token::OP_ADD: {
-            str += lhs->eval() + rhs->eval() + "\tADD";
+            str += children[0]->eval() + children[1]->eval() + "\tADD";
             str += "\n";
             break;
         }
         case Token::OP_SUB: {
-            str += lhs->eval() + rhs->eval() + "\tSUB";
+            str += children[0]->eval() + children[1]->eval() + "\tSUB";
             str += "\n";
             break;
         }
         case Token::OP_MUL: {
-            str += lhs->eval() + rhs->eval() + "\tMUL";
+            str += children[0]->eval() + children[1]->eval() + "\tMUL";
             str += "\n";
             break;
         }
         case Token::OP_DIV: {
-            str += lhs->eval() + rhs->eval() + "\tDIV";
+            str += children[0]->eval() + children[1]->eval() + "\tDIV";
             str += "\n";
             break;
         }
         case Token::OP_GT: {
-            str += lhs->eval() + rhs->eval() + "\tGT";
+            str += children[0]->eval() + children[1]->eval() + "\tGT";
             str += "\n";
             break;
         }
         case Token::OP_LT: {
-            str += lhs->eval() + rhs->eval() + "\tLT";
+            str += children[0]->eval() + children[1]->eval() + "\tLT";
             str += "\n";
             break;
         }
         case Token::OP_GTE: {
-            str += lhs->eval() + rhs->eval() + "\tGTE";
+            str += children[0]->eval() + children[1]->eval() + "\tGTE";
             str += "\n";
             break;
         }
         case Token::OP_LTE: {
-            str += lhs->eval() + rhs->eval() + "\tLTE";
+            str += children[0]->eval() + children[1]->eval() + "\tLTE";
             str += "\n";
             break;
         }
         case Token::OP_EQ: {
-            str += lhs->eval() + rhs->eval();
+            str += children[0]->eval() + children[1]->eval();
             str += "\tEQU\n";
             break;
         }
         case Token::OP_NE: {
-            str += lhs->eval() + rhs->eval() + "\tNE";
+            str += children[0]->eval() + children[1]->eval() + "\tNE";
             str += "\n";
             break;
         }

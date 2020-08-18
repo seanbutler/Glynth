@@ -322,9 +322,6 @@ public:
     virtual std::string eval();
 
     Token op;
-    ASTNode *lhs;
-    ASTNode *rhs;
-
 private:
 };
 
