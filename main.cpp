@@ -38,21 +38,21 @@ int main(int argc, char **argv) {
         auto startPos = std::pair<int,int>(copy->alienVars.get(0), copy->alienVars.get(1));
         int furthestDist = 0;
 
-        for(int i = 0; i < 1000; i++)
+        for(int i = 0; i < 50; i++)
         {
             copy->Update(0);
             auto newPos = std::pair<int,int>(copy->alienVars.get(0), copy->alienVars.get(1));
             if((std::find(uniqueLocations.begin(), uniqueLocations.end(), newPos)) == uniqueLocations.end())
             {
                 uniqueLocations.push_back(newPos);
-                int dist = powf(abs(startPos.first - newPos.first),2) + powf(abs(startPos.second - newPos.second),2);
+                int dist = powf(abs(startPos.first - newPos.first),3) + powf(abs(startPos.second - newPos.second),3);
                 if(dist > furthestDist)
                 {
                     furthestDist = dist;
                 }
             }
         }
-        return (uniqueLocations.size()*4) - furthestDist;
+        return (uniqueLocations.size()*25) - furthestDist;
     };
 
     evolution.SetRandomiseFunction(hurtfulRand);
