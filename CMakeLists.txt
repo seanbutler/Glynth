@@ -35,8 +35,10 @@ add_executable(Glynth main.cpp
         Genetics/Mutations/Mutagen.h
         Genetics/Mutations/Mutagen.cpp
         Utils/Maze.h
-
-        Utils/RandomNumberGenerator.cpp Utils/RandomNumberGenerator.h)
+        Utils/RandomNumberGenerator.cpp
+        Utils/RandomNumberGenerator.h
+        Test/TobyTest.h
+        Test/TobyTest.cpp)
 
 
 find_package(SFML REQUIRED COMPONENTS system graphics window network audio)
