@@ -2,6 +2,7 @@
 // Created by sean on 30/07/2020.
 //
 
+#include <future>
 #include "Evolution.h"
 
 namespace Genetics {
@@ -93,18 +94,27 @@ namespace Genetics {
     /// Calculates a fitness for each individual based on the designated fitness function
     void Evolution::AssessFitness()
     {
+
+        std::vector<std::future<float>> futures;
+        futures.reserve(population.size());
         for(auto &I : population) {
             if(I.scored) continue;
-            // Make a copy of the agents state so it can be reverted after fitness test
-            auto varsCopy = I.agent->alienVars.values;
-            I.fitness = fitnessFunction(I.agent);
+            futures.push_back(std::async(std::launch::async, fitnessFunction, I.agent));
+        }
+
+        int i = 0;
+        for(auto &I : population) {
+            if(I.scored) continue;
+            futures[i].wait();
+            I.fitness = futures[i].get();
+            i++;
             // Allow even the worst individuals to have a small chance of reproducing
             if(I.fitness < 1)
                 I.fitness = 1;
-            I.agent->alienVars.values = varsCopy;
             I.scored = true;
         }
     }
+
 
     /// Takes the current population and applies crossover, reproduction and mutation to
     /// create and replace the current population with a new one
