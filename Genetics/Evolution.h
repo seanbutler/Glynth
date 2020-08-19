@@ -46,10 +46,11 @@ namespace Genetics {
         void GenerateNewPopulation(float crossover = 0.9f, float reproduction = 0.09f, float mutation = 0.01f);
 
         void AddIndividual(Agent *newIndividual);
+        void AddIndividuals(const std::vector<Agent*>& newIndividuals);
         void SetFitnessFunction(const std::function<float(Agent*)> &function);
         void SetRandomiseFunction(const std::function<void(Agent*)> &function);
 
-        std::vector<Agent*> GetTopPopulationAgents(float percent);
+        std::vector<Agent*> GetTopPopulationAgents(float percent, bool clearPopulation);
 
     private:
         std::function<float(Agent*)> fitnessFunction;

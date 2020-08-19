@@ -18,7 +18,7 @@ namespace Genetics {
 
         Mutagen mutagen;
         mutagen.AddMutation(new RandomizeComparisonMutation(0.5));
-        //mutagen.AddMutation(new RandomizeNumberMutation(0.5));
+        mutagen.AddMutation(new RandomizeNumberMutation(0.5));
         mutagen.AddMutation(new RandomizeArithmeticMutation(0.5));
 
         for (auto &node : agent->parser.abstractSyntaxTree ) {
@@ -41,8 +41,18 @@ namespace Genetics {
         population.emplace_back(newIndividual);
     }
 
-    // Returns the top percent (0-1) of the populations agents
-    std::vector<Agent *> Evolution::GetTopPopulationAgents(float percent)
+    void Evolution::AddIndividuals(const std::vector<Agent *>& newIndividuals)
+    {
+        for(auto agent : newIndividuals)
+        {
+            population.emplace_back(agent);
+        }
+    }
+
+
+    // Returns the top percent (0-1) of the populations agents. If clearPopulation is set, all agents other than the
+    // returned ones are deleted and the population is cleared out.
+    std::vector<Agent *> Evolution::GetTopPopulationAgents(float percent, bool clearPopulation)
     {
         // Order population
         std::sort(population.begin(), population.end(), [](Individual a, Individual b){
@@ -53,6 +63,13 @@ namespace Genetics {
         returnVec.reserve((float)population.size()*percent);
         for(int i = 0; i < (int)((float)population.size()*percent); i++) {
             returnVec.push_back(population[i].agent);
+        }
+        if(clearPopulation)
+        {
+            for (int i = (int) ((float) population.size() * percent); i < population.size(); i++) {
+                delete population[i].agent;
+            }
+            population.clear();
         }
         return returnVec;
     }
@@ -98,13 +115,13 @@ namespace Genetics {
         std::vector<std::future<float>> futures;
         futures.reserve(population.size());
         for(auto &I : population) {
-            if(I.scored) continue;
+            //if(I.scored) continue;
             futures.push_back(std::async(std::launch::async, fitnessFunction, I.agent));
         }
 
         int i = 0;
         for(auto &I : population) {
-            if(I.scored) continue;
+            //if(I.scored) continue;
             futures[i].wait();
             I.fitness = futures[i].get();
             i++;
