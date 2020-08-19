@@ -22,6 +22,24 @@ Parser::Parser(Parser &rhs)
     }
 }
 
+Parser::~Parser()
+{
+    for(auto child : abstractSyntaxTree)
+    {
+        DeleteNodeAndChildren(child);
+        delete child;
+    }
+}
+
+void Parser::DeleteNodeAndChildren(ASTNode* node)
+{
+    for(auto child : node->children)
+    {
+        DeleteNodeAndChildren(child);
+        delete child;
+    }
+}
+
 void Parser::ReportIssue(const std::string & typeStr,
                          const std::string & problemStr,
                          const std::string & contextStr,

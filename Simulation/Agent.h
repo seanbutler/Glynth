@@ -231,12 +231,15 @@ public:
 
         // Find the two slice points
         ASTNode** a = newAgent->parser.GetRandomASTNode(CompatibilityType::all);
+        ASTNode* aP = *a;
         ASTNode** b = agent->parser.GetRandomASTNode((*a)->GetCompType());
 
         // Replace the nodes after the first slice point with the branch of the second
         if(b != nullptr)
+        {
             newAgent->parser.CopyNodeAndChildren(*b, *a);
-
+            parser.DeleteNodeAndChildren(aP);
+        }
 
         return newAgent;
     }

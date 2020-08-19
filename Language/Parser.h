@@ -22,7 +22,8 @@ class Parser {
 public:
     Parser() = default;
     Parser(Parser& rhs);
-    virtual ~Parser() {}
+    virtual ~Parser();
+    void DeleteNodeAndChildren(ASTNode* node);
 
 //    void SetTokens(const std::vector<std::pair<Token, std::string>> &T) {
 //        tokens = T;
