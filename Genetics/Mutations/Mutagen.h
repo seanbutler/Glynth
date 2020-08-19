@@ -23,6 +23,14 @@ namespace Genetics {
 
         }
 
+        ~Mutagen()
+        {
+            for(auto visitor : mutations)
+            {
+                delete visitor;
+            }
+        }
+
         void AddMutation(MutationVisitor* MV) {
 //            mutationVisitor = MV;
             mutations.push_back(MV);
