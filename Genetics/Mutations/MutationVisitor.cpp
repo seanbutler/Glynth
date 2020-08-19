@@ -22,7 +22,10 @@ namespace Genetics {
         }
         else
         {
-            node->setNumber( node->getNumber() - 1 );
+            int num = node->getNumber() - 1;
+            if (num < 0)
+                num = 0;
+            node->setNumber( num);
         }
     };
 
