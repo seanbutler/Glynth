@@ -239,6 +239,7 @@ public:
         {
             newAgent->parser.CopyNodeAndChildren(*b, *a);
             parser.DeleteNodeAndChildren(aP);
+            delete aP;
         }
 
         return newAgent;
