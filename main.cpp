@@ -2,14 +2,23 @@
 
 #include "./Engine/Engine.h"
 #include "./Test/SeanTest.h"
+#include "./Engine/Entity.h"
+
+#include "./Simulation/Agent.h"
+#include "./Simulation/MazeEnvironment.h"
+#include "./Simulation/WallEnvironment.h"
+#include "./Simulation/ForestEnvironment.h"
+
+#include "./Genetics/Evolution.h"
+#include "Test/TobyTest.h"
+>>>>>>> origin/master
 
 int main(int argc, char **argv) {
     std::cout << "GLYNTH - Game Language Program Synthesis" << std::endl;
+    srand(time(nullptr));
 
 //    TobyTest::Test1();
     SeanTest::Test1();
-
-    // SEAN WORKING ON RAND and SENSE functions in language
-
     return 0;
 }
+

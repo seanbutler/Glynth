@@ -9,8 +9,18 @@
 
 #include "Parser.h"
 #include "AST.h"
+#include "../Utils/RandomNumberGenerator.h"
 
 // ----------------------------------------------------------------------
+
+Parser::Parser(Parser &rhs)
+{
+    abstractSyntaxTree = rhs.abstractSyntaxTree;
+    for(int i = 0; i < rhs.abstractSyntaxTree.size(); i++)
+    {
+        CopyNodeAndChildren(rhs.abstractSyntaxTree[i], abstractSyntaxTree[i]);
+    }
+}
 
 void Parser::ReportIssue(const std::string & typeStr,
                          const std::string & problemStr,
@@ -690,6 +700,108 @@ std::string Parser::GetAsm() {
     }
 
     return  assemblyCode;
+}
+
+/// Recursive function used to create deep copies of ASTNodes
+void Parser::CopyNodeAndChildren(ASTNode *&original, ASTNode *&copy)
+{
+    //copy = new ASTNode(*original);
+    //Temp fix to allow for deep copies
+    if(dynamic_cast<RandFuncAST*>(original))
+        copy = new RandFuncAST(*dynamic_cast<RandFuncAST*>(original));
+    else if(dynamic_cast<BinOperandAST*>(original))
+        copy = new BinOperandAST(*dynamic_cast<BinOperandAST*>(original));
+    else if(dynamic_cast<WhileStatementAST*>(original))
+        copy = new WhileStatementAST(*dynamic_cast<WhileStatementAST*>(original));
+    else if(dynamic_cast<IfStatementAST*>(original))
+        copy = new IfStatementAST(*dynamic_cast<IfStatementAST*>(original));
+    else if(dynamic_cast<AssignmentStatementAST*>(original))
+        copy = new AssignmentStatementAST(*dynamic_cast<AssignmentStatementAST*>(original));
+    else if(dynamic_cast<AlienVarAST*>(original))
+        copy = new AlienVarAST(*dynamic_cast<AlienVarAST*>(original));
+    else if(dynamic_cast<BlockAST*>(original))
+        copy = new BlockAST(*dynamic_cast<BlockAST*>(original));
+    else if(dynamic_cast<IdentifierAST*>(original))
+        copy = new IdentifierAST(*dynamic_cast<IdentifierAST*>(original));
+    else if(dynamic_cast<MoveAST*>(original))
+        copy = new MoveAST(*dynamic_cast<MoveAST*>(original));
+    else if(dynamic_cast<NumberAST*>(original))
+        copy = new NumberAST(*dynamic_cast<NumberAST*>(original));
+    else if(dynamic_cast<OutputAST*>(original))
+        copy = new OutputAST(*dynamic_cast<OutputAST*>(original));
+    else if(dynamic_cast<VariableDeclarationAST*>(original))
+        copy = new VariableDeclarationAST(*dynamic_cast<VariableDeclarationAST*>(original));
+    else if(dynamic_cast<YieldAST*>(original))
+        copy = new YieldAST(*dynamic_cast<YieldAST*>(original));
+    //Temp fix to allow for deep copies
+
+    copy->GenerateNewID();
+    if(!original->children.empty())
+    {
+        for(int i = 0; i < original->children.size(); i++)
+        {
+            CopyNodeAndChildren(original->children[i], copy->children[i]);
+        }
+    }
+}
+
+/// Returns a random node within the AST
+ASTNode ** Parser::GetRandomASTNode(CompatibilityType typeFilter)
+{
+    return GetASTNode(util::RandomNumberGenerator::RandNum(1, CompatibleASTCount(typeFilter)), typeFilter);
+}
+
+/// Returns the nth (index) node in the AST of the given typeFilter
+ASTNode ** Parser::GetASTNode(int index, CompatibilityType typeFilter)
+{
+    int i = 0;
+    for(auto& node : abstractSyntaxTree)
+    {
+        ASTNode** result = FindNodeInTree(i, node, index, typeFilter);
+        if(result != nullptr)
+            return result;
+    }
+    return nullptr;
+}
+
+/// Searches through all of a nodes children to find a given index
+ASTNode ** Parser::FindNodeInTree(int &currentIndex, ASTNode*& node, int targetIndex, CompatibilityType typeFilter)
+{
+    if(node->GetCompType() == typeFilter ||
+       (typeFilter == CompatibilityType::all && node->GetCompType() != CompatibilityType::none))
+        currentIndex++;
+
+    if(targetIndex == currentIndex)
+        return &node;
+    for(auto &n : node->children)
+    {
+        ASTNode** result = FindNodeInTree(currentIndex, n, targetIndex, typeFilter);
+        if(result != nullptr)
+            return result;
+    }
+    return nullptr;
+}
+
+/// Returns the number of nodes of a given typeFilter in the current AST
+int Parser::CompatibleASTCount(CompatibilityType typeFilter)
+{
+    int total = 0;
+    for(auto node : abstractSyntaxTree)
+    {
+        CountNodes(total, node, typeFilter);
+    }
+    return total;
+}
+
+/// Searches through all of a nodes children and adds that count to nodeTotal
+void Parser::CountNodes(int &nodeTotal, ASTNode* node, CompatibilityType typeFilter)
+{
+    if(node->GetCompType() == typeFilter ||
+      (typeFilter == CompatibilityType::all && node->GetCompType() != CompatibilityType::none))
+        nodeTotal++;
+
+    for(auto n : node->children)
+        CountNodes(nodeTotal, n, typeFilter);
 }
 
 

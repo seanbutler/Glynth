@@ -14,13 +14,17 @@
 
 namespace Genetics {
 
-    using Individual = Agent;
 
     // ----------------------------------------------------------------------
 
-    class Population {
+    struct Individual {
     public:
-        std::vector<Individual *> individuals;
+        explicit Individual(Agent* agt) : agent(agt){};
+        Individual() = default;
+
+        Agent* agent = nullptr;
+        float fitness = 0;
+        bool scored = false;
     };
 
     // ----------------------------------------------------------------------
@@ -28,20 +32,31 @@ namespace Genetics {
     class Evolution {
 
     public:
-        Evolution()                         {}
-        virtual ~Evolution()                {}
+        Evolution();
 
-        void MutateIndividual(Agent* agent);
-        void MutateNodeAndChildren(ASTNode* node, Mutagen& mutagen);
+        virtual ~Evolution() {}
 
-//        void InitialisePopulation()       {}
-//        void RandomizePopulation()        {}
-//        void MutatePopulation();
-//        void AssessFitness()              {}
+        void MutateIndividual(Agent *agent);
 
+        void MutateNodeAndChildren(ASTNode *node, Mutagen &mutagen);
 
-    public:
-//        Population population;
+        void InitialisePopulation(int popSize, AgentType agentType, const std::string& agentFilePath);
+        void RandomisePopulation();
+        void AssessFitness();
+        void GenerateNewPopulation(float crossover = 0.9f, float reproduction = 0.09f, float mutation = 0.01f);
+
+        void AddIndividual(Agent *newIndividual);
+        void SetFitnessFunction(const std::function<float(Agent*)> &function);
+        void SetRandomiseFunction(const std::function<void(Agent*)> &function);
+
+        std::vector<Agent*> GetTopPopulationAgents(float percent);
+
+    private:
+        std::function<float(Agent*)> fitnessFunction;
+        std::function<void(Agent*)> randomiseAgentVars;
+        std::vector<Individual> population;
+
+        std::default_random_engine randEngine;
     };
 
 // ----------------------------------------------------------------------

@@ -98,6 +98,8 @@ void VM::Execute(unsigned int slice) {
 
                 case INS::DIV: {
                     int a = stack.top();
+                    if(a==0)
+                        a = 1;
                     stack.pop();
                     int b = stack.top();
                     stack.pop();

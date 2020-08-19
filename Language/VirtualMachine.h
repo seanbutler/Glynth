@@ -44,6 +44,8 @@ public:
         programCounter = 0;
     }
 
+    void SetAliensVarPtr(AlienVars* av){alienVars = av;}
+
     ~VM() {
     }
 

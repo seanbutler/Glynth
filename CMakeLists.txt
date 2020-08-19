@@ -33,14 +33,21 @@ add_executable(Glynth main.cpp
         Simulation/Detection.h
         Simulation/Detection.cpp
         Utils/Maze.h
+
         Test/SeanTest.h
         Test/SeanTest.cpp
-        )
+
+        Utils/RandomNumberGenerator.cpp
+        Utils/RandomNumberGenerator.h
+        Test/TobyTest.h
+        Test/TobyTest.cpp)
 
 
 find_package(SFML REQUIRED COMPONENTS system graphics window network audio)
 
 set(SFML_LIBRARIES "-lsfml-graphics -lsfml-window -lsfml-system")
+
+TARGET_LINK_LIBRARIES(Glynth pthread)
 
 if(SFML_FOUND)
     include_directories(${SFML_INCLUDE_DIR})

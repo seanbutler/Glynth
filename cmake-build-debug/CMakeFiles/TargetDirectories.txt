@@ -1,3 +1,0 @@
-/home/sean/Projects/Glynth/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/sean/Projects/Glynth/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/sean/Projects/Glynth/cmake-build-debug/CMakeFiles/Glynth.dir

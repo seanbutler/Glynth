@@ -22,6 +22,19 @@ namespace Genetics {
 
 static std::string getUniqueIdentifier();
 
+enum class CompatibilityType
+{
+    none,
+    all,
+    blockStart,
+    var,
+    binArith,
+    binComp,
+    block,
+    identifier
+
+};
+
 // ------------------------------------------------------------------------
 
 static unsigned int uid = 1;
@@ -39,21 +52,27 @@ public:
     };
 
     unsigned int getID()            { return id; }
+    void GenerateNewID()            {id = uid++;}
     std::string &getName()          { return name; }
 
     int getNumber() const           { return number; }
     void setNumber(int N)           { number = N; }
+    CompatibilityType GetCompType() {return compatibility; };
 
     virtual std::string print();                                // USED FOR SIMPLE SERIALIZATION
-    virtual std::string diag(unsigned int parentID) = 0;        // USED FOR GENERATING THE GV FILE...
-    virtual std::string eval() = 0;                             // USED FOR EMITTING THE ACTUAL INSTRUCTIONS...
+    virtual std::string diag(unsigned int parentID) {};        // USED FOR GENERATING THE GV FILE...
+    virtual std::string eval() {};                             // USED FOR EMITTING THE ACTUAL INSTRUCTIONS...
 
     std::vector<ASTNode*>children;
+
+protected:
+    CompatibilityType compatibility = CompatibilityType::none;
 
 private:
     unsigned int id;
     std::string name;
     int number;
+
 };
 
 // ------------------------------------------------------------------------
@@ -61,6 +80,8 @@ private:
 class IdentifierAST : public ASTNode {
 
 public:
+    IdentifierAST() {};
+
     explicit IdentifierAST(const std::string &N) : ASTNode(N) {}
 
     virtual void Accept( Genetics::MutationVisitor *visitor)  override ;
@@ -75,6 +96,11 @@ public:
 class AlienVarAST : public ASTNode {
 
 public:
+    AlienVarAST()
+    {
+        compatibility = CompatibilityType::var;
+    }
+
     virtual std::string print();
     virtual std::string diag(unsigned int parentID);
     virtual std::string eval();
@@ -89,6 +115,7 @@ public:
         : ASTNode()
         , identifier(I)
     {
+        compatibility = CompatibilityType::identifier;
         ASTNode::children.push_back(I);
     }
 
@@ -112,7 +139,7 @@ public:
     BlockAST()
         : ASTNode()
     {
-
+        compatibility = CompatibilityType::block;
     }
 
     virtual void Accept( Genetics::MutationVisitor *visitor) ;
@@ -214,6 +241,7 @@ public:
     IfStatementAST(ASTNode *E, ASTNode *B)
         : ASTNode()
     {
+        compatibility = CompatibilityType::blockStart;
         children.push_back(E);
         children.push_back(B);
     }
@@ -240,6 +268,7 @@ public:
     WhileStatementAST(ASTNode *E, ASTNode *B)
     : ASTNode()
     {
+        compatibility = CompatibilityType::blockStart;
         children.push_back(E);
         children.push_back(B);
     }
@@ -285,6 +314,7 @@ class NumberAST : public ASTNode {
 
 public:
     NumberAST(int V) : ASTNode() {
+        compatibility = CompatibilityType::var;
         setNumber(V);
     }
 
@@ -304,7 +334,7 @@ public:
 class BinOperandAST : public ASTNode {
 
 public:
-    BinOperandAST(Token O, ASTNode *L, ASTNode *R) : ASTNode(), op(O), lhs(L), rhs(R) {}
+    BinOperandAST(Token O, ASTNode *L, ASTNode *R);
 
     virtual void Accept( Genetics::MutationVisitor *visitor) override ;
 
@@ -313,9 +343,6 @@ public:
     virtual std::string eval();
 
     Token op;
-    ASTNode *lhs;
-    ASTNode *rhs;
-
 private:
 };
 

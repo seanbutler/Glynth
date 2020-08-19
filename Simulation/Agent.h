@@ -32,6 +32,19 @@ public:
         std::cout << "Agent::Agent ()" << std::endl;
     }
 
+    Agent(Agent &rhs)
+    : agenttype(rhs.agenttype.Colour()),
+        srcFilename(rhs.srcFilename),
+        rectangle(rhs.rectangle),
+        lexer(rhs.lexer),
+        parser(rhs.parser),
+        assembler(rhs.assembler),
+        virtualMachine(rhs.virtualMachine),
+        alienVars(rhs.alienVars)
+    {
+        virtualMachine.SetAliensVarPtr(&alienVars);
+    }
+
     virtual void Compile(std::string F) {
         srcFilename = F;
         std::ifstream sourceFile(srcFilename);
@@ -78,6 +91,22 @@ public:
         if (!virtualMachine.done) {
             virtualMachine.Execute(10);
         }
+    }
+
+    Agent* Cross(Agent* agent){
+        // Copy this agent
+        auto newAgent = new Agent(*this);
+
+        // Find the two slice points
+        ASTNode** a = newAgent->parser.GetRandomASTNode(CompatibilityType::all);
+        ASTNode** b = agent->parser.GetRandomASTNode((*a)->GetCompType());
+
+        // Replace the nodes after the first slice point with the branch of the second
+        if(b != nullptr)
+            newAgent->parser.CopyNodeAndChildren(*b, *a);
+
+
+        return newAgent;
     }
 
     std::string srcFilename;
