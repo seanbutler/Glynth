@@ -5,4 +5,4 @@
 #include "./Agent.h"
 #include <vector>
 
-static std::vector<std::pair<int, int>> DetectableAgentType::positionTable;
+//static std::vector<std::pair<int, int>> DetectableAgentType::positionTable;

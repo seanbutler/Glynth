@@ -80,11 +80,18 @@ Token Lexer::ScanToken() {
             return Token::KEYWORD_TURN;
         }
         else if (tokenString == "rand") {
-            tokens.push_back(std::make_pair(Token::KEYWORD_RAND, tokenString));
-            tokensWithLine.push_back(std::make_tuple(Token::KEYWORD_RAND, tokenString, currentLine));
+            tokens.push_back(std::make_pair(Token::KEYWORD_RANDFUN, tokenString));
+            tokensWithLine.push_back(std::make_tuple(Token::KEYWORD_RANDFUN, tokenString, currentLine));
 
-            return Token::KEYWORD_RAND;
+            return Token::KEYWORD_RANDFUN;
         }
+        else if (tokenString == "sense") {
+            tokens.push_back(std::make_pair(Token::KEYWORD_SENSEFUN, tokenString));
+            tokensWithLine.push_back(std::make_tuple(Token::KEYWORD_SENSEFUN, tokenString, currentLine));
+
+            return Token::KEYWORD_SENSEFUN;
+        }
+
         tokens.push_back(std::make_pair(Token::IDENTIFIER, tokenString));
         tokensWithLine.push_back(std::make_tuple(Token::IDENTIFIER, tokenString, currentLine));
 

@@ -11,10 +11,10 @@ add_executable(Glynth main.cpp
         Engine/Scheduler.h
         Genetics/Evolution.cpp
         Genetics/Evolution.h
-        Genetics/Mutations/MutationVisitor.cpp
         Genetics/Mutations/MutationVisitor.h
-        Genetics/Mutations/Mutagen.cpp
+        Genetics/Mutations/MutationVisitor.cpp
         Genetics/Mutations/Mutagen.h
+        Genetics/Mutations/Mutagen.cpp
         Language/Instructions.cpp
         Language/Instructions.h
         Language/Lexer.cpp
@@ -28,12 +28,10 @@ add_executable(Glynth main.cpp
         Language/Assembler.h
         Language/VirtualMachine.cpp
         Language/VirtualMachine.h
-        Genetics/Evolution.h
-        Genetics/Evolution.cpp
-        Genetics/Mutations/MutationVisitor.h
-        Genetics/Mutations/MutationVisitor.cpp
-        Genetics/Mutations/Mutagen.h
-        Genetics/Mutations/Mutagen.cpp
+        Simulation/Agent.h
+        Simulation/Agent.cpp
+        Simulation/Detection.h
+        Simulation/Detection.cpp
         Utils/Maze.h
         Test/SeanTest.h
         Test/SeanTest.cpp

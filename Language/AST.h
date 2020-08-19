@@ -165,13 +165,15 @@ public:
     ASTNode * getExpression()   { return children[0];}
 };
 
+// ------------------------------------------------------------------------
 
 class RandFuncAST : public ASTNode {
 
 public:
-    RandFuncAST()
+    RandFuncAST(ASTNode *E)
         : ASTNode()
     {
+        ASTNode::children.push_back(E);
     }
 
     virtual void Accept( Genetics::MutationVisitor *visitor) override;
@@ -180,9 +182,28 @@ public:
     virtual std::string diag(unsigned int parentID);
     virtual std::string eval();
 
-private:
+    ASTNode * getExpression()   { return children[0];}
 };
 
+// ------------------------------------------------------------------------
+
+class SenseFuncAST : public ASTNode {
+
+public:
+    SenseFuncAST(ASTNode *E)
+            : ASTNode()
+    {
+        ASTNode::children.push_back(E);
+    }
+
+    virtual void Accept( Genetics::MutationVisitor *visitor) override;
+
+    virtual std::string print();
+    virtual std::string diag(unsigned int parentID);
+    virtual std::string eval();
+
+    ASTNode * getExpression()   { return children[0];}
+};
 
 
 // ------------------------------------------------------------------------

@@ -13,68 +13,69 @@
 #include "../Language/Assembler.h"
 #include "../Language/VirtualMachine.h"
 
-#include "./Agent.h"
 #include "AlienVars.h"
-
-//
-// a specific version of a game entity which has AI
-//
 
 // ----------------------------------------------------------------------
 
-class DetectionComponent {
+class HurtfulAgent;
+class HealingAgent;
+class GoalAgent;
+class PlayerAgent;
+
+// ----------------------------------------------------------------------
+
+// TODO should template these classes
+
+
+class DetectableComponent_Hurtful {
 public:
-    DetectionComponent(Agent& A)
-    :   agent(A)
-    {
-    }
-
-public:
-
-    unsigned int directionToNearest(AgentType & AT) {
-
-        unsigned int shortestDistance = INT32_MAX;
-        float distance;
-        unsigned int closest = INT32_MAX;
-
-        int x = agent.alienVars.get(0);
-        int y = agent.alienVars.get(1);
-
-        for( int n = 0; n< positionTable.size(); n++) {
-
-            distance =  sqrt ( ( ( std::get<0>(positionTable[n]) - x ) * ( std::get<0>(positionTable[n]) - x ) )
-                               + ( ( std::get<1>(positionTable[n]) - y ) * ( std::get<1>(positionTable[n]) - y ) ) );
-
-            if ( distance < shortestDistance ) {
-                shortestDistance = distance;
-                closest = n;
-            }
-
-            int unit_x = (std::get<0>(positionTable[n]) - x ) / distance;
-            int unit_y = (std::get<1>(positionTable[n]) - y ) / distance;
-
-            std::cout << "unit_y = " << unit_x << "unit_y = " << unit_y << std::endl;
-
-            if (unit_x == -1 && unit_y == 0 ) return 3;
-            if (unit_x == 0 && unit_y == -1 ) return 2;
-            if (unit_x == 1 && unit_y == 0 ) return 1;
-            if (unit_x == 0 && unit_y == 1 ) return 0;
-
-        }
-        return 0;
-    }
-
-    virtual void setPosition(int x, int y) {
-        positionTable.emplace_back(std::tuple<int, int, AgentType>(x, y));
-    }
+    DetectableComponent_Hurtful(HurtfulAgent* A) : agent(A) {DetectableComponent_Hurtful::detectableAgents.push_back(agent);}
+    virtual ~DetectableComponent_Hurtful() {}
+    static unsigned int directionToNearest(int x, int y);
 
 private:
-    static std::vector<std::tuple<int, int, AgentType>> positionTable;
-
-private:
-    Agent & agent;
-
+    HurtfulAgent* agent;
+    static std::vector<HurtfulAgent*> detectableAgents;
 };
 
+// ----------------------------------------------------------------------
 
+class DetectableComponent_Healing {
+public:
+    DetectableComponent_Healing(HealingAgent* A) : agent(A) {DetectableComponent_Healing::detectableAgents.push_back(agent);}
+    virtual ~DetectableComponent_Healing() {}
+    static unsigned int directionToNearest(int x, int y);
+
+private:
+    HealingAgent* agent;
+    static std::vector<HealingAgent*> detectableAgents;
+};
+
+// ----------------------------------------------------------------------
+
+class DetectableComponent_Goal {
+public:
+    DetectableComponent_Goal(GoalAgent* A) : agent(A) {DetectableComponent_Goal::detectableAgents.push_back(agent);}
+    virtual ~DetectableComponent_Goal() {}
+    static unsigned int directionToNearest(int x, int y);
+
+private:
+    GoalAgent* agent;
+    static std::vector<GoalAgent*> detectableAgents;
+};
+
+// ----------------------------------------------------------------------
+
+class DetectableComponent_Player {
+public:
+    DetectableComponent_Player(PlayerAgent* A) : agent(A) {DetectableComponent_Player::detectableAgents.push_back(agent);}
+    virtual ~DetectableComponent_Player() {}
+    static unsigned int directionToNearest(int x, int y);
+
+private:
+    PlayerAgent* agent;
+    static std::vector<PlayerAgent*> detectableAgents;
+};
+
+// ----------------------------------------------------------------------
 

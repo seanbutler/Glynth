@@ -178,6 +178,8 @@ void VM::Execute(unsigned int slice) {
                 }
 
                 case INS::RAND : {
+                    // a single parameter function, returns single value
+                    // todo roll this out to a generic form with identifier
                     int param = this->stack.top();
                     this->stack.pop();
                     int result = (int) (rand() % param);
@@ -196,13 +198,31 @@ void VM::Execute(unsigned int slice) {
                     break;
                 }
 
-                case INS::NEAREST : {
-                    int param = this->stack.top() % 4;
-                    int result;
+                case INS::SENSE : {
+                    int param = this->stack.top();
+                    int result =-1;
                     int x = alienVars->get(0);
                     int y = alienVars->get(1);
 
-//                    directionToNearest(param, x, y);
+                    switch(param%4){
+                        case 0: {
+                            result = DetectableComponent_Hurtful::directionToNearest(x, y);
+                            break;
+                        }
+                        case 1: {
+                            result = DetectableComponent_Healing::directionToNearest(x, y);
+                            break;
+                        }
+                        case 2: {
+                            result = DetectableComponent_Goal::directionToNearest(x, y);
+                            break;
+                        }
+                        case 3: {
+                            result = DetectableComponent_Player::directionToNearest(x, y);
+                            break;
+                        }
+
+                    }
 
                     this->stack.push(result);
                     break;

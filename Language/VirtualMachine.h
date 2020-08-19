@@ -11,9 +11,10 @@
 #include <iostream>
 #include <map>
 
-//#include "../Simulation/Agent.h"
 #include "../Simulation/AlienVars.h"
 #include "Instructions.h"
+
+class Agent;
 
 class VM {
 
@@ -56,7 +57,7 @@ private:
     std::stack<int> stack;
 
     AlienVars * alienVars;
-
+    Agent* agent;
     int programCounter = 0;
 
     void incrProgramCounter()       { programCounter++; }

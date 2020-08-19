@@ -67,11 +67,13 @@ public:
     ASTNode* ParseParenExpression();
     ASTNode* ParseAssignmentStatement();
     ASTNode* ParseOutput();
-    ASTNode* ParseMove();
-    ASTNode* ParseTurn();
+
+    ASTNode* ParseMoveProc();
+
+    ASTNode* ParseTurn();   // DELETE ME
+
     ASTNode* ParseRandFunc();
-
-
+    ASTNode* ParseSenseFunc();
 
     bool OutputTreeDiagram(std::string filename);
     bool OutputASTJSON(std::string filename);
