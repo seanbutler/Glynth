@@ -41,6 +41,7 @@ namespace Genetics {
         virtual void Visit_OutputAST( OutputAST* node)  {};
         virtual void Visit_MoveAST( MoveAST* node) {};
         virtual void Visit_RandFuncAST( RandFuncAST* node) {};
+        virtual void Visit_SenseFuncAST( SenseFuncAST* node) {};
         virtual void Visit_IfStatementAST( IfStatementAST* node) {};
         virtual void Visit_WhileStatementAST( WhileStatementAST* node) {};
         virtual void Visit_AssignmentStatementAST( AssignmentStatementAST* node) {};

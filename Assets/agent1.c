@@ -1,5 +1,5 @@
 
-max_moves = 16;
+max_moves = 4 + rand(4);
 spin = 1;
 direction = 1;
 

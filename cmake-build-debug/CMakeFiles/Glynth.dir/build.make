@@ -220,6 +220,45 @@ CMakeFiles/Glynth.dir/Language/VirtualMachine.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Glynth.dir/Language/VirtualMachine.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sean/Projects/Glynth/Language/VirtualMachine.cpp -o CMakeFiles/Glynth.dir/Language/VirtualMachine.cpp.s
 
+CMakeFiles/Glynth.dir/Simulation/Agent.cpp.o: CMakeFiles/Glynth.dir/flags.make
+CMakeFiles/Glynth.dir/Simulation/Agent.cpp.o: ../Simulation/Agent.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sean/Projects/Glynth/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/Glynth.dir/Simulation/Agent.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Glynth.dir/Simulation/Agent.cpp.o -c /home/sean/Projects/Glynth/Simulation/Agent.cpp
+
+CMakeFiles/Glynth.dir/Simulation/Agent.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Glynth.dir/Simulation/Agent.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sean/Projects/Glynth/Simulation/Agent.cpp > CMakeFiles/Glynth.dir/Simulation/Agent.cpp.i
+
+CMakeFiles/Glynth.dir/Simulation/Agent.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Glynth.dir/Simulation/Agent.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sean/Projects/Glynth/Simulation/Agent.cpp -o CMakeFiles/Glynth.dir/Simulation/Agent.cpp.s
+
+CMakeFiles/Glynth.dir/Simulation/Detection.cpp.o: CMakeFiles/Glynth.dir/flags.make
+CMakeFiles/Glynth.dir/Simulation/Detection.cpp.o: ../Simulation/Detection.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sean/Projects/Glynth/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/Glynth.dir/Simulation/Detection.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Glynth.dir/Simulation/Detection.cpp.o -c /home/sean/Projects/Glynth/Simulation/Detection.cpp
+
+CMakeFiles/Glynth.dir/Simulation/Detection.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Glynth.dir/Simulation/Detection.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sean/Projects/Glynth/Simulation/Detection.cpp > CMakeFiles/Glynth.dir/Simulation/Detection.cpp.i
+
+CMakeFiles/Glynth.dir/Simulation/Detection.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Glynth.dir/Simulation/Detection.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sean/Projects/Glynth/Simulation/Detection.cpp -o CMakeFiles/Glynth.dir/Simulation/Detection.cpp.s
+
+CMakeFiles/Glynth.dir/Test/SeanTest.cpp.o: CMakeFiles/Glynth.dir/flags.make
+CMakeFiles/Glynth.dir/Test/SeanTest.cpp.o: ../Test/SeanTest.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/sean/Projects/Glynth/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/Glynth.dir/Test/SeanTest.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Glynth.dir/Test/SeanTest.cpp.o -c /home/sean/Projects/Glynth/Test/SeanTest.cpp
+
+CMakeFiles/Glynth.dir/Test/SeanTest.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Glynth.dir/Test/SeanTest.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/sean/Projects/Glynth/Test/SeanTest.cpp > CMakeFiles/Glynth.dir/Test/SeanTest.cpp.i
+
+CMakeFiles/Glynth.dir/Test/SeanTest.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Glynth.dir/Test/SeanTest.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/sean/Projects/Glynth/Test/SeanTest.cpp -o CMakeFiles/Glynth.dir/Test/SeanTest.cpp.s
+
 # Object files for target Glynth
 Glynth_OBJECTS = \
 "CMakeFiles/Glynth.dir/main.cpp.o" \
@@ -232,7 +271,10 @@ Glynth_OBJECTS = \
 "CMakeFiles/Glynth.dir/Language/AST.cpp.o" \
 "CMakeFiles/Glynth.dir/Language/Parser.cpp.o" \
 "CMakeFiles/Glynth.dir/Language/Assembler.cpp.o" \
-"CMakeFiles/Glynth.dir/Language/VirtualMachine.cpp.o"
+"CMakeFiles/Glynth.dir/Language/VirtualMachine.cpp.o" \
+"CMakeFiles/Glynth.dir/Simulation/Agent.cpp.o" \
+"CMakeFiles/Glynth.dir/Simulation/Detection.cpp.o" \
+"CMakeFiles/Glynth.dir/Test/SeanTest.cpp.o"
 
 # External object files for target Glynth
 Glynth_EXTERNAL_OBJECTS =
@@ -248,9 +290,12 @@ Glynth: CMakeFiles/Glynth.dir/Language/AST.cpp.o
 Glynth: CMakeFiles/Glynth.dir/Language/Parser.cpp.o
 Glynth: CMakeFiles/Glynth.dir/Language/Assembler.cpp.o
 Glynth: CMakeFiles/Glynth.dir/Language/VirtualMachine.cpp.o
+Glynth: CMakeFiles/Glynth.dir/Simulation/Agent.cpp.o
+Glynth: CMakeFiles/Glynth.dir/Simulation/Detection.cpp.o
+Glynth: CMakeFiles/Glynth.dir/Test/SeanTest.cpp.o
 Glynth: CMakeFiles/Glynth.dir/build.make
 Glynth: CMakeFiles/Glynth.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/sean/Projects/Glynth/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Linking CXX executable Glynth"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/sean/Projects/Glynth/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Linking CXX executable Glynth"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Glynth.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

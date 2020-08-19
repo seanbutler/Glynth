@@ -20,6 +20,7 @@ CMakeFiles/Glynth.dir/Genetics/Evolution.cpp.o: ../Language/Tokens.h
 CMakeFiles/Glynth.dir/Genetics/Evolution.cpp.o: ../Language/VirtualMachine.h
 CMakeFiles/Glynth.dir/Genetics/Evolution.cpp.o: ../Simulation/Agent.h
 CMakeFiles/Glynth.dir/Genetics/Evolution.cpp.o: ../Simulation/AlienVars.h
+CMakeFiles/Glynth.dir/Genetics/Evolution.cpp.o: ../Simulation/Detection.h
 
 CMakeFiles/Glynth.dir/Genetics/Mutations/Mutagen.cpp.o: ../Genetics/Mutations/Mutagen.cpp
 CMakeFiles/Glynth.dir/Genetics/Mutations/Mutagen.cpp.o: ../Genetics/Mutations/Mutagen.h
@@ -56,31 +57,64 @@ CMakeFiles/Glynth.dir/Language/Parser.cpp.o: ../Language/Parser.cpp
 CMakeFiles/Glynth.dir/Language/Parser.cpp.o: ../Language/Parser.h
 CMakeFiles/Glynth.dir/Language/Parser.cpp.o: ../Language/Tokens.h
 
+CMakeFiles/Glynth.dir/Language/VirtualMachine.cpp.o: ../Engine/Entity.h
+CMakeFiles/Glynth.dir/Language/VirtualMachine.cpp.o: ../Language/Assembler.h
 CMakeFiles/Glynth.dir/Language/VirtualMachine.cpp.o: ../Language/Instructions.h
+CMakeFiles/Glynth.dir/Language/VirtualMachine.cpp.o: ../Language/Lexer.h
+CMakeFiles/Glynth.dir/Language/VirtualMachine.cpp.o: ../Language/Parser.h
+CMakeFiles/Glynth.dir/Language/VirtualMachine.cpp.o: ../Language/Tokens.h
 CMakeFiles/Glynth.dir/Language/VirtualMachine.cpp.o: ../Language/VirtualMachine.cpp
 CMakeFiles/Glynth.dir/Language/VirtualMachine.cpp.o: ../Language/VirtualMachine.h
+CMakeFiles/Glynth.dir/Language/VirtualMachine.cpp.o: ../Simulation/Agent.h
 CMakeFiles/Glynth.dir/Language/VirtualMachine.cpp.o: ../Simulation/AlienVars.h
+CMakeFiles/Glynth.dir/Language/VirtualMachine.cpp.o: ../Simulation/Detection.h
+
+CMakeFiles/Glynth.dir/Simulation/Agent.cpp.o: ../Engine/Entity.h
+CMakeFiles/Glynth.dir/Simulation/Agent.cpp.o: ../Language/Assembler.h
+CMakeFiles/Glynth.dir/Simulation/Agent.cpp.o: ../Language/Instructions.h
+CMakeFiles/Glynth.dir/Simulation/Agent.cpp.o: ../Language/Lexer.h
+CMakeFiles/Glynth.dir/Simulation/Agent.cpp.o: ../Language/Parser.h
+CMakeFiles/Glynth.dir/Simulation/Agent.cpp.o: ../Language/Tokens.h
+CMakeFiles/Glynth.dir/Simulation/Agent.cpp.o: ../Language/VirtualMachine.h
+CMakeFiles/Glynth.dir/Simulation/Agent.cpp.o: ../Simulation/Agent.cpp
+CMakeFiles/Glynth.dir/Simulation/Agent.cpp.o: ../Simulation/Agent.h
+CMakeFiles/Glynth.dir/Simulation/Agent.cpp.o: ../Simulation/AlienVars.h
+CMakeFiles/Glynth.dir/Simulation/Agent.cpp.o: ../Simulation/Detection.h
+
+CMakeFiles/Glynth.dir/Simulation/Detection.cpp.o: ../Engine/Entity.h
+CMakeFiles/Glynth.dir/Simulation/Detection.cpp.o: ../Language/Assembler.h
+CMakeFiles/Glynth.dir/Simulation/Detection.cpp.o: ../Language/Instructions.h
+CMakeFiles/Glynth.dir/Simulation/Detection.cpp.o: ../Language/Lexer.h
+CMakeFiles/Glynth.dir/Simulation/Detection.cpp.o: ../Language/Parser.h
+CMakeFiles/Glynth.dir/Simulation/Detection.cpp.o: ../Language/Tokens.h
+CMakeFiles/Glynth.dir/Simulation/Detection.cpp.o: ../Language/VirtualMachine.h
+CMakeFiles/Glynth.dir/Simulation/Detection.cpp.o: ../Simulation/Agent.h
+CMakeFiles/Glynth.dir/Simulation/Detection.cpp.o: ../Simulation/AlienVars.h
+CMakeFiles/Glynth.dir/Simulation/Detection.cpp.o: ../Simulation/Detection.cpp
+CMakeFiles/Glynth.dir/Simulation/Detection.cpp.o: ../Simulation/Detection.h
+
+CMakeFiles/Glynth.dir/Test/SeanTest.cpp.o: ../Engine/Engine.h
+CMakeFiles/Glynth.dir/Test/SeanTest.cpp.o: ../Engine/Entity.h
+CMakeFiles/Glynth.dir/Test/SeanTest.cpp.o: ../Engine/Scheduler.h
+CMakeFiles/Glynth.dir/Test/SeanTest.cpp.o: ../Genetics/Evolution.h
+CMakeFiles/Glynth.dir/Test/SeanTest.cpp.o: ../Genetics/Mutations/Mutagen.h
+CMakeFiles/Glynth.dir/Test/SeanTest.cpp.o: ../Genetics/Mutations/MutationVisitor.h
+CMakeFiles/Glynth.dir/Test/SeanTest.cpp.o: ../Language/AST.h
+CMakeFiles/Glynth.dir/Test/SeanTest.cpp.o: ../Language/Assembler.h
+CMakeFiles/Glynth.dir/Test/SeanTest.cpp.o: ../Language/Instructions.h
+CMakeFiles/Glynth.dir/Test/SeanTest.cpp.o: ../Language/Lexer.h
+CMakeFiles/Glynth.dir/Test/SeanTest.cpp.o: ../Language/Parser.h
+CMakeFiles/Glynth.dir/Test/SeanTest.cpp.o: ../Language/Tokens.h
+CMakeFiles/Glynth.dir/Test/SeanTest.cpp.o: ../Language/VirtualMachine.h
+CMakeFiles/Glynth.dir/Test/SeanTest.cpp.o: ../Simulation/Agent.h
+CMakeFiles/Glynth.dir/Test/SeanTest.cpp.o: ../Simulation/AlienVars.h
+CMakeFiles/Glynth.dir/Test/SeanTest.cpp.o: ../Simulation/Detection.h
+CMakeFiles/Glynth.dir/Test/SeanTest.cpp.o: ../Test/SeanTest.cpp
+CMakeFiles/Glynth.dir/Test/SeanTest.cpp.o: ../Test/SeanTest.h
 
 CMakeFiles/Glynth.dir/main.cpp.o: ../Engine/Engine.h
 CMakeFiles/Glynth.dir/main.cpp.o: ../Engine/Entity.h
 CMakeFiles/Glynth.dir/main.cpp.o: ../Engine/Scheduler.h
-CMakeFiles/Glynth.dir/main.cpp.o: ../Genetics/Evolution.h
-CMakeFiles/Glynth.dir/main.cpp.o: ../Genetics/Mutations/Mutagen.h
-CMakeFiles/Glynth.dir/main.cpp.o: ../Genetics/Mutations/MutationVisitor.h
-CMakeFiles/Glynth.dir/main.cpp.o: ../Language/AST.h
-CMakeFiles/Glynth.dir/main.cpp.o: ../Language/Assembler.h
-CMakeFiles/Glynth.dir/main.cpp.o: ../Language/Instructions.h
-CMakeFiles/Glynth.dir/main.cpp.o: ../Language/Lexer.h
-CMakeFiles/Glynth.dir/main.cpp.o: ../Language/Parser.h
-CMakeFiles/Glynth.dir/main.cpp.o: ../Language/Tokens.h
-CMakeFiles/Glynth.dir/main.cpp.o: ../Language/VirtualMachine.h
-CMakeFiles/Glynth.dir/main.cpp.o: ../Simulation/Agent.h
-CMakeFiles/Glynth.dir/main.cpp.o: ../Simulation/AlienVars.h
-CMakeFiles/Glynth.dir/main.cpp.o: ../Simulation/ForestEnvironment.h
-CMakeFiles/Glynth.dir/main.cpp.o: ../Simulation/MazeEnvironment.h
-CMakeFiles/Glynth.dir/main.cpp.o: ../Simulation/WallEnvironment.h
-CMakeFiles/Glynth.dir/main.cpp.o: ../Utils/Forest.h
-CMakeFiles/Glynth.dir/main.cpp.o: ../Utils/Maze.h
-CMakeFiles/Glynth.dir/main.cpp.o: ../Utils/Walls.h
+CMakeFiles/Glynth.dir/main.cpp.o: ../Test/SeanTest.h
 CMakeFiles/Glynth.dir/main.cpp.o: ../main.cpp
 

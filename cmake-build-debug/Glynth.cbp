@@ -156,6 +156,24 @@
 		<Unit filename="/home/sean/Projects/Glynth/Language/VirtualMachine.h">
 			<Option target="Glynth"/>
 		</Unit>
+		<Unit filename="/home/sean/Projects/Glynth/Simulation/Agent.cpp">
+			<Option target="Glynth"/>
+		</Unit>
+		<Unit filename="/home/sean/Projects/Glynth/Simulation/Agent.h">
+			<Option target="Glynth"/>
+		</Unit>
+		<Unit filename="/home/sean/Projects/Glynth/Simulation/Detection.cpp">
+			<Option target="Glynth"/>
+		</Unit>
+		<Unit filename="/home/sean/Projects/Glynth/Simulation/Detection.h">
+			<Option target="Glynth"/>
+		</Unit>
+		<Unit filename="/home/sean/Projects/Glynth/Test/SeanTest.cpp">
+			<Option target="Glynth"/>
+		</Unit>
+		<Unit filename="/home/sean/Projects/Glynth/Test/SeanTest.h">
+			<Option target="Glynth"/>
+		</Unit>
 		<Unit filename="/home/sean/Projects/Glynth/Utils/Maze.h">
 			<Option target="Glynth"/>
 		</Unit>
