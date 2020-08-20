@@ -7,7 +7,6 @@
 #include <cmath>
 #include "../Engine/Entity.h"
 
-
 #include "../Language/Lexer.h"
 #include "../Language/Parser.h"
 #include "../Language/Assembler.h"
@@ -15,7 +14,6 @@
 
 #include "Detection.h"
 #include "AlienVars.h"
-
 
 //
 // a specific version of a game entity which has AI
@@ -68,7 +66,7 @@ public:
         assembler.Scan(parser.GetAsm());
         assembler.OutputInstructionList(srcFilename);
 
-        assembler.GenerateTestBinaryInstructions();
+//        assembler.GenerateTestBinaryInstructions();
         virtualMachine.Initialise(assembler.GetInstructions(), &alienVars);
     }
 
@@ -91,10 +89,9 @@ public:
         return alienVars.call(id, parameter);
     }
 
-
     virtual void Update(float deltaTime) {
         if (!virtualMachine.done) {
-            virtualMachine.Execute(10);
+            virtualMachine.Execute(8);
         }
     }
 
@@ -110,7 +107,6 @@ public:
         if(b != nullptr)
             newAgent->parser.CopyNodeAndChildren(*b, *a);
 
-
         return newAgent;
     }
 
@@ -120,6 +116,7 @@ public:
     Lexer lexer;
     Parser parser;
     Assembler assembler;
+
     VM virtualMachine;
 
     AlienVars alienVars;
@@ -162,9 +159,14 @@ class HealingAgent : public Agent {
 public:
     HealingAgent()
             : Agent(sf::RectangleShape(sf::Vector2f(1, 1)))
+            , detectable(this)
+
     {
         rectangle.setFillColor(sf::Color(32, 255, 32));
     }
+
+    DetectableComponent_Healing detectable;
+
 };
 
 // ----------------------------------------------------------------------
@@ -174,9 +176,14 @@ class GoalAgent : public Agent {
 public:
     GoalAgent()
             : Agent(sf::RectangleShape(sf::Vector2f(1, 1)))
+            , detectable(this)
+
     {
         rectangle.setFillColor(sf::Color(128, 128, 255));
     }
+
+    DetectableComponent_Goal detectable;
+
 };
 
 // ----------------------------------------------------------------------

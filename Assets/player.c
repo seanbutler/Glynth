@@ -7,8 +7,9 @@ while(1) {
 
     moves = max_moves;
     while ( moves > 0 ) {
-    moves = moves - 1;
-    move(direction);
-}
-direction = direction + spin;
+        moves = moves - 1;
+        move(direction);
+    }
+
+    direction = direction + spin;
 }

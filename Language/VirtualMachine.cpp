@@ -189,7 +189,6 @@ void VM::Execute(unsigned int slice) {
                     break;
                 }
 
-
                 case INS::OUTPUT : {
                     std::cout << "out... " << this->stack.top() << std::endl;
                     this->stack.pop();
@@ -252,20 +251,6 @@ void VM::Execute(unsigned int slice) {
                     break;
                 }
 
-                case INS::TURN : {
-                    int dir = this->stack.top();
-
-                    if (dir == 0) {
-//                        this->alien[2] += 1;
-                    }
-
-                    if (dir == 1) {
-//                        this->alien[2] -= 1;
-                    }
-
-                    this->stack.pop();
-                    break;
-                }
 
                 case INS::SAVEALIEN: {
                     int val = stack.top();
