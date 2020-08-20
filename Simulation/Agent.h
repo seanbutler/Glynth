@@ -87,6 +87,11 @@ public:
         return alienVars.get(id);
     }
 
+    int CallAlienFunction(int id, int parameter){
+        return alienVars.call(id, parameter);
+    }
+
+
     virtual void Update(float deltaTime) {
         if (!virtualMachine.done) {
             virtualMachine.Execute(10);

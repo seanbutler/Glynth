@@ -1,5 +1,5 @@
 while(1) {
-    move(rand(4));
+d=0;
 }
 
 

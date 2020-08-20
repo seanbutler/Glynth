@@ -432,7 +432,7 @@ ASTNode *Parser::ParseExpression() {
             }
 
             case Token::KEYWORD_SENSEFUN: {
-                valueStack.push(ParseRandFunc());
+                valueStack.push(ParseSenseFunc());
                 break;
             }
 

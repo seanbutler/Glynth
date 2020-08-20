@@ -7,7 +7,7 @@
 
 namespace Engine {
 
-    Engine::Engine(unsigned int W, unsigned int H, unsigned int PS, unsigned int SC)
+    Engine::Engine(unsigned int W, unsigned int H, unsigned int PS, unsigned int SC, unsigned int FR)
             :   w(W)
             ,   h(H)
             ,   pixel_scale(PS)
@@ -18,7 +18,7 @@ namespace Engine {
 
     {
         window.setSize(sf::Vector2u(w*pixel_scale,h*pixel_scale));
-        window.setFramerateLimit(16);
+        window.setFramerateLimit(FR);
     }
 
     void Engine::MainLoop()

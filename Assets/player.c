@@ -1,14 +1,14 @@
 
-max_moves = 4;
-spin = 3;
-direction = 2;
+max_moves = 16;
+spin = 1;
+direction = 1;
 
 while(1) {
 
     moves = max_moves;
     while ( moves > 0 ) {
-        moves = moves - 1;
-        move(direction);
-    }
-    direction = direction + spin;
+    moves = moves - 1;
+    move(direction);
+}
+direction = direction + spin;
 }
