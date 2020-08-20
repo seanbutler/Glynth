@@ -33,7 +33,7 @@ public:
     }
 
     Agent(Agent &rhs)
-    : agenttype(rhs.agenttype.Colour()),
+    :
         srcFilename(rhs.srcFilename),
         rectangle(rhs.rectangle),
         lexer(rhs.lexer),

@@ -11,7 +11,6 @@
 
 #include "./Genetics/Evolution.h"
 #include "Test/TobyTest.h"
->>>>>>> origin/master
 
 int main(int argc, char **argv) {
     std::cout << "GLYNTH - Game Language Program Synthesis" << std::endl;

@@ -241,8 +241,10 @@ std::string RandFuncAST::print() {
     std::string str;
     str = ASTNode::print();
     str +=  "\"rand\" : {\n";
+    str += getExpression()->print();
     str += "}\n";
     return str;
+
 }
 
 std::string RandFuncAST::diag(unsigned int parentID) {
@@ -260,7 +262,6 @@ std::string RandFuncAST::eval() {
     str += "\tRAND \n";
     return str;
 }
-
 
 // ---------------------------------------------------------------------------
 
@@ -293,14 +294,11 @@ std::string SenseFuncAST::eval() {
     return str;
 }
 
-
-
 // ---------------------------------------------------------------------------
 
 void IfStatementAST::Accept( Genetics::MutationVisitor *visitor)  {
     visitor->Visit_IfStatementAST(this);
 };
-
 
 std::string IfStatementAST::print() {
     std::string str;

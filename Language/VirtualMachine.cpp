@@ -189,6 +189,19 @@ void VM::Execute(unsigned int slice) {
                     break;
                 }
 
+                case INS::SENSE : {
+                    // a single parameter function, returns single value
+                    // todo roll this out to a generic form with identifier
+                    int param = this->stack.top();
+                    this->stack.pop();
+                    int result = -1;
+
+//                    int result = (int) (rand() % param);
+//                    result = (int) (sense(param)%4)
+                    this->stack.push(result);
+                    break;
+                }
+
                 case INS::OUTPUT : {
                     std::cout << "out... " << this->stack.top() << std::endl;
                     this->stack.pop();

@@ -59,6 +59,7 @@ private:
     std::stack<int> stack;
 
     AlienVars * alienVars;
+    AlienFuncs * alienFuncs;
     Agent* agent;
     int programCounter = 0;
 

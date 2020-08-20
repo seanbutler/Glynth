@@ -43,7 +43,7 @@ void TobyTest::TestPopulation(Engine::Engine &engine)
 
     evolution.SetRandomiseFunction(hurtfulRand);
     evolution.SetFitnessFunction(hurtfulFitness);
-    evolution.InitialisePopulation(200,HurtfulAgentType(),"../Assets/agent2.c");
+    evolution.InitialisePopulation(200,"../Assets/agent2.c");
     evolution.RandomisePopulation();
 
     int maxGenerations = 30;

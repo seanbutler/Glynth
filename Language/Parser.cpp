@@ -215,7 +215,6 @@ ASTNode *Parser::ParseBlock() {
     return block;
 }
 
-
 // ----------------------------------------------------------------------
 
 ASTNode *Parser::ParseOutput() {
@@ -223,24 +222,10 @@ ASTNode *Parser::ParseOutput() {
     Token tokenType = std::get<0>(currentTokenWithLine);
     std::string tokenString = std::get<1>(currentTokenWithLine);
 
-//    std::cout << "Parser::ParseOutput tokenType = " << (int) tokenType
-//              << " " << tokenString << std::endl;
-
     getNextToken();
 
     if (std::get<0>(currentTokenWithLine) != Token::SYM_ASSIGN) {
-//        std::cerr << "ERROR Parser::ParseOutput() - Unrecognised Token Before Statement Expression, Expected Assign."
-//                  << std::endl;
-
-//        std::cerr << "PARSER ERROR : Parser::ParseOutput() - Unrecognised Token \""
-//                    << std::get<1>(currentTokenWithLine) << "\""
-//                    << "Before Statement Expression, Expected Assign \""
-//                    << " at Line " << std::get<2>(currentTokenWithLine)
-//                    << std::endl;
-
         ReportError("Unrecognised Token",  "Before Statement Expression", "Expected Assign");
-
-
         return nullptr;
     }
 
@@ -273,13 +258,9 @@ ASTNode *Parser::ParseMoveProc() {
     }
 
     getNextToken();
-
     ASTNode *expr = this->ParseExpression();
-
     getNextToken();
-
     MoveAST *statement = new MoveAST(expr);
-
     return statement;
 }
 
@@ -295,7 +276,6 @@ ASTNode *Parser::ParseSenseFunc() {
     getNextToken();
 
     if (std::get<0>(currentTokenWithLine) != Token::SYM_LPAREN) {
-
         ReportError("Unrecognised Token",  "Before Statement Expression, Left Parenthesis");
         return nullptr;
     }
@@ -326,14 +306,6 @@ ASTNode *Parser::ParseRandFunc() {
     }
 
     ASTNode *expr = ParseExpression();
-
-//    getNextToken();
-//
-//    if (std::get<0>(currentTokenWithLine) != Token::SYM_RPAREN) {
-//        ReportError("Unrecognised Token",  "Function Call", "Expected \')\'");
-//        return nullptr;
-//    }
-
     RandFuncAST *statement = new RandFuncAST(expr);
     return statement;
 }
@@ -455,13 +427,12 @@ ASTNode *Parser::ParseExpression() {
         switch (std::get<0>(currentTokenWithLine)) {
 
             case Token::KEYWORD_RANDFUN: {
-
                 valueStack.push(ParseRandFunc());
                 break;
             }
 
             case Token::KEYWORD_SENSEFUN: {
-                valueStack.push(ParseParenExpression());
+                valueStack.push(ParseRandFunc());
                 break;
             }
 

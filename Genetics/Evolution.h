@@ -40,7 +40,7 @@ namespace Genetics {
 
         void MutateNodeAndChildren(ASTNode *node, Mutagen &mutagen);
 
-        void InitialisePopulation(int popSize, AgentType agentType, const std::string& agentFilePath);
+        void InitialisePopulation(int popSize, const std::string& agentFilePath);
         void RandomisePopulation();
         void AssessFitness();
         void GenerateNewPopulation(float crossover = 0.9f, float reproduction = 0.09f, float mutation = 0.01f);
