@@ -6,6 +6,25 @@
 #include "Detection.h"
 
 // --------------------------------------------------------------------------------
+std::vector<Agent*> CollisionComponent::agents = {};
+
+unsigned int CollisionComponent::collisionTest(int x, int y) {
+
+    for( int n = 0; n< CollisionComponent::agents.size(); n++) {
+
+        int otherX = agents[n]->alienVars.get(0);
+        int otherY = agents[n]->alienVars.get(1);
+
+        if ( otherX == x ) {
+            if (otherY == y ) {
+                // there exists a collidable agent at these coords
+                return true;
+            }
+        }
+    }
+    // there is no collidable agent at these coords
+    return false;
+}
 
 
 // TODO lots of nasty code repetition here, do something about it
@@ -16,81 +35,6 @@ std::vector<HurtfulAgent*> DetectableComponent_Hurtful::detectableAgents = {};
 
 unsigned int DetectableComponent_Hurtful::directionToNearest(int x, int y) {
 
-    float shortestDistance = INT32_MAX;
-    float distance;
-    unsigned int unit_x = 0;
-    unsigned int unit_y = 0;
-
-    for( int n = 0; n< DetectableComponent_Hurtful::detectableAgents.size(); n++) {
-
-        int otherX = detectableAgents[n]->alienVars.get(0);
-        int otherY = detectableAgents[n]->alienVars.get(1);
-
-        int deltaX = otherX - x;
-        int deltaY = otherY - y;
-
-        distance = sqrt((deltaX * deltaX) + (deltaY * deltaY));
-
-        if (distance < shortestDistance) {
-            shortestDistance = distance;
-            unit_x = deltaX / distance;
-            unit_y = deltaY / distance;
-        }
-    }
-
-    std::cout << "unit_x = " << unit_x << " unit_y = " << unit_y << std::endl;
-
-    if (unit_x == -1 && unit_y == 0 ) return 3;
-    if (unit_x == 0 && unit_y == -1 ) return 2;
-    if (unit_x == 1 && unit_y == 0 ) return 1;
-    if (unit_x == 0 && unit_y == 1 ) return 0;
-
-    return -1;
-}
-
-// --------------------------------------------------------------------------------
-
-std::vector<HealingAgent*> DetectableComponent_Healing::detectableAgents = {};
-
-unsigned int DetectableComponent_Healing::directionToNearest(int x, int y) {
-
-    float shortestDistance = INT32_MAX;
-    float distance;
-    unsigned int unit_x = 0;
-    unsigned int unit_y = 0;
-
-    for( int n = 0; n< detectableAgents.size(); n++) {
-
-        int otherX = detectableAgents[n]->alienVars.get(0);
-        int otherY = detectableAgents[n]->alienVars.get(1);
-
-        int deltaX = otherX - x;
-        int deltaY = otherY - y;
-
-        distance = sqrt((deltaX * deltaX) + (deltaY * deltaY));
-
-        if (distance < shortestDistance) {
-            shortestDistance = distance;
-            unit_x = deltaX / distance;
-            unit_y = deltaY / distance;
-        }
-    }
-
-    std::cout << "unit_x = " << unit_x << " unit_y = " << unit_y << std::endl;
-
-    if (unit_x == -1 && unit_y == 0 ) return 3;
-    if (unit_x == 0 && unit_y == -1 ) return 2;
-    if (unit_x == 1 && unit_y == 0 ) return 1;
-    if (unit_x == 0 && unit_y == 1 ) return 0;
-
-    return -1;
-}
-
-// --------------------------------------------------------------------------------
-
-std::vector<PlayerAgent*> DetectableComponent_Player::detectableAgents = {};
-
-unsigned int DetectableComponent_Player::directionToNearest(int x, int y) {
 
     float shortestDistance = INT32_MAX;
     float distance;
@@ -111,24 +55,134 @@ unsigned int DetectableComponent_Player::directionToNearest(int x, int y) {
 
         if (distance < shortestDistance) {
             shortestDistance = distance;
-            finalX = ceil(deltaX / distance);
-            finalY = ceil (deltaY / distance);
+            finalX = deltaX;
+            finalY = deltaY;
         }
     }
 
+    if (abs(finalX) > abs(finalY)) {
 
-    // TODO lets make this slightly more rounded...
-    if ( finalX >= 1  ) {
-        return 1;
+        if (finalX > 0) {
+            return 1;
+        }
+        if (finalX < 0) {
+            return 3;
+        }
     }
-    if ( finalX <= -1  ) {
-        return 3;
+    else {
+
+        if ( finalY > 0 ) {
+            return 2;
+        }
+        if ( finalY < 0 ) {
+            return 0;
+        }
     }
-    if ( finalY >= 1 ) {
-        return 2;
+
+    return -1;
+}
+
+// --------------------------------------------------------------------------------
+
+std::vector<HealingAgent*> DetectableComponent_Healing::detectableAgents = {};
+
+unsigned int DetectableComponent_Healing::directionToNearest(int x, int y) {
+
+
+    float shortestDistance = INT32_MAX;
+    float distance;
+    float finalX = 0;
+    float finalY = 0;
+    float deltaX = 0;
+    float deltaY = 0;
+
+    for( int n = 0; n< detectableAgents.size(); n++) {
+
+        float otherX = detectableAgents[n]->alienVars.get(0);
+        float otherY = detectableAgents[n]->alienVars.get(1);
+
+        deltaX = otherX - x;
+        deltaY = otherY - y;
+
+        distance = abs(sqrt((deltaX * deltaX) + (deltaY * deltaY)));
+
+        if (distance < shortestDistance) {
+            shortestDistance = distance;
+            finalX = deltaX;
+            finalY = deltaY;
+        }
     }
-    if ( finalY <= -1 ) {
-        return 0;
+
+    if (abs(finalX) > abs(finalY)) {
+
+        if (finalX > 0) {
+            return 1;
+        }
+        if (finalX < 0) {
+            return 3;
+        }
+    }
+    else {
+
+        if ( finalY > 0 ) {
+            return 2;
+        }
+        if ( finalY < 0 ) {
+            return 0;
+        }
+    }
+
+    return -1;
+}
+
+// --------------------------------------------------------------------------------
+
+std::vector<PlayerAgent*> DetectableComponent_Player::detectableAgents = {};
+
+unsigned int DetectableComponent_Player::directionToNearest(int x, int y) {
+
+
+    float shortestDistance = INT32_MAX;
+    float distance;
+    float finalX = 0;
+    float finalY = 0;
+    float deltaX = 0;
+    float deltaY = 0;
+
+    for( int n = 0; n< detectableAgents.size(); n++) {
+
+        float otherX = detectableAgents[n]->alienVars.get(0);
+        float otherY = detectableAgents[n]->alienVars.get(1);
+
+        deltaX = otherX - x;
+        deltaY = otherY - y;
+
+        distance = abs(sqrt((deltaX * deltaX) + (deltaY * deltaY)));
+
+        if (distance < shortestDistance) {
+            shortestDistance = distance;
+            finalX = deltaX;
+            finalY = deltaY;
+        }
+    }
+
+    if (abs(finalX) > abs(finalY)) {
+
+        if (finalX > 0) {
+            return 1;
+        }
+        if (finalX < 0) {
+            return 3;
+        }
+    }
+    else {
+
+        if ( finalY > 0 ) {
+            return 2;
+        }
+        if ( finalY < 0 ) {
+            return 0;
+        }
     }
 
     return -1;
@@ -160,24 +214,28 @@ unsigned int DetectableComponent_Goal::directionToNearest(int x, int y) {
 
         if (distance < shortestDistance) {
             shortestDistance = distance;
-            finalX = ceil(deltaX / distance);
-            finalY = ceil (deltaY / distance);
+            finalX = deltaX;
+            finalY = deltaY;
         }
     }
 
+    if (abs(finalX) > abs(finalY)) {
 
-    // TODO lets make this slightly more rounded...
-    if ( finalX >= 1  ) {
-        return 1;
+        if (finalX > 0) {
+            return 1;
+        }
+        if (finalX < 0) {
+            return 3;
+        }
     }
-    if ( finalX <= -1  ) {
-        return 3;
-    }
-    if ( finalY >= 1 ) {
-        return 2;
-    }
-    if ( finalY <= -1 ) {
-        return 0;
+    else {
+
+        if ( finalY > 0 ) {
+            return 2;
+        }
+        if ( finalY < 0 ) {
+            return 0;
+        }
     }
 
     return -1;

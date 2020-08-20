@@ -179,15 +179,6 @@ void VM::Execute(unsigned int slice) {
                     break;
                 }
 
-                case INS::RAND : {
-                    // a single parameter function, returns single value
-                    // todo roll this out to a generic form with identifier
-                    int param = this->stack.top();
-                    this->stack.pop();
-                    int result = (int) (rand() % param);
-                    this->stack.push(result);
-                    break;
-                }
 
                 case INS::OUTPUT : {
                     std::cout << "out... " << this->stack.top() << std::endl;
@@ -199,6 +190,20 @@ void VM::Execute(unsigned int slice) {
                     std::cout << "INPUT - not implemented" << std::endl;
                     break;
                 }
+
+
+
+                case INS::RAND : {
+                    // a single parameter function, returns single value
+                    // todo roll this out to a generic form with identifier
+                    int param = this->stack.top();
+                    this->stack.pop();
+                    int result = (int) (rand() % param);
+                    this->stack.push(result);
+                    break;
+                }
+
+
 
                 case INS::SENSE : {
                     int param = this->stack.top();
@@ -232,19 +237,31 @@ void VM::Execute(unsigned int slice) {
                 }
 
                 case INS::MOVE : {
-                    int dir = this->stack.top() % 4;
+//                    std::pair<int, int> oldPosition(alienVars->get(0), alienVars->get(1));
+                    std::pair<int, int> tmpPosition(alienVars->get(0), alienVars->get(1));
 
+                    int dir = this->stack.top() % 4;
                     if (dir == 0) {
-                        alienVars->set(1, alienVars->get(1) - 1);
+                        tmpPosition.second = alienVars->get(1) - 1;
+//                        alienVars->set(1, alienVars->get(1) - 1);
                     }
                     else if (dir == 1) {
-                        alienVars->set(0, alienVars->get(0) + 1);
+                        tmpPosition.first = alienVars->get(0) + 1;
+//                        alienVars->set(0, alienVars->get(0) + 1);
                     }
                     else if (dir == 2) {
-                        alienVars->set(1, alienVars->get(1) + 1);
+                        tmpPosition.second = alienVars->get(1) + 1;
+//                        alienVars->set(1, alienVars->get(1) + 1);
                     }
                     else if (dir == 3) {
-                        alienVars->set(0, alienVars->get(0) - 1);
+                        tmpPosition.first = alienVars->get(0) - 1;
+//                        alienVars->set(0, alienVars->get(0) - 1);
+                    }
+
+                    if (CollisionComponent::collisionTest(tmpPosition.first, tmpPosition.second) == false ) {
+                        // not occupied by agent, so express the movement to the alien vars to be picked up by the engine
+                        alienVars->set(0, tmpPosition.first);
+                        alienVars->set(1, tmpPosition.second);
                     }
 
                     this->stack.pop();

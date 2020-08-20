@@ -17,6 +17,7 @@
 
 // ----------------------------------------------------------------------
 
+class Agent;
 class HurtfulAgent;
 class HealingAgent;
 class GoalAgent;
@@ -24,8 +25,23 @@ class PlayerAgent;
 
 // ----------------------------------------------------------------------
 
-// TODO should template these classes
+class CollisionComponent {
+public:
+    CollisionComponent(Agent* A) : agent(A) {
+        CollisionComponent::agents.push_back(agent);
+    }
+    virtual ~CollisionComponent() {}
+    static unsigned int collisionTest(int x, int y);
 
+private:
+    Agent* agent;
+    static std::vector<Agent*> agents;
+};
+
+
+// ----------------------------------------------------------------------
+
+// TODO should template these classes
 
 class DetectableComponent_Hurtful {
 public:

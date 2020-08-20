@@ -130,10 +130,12 @@ class WallAgent : public Agent {
 public:
     WallAgent()
             : Agent(sf::RectangleShape(sf::Vector2f(1, 1)))
+            ,collidable(this)
     {
         rectangle.setFillColor(sf::Color(0, 0, 0));
     }
 
+    CollisionComponent collidable;
 };
 
 // ----------------------------------------------------------------------
@@ -144,11 +146,15 @@ public:
     HurtfulAgent()
             : Agent(sf::RectangleShape(sf::Vector2f(1, 1)))
             , detectable(this)
+            , collidable(this)
+
     {
         rectangle.setFillColor(sf::Color(255, 32, 32));
     }
 
     DetectableComponent_Hurtful detectable;
+    CollisionComponent collidable;
+
 
 };
 
