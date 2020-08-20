@@ -14,9 +14,9 @@
 
 int main(int argc, char **argv) {
     std::cout << "GLYNTH - Game Language Program Synthesis" << std::endl;
-    srand(time(nullptr));
 
-//    TobyTest::Test1();
+
+    //    TobyTest::Test1();
     SeanTest::Test1();
     return 0;
 }
