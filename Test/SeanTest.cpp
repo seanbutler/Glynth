@@ -10,9 +10,7 @@
 
 void SeanTest::Test1() {
 
-    srand(1);
-
-//    srand(time(nullptr));
+    srand(time(nullptr));
 
 
     Engine::Engine engine(32, 32);
@@ -31,14 +29,35 @@ void SeanTest::Test1() {
     }
 
 
-    
-    Agent* playerAgentPtr;
-    playerAgentPtr = new PlayerAgent();
-    playerAgentPtr->Compile("../Assets/player.c");
-    playerAgentPtr->Assemble();
-    playerAgentPtr->SetAlienVar(0, 8 );
-    playerAgentPtr->SetAlienVar(1, 8 );
-    engine.entityScheduler.entities.push_back((Engine::Entity*)playerAgentPtr);
+    Agent* goalAgentPtr;
+    goalAgentPtr = new GoalAgent();
+    goalAgentPtr->Compile("../Assets/goal.c");
+    goalAgentPtr->Assemble();
+    goalAgentPtr->SetAlienVar(0, 24 );
+    goalAgentPtr->SetAlienVar(1, 24 );
+    engine.entityScheduler.entities.push_back((Engine::Entity*)goalAgentPtr);
+
+    goalAgentPtr = new GoalAgent();
+    goalAgentPtr->Compile("../Assets/goal.c");
+    goalAgentPtr->Assemble();
+    goalAgentPtr->SetAlienVar(0, 24 );
+    goalAgentPtr->SetAlienVar(1, 8 );
+    engine.entityScheduler.entities.push_back((Engine::Entity*)goalAgentPtr);
+
+    goalAgentPtr = new GoalAgent();
+    goalAgentPtr->Compile("../Assets/goal.c");
+    goalAgentPtr->Assemble();
+    goalAgentPtr->SetAlienVar(0, 8 );
+    goalAgentPtr->SetAlienVar(1, 24 );
+    engine.entityScheduler.entities.push_back((Engine::Entity*)goalAgentPtr);
+
+//    Agent* playerAgentPtr;
+//    playerAgentPtr = new PlayerAgent();
+//    playerAgentPtr->Compile("../Assets/player.c");
+//    playerAgentPtr->Assemble();
+//    playerAgentPtr->SetAlienVar(0, 8 );
+//    playerAgentPtr->SetAlienVar(1, 8 );
+//    engine.entityScheduler.entities.push_back((Engine::Entity*)playerAgentPtr);
 
     engine.MainLoop();
 }
