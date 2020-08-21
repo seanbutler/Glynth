@@ -47,12 +47,11 @@ These games __all__ have the following patterns in common.
  
 ## Uncommon Patterns
  - Some Environment Can be destroyed
-   - if so then fills space available
+   - if so then much more common
  - Player collects Items for Powers
    - Suppressed abilities, collectables unlock them
  - Enemies Grow or Space Shrinks either directly or indirectly (more on this later)    
  - Enemies Reach Goal To Win (Player Lose)
-
 
 # Criteria for Quality Arcade Games
 

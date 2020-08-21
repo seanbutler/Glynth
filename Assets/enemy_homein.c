@@ -1,5 +1,5 @@
 
 while(1) {
-    d = sense(2);
+    d = sense(3);
     move(d);
 }

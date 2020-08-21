@@ -17,7 +17,7 @@ namespace Engine {
 
     class Engine {
     public:
-        Engine(unsigned int W = 32, unsigned int H = 32, unsigned int PS = 24, unsigned int SC = 16, unsigned int FR=4);
+        Engine(unsigned int W = 32, unsigned int H = 32, unsigned int PS = 24, unsigned int SC = 16, unsigned int FR=1);
         virtual ~Engine();
 
         unsigned int w, h, pixel_scale, scale;

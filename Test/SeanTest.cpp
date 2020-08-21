@@ -18,21 +18,51 @@ void SeanTest::Test1() {
     srand(time(nullptr));
 
     Agent* tmpAgent1Ptr;
-    for(int n=0;n<8;n++) {
+    for(int n=0;n<4;n++) {
         tmpAgent1Ptr = new HurtfulAgent();
-        tmpAgent1Ptr->Compile("../Assets/agent2.c");
+        tmpAgent1Ptr->Compile("../Assets/enemy_homein.c");
         tmpAgent1Ptr->Assemble();
         tmpAgent1Ptr->SetAlienVar(0, 8 + rand()%16 );
         tmpAgent1Ptr->SetAlienVar(1, 8 + rand()%16 );
         engine.entityScheduler.entities.push_back((Engine::Entity*)tmpAgent1Ptr);
     }
 
+//    for(int n=0;n<4;n++) {
+//        tmpAgent1Ptr = new HurtfulAgent();
+//        tmpAgent1Ptr->Compile("../Assets/enemy_pattern.c");
+//        tmpAgent1Ptr->Assemble();
+//        tmpAgent1Ptr->SetAlienVar(0, 8 + rand()%16 );
+//        tmpAgent1Ptr->SetAlienVar(1, 8 + rand()%16 );
+//        engine.entityScheduler.entities.push_back((Engine::Entity*)tmpAgent1Ptr);
+//    }
+
+    int off = rand()%24;
+    for(int n=0;n<16;n++) {
+        tmpAgent1Ptr = new WallAgent();
+        tmpAgent1Ptr->Compile("../Assets/wall.c");
+        tmpAgent1Ptr->Assemble();
+        tmpAgent1Ptr->SetAlienVar(0, 8 + off );
+        tmpAgent1Ptr->SetAlienVar(1, 8 + n );
+        engine.entityScheduler.entities.push_back((Engine::Entity*)tmpAgent1Ptr);
+    }
+
+//    off = rand()%24;
+//    for(int n=0;n<16;n++) {
+//        tmpAgent1Ptr = new WallAgent();
+//        tmpAgent1Ptr->Compile("../Assets/wall.c");
+//        tmpAgent1Ptr->Assemble();
+//        tmpAgent1Ptr->SetAlienVar(0, 8 + n );
+//        tmpAgent1Ptr->SetAlienVar(1, 8 + off );
+//        engine.entityScheduler.entities.push_back((Engine::Entity*)tmpAgent1Ptr);
+//    }
+
+
     Agent* goalAgentPtr;
     goalAgentPtr = new GoalAgent();
     goalAgentPtr->Compile("../Assets/goal.c");
     goalAgentPtr->Assemble();
     goalAgentPtr->SetAlienVar(0, 8 + rand()%24 );
-    goalAgentPtr->SetAlienVar(1, 8  + rand()%24 );
+    goalAgentPtr->SetAlienVar(1, 8 + rand()%24 );
     engine.entityScheduler.entities.push_back((Engine::Entity*)goalAgentPtr);
 
     Agent* playerAgentPtr;
