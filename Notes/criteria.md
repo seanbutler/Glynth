@@ -29,16 +29,17 @@ Ignore the strolling beat em up fighting games like Street Fighter and etc. Also
 ignore Mario Bros as really a console game. Both are well covered in other literature as well.
 
 ## Universal Patterns
-These games all have several things in common.
-- Player Can Move
-- Flat 2D Space (asteroids?!)
-
-## Common Patterns
+These games __all__ have the following patterns in common.
+ - Player Can Move
+ - Flat 2D Space (asteroids?!)
  - __Either__ Player Reaches Goal To Win __OR__ Player Defeats (all) Enemies to Win
+ - Enemies Hurt Player on Collision
+ - More Enemies Than Players
+ 
+## Common Patterns
  - Some Environment Blocks are visible and impassible, if so then only small fraction of space
  - Player has 3 Health
  - Enemies have 1 Health
- - Enemies Hurt Player on Collision
  - Players Shoot Hurtful Projectiles
  - Enemies Shoot Hurtful Projectiles
  - Waves of Enemies
@@ -83,8 +84,6 @@ These games all have several things in common.
  - Enemy Should interact (get close too) player at some point to succeed
  
  - Enemy Rewards the Player on its Death
-
-
 
 ## More Advanced Patterns
 
