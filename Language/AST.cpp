@@ -233,7 +233,6 @@ std::string MoveAST::eval() {
 
 // ---------------------------------------------------------------------------
 
-
 void RandFuncAST::Accept( Genetics::MutationVisitor *visitor) {
     visitor->Visit_RandFuncAST(this);
 };
@@ -242,24 +241,56 @@ std::string RandFuncAST::print() {
     std::string str;
     str = ASTNode::print();
     str +=  "\"rand\" : {\n";
-//    str += this->expression->print();
+    str += getExpression()->print();
     str += "}\n";
     return str;
+
 }
 
 std::string RandFuncAST::diag(unsigned int parentID) {
     std::string str;
     str += "node" + std::to_string(ASTNode::getID()) + " [ label = \"rand:\"];\n";
     str += "node" + std::to_string(parentID) + " -> node" + std::to_string(ASTNode::getID()) + ";\n";
-//    str += this->expression->diag(ASTNode::getID());
+    str += getExpression()->diag(ASTNode::getID());
     return str;
 }
 
 std::string RandFuncAST::eval() {
     std::string str = "";
     str += "\n" + COMMENT + " RAND FUNC (builtin)\n";
-//    str += this->expression->eval();
+    str += getExpression()->eval();
     str += "\tRAND \n";
+    return str;
+}
+
+// ---------------------------------------------------------------------------
+
+void SenseFuncAST::Accept( Genetics::MutationVisitor *visitor)  {
+    visitor->Visit_SenseFuncAST(this);
+}
+
+std::string SenseFuncAST::print() {
+    std::string str;
+    str = ASTNode::print();
+    str +=  "\"sense\" : {\n";
+    str += getExpression()->print();
+    str += "}\n";
+    return str;
+}
+
+std::string SenseFuncAST::diag(unsigned int parentID) {
+    std::string str;
+    str += "node" + std::to_string(ASTNode::getID()) + " [ label = \"move:\"];\n";
+    str += "node" + std::to_string(parentID) + " -> node" + std::to_string(ASTNode::getID()) + ";\n";
+    str += getExpression()->diag(ASTNode::getID());
+    return str;
+}
+
+std::string SenseFuncAST::eval() {
+    std::string str = "";
+    str += "\n" + COMMENT + " SENSE FUNC (builtin)\n";
+    str += getExpression()->eval();
+    str += "\tSENSE \n";
     return str;
 }
 
@@ -268,7 +299,6 @@ std::string RandFuncAST::eval() {
 void IfStatementAST::Accept( Genetics::MutationVisitor *visitor)  {
     visitor->Visit_IfStatementAST(this);
 };
-
 
 std::string IfStatementAST::print() {
     std::string str;

@@ -153,6 +153,12 @@ INS Assembler::ScanInstruction() {
             this->instructions.push_back((int) INS::RAND);
             return INS::RAND;
         }
+
+        if (tokenString.compare("SENSE") == 0) {
+            this->instructions.push_back((int) INS::SENSE);
+            return INS::SENSE;
+        }
+
         if (tokenString.compare("OUTPUT") == 0) {
             this->instructions.push_back((int) INS::OUTPUT);
             return INS::OUTPUT;

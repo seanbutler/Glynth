@@ -8,6 +8,12 @@
 
 class SeanTest {
 
+public:
+    static void Test1();
+
+private:
+    SeanTest(){}
+
 };
 
 

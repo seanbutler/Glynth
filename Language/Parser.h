@@ -69,13 +69,19 @@ public:
     ASTNode* ParseParenExpression();
     ASTNode* ParseAssignmentStatement();
     ASTNode* ParseOutput();
-    ASTNode* ParseMove();
-    ASTNode* ParseTurn();
+
+    ASTNode* ParseMoveProc();
+
+    ASTNode* ParseTurn();   // DELETE ME
+
     ASTNode* ParseRandFunc();
+    ASTNode* ParseSenseFunc();
+
 
     void CopyNodeAndChildren(ASTNode*& original, ASTNode*& copy);
     ASTNode ** GetRandomASTNode(CompatibilityType typeFilter);
     int CompatibleASTCount(CompatibilityType typeFilter);
+
 
     bool OutputTreeDiagram(std::string filename);
     bool OutputASTJSON(std::string filename);

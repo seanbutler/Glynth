@@ -1,3 +1,0 @@
-/home/toby/Desktop/Glynth/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/toby/Desktop/Glynth/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/toby/Desktop/Glynth/cmake-build-debug/CMakeFiles/Glynth.dir

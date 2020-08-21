@@ -4,6 +4,7 @@
 
 #include "Instructions.h"
 #include "VirtualMachine.h"
+#include "../Simulation/Agent.h"
 
 //#define DEBUG
 
@@ -12,7 +13,7 @@ void VM::Execute(unsigned int slice) {
     if ( ! done ) {
         while (running > 0) {
             running--;
-    #ifdef DEBUG
+#ifdef DEBUG
             std::cout << "pc = " << programCounter << " instr = " << instructionNames[getCurrentInstruction()] << std::endl;
 
             std::cout << "instr = ";
@@ -35,7 +36,7 @@ void VM::Execute(unsigned int slice) {
                 std::cout << "(unknown)";
 
             std::cout << std::endl;
-    #endif
+#endif
             switch ((INS)getCurrentInstruction()) {
 
                 case INS::NOP : {
@@ -178,13 +179,6 @@ void VM::Execute(unsigned int slice) {
                     break;
                 }
 
-                case INS::RAND : {
-                    int param = this->stack.top();
-                    this->stack.pop();
-                    int result = (int) (rand() % param);
-                    this->stack.push(result);
-                    break;
-                }
 
                 case INS::OUTPUT : {
                     std::cout << "out... " << this->stack.top() << std::endl;
@@ -197,43 +191,83 @@ void VM::Execute(unsigned int slice) {
                     break;
                 }
 
-                case INS::MOVE : {
-                    int dir = this->stack.top() % 4;
 
+
+                case INS::RAND : {
+                    // a single parameter function, returns single value
+                    // todo roll this out to a generic form with identifier
+                    int param = this->stack.top();
+                    this->stack.pop();
+                    int result = (int) (rand() % param);
+                    this->stack.push(result);
+                    break;
+                }
+
+
+
+                case INS::SENSE : {
+                    int param = this->stack.top();
+                    this->stack.pop();
+                    int result =-1;
+                    int x = alienVars->get(0);
+                    int y = alienVars->get(1);
+
+                    switch(param%4){
+                        case 0: {
+                            result = DetectableComponent_Hurtful::directionToNearest(x, y);
+                            break;
+                        }
+                        case 1: {
+                            result = DetectableComponent_Healing::directionToNearest(x, y);
+                            break;
+                        }
+                        case 2: {
+                            result = DetectableComponent_Goal::directionToNearest(x, y);
+                            break;
+                        }
+                        case 3: {
+                            result = DetectableComponent_Player::directionToNearest(x, y);
+                            break;
+                        }
+
+                    }
+
+                    this->stack.push(result);
+                    break;
+                }
+
+                case INS::MOVE : {
+//                    std::pair<int, int> oldPosition(alienVars->get(0), alienVars->get(1));
+                    std::pair<int, int> tmpPosition(alienVars->get(0), alienVars->get(1));
+
+                    int dir = this->stack.top() % 4;
                     if (dir == 0) {
-                        alienVars->set(1, alienVars->get(1) - 1);
+                        tmpPosition.second = alienVars->get(1) - 1;
+//                        alienVars->set(1, alienVars->get(1) - 1);
                     }
                     else if (dir == 1) {
-                        alienVars->set(0, alienVars->get(0) + 1);
-//                        this->alien[0] += 1;
+                        tmpPosition.first = alienVars->get(0) + 1;
+//                        alienVars->set(0, alienVars->get(0) + 1);
                     }
                     else if (dir == 2) {
-                        alienVars->set(1, alienVars->get(1) + 1);
-//                        this->alien[1] += 1;
+                        tmpPosition.second = alienVars->get(1) + 1;
+//                        alienVars->set(1, alienVars->get(1) + 1);
                     }
                     else if (dir == 3) {
-                        alienVars->set(0, alienVars->get(0) - 1);
-//                        this->alien[0] -= 1;
+                        tmpPosition.first = alienVars->get(0) - 1;
+//                        alienVars->set(0, alienVars->get(0) - 1);
+                    }
+
+                    if (CollisionComponent::collisionTest(tmpPosition.first, tmpPosition.second) == false ) {
+                        // not occupied by agent, so express the movement to the alien vars to be picked up by the engine
+                        alienVars->set(0, tmpPosition.first);
+                        alienVars->set(1, tmpPosition.second);
                     }
 
                     this->stack.pop();
                     break;
                 }
 
-                case INS::TURN : {
-                    int dir = this->stack.top();
-
-                    if (dir == 0) {
-//                        this->alien[2] += 1;
-                    }
-
-                    if (dir == 1) {
-//                        this->alien[2] -= 1;
-                    }
-
-                    this->stack.pop();
-                    break;
-                }
 
                 case INS::SAVEALIEN: {
                     int val = stack.top();
@@ -304,7 +338,7 @@ void VM::Execute(unsigned int slice) {
                     if (a==0) {
                         programCounter = addr-1;
                     }
-    //                std::cout << " " << programCounter << std::endl;
+                    //                std::cout << " " << programCounter << std::endl;
                     break;
                 }
 

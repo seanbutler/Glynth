@@ -61,7 +61,7 @@ public:
 
     virtual std::string print();                                // USED FOR SIMPLE SERIALIZATION
     virtual std::string diag(unsigned int parentID) {};        // USED FOR GENERATING THE GV FILE...
-    virtual std::string eval() {};                             // USED FOR EMITTING THE ACTUAL INSTRUCTIONS...
+    virtual std::string eval() {return "";};                             // USED FOR EMITTING THE ACTUAL INSTRUCTIONS...
 
     std::vector<ASTNode*>children;
 
@@ -192,13 +192,15 @@ public:
     ASTNode * getExpression()   { return children[0];}
 };
 
+// ------------------------------------------------------------------------
 
 class RandFuncAST : public ASTNode {
 
 public:
-    RandFuncAST()
+    RandFuncAST(ASTNode *E)
         : ASTNode()
     {
+        ASTNode::children.push_back(E);
     }
 
     virtual void Accept( Genetics::MutationVisitor *visitor) override;
@@ -207,9 +209,28 @@ public:
     virtual std::string diag(unsigned int parentID);
     virtual std::string eval();
 
-private:
+    ASTNode * getExpression()   { return children[0];}
 };
 
+// ------------------------------------------------------------------------
+
+class SenseFuncAST : public ASTNode {
+
+public:
+    SenseFuncAST(ASTNode *E)
+            : ASTNode()
+    {
+        ASTNode::children.push_back(E);
+    }
+
+    virtual void Accept( Genetics::MutationVisitor *visitor) override;
+
+    virtual std::string print();
+    virtual std::string diag(unsigned int parentID);
+    virtual std::string eval();
+
+    ASTNode * getExpression()   { return children[0];}
+};
 
 
 // ------------------------------------------------------------------------

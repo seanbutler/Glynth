@@ -40,6 +40,7 @@ char* instructionNames[] = {
         "TURN",
 
         "RAND",
+        "SENSE",
 
         "NUMBER",
         "ADDRESS",

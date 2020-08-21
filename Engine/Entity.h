@@ -10,15 +10,11 @@
 namespace Engine {
 
     class Entity {
-
     public:
-
         Entity() {}
         virtual ~Entity() {};
-
         virtual void Update(float deltaTime) = 0;
         virtual void Render(sf::RenderWindow *W) = 0;
-
     };
 
 };

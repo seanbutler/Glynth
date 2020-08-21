@@ -87,11 +87,11 @@ namespace Genetics {
     }
 
     /// Fills the population using the function set by SetInitFunction
-    void Evolution::InitialisePopulation(int popSize, AgentType agentType, const std::string& agentFilePath)
+    void Evolution::InitialisePopulation(int popSize, const std::string& agentFilePath)
     {
         for(int i = 0; i < popSize; i++)
         {
-            auto agent = new Agent(agentType);
+            auto agent = new HurtfulAgent();
             agent->Compile(agentFilePath);
             randomiseAgentVars(agent);
             population.emplace_back(agent);

@@ -413,6 +413,87 @@ Language/VirtualMachine.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Glynth.dir/build.make CMakeFiles/Glynth.dir/Language/VirtualMachine.cpp.s
 .PHONY : Language/VirtualMachine.cpp.s
 
+Simulation/Agent.o: Simulation/Agent.cpp.o
+
+.PHONY : Simulation/Agent.o
+
+# target to build an object file
+Simulation/Agent.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Glynth.dir/build.make CMakeFiles/Glynth.dir/Simulation/Agent.cpp.o
+.PHONY : Simulation/Agent.cpp.o
+
+Simulation/Agent.i: Simulation/Agent.cpp.i
+
+.PHONY : Simulation/Agent.i
+
+# target to preprocess a source file
+Simulation/Agent.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Glynth.dir/build.make CMakeFiles/Glynth.dir/Simulation/Agent.cpp.i
+.PHONY : Simulation/Agent.cpp.i
+
+Simulation/Agent.s: Simulation/Agent.cpp.s
+
+.PHONY : Simulation/Agent.s
+
+# target to generate assembly for a file
+Simulation/Agent.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Glynth.dir/build.make CMakeFiles/Glynth.dir/Simulation/Agent.cpp.s
+.PHONY : Simulation/Agent.cpp.s
+
+Simulation/Detection.o: Simulation/Detection.cpp.o
+
+.PHONY : Simulation/Detection.o
+
+# target to build an object file
+Simulation/Detection.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Glynth.dir/build.make CMakeFiles/Glynth.dir/Simulation/Detection.cpp.o
+.PHONY : Simulation/Detection.cpp.o
+
+Simulation/Detection.i: Simulation/Detection.cpp.i
+
+.PHONY : Simulation/Detection.i
+
+# target to preprocess a source file
+Simulation/Detection.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Glynth.dir/build.make CMakeFiles/Glynth.dir/Simulation/Detection.cpp.i
+.PHONY : Simulation/Detection.cpp.i
+
+Simulation/Detection.s: Simulation/Detection.cpp.s
+
+.PHONY : Simulation/Detection.s
+
+# target to generate assembly for a file
+Simulation/Detection.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Glynth.dir/build.make CMakeFiles/Glynth.dir/Simulation/Detection.cpp.s
+.PHONY : Simulation/Detection.cpp.s
+
+Test/SeanTest.o: Test/SeanTest.cpp.o
+
+.PHONY : Test/SeanTest.o
+
+# target to build an object file
+Test/SeanTest.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Glynth.dir/build.make CMakeFiles/Glynth.dir/Test/SeanTest.cpp.o
+.PHONY : Test/SeanTest.cpp.o
+
+Test/SeanTest.i: Test/SeanTest.cpp.i
+
+.PHONY : Test/SeanTest.i
+
+# target to preprocess a source file
+Test/SeanTest.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Glynth.dir/build.make CMakeFiles/Glynth.dir/Test/SeanTest.cpp.i
+.PHONY : Test/SeanTest.cpp.i
+
+Test/SeanTest.s: Test/SeanTest.cpp.s
+
+.PHONY : Test/SeanTest.s
+
+# target to generate assembly for a file
+Test/SeanTest.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Glynth.dir/build.make CMakeFiles/Glynth.dir/Test/SeanTest.cpp.s
+.PHONY : Test/SeanTest.cpp.s
+
 main.o: main.cpp.o
 
 .PHONY : main.o
@@ -479,6 +560,15 @@ help:
 	@echo "... Language/VirtualMachine.o"
 	@echo "... Language/VirtualMachine.i"
 	@echo "... Language/VirtualMachine.s"
+	@echo "... Simulation/Agent.o"
+	@echo "... Simulation/Agent.i"
+	@echo "... Simulation/Agent.s"
+	@echo "... Simulation/Detection.o"
+	@echo "... Simulation/Detection.i"
+	@echo "... Simulation/Detection.s"
+	@echo "... Test/SeanTest.o"
+	@echo "... Test/SeanTest.i"
+	@echo "... Test/SeanTest.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
