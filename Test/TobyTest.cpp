@@ -9,6 +9,7 @@
 
 void TobyTest::TestPopulation(Engine::Engine &engine)
 {
+
     Genetics::Evolution evolution;
 
     auto hurtfulRand = [](Agent* agent){
@@ -16,7 +17,7 @@ void TobyTest::TestPopulation(Engine::Engine &engine)
         agent->SetAlienVar(1, 8 + (int)rand()%16);
     };
 
-    bool xAxis = false;
+    bool xAxis = true;
     auto axisFitness = [&xAxis](Agent* agent){
 
         auto copy = new Agent(*agent);
@@ -28,7 +29,7 @@ void TobyTest::TestPopulation(Engine::Engine &engine)
         int furthestDist = 0;
         int moveCount = 0;
 
-        for(int i = 0; i < 10000; i++)
+        for(int i = 0; i < 5000; i++)
         {
             copy->Update(0);
             auto newPos = std::pair<int,int>(copy->alienVars.get(0), copy->alienVars.get(1));
@@ -47,7 +48,8 @@ void TobyTest::TestPopulation(Engine::Engine &engine)
             }
             lastPos = xAxis ? newPos.first : newPos.second;
         }
-        return ((int)(uniqueLocations.size()*5) +(moveCount*2) ) - furthestDist;
+        delete copy;
+        return ((int)((uniqueLocations.size()-1)*5) +(moveCount*2) ) - furthestDist;
     };
 
     auto combinedFitness = [](Agent* agent){
@@ -60,7 +62,7 @@ void TobyTest::TestPopulation(Engine::Engine &engine)
         int furthestDist = 0;
         int moveCount = 0;
 
-        for(int i = 0; i < 50000; i++)
+        for(int i = 0; i < 10000; i++)
         {
             copy->Update(0);
             auto newPos = std::pair<int,int>(copy->alienVars.get(0), copy->alienVars.get(1));
@@ -69,21 +71,22 @@ void TobyTest::TestPopulation(Engine::Engine &engine)
             if((std::find(uniqueLocations.begin(), uniqueLocations.end(), newPos)) == uniqueLocations.end())
             {
                 uniqueLocations.push_back(newPos);
-                float xDist = powf((float)fabs((double)startPos.first - (double)newPos.first),3.0f);
-                float yDist = powf((float)fabs((double)startPos.second - (double)newPos.second),3.0f);
-                int dist = (int)sqrtf(xDist + (yDist));
+                float xDist = powf((float)fabs((double)startPos.first - (double)newPos.first),2.0f);
+                float yDist = powf((float)fabs((double)startPos.second - (double)newPos.second),2.0f);
+                int dist = (int)powf(sqrtf(xDist + yDist),2);
                 if(dist > furthestDist)
                 {
                     furthestDist = dist;
                 }
             }
         }
-        return ((int)(uniqueLocations.size()*3) + moveCount) - furthestDist;
+        delete copy;
+        return ((int)((uniqueLocations.size()-1)*15) + (moveCount)) - furthestDist;
     };
 
     evolution.SetRandomiseFunction(hurtfulRand);
     evolution.SetFitnessFunction(axisFitness);
-    evolution.InitialisePopulation(400,HurtfulAgentType(),"../Assets/agent2.c");
+    evolution.InitialisePopulation(500,HurtfulAgentType(),"../Assets/agent2.c");
     evolution.RandomisePopulation();
 
     int maxGenerations = 30;
@@ -95,10 +98,11 @@ void TobyTest::TestPopulation(Engine::Engine &engine)
     }
     evolution.AssessFitness();
 
-    auto xPop = evolution.GetTopPopulationAgents(0.25f, true);
+
+    auto xPop = evolution.GetTopPopulationAgents(0.1f, true);
 
     xAxis = false;
-    evolution.InitialisePopulation(400, HurtfulAgentType(), "../Assets/agent2.c");
+    evolution.InitialisePopulation(500, HurtfulAgentType(), "../Assets/agent2.c");
     evolution.RandomisePopulation();
 
     for(int i = 0; i <maxGenerations; i++)
@@ -107,20 +111,21 @@ void TobyTest::TestPopulation(Engine::Engine &engine)
         evolution.AssessFitness();
         evolution.GenerateNewPopulation(0.96f, 0.02f, 0.02f);
     }
+    evolution.AssessFitness();
 
-    auto yPop = evolution.GetTopPopulationAgents(0.25f, true);
+    auto yPop = evolution.GetTopPopulationAgents(0.1f, true);
 
     evolution.AddIndividuals(xPop);
     evolution.AddIndividuals(yPop);
     evolution.SetFitnessFunction(combinedFitness);
 
-    maxGenerations = 20;
     for(int i = 0; i <maxGenerations; i++)
     {
         std::cout << "Combined Pop: Creating generation " << i+1 << "/" << maxGenerations << "..." << std::endl;
         evolution.AssessFitness();
         evolution.GenerateNewPopulation(0.96f, 0.02f, 0.02f);
     }
+    evolution.AssessFitness();
 
     int i =0;
     for(auto agent : evolution.GetTopPopulationAgents(0.1f, true))
