@@ -10,22 +10,22 @@
 
 void SeanTest::Test1() {
 
-    srand(time(nullptr));
+//    srand(time(nullptr));
 
     Engine::Engine engine(32, 32);
     Genetics::Evolution evolution;
 
     srand(time(nullptr));
-//
-//    Agent* tmpAgent1Ptr;
-//    for(int n=0;n<4;n++) {
-//        tmpAgent1Ptr = new HurtfulAgent();
-//        tmpAgent1Ptr->Compile("../Assets/agent2.c");
-//        tmpAgent1Ptr->Assemble();
-//        tmpAgent1Ptr->SetAlienVar(0, 8 + rand()%16 );
-//        tmpAgent1Ptr->SetAlienVar(1, 8 + rand()%16 );
-//        engine.entityScheduler.entities.push_back((Engine::Entity*)tmpAgent1Ptr);
-//    }
+
+    Agent* tmpAgent1Ptr;
+    for(int n=0;n<8;n++) {
+        tmpAgent1Ptr = new HurtfulAgent();
+        tmpAgent1Ptr->Compile("../Assets/agent2.c");
+        tmpAgent1Ptr->Assemble();
+        tmpAgent1Ptr->SetAlienVar(0, 8 + rand()%16 );
+        tmpAgent1Ptr->SetAlienVar(1, 8 + rand()%16 );
+        engine.entityScheduler.entities.push_back((Engine::Entity*)tmpAgent1Ptr);
+    }
 
     Agent* goalAgentPtr;
     goalAgentPtr = new GoalAgent();
