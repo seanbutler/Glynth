@@ -7,6 +7,8 @@
 Token Lexer::ScanToken() {
     char currentChar = lexingStr[lexingPos++];
 
+    SCANSTART:
+
     //
     // skip whitespace
     //
@@ -15,6 +17,18 @@ Token Lexer::ScanToken() {
             currentLine++;
         }
         currentChar = lexingStr[lexingPos++];
+    }
+
+    //
+    // skip comment
+    //
+    if (currentChar == '#') {
+        do{
+            currentChar = lexingStr[lexingPos++];
+        } while (currentChar != '\n');
+        currentLine++;
+        currentChar = lexingStr[lexingPos++];
+        goto SCANSTART;
     }
 
     //
@@ -229,6 +243,7 @@ Token Lexer::ScanToken() {
         }
 
         case '/': {
+
             tokens.push_back(std::make_pair(Token::OP_DIV, "/"));
             tokensWithLine.push_back(std::make_tuple(Token::OP_DIV, "/", currentLine));
 
