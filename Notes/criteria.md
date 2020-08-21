@@ -3,28 +3,28 @@
 
 Taken from [this](https://www.ranker.com/crowdranked-list/the-best-classic-arcade-games)
  site is a lost of the most popular arcade games from the classic era.
-
- 1 Galaga
- 2 Donkey Kong
- 3 Pac Man
- 4 Space Invaders (1 and 4 are synonymous)
- 5 Ms. Pac Man (3 and 5 are synonymous)
- 6 Dig Dug
- 7 Gauntlet
- 8 Asteroids
- 9 Mario Bros (not an arcade game, also covered elsewhere)
- 10 1942
- 11 Defender
- 12 Street Fighter II
- 13 Centipede
- 14 Street Fighter 
- 15 Double Dragon (see 12 & 14)
- 16 Joust
- 17 Mortal Combat (see 12, 14 & 15)
- 18
- 19
- 20 etc
- 
+ - Galaga
+ - Donkey Kong
+ - Pac Man
+ - Space Invaders (1 and 4 are synonymous)
+ - Ms. Pac Man (3 and 5 are synonymous)
+ - Dig Dug
+ - Gauntlet
+ - Asteroids
+ - Mario Bros (not an arcade game, also covered elsewhere)
+ - 1942
+ - Defender
+ - Street Fighter II
+ - Centipede
+ - Street Fighter 
+ - Double Dragon (see 12 & 14)
+ - Joust
+ - Mortal Combat (see 12, 14 & 15)
+ - etc
+ - etc
+ - PONG
+ - SPY HUNTER
+  
 Ignore the strolling beat em up fighting games like Street Fighter and etc. Also 
 ignore Mario Bros as really a console game. Both are well covered in other literature as well.
 
@@ -32,26 +32,25 @@ ignore Mario Bros as really a console game. Both are well covered in other liter
 These games all have several things in common.
 - Player Can Move
 - Flat 2D Space (asteroids?!)
-- Enemies which Hurt Player on Collision
 
 ## Common Patterns
-- __Either__ Player Reaches Goal To Win __OR__ Player Defeats (all) Enemies to Win
-- Some Environment Blocks are visible and impassible
-   - if so then small fraction of space
- - Some Environment Can be destroyed
-   - if so then fills space available
- - Players Shoot Hurtful Projectiles
- - Enemies Shoot Hurtful Projectiles
- - Enemies Reach Goal To Win (Player Lose)
- - Waves of Enemies
- - Stationary Player Respawn (Start) Point
+ - __Either__ Player Reaches Goal To Win __OR__ Player Defeats (all) Enemies to Win
+ - Some Environment Blocks are visible and impassible, if so then only small fraction of space
  - Player has 3 Health
  - Enemies have 1 Health
+ - Enemies Hurt Player on Collision
+ - Players Shoot Hurtful Projectiles
+ - Enemies Shoot Hurtful Projectiles
+ - Waves of Enemies
+ - Stationary Player Respawn (Start) Point
  
 ## Uncommon Patterns
+ - Some Environment Can be destroyed
+   - if so then fills space available
  - Player collects Items for Powers
    - Suppressed abilities, collectables unlock them
  - Enemies Grow or Space Shrinks either directly or indirectly (more on this later)    
+ - Enemies Reach Goal To Win (Player Lose)
 
 
 # Criteria for Quality Arcade Games
@@ -94,7 +93,6 @@ These games all have several things in common.
  - Use Randomised depth first search to carve out a maze
  - Randomly place few long walls
  - Randomly place single blocks
-
 
 #### Player Characteristics
 
