@@ -513,6 +513,15 @@ std::string BinOperandAST::print() {
         case Token::OP_DIV:
             opStr = "/";
             break;
+
+        case Token::OP_AND:
+            opStr = "&& (and)";
+            break;
+
+        case Token::OP_OR:
+            opStr = "|| (or)";
+            break;
+
     }
 
     str +=  "\"operand\" : \"" + opStr + "\",\n" ;
@@ -578,6 +587,14 @@ std::string BinOperandAST::diag(unsigned int parentID) {
         case Token::OP_DIV:
             opStr = "/";
             break;
+
+        case Token::OP_AND:
+            opStr = "&& (and)";
+            break;
+
+        case Token::OP_OR:
+            opStr = "|| (or)";
+            break;
     }
 
     str += "node" + std::to_string(getID()) + " [ label = \"op: " + opStr + "\"];\n";
@@ -610,6 +627,18 @@ std::string BinOperandAST::eval() {
             str += "\n";
             break;
         }
+        case Token::OP_AND: {
+            str += children[0]->eval() + children[1]->eval() + "\tAND";
+            str += "\n";
+            break;
+        }
+
+        case Token::OP_OR: {
+            str += children[0]->eval() + children[1]->eval() + "\tOR";
+            str += "\n";
+            break;
+        }
+
         case Token::OP_GT: {
             str += children[0]->eval() + children[1]->eval() + "\tGT";
             str += "\n";

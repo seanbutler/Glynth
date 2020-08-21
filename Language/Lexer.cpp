@@ -235,6 +235,36 @@ Token Lexer::ScanToken() {
             return Token::OP_DIV;
         }
 
+        case '&': {
+            char nextChar = lexingStr[lexingPos];
+
+            if (nextChar == '&') {
+                tokens.push_back(std::make_pair(Token::OP_AND, "&&"));
+                tokensWithLine.push_back(std::make_tuple(Token::OP_AND, "&&", currentLine));
+
+                ++lexingPos;
+                return Token::OP_AND;
+            }
+
+            std::cerr << "TOKENIZER ERROR after \'&\' at Line " << currentLine << " Got " << currentChar << std::endl;
+            return Token::ERROR;
+        }
+
+        case '|': {
+            char nextChar = lexingStr[lexingPos];
+
+            if (nextChar == '|') {
+                tokens.push_back(std::make_pair(Token::OP_OR, "||"));
+                tokensWithLine.push_back(std::make_tuple(Token::OP_OR, "||", currentLine));
+
+                ++lexingPos;
+                return Token::OP_OR;
+            }
+
+            std::cerr << "TOKENIZER ERROR after \'|\' at Line " << currentLine << " Got " << currentChar << std::endl;
+            return Token::ERROR;
+        }
+
         case '!': {
             char nextChar = lexingStr[lexingPos];
 
@@ -245,8 +275,7 @@ Token Lexer::ScanToken() {
                 ++lexingPos;
                 return Token::OP_NE;
             }
-
-            std::cerr << "TOKENIZER ERROR at Line " << currentLine << " Got " << currentChar << std::endl;
+            std::cerr << "TOKENIZER ERROR after \'!\' at Line " << currentLine << " Got " << currentChar << std::endl;
             return Token::ERROR;
         }
 

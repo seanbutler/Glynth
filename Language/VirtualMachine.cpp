@@ -98,12 +98,29 @@ void VM::Execute(unsigned int slice) {
 
                 case INS::DIV: {
                     int a = stack.top();
-                    if(a==0)
-                        a = 1;
+                    if(a==0) a = 1;
                     stack.pop();
                     int b = stack.top();
                     stack.pop();
                     stack.push(b / a);
+                    break;
+                }
+
+                case INS::AND: {
+                    int a = stack.top();
+                    stack.pop();
+                    int b = stack.top();
+                    stack.pop();
+                    stack.push(b && a);
+                    break;
+                }
+
+                case INS::OR: {
+                    int a = stack.top();
+                    stack.pop();
+                    int b = stack.top();
+                    stack.pop();
+                    stack.push(b || a);
                     break;
                 }
 
@@ -179,7 +196,6 @@ void VM::Execute(unsigned int slice) {
                     break;
                 }
 
-
                 case INS::OUTPUT : {
                     std::cout << "out... " << this->stack.top() << std::endl;
                     this->stack.pop();
@@ -191,8 +207,6 @@ void VM::Execute(unsigned int slice) {
                     break;
                 }
 
-
-
                 case INS::RAND : {
                     // a single parameter function, returns single value
                     // todo roll this out to a generic form with identifier
@@ -202,8 +216,6 @@ void VM::Execute(unsigned int slice) {
                     this->stack.push(result);
                     break;
                 }
-
-
 
                 case INS::SENSE : {
                     int param = this->stack.top();

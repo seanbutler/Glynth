@@ -463,7 +463,10 @@ ASTNode *Parser::ParseExpression() {
             case Token::OP_ADD:
             case Token::OP_SUB:
             case Token::OP_MUL:
-            case Token::OP_DIV: {
+            case Token::OP_DIV:
+            case Token::OP_AND:
+            case Token::OP_OR:
+                {
                 if (!opStack.empty()) {
                     // get the last operator
                     Token op = opStack.top();

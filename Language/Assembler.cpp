@@ -123,7 +123,14 @@ INS Assembler::ScanInstruction() {
             this->instructions.push_back((int) INS::DIV);
             return INS::DIV;
         }
-
+        if (tokenString.compare("AND") == 0) {
+            this->instructions.push_back((int) INS::AND);
+            return INS::AND;
+        }
+        if (tokenString.compare("OR") == 0) {
+            this->instructions.push_back((int) INS::OR);
+            return INS::OR;
+        }
         if (tokenString.compare("EQU") == 0) {
             this->instructions.push_back((int) INS::EQU);
             return INS::EQU;
