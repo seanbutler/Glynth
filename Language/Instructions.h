@@ -37,6 +37,10 @@ enum class INS : int {
     LT,
     LTE,
 
+    AND,
+    OR,
+    NOT,
+
     OUTPUT,
     INPUT,
 

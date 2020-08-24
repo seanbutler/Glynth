@@ -44,6 +44,10 @@ enum class Token : int {
     OP_MUL,
     OP_DIV,
 
+    OP_AND,
+    OP_OR,
+    //OP_NOT,
+
     END_OF_FILE = -1,
     ERROR = -2
 };

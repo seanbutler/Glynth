@@ -33,6 +33,10 @@ char* instructionNames[] = {
         "LT",
         "LTE",
 
+        "AND",
+        "OR",
+        "NOT",
+
         "OUTPUT",
         "INPUT",
 

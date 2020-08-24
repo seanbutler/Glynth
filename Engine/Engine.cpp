@@ -15,7 +15,6 @@ namespace Engine {
             ,   window(sf::VideoMode(w, h),
                        "GLYNTH",
                        sf::Style::Titlebar | sf::Style::Close)
-
     {
         window.setSize(sf::Vector2u(w*pixel_scale,h*pixel_scale));
         window.setFramerateLimit(FR);
