@@ -86,7 +86,7 @@ void TobyTest::TestPopulation()
 
     evolution.SetRandomiseFunction(hurtfulRand);
     evolution.SetFitnessFunction(axisFitness);
-    evolution.InitialisePopulation(500,"../Assets/agent2.c");
+    evolution.InitialisePopulation(500,"../Assets/player.c");
     evolution.RandomisePopulation();
 
     int maxGenerations = 30;
@@ -102,7 +102,7 @@ void TobyTest::TestPopulation()
     auto xPop = evolution.GetTopPopulationAgents(0.1f, true);
 
     xAxis = false;
-    evolution.InitialisePopulation(500, "../Assets/agent2.c");
+    evolution.InitialisePopulation(500, "../Assets/player.c");
     evolution.RandomisePopulation();
 
     for(int i = 0; i <maxGenerations; i++)
