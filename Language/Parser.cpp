@@ -722,6 +722,8 @@ void Parser::CopyNodeAndChildren(ASTNode *&original, ASTNode *&copy)
         copy = new VariableDeclarationAST(*dynamic_cast<VariableDeclarationAST*>(original));
     else if(dynamic_cast<YieldAST*>(original))
         copy = new YieldAST(*dynamic_cast<YieldAST*>(original));
+    else if(dynamic_cast<SenseFuncAST*>(original))
+        copy = new SenseFuncAST(*dynamic_cast<SenseFuncAST*>(original));
     //Temp fix to allow for deep copies
 
     copy->GenerateNewID();

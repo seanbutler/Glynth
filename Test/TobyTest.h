@@ -11,7 +11,7 @@ namespace Engine {
 
 class TobyTest {
 public:
-    static void TestPopulation(Engine::Engine& engine);
+    static void TestPopulation();
 
 };
 

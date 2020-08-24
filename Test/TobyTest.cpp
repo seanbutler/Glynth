@@ -7,9 +7,9 @@
 #include "../Engine/Engine.h"
 #include "../Genetics/Evolution.h"
 
-void TobyTest::TestPopulation(Engine::Engine &engine)
+void TobyTest::TestPopulation()
 {
-
+    Engine::Engine engine(32, 32);
     Genetics::Evolution evolution;
 
     auto hurtfulRand = [](Agent* agent){
@@ -29,7 +29,7 @@ void TobyTest::TestPopulation(Engine::Engine &engine)
         int furthestDist = 0;
         int moveCount = 0;
 
-        for(int i = 0; i < 5000; i++)
+        for(int i = 0; i < 500; i++)
         {
             copy->Update(0);
             auto newPos = std::pair<int,int>(copy->alienVars.get(0), copy->alienVars.get(1));
@@ -62,7 +62,7 @@ void TobyTest::TestPopulation(Engine::Engine &engine)
         int furthestDist = 0;
         int moveCount = 0;
 
-        for(int i = 0; i < 10000; i++)
+        for(int i = 0; i < 1000; i++)
         {
             copy->Update(0);
             auto newPos = std::pair<int,int>(copy->alienVars.get(0), copy->alienVars.get(1));
@@ -86,7 +86,7 @@ void TobyTest::TestPopulation(Engine::Engine &engine)
 
     evolution.SetRandomiseFunction(hurtfulRand);
     evolution.SetFitnessFunction(axisFitness);
-    evolution.InitialisePopulation(500,HurtfulAgentType(),"../Assets/agent2.c");
+    evolution.InitialisePopulation(500,"../Assets/agent2.c");
     evolution.RandomisePopulation();
 
     int maxGenerations = 30;
@@ -102,7 +102,7 @@ void TobyTest::TestPopulation(Engine::Engine &engine)
     auto xPop = evolution.GetTopPopulationAgents(0.1f, true);
 
     xAxis = false;
-    evolution.InitialisePopulation(500, HurtfulAgentType(), "../Assets/agent2.c");
+    evolution.InitialisePopulation(500, "../Assets/agent2.c");
     evolution.RandomisePopulation();
 
     for(int i = 0; i <maxGenerations; i++)
@@ -135,4 +135,6 @@ void TobyTest::TestPopulation(Engine::Engine &engine)
         engine.entityScheduler.entities.push_back((Engine::Entity*)agent);
         i++;
     }
+
+    engine.MainLoop();
 }
