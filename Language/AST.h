@@ -30,6 +30,7 @@ enum class CompatibilityType
     var,
     binArith,
     binComp,
+    binLogic,
     block,
     identifier
 

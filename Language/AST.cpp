@@ -456,6 +456,8 @@ BinOperandAST::BinOperandAST(Token O, ASTNode *L, ASTNode *R) :
 
     if(op == Token::OP_ADD || op == Token::OP_SUB || op == Token::OP_MUL || op == Token::OP_DIV)
         compatibility = CompatibilityType::binArith;
+    else if(op == Token::OP_AND || op == Token::OP_OR)
+        compatibility = CompatibilityType::binLogic;
     else
         compatibility = CompatibilityType::binComp;
 }
