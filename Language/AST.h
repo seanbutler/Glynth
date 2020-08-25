@@ -33,7 +33,7 @@ enum class CompatibilityType
     binLogic,
     block,
     identifier,
-    generic,
+    blockChild,
 
 };
 
@@ -120,7 +120,7 @@ public:
         : ASTNode()
         , identifier(I)
     {
-        compatibility = CompatibilityType::generic;
+        compatibility = CompatibilityType::blockChild;
         ASTNode::children.push_back(I);
     }
 
@@ -164,7 +164,7 @@ public:
     OutputAST(ASTNode *E)
         : ASTNode()
     {
-        compatibility = CompatibilityType::generic;
+        compatibility = CompatibilityType::blockChild;
         ASTNode::children.push_back(E);
     }
 
@@ -186,7 +186,7 @@ public:
     MoveAST(ASTNode *E)
         : ASTNode()
     {
-        compatibility = CompatibilityType::generic;
+        compatibility = CompatibilityType::blockChild;
         ASTNode::children.push_back(E);
     }
 
@@ -228,7 +228,7 @@ public:
     SenseFuncAST(ASTNode *E)
             : ASTNode()
     {
-        compatibility = CompatibilityType::generic;
+        compatibility = CompatibilityType::blockChild;
         ASTNode::children.push_back(E);
     }
 
@@ -301,7 +301,7 @@ public:
     AssignmentStatementAST(ASTNode *I, ASTNode *E)
         : ASTNode()
     {
-        compatibility = CompatibilityType::generic;
+        compatibility = CompatibilityType::blockChild;
         children.push_back(I);
         children.push_back(E);
     }
@@ -365,7 +365,7 @@ class YieldAST : public ASTNode {
 public:
     YieldAST() : ASTNode()
     {
-        compatibility = CompatibilityType::generic;
+        compatibility = CompatibilityType::blockChild;
     }
 
     virtual void Accept( Genetics::MutationVisitor *visitor) override;

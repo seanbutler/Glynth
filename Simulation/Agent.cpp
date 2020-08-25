@@ -105,8 +105,9 @@ ASTNode * Agent::GenerateAssignment(TreeState state)
 /// variables. Note this is also recursive, as each number used in the binary operators calls this function again.
 ASTNode * Agent::GenerateNum(TreeState state)
 {
-    int randInd = util::RandomNumberGenerator::RandNum(0, (int)state.scopedVars.size()-1);
-    switch (util::RandomNumberGenerator::RandNum(0, state.currentDepth < state.maxDepth ? 3 : 2)) {
+    bool depthReached = state.currentDepth > state.maxDepth;
+    int randInd = state.scopedVars.empty() ? -1 : util::RandomNumberGenerator::RandNum(0, (int)state.scopedVars.size()-1);
+    switch (util::RandomNumberGenerator::RandNum(state.full && !depthReached ? 3 : 0, depthReached? 2 : 3)) {
         case 0:
             state.currentDepth++;
             return new NumberAST(util::RandomNumberGenerator::RandNum(0, 100));
@@ -115,7 +116,8 @@ ASTNode * Agent::GenerateNum(TreeState state)
                 return GenerateNum(state);
             return new IdentifierAST(state.scopedVars[randInd]);
         case 2:
-            return new AlienVarAST();
+            return GenerateNum(state);
+            //return new AlienVarAST();
         case 3: // Case 3 is ignored when depth limit is reached
             return GenerateArithBin(state);
         default: // Should never hit default
@@ -145,17 +147,18 @@ ASTNode * Agent::GenerateArithBin(TreeState state)
 /// Creates a random AST Node that is legal as a child of a block
 ASTNode* Agent::GenerateBlockChild(TreeState state)
 {
-    switch (util::RandomNumberGenerator::RandNum(0, state.currentDepth < state.maxDepth ? 3 : 2)) {
-        case 0:
-            return GenerateVar(state);
+    bool depthReached = state.currentDepth > state.maxDepth;
+    switch (util::RandomNumberGenerator::RandNum(state.full && !depthReached ? 1 : 0, depthReached ? 2 : 3)) {
+        case 0: // Skipped when using full method AND max depth has not been reached
+            state.currentDepth++;
+            return new MoveAST(GenerateNum(state));
         case 1:
             if((int)state.scopedVars.size() > 0)
                 return GenerateAssignment(state);
             else
                 GenerateBlockChild(state); // If no variables are in scope, then just re-roll
         case 2:
-            state.currentDepth++;
-            return new MoveAST(GenerateNum(state));
+            return GenerateVar(state);
         case 3: // Case 3 is ignored when depth limit is reached
             return GenerateBlock(state);
         default: // Should never hit default
