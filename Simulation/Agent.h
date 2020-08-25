@@ -11,6 +11,7 @@
 #include "../Language/Parser.h"
 #include "../Language/Assembler.h"
 #include "../Language/VirtualMachine.h"
+#include "../Utils/RandomNumberGenerator.h"
 
 #include "Detection.h"
 #include "AlienVars.h"
@@ -18,6 +19,16 @@
 //
 // a specific version of a game entity which has AI
 //
+
+struct TreeState
+{
+    int maxBranchWidth = 0;
+    int maxDepth = 0;
+    int currentDepth = 0;
+    bool full = false;
+
+    std::vector<std::string> scopedVars;
+};
 
 // ----------------------------------------------------------------------
 
@@ -115,6 +126,9 @@ public:
         return newAgent;
     }
 
+    void GenerateRandomAST(int maxTreeDepth, int maxBranchWidth, bool full);
+
+
     std::string srcFilename;
     sf::RectangleShape rectangle;
 
@@ -126,6 +140,17 @@ public:
 
     AlienVars alienVars;
 
+private:
+    ASTNode* GenerateBlock(TreeState state);
+    ASTNode* GenerateBlockChild(TreeState state);
+    ASTNode* GenerateAssignment(TreeState state);
+    ASTNode* GenerateCondition(TreeState state);
+    ASTNode* GenerateBinComp(TreeState state);
+    ASTNode* GenerateArithBin(TreeState state);
+    ASTNode* GenerateNum(TreeState state);
+    ASTNode* GenerateVar(TreeState& state);
+
+    int varCount = 0;
 };
 
 // ----------------------------------------------------------------------
