@@ -154,13 +154,13 @@ namespace Genetics {
 
     /// Takes the current population and applies crossover, reproduction and mutation to
     /// create and replace the current population with a new one
-    void Evolution::GenerateNewPopulation(float crossover, float reproduction, float mutation)
+    void Evolution::GenerateNewPopulation(float crossover, float reproduction, float pointMutation, float branchMutation)
     {
         static int generation = -1;
         generation++;
 
         std::vector<Individual> newPopulation;
-        std::discrete_distribution<int> typeDist {crossover, reproduction, mutation};
+        std::discrete_distribution<int> typeDist {crossover, reproduction, pointMutation, branchMutation};
 
         // Use the fitness scores for each population as the weights for a probabilistic generator
         std::vector<int> weights;
@@ -195,13 +195,25 @@ namespace Genetics {
                     newPopulation.back().agent = new Agent(*population[copyIndex].agent);
                     break;
                 }
-                // Mutation
+                // Point Mutation
                 case 2:
                 {
                     int copyIndex = probDist(randEngine);
                     newPopulation.push_back(population[copyIndex]);
                     newPopulation.back().agent = new Agent(*population[copyIndex].agent);
                     MutateIndividual(newPopulation.back().agent);
+                    break;
+                }
+                // Branch Mutation
+                case 3:
+                {
+                    Agent* a = population[probDist(randEngine)].agent;
+                    Agent* b = new HurtfulAgent();
+                    // TODO: Make this use the first agents depth and width rather than hardcoded 6/4
+                    b->GenerateRandomAST(6, 4, false);
+                    newPopulation.emplace_back();
+                    newPopulation.back().agent = a->Cross(b);
+                    delete b;
                     break;
                 }
             }

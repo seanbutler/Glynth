@@ -44,7 +44,7 @@ namespace Genetics {
         void InitialiseRandomPopulation(int popSize, int maxDepth, int maxBranchWidth);
         void RandomisePopulation();
         void AssessFitness();
-        void GenerateNewPopulation(float crossover = 0.9f, float reproduction = 0.09f, float mutation = 0.01f);
+        void GenerateNewPopulation(float crossover = 0.9f, float reproduction = 0.06f, float pointMutation = 0.02f, float branchMutation = 0.02f);
 
         void AddIndividual(Agent *newIndividual);
         void AddIndividuals(const std::vector<Agent*>& newIndividuals);

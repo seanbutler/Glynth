@@ -87,6 +87,7 @@ void TobyTest::TestPopulation()
     evolution.SetRandomiseFunction(hurtfulRand);
     evolution.SetFitnessFunction(axisFitness);
     evolution.InitialisePopulation(500,"../Assets/enemy_pattern.c");
+    //evolution.InitialiseRandomPopulation(500, 6, 4);
     evolution.RandomisePopulation();
 
     int maxGenerations = 30;
@@ -94,7 +95,7 @@ void TobyTest::TestPopulation()
     {
         std::cout << "xAxis Pop: Creating generation " << i+1 << "/" << maxGenerations << "..." << std::endl;
         evolution.AssessFitness();
-        evolution.GenerateNewPopulation(0.96f, 0.02f, 0.02f);
+        evolution.GenerateNewPopulation(0.7f, 0.1f, 0.1f, 0.1f);
     }
     evolution.AssessFitness();
 
@@ -103,13 +104,14 @@ void TobyTest::TestPopulation()
 
     xAxis = false;
     evolution.InitialisePopulation(500, "../Assets/enemy_pattern.c");
+    //evolution.InitialiseRandomPopulation(500, 6, 4);
     evolution.RandomisePopulation();
 
     for(int i = 0; i <maxGenerations; i++)
     {
         std::cout << "yAxis Pop: Creating generation " << i+1 << "/" << maxGenerations << "..." << std::endl;
         evolution.AssessFitness();
-        evolution.GenerateNewPopulation(0.96f, 0.02f, 0.02f);
+        evolution.GenerateNewPopulation();
     }
     evolution.AssessFitness();
 
@@ -123,7 +125,7 @@ void TobyTest::TestPopulation()
     {
         std::cout << "Combined Pop: Creating generation " << i+1 << "/" << maxGenerations << "..." << std::endl;
         evolution.AssessFitness();
-        evolution.GenerateNewPopulation(0.96f, 0.02f, 0.02f);
+        evolution.GenerateNewPopulation();
     }
     evolution.AssessFitness();
 
