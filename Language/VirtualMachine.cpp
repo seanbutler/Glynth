@@ -211,6 +211,7 @@ void VM::Execute(unsigned int slice) {
                     // a single parameter function, returns single value
                     // todo roll this out to a generic form with identifier
                     int param = this->stack.top();
+                    param = param <= 0 ? 1 : param;
                     this->stack.pop();
                     int result = (int) (rand() % param);
                     this->stack.push(result);
