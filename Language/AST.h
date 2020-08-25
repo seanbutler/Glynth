@@ -32,7 +32,8 @@ enum class CompatibilityType
     binComp,
     binLogic,
     block,
-    identifier
+    identifier,
+    generic,
 
 };
 
@@ -83,7 +84,10 @@ class IdentifierAST : public ASTNode {
 public:
     IdentifierAST() {};
 
-    explicit IdentifierAST(const std::string &N) : ASTNode(N) {}
+    explicit IdentifierAST(const std::string &N) : ASTNode(N)
+    {
+        compatibility = CompatibilityType::identifier;
+    }
 
     virtual void Accept( Genetics::MutationVisitor *visitor)  override ;
 
@@ -116,7 +120,7 @@ public:
         : ASTNode()
         , identifier(I)
     {
-        compatibility = CompatibilityType::identifier;
+        compatibility = CompatibilityType::generic;
         ASTNode::children.push_back(I);
     }
 
@@ -160,6 +164,7 @@ public:
     OutputAST(ASTNode *E)
         : ASTNode()
     {
+        compatibility = CompatibilityType::generic;
         ASTNode::children.push_back(E);
     }
 
@@ -181,6 +186,7 @@ public:
     MoveAST(ASTNode *E)
         : ASTNode()
     {
+        compatibility = CompatibilityType::generic;
         ASTNode::children.push_back(E);
     }
 
@@ -201,6 +207,7 @@ public:
     RandFuncAST(ASTNode *E)
         : ASTNode()
     {
+        compatibility = CompatibilityType::var;
         ASTNode::children.push_back(E);
     }
 
@@ -221,6 +228,7 @@ public:
     SenseFuncAST(ASTNode *E)
             : ASTNode()
     {
+        compatibility = CompatibilityType::generic;
         ASTNode::children.push_back(E);
     }
 
@@ -293,6 +301,7 @@ public:
     AssignmentStatementAST(ASTNode *I, ASTNode *E)
         : ASTNode()
     {
+        compatibility = CompatibilityType::generic;
         children.push_back(I);
         children.push_back(E);
     }
@@ -354,7 +363,10 @@ private:
 class YieldAST : public ASTNode {
 
 public:
-    YieldAST() : ASTNode() { }
+    YieldAST() : ASTNode()
+    {
+        compatibility = CompatibilityType::generic;
+    }
 
     virtual void Accept( Genetics::MutationVisitor *visitor) override;
 
