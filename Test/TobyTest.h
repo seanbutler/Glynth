@@ -12,6 +12,7 @@ namespace Engine {
 class TobyTest {
 public:
     static void TestPopulation();
+    static void TestRandomAST();
 
 };
 

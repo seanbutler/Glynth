@@ -98,6 +98,25 @@ namespace Genetics {
         }
     }
 
+
+    /// Creates a new population with random abstract syntax trees using a ramped half and half method.
+    void Evolution::InitialiseRandomPopulation(int popSize, int maxDepth, int maxBranchWidth)
+    {
+        float rampedDepth = (float)maxDepth/4;
+        float rampIncrement = (((float)maxDepth / 4) * 3) / (float)popSize;
+        bool full = false;
+
+        for(int i = 0; i< popSize; i++)
+        {
+            auto agent = new HurtfulAgent();
+            agent->GenerateRandomAST((int)rampedDepth, maxBranchWidth, full);
+            randomiseAgentVars(agent);
+            population.emplace_back(agent);
+            full = !full;
+            rampedDepth += rampIncrement;
+        }
+    }
+
     /// Randomises every member of the current population
     void Evolution::RandomisePopulation()
     {

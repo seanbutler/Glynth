@@ -6,7 +6,8 @@
 int main(int argc, char **argv) {
     std::cout << "GLYNTH - Game Language Program Synthesis" << std::endl;
 
-    TobyTest::TestPopulation();
+    //TobyTest::TestPopulation();
+    TobyTest::TestRandomAST();
     //SeanTest::Test1();
     return 0;
 }

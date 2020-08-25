@@ -86,7 +86,7 @@ void TobyTest::TestPopulation()
 
     evolution.SetRandomiseFunction(hurtfulRand);
     evolution.SetFitnessFunction(axisFitness);
-    evolution.InitialisePopulation(500,"../Assets/player.c");
+    evolution.InitialisePopulation(500,"../Assets/enemy_pattern.c");
     evolution.RandomisePopulation();
 
     int maxGenerations = 30;
@@ -102,7 +102,7 @@ void TobyTest::TestPopulation()
     auto xPop = evolution.GetTopPopulationAgents(0.1f, true);
 
     xAxis = false;
-    evolution.InitialisePopulation(500, "../Assets/player.c");
+    evolution.InitialisePopulation(500, "../Assets/enemy_pattern.c");
     evolution.RandomisePopulation();
 
     for(int i = 0; i <maxGenerations; i++)
@@ -129,6 +129,37 @@ void TobyTest::TestPopulation()
 
     int i =0;
     for(auto agent : evolution.GetTopPopulationAgents(0.1f, true))
+    {
+        agent->Assemble();
+        agent->parser.OutputTreeDiagram("/home/toby/agent" + std::to_string(i));
+        engine.entityScheduler.entities.push_back((Engine::Entity*)agent);
+        i++;
+    }
+
+    engine.MainLoop();
+}
+
+void TobyTest::TestRandomAST()
+{
+    Engine::Engine engine(32, 32);
+    Genetics::Evolution evolution;
+
+    auto randFunc = [](Agent* agent){
+        agent->SetAlienVar(0, 8 + (int)rand()%16);
+        agent->SetAlienVar(1, 8 + (int)rand()%16);
+    };
+
+    auto fitness = [](Agent* agent){
+        return 1;
+    };
+
+    evolution.SetRandomiseFunction(randFunc);
+    evolution.SetFitnessFunction(fitness);
+
+    evolution.InitialiseRandomPopulation(10, 10, 4);
+
+    int i =0;
+    for(auto agent : evolution.GetTopPopulationAgents(1.0f, true))
     {
         agent->Assemble();
         agent->parser.OutputTreeDiagram("/home/toby/agent" + std::to_string(i));
