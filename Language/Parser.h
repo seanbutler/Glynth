@@ -119,7 +119,7 @@ private:
                        const std::string & expectedStr = "");
 
     ASTNode* GenerateBlock(TreeState state);
-    ASTNode* GenerateBlockChild(TreeState state);
+    ASTNode* GenerateBlockChild(TreeState& state);
     ASTNode* GenerateAssignment(TreeState state);
     ASTNode* GenerateCondition(TreeState state);
     ASTNode* GenerateBinComp(TreeState state);

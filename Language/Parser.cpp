@@ -981,7 +981,7 @@ ASTNode * Parser::GenerateArithBin(TreeState state)
 }
 
 /// Creates a random AST Node that is legal as a child of a block
-ASTNode* Parser::GenerateBlockChild(TreeState state)
+ASTNode* Parser::GenerateBlockChild(TreeState& state)
 {
     bool depthReached = state.currentDepth > state.maxDepth;
     switch (util::RandomNumberGenerator::RandNum(state.full && !depthReached ? 1 : 0, depthReached ? 2 : 3)) {
