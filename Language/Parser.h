@@ -121,10 +121,8 @@ private:
     ASTNode* GenerateBlock(TreeState state);
     ASTNode* GenerateBlockChild(TreeState& state);
     ASTNode* GenerateAssignment(TreeState state);
-    ASTNode* GenerateCondition(TreeState state);
-    ASTNode* GenerateBinComp(TreeState state);
-    ASTNode* GenerateArithBin(TreeState state);
-    ASTNode* GenerateNum(TreeState state);
+    ASTNode* GenerateBin(TreeState state);
+    ASTNode* GenerateExpr(TreeState state);
     ASTNode* GenerateVar(TreeState& state);
 
     ASTNode** GetASTNode(int index, CompatibilityType typeFilter);

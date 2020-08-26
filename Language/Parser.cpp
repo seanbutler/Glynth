@@ -463,6 +463,8 @@ ASTNode *Parser::ParseExpression() {
 
             case Token::IDENTIFIER: {
                 valueStack.push(ParseIdentifier());
+                // When identifiers are used as part of an expression we need to change its compatibility type
+                valueStack.top()->SetCompType(CompatibilityType::expression);
                 getNextToken();
                 break;
             }
@@ -866,11 +868,11 @@ ASTNode* Parser::GenerateBlock(TreeState state)
     ASTNode* node = nullptr;
     if(util::RandomNumberGenerator::RandNum(0,1) == 0)
     {
-        node = new IfStatementAST(GenerateCondition(state), new BlockAST());
+        node = new IfStatementAST(GenerateExpr(state), new BlockAST());
     }
     else
     {
-        node = new WhileStatementAST(GenerateCondition(state), new BlockAST());
+        node = new WhileStatementAST(GenerateExpr(state), new BlockAST());
     }
 
     for(int i = 0; i < util::RandomNumberGenerator::RandNum(0, state.maxBranchWidth); i++)
@@ -880,38 +882,36 @@ ASTNode* Parser::GenerateBlock(TreeState state)
     return node;
 }
 
-/// Creates a random condition node, either binary comparison or a flat number (true/false)
-ASTNode * Parser::GenerateCondition(TreeState state)
-{
-    switch (util::RandomNumberGenerator::RandNum(0,state.currentDepth < state.maxDepth ? 1 : 0))
-    {
-        case 0:
-            return GenerateNum(state);
-        case 1: // Case 1 is ignored when depth limit is reached
-            return GenerateBinComp(state);
-        default: // Should never hit default
-            return nullptr;
-    }
-}
-
-/// Creates a random binary comparison node: > >= < <= == !=
-ASTNode * Parser::GenerateBinComp(TreeState state)
+/// Creates a random binary node
+ASTNode * Parser::GenerateBin(TreeState state)
 {
     state.currentDepth++;
-    switch (util::RandomNumberGenerator::RandNum(0,5))
+    switch (util::RandomNumberGenerator::RandNum(0,11))
     {
         case 0:
-            return new BinOperandAST(Token::OP_GT, GenerateNum(state), GenerateNum(state));
+            return new BinOperandAST(Token::OP_GT, GenerateExpr(state), GenerateExpr(state));
         case 1:
-            return new BinOperandAST(Token::OP_GTE, GenerateNum(state), GenerateNum(state));
+            return new BinOperandAST(Token::OP_GTE, GenerateExpr(state), GenerateExpr(state));
         case 2:
-            return new BinOperandAST(Token::OP_LT, GenerateNum(state), GenerateNum(state));
+            return new BinOperandAST(Token::OP_LT, GenerateExpr(state), GenerateExpr(state));
         case 3:
-            return new BinOperandAST(Token::OP_LTE, GenerateNum(state), GenerateNum(state));
+            return new BinOperandAST(Token::OP_LTE, GenerateExpr(state), GenerateExpr(state));
         case 4:
-            return new BinOperandAST(Token::OP_EQ, GenerateNum(state), GenerateNum(state));
+            return new BinOperandAST(Token::OP_EQ, GenerateExpr(state), GenerateExpr(state));
         case 5:
-            return new BinOperandAST(Token::OP_NE, GenerateNum(state), GenerateNum(state));
+            return new BinOperandAST(Token::OP_NE, GenerateExpr(state), GenerateExpr(state));
+        case 6:
+            return new BinOperandAST(Token::OP_MUL, GenerateExpr(state), GenerateExpr(state));
+        case 7:
+            return new BinOperandAST(Token::OP_DIV, GenerateExpr(state), GenerateExpr(state));
+        case 8:
+            return new BinOperandAST(Token::OP_ADD, GenerateExpr(state), GenerateExpr(state));
+        case 9:
+            return new BinOperandAST(Token::OP_SUB, GenerateExpr(state), GenerateExpr(state));
+        case 10:
+            return new BinOperandAST(Token::OP_AND, GenerateExpr(state), GenerateExpr(state));
+        case 11:
+            return new BinOperandAST(Token::OP_OR, GenerateExpr(state), GenerateExpr(state));
         default: // Should never hit default
             return nullptr;
     }
@@ -922,7 +922,7 @@ ASTNode * Parser::GenerateVar(TreeState& state)
 {
     state.currentDepth++;
     std::string name = "v" + std::to_string(varCount++);
-    auto node = new AssignmentStatementAST(new IdentifierAST(name), GenerateNum(state));
+    auto node = new AssignmentStatementAST(new IdentifierAST(name), GenerateExpr(state));
     state.scopedVars.push_back(name);
     return node;
 }
@@ -933,13 +933,13 @@ ASTNode * Parser::GenerateAssignment(TreeState state)
 {
     state.currentDepth++;
     int randInd = util::RandomNumberGenerator::RandNum(0, (int)state.scopedVars.size()-1);
-    return new AssignmentStatementAST(new IdentifierAST(state.scopedVars[randInd]), GenerateNum(state));
+    return new AssignmentStatementAST(new IdentifierAST(state.scopedVars[randInd]), GenerateExpr(state));
 }
 
 
 /// Creates a random numeric value, either a static number, a variable, or a result of binary operators on numbers and
 /// variables. Note this is also recursive, as each number used in the binary operators calls this function again.
-ASTNode * Parser::GenerateNum(TreeState state)
+ASTNode * Parser::GenerateExpr(TreeState state)
 {
     bool depthReached = state.currentDepth > state.maxDepth;
     int randInd = state.scopedVars.empty() ? -1 : util::RandomNumberGenerator::RandNum(0, (int)state.scopedVars.size()-1);
@@ -949,36 +949,18 @@ ASTNode * Parser::GenerateNum(TreeState state)
             return new NumberAST(util::RandomNumberGenerator::RandNum(0, 100));
         case 1:
             if(state.scopedVars.empty())
-                return GenerateNum(state);
+                return GenerateExpr(state);
             return new IdentifierAST(state.scopedVars[randInd]);
         case 2:
-            return GenerateNum(state);
+            return GenerateExpr(state);
             //return new AlienVarAST();
         case 3: // Case 3 is ignored when depth limit is reached
-            return GenerateArithBin(state);
+            return GenerateBin(state);
         default: // Should never hit default
             return nullptr;
     }
 }
 
-
-/// Creates a random arithmetic binary operator node: * / + -
-ASTNode * Parser::GenerateArithBin(TreeState state)
-{
-    state.currentDepth++;
-    switch (util::RandomNumberGenerator::RandNum(0, 3)) {
-        case 0:
-            return new BinOperandAST(Token::OP_MUL, GenerateNum(state), GenerateNum(state));
-        case 1:
-            return new BinOperandAST(Token::OP_DIV, GenerateNum(state), GenerateNum(state));
-        case 2:
-            return new BinOperandAST(Token::OP_ADD, GenerateNum(state), GenerateNum(state));
-        case 3:
-            return new BinOperandAST(Token::OP_SUB, GenerateNum(state), GenerateNum(state));
-        default: // Should never hit default
-            return nullptr;
-    }
-}
 
 /// Creates a random AST Node that is legal as a child of a block
 ASTNode* Parser::GenerateBlockChild(TreeState& state)
@@ -987,7 +969,7 @@ ASTNode* Parser::GenerateBlockChild(TreeState& state)
     switch (util::RandomNumberGenerator::RandNum(state.full && !depthReached ? 1 : 0, depthReached ? 2 : 3)) {
         case 0: // Skipped when using full method AND max depth has not been reached
             state.currentDepth++;
-            return new MoveAST(GenerateNum(state));
+            return new MoveAST(GenerateExpr(state));
         case 1:
             if((int)state.scopedVars.size() > 0)
                 return GenerateAssignment(state);

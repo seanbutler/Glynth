@@ -27,10 +27,7 @@ enum class CompatibilityType
     none,
     all,
     blockStart,
-    var,
-    binArith,
-    binComp,
-    binLogic,
+    expression,
     block,
     identifier,
     blockChild,
@@ -60,6 +57,7 @@ public:
     int getNumber() const           { return number; }
     void setNumber(int N)           { number = N; }
     CompatibilityType GetCompType() {return compatibility; };
+    void SetCompType(CompatibilityType type) {compatibility = type;};
 
     virtual std::string print();                                // USED FOR SIMPLE SERIALIZATION
     virtual std::string diag(unsigned int parentID) {};        // USED FOR GENERATING THE GV FILE...
@@ -103,7 +101,7 @@ class AlienVarAST : public ASTNode {
 public:
     AlienVarAST()
     {
-        compatibility = CompatibilityType::var;
+        compatibility = CompatibilityType::expression;
     }
 
     virtual std::string print();
@@ -207,7 +205,7 @@ public:
     RandFuncAST(ASTNode *E)
         : ASTNode()
     {
-        compatibility = CompatibilityType::var;
+        compatibility = CompatibilityType::expression;
         ASTNode::children.push_back(E);
     }
 
@@ -228,7 +226,7 @@ public:
     SenseFuncAST(ASTNode *E)
             : ASTNode()
     {
-        compatibility = CompatibilityType::blockChild;
+        compatibility = CompatibilityType::expression;
         ASTNode::children.push_back(E);
     }
 
@@ -324,7 +322,7 @@ class NumberAST : public ASTNode {
 
 public:
     NumberAST(int V) : ASTNode() {
-        compatibility = CompatibilityType::var;
+        compatibility = CompatibilityType::expression;
         setNumber(V);
     }
 

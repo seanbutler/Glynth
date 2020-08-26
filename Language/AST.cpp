@@ -454,12 +454,7 @@ BinOperandAST::BinOperandAST(Token O, ASTNode *L, ASTNode *R) :
     children.push_back(L);
     children.push_back(R);
 
-    if(op == Token::OP_ADD || op == Token::OP_SUB || op == Token::OP_MUL || op == Token::OP_DIV)
-        compatibility = CompatibilityType::binArith;
-    else if(op == Token::OP_AND || op == Token::OP_OR)
-        compatibility = CompatibilityType::binLogic;
-    else
-        compatibility = CompatibilityType::binComp;
+    compatibility = CompatibilityType::expression;
 }
 
 void BinOperandAST::Accept( Genetics::MutationVisitor *visitor)  {

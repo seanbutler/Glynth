@@ -158,7 +158,8 @@ void TobyTest::TestRandomAST()
     evolution.SetRandomiseFunction(randFunc);
     evolution.SetFitnessFunction(fitness);
 
-    evolution.InitialiseRandomPopulation(10, 10, 4);
+    //evolution.InitialiseRandomPopulation(1000, 10, 4);
+    evolution.InitialisePopulation(10, "../Assets/enemy_pattern.c");
 
     int i =0;
     for(auto agent : evolution.GetTopPopulationAgents(1.0f, true))
@@ -168,6 +169,7 @@ void TobyTest::TestRandomAST()
         engine.entityScheduler.entities.push_back((Engine::Entity*)agent);
         i++;
     }
+
 
     engine.MainLoop();
 }
