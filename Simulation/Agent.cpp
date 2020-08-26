@@ -28,6 +28,8 @@ Agent * Agent::Cross(Agent *agent)
         delete aP;
     }
 
+    newAgent->parser.ValidateAST();
+
     return newAgent;
 }
 

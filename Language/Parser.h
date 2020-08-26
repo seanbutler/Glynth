@@ -99,7 +99,7 @@ public:
     std::string GetAsm();
 
     void GenerateRandomAST(int maxTreeDepth, int maxBranchWidth, bool full);
-    bool IsASTValid();
+    void ValidateAST();
 
     std::vector<ASTNode *> abstractSyntaxTree;
 
@@ -127,11 +127,13 @@ private:
     ASTNode* GenerateNum(TreeState state);
     ASTNode* GenerateVar(TreeState& state);
 
-    int varCount = 0;
-
     ASTNode** GetASTNode(int index, CompatibilityType typeFilter);
     ASTNode** FindNodeInTree(int& currentIndex,ASTNode*& node, int targetIndex, CompatibilityType typeFilter);
     void CountNodes(int& nodeTotal, ASTNode* node, CompatibilityType typeFilter);
+
+    void ValidateBranch(ASTNode** node, TreeState state);
+
+    int varCount = 0;
 
 };
 

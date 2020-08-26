@@ -6,6 +6,7 @@
 #include <iostream>
 #include <fstream>
 #include <stack>
+#include <algorithm>
 
 #include "Parser.h"
 #include "AST.h"
@@ -802,9 +803,44 @@ void Parser::CountNodes(int &nodeTotal, ASTNode* node, CompatibilityType typeFil
 // ----------------------------------------------------------------------
 
 /// Checks to see if the AST is valid (trees may sometimes be invalid after crossover)
-bool Parser::IsASTValid()
+void Parser::ValidateAST()
 {
+    bool valid = true;
+    TreeState state;
+    
+    for(auto& node : abstractSyntaxTree)
+    {
+        // Record any variables that are in scope
+        if(dynamic_cast<VariableDeclarationAST*>(node) || dynamic_cast<AssignmentStatementAST*>(node))
+        {
+            state.scopedVars.push_back(node->children[0]->getName());
+        }
+        ValidateBranch(&node, state);
+    }
+}
 
+void Parser::ValidateBranch(ASTNode** node, TreeState state)
+{
+    bool valid = true;
+    if(dynamic_cast<IdentifierAST*>(*node))
+    {
+        // If this identifier is used out of scope, replace it
+        if(std::find(state.scopedVars.begin(), state.scopedVars.end(), (*node)->getName()) == state.scopedVars.end())
+        {
+            delete *node;
+            ASTNode* num = new NumberAST(util::RandomNumberGenerator::RandNum(0,10));
+            *node = num;
+        }
+    }
+    for(auto& child : (*node)->children)
+    {
+        // Record any variables that are in scope
+        if(dynamic_cast<VariableDeclarationAST*>(child) || dynamic_cast<AssignmentStatementAST*>(child))
+        {
+            state.scopedVars.push_back(child->children[0]->getName());
+        }
+        ValidateBranch(&child, state);
+    }
 }
 
 
