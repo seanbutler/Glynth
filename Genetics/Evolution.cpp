@@ -109,7 +109,7 @@ namespace Genetics {
         for(int i = 0; i< popSize; i++)
         {
             auto agent = new HurtfulAgent();
-            agent->GenerateRandomAST((int)rampedDepth, maxBranchWidth, full);
+            agent->parser.GenerateRandomAST((int)rampedDepth, maxBranchWidth, full);
             randomiseAgentVars(agent);
             population.emplace_back(agent);
             full = !full;
@@ -210,7 +210,7 @@ namespace Genetics {
                     Agent* a = population[probDist(randEngine)].agent;
                     Agent* b = new HurtfulAgent();
                     // TODO: Make this use the first agents depth and width rather than hardcoded 6/4
-                    b->GenerateRandomAST(6, 4, false);
+                    b->parser.GenerateRandomAST(6, 4, false);
                     newPopulation.emplace_back();
                     newPopulation.back().agent = a->Cross(b);
                     delete b;

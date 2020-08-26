@@ -20,15 +20,6 @@
 // a specific version of a game entity which has AI
 //
 
-struct TreeState
-{
-    int maxBranchWidth = 0;
-    int maxDepth = 0;
-    int currentDepth = 0;
-    bool full = false;
-
-    std::vector<std::string> scopedVars;
-};
 
 // ----------------------------------------------------------------------
 
@@ -106,28 +97,7 @@ public:
         }
     }
 
-    Agent* Cross(Agent* agent){
-        // Copy this agent
-        auto newAgent = new Agent(*this);
-
-        // Find the two slice points
-        ASTNode** a = newAgent->parser.GetRandomASTNode(CompatibilityType::all);
-        ASTNode* aP = *a;
-        ASTNode** b = agent->parser.GetRandomASTNode((*a)->GetCompType());
-
-        // Replace the nodes after the first slice point with the branch of the second
-        if(b != nullptr)
-        {
-            newAgent->parser.CopyNodeAndChildren(*b, *a);
-            parser.DeleteNodeAndChildren(aP);
-            delete aP;
-        }
-
-        return newAgent;
-    }
-
-    void GenerateRandomAST(int maxTreeDepth, int maxBranchWidth, bool full);
-
+    Agent* Cross(Agent* agent);
 
     std::string srcFilename;
     sf::RectangleShape rectangle;
@@ -140,17 +110,6 @@ public:
 
     AlienVars alienVars;
 
-private:
-    ASTNode* GenerateBlock(TreeState state);
-    ASTNode* GenerateBlockChild(TreeState state);
-    ASTNode* GenerateAssignment(TreeState state);
-    ASTNode* GenerateCondition(TreeState state);
-    ASTNode* GenerateBinComp(TreeState state);
-    ASTNode* GenerateArithBin(TreeState state);
-    ASTNode* GenerateNum(TreeState state);
-    ASTNode* GenerateVar(TreeState& state);
-
-    int varCount = 0;
 };
 
 // ----------------------------------------------------------------------

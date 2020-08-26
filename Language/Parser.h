@@ -17,6 +17,16 @@
 
 class ASTNode;
 
+struct TreeState
+{
+    int maxBranchWidth = 0;
+    int maxDepth = 0;
+    int currentDepth = 0;
+    bool full = false;
+
+    std::vector<std::string> scopedVars;
+};
+
 class Parser {
 
 public:
@@ -88,6 +98,9 @@ public:
     bool OutputAsm(std::string filename);
     std::string GetAsm();
 
+    void GenerateRandomAST(int maxTreeDepth, int maxBranchWidth, bool full);
+    bool IsASTValid();
+
     std::vector<ASTNode *> abstractSyntaxTree;
 
 
@@ -104,6 +117,17 @@ private:
     void ReportWarning(const std::string & problemStr,
                        const std::string & contextStr = "",
                        const std::string & expectedStr = "");
+
+    ASTNode* GenerateBlock(TreeState state);
+    ASTNode* GenerateBlockChild(TreeState state);
+    ASTNode* GenerateAssignment(TreeState state);
+    ASTNode* GenerateCondition(TreeState state);
+    ASTNode* GenerateBinComp(TreeState state);
+    ASTNode* GenerateArithBin(TreeState state);
+    ASTNode* GenerateNum(TreeState state);
+    ASTNode* GenerateVar(TreeState& state);
+
+    int varCount = 0;
 
     ASTNode** GetASTNode(int index, CompatibilityType typeFilter);
     ASTNode** FindNodeInTree(int& currentIndex,ASTNode*& node, int targetIndex, CompatibilityType typeFilter);
