@@ -974,7 +974,7 @@ ASTNode* Parser::GenerateBlockChild(TreeState& state)
             if((int)state.scopedVars.size() > 0)
                 return GenerateAssignment(state);
             else
-                GenerateBlockChild(state); // If no variables are in scope, then just re-roll
+                return GenerateBlockChild(state); // If no variables are in scope, then just re-roll
         case 2:
             return GenerateVar(state);
         case 3: // Case 3 is ignored when depth limit is reached
