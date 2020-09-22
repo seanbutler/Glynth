@@ -29,6 +29,7 @@ Ignore the strolling beat em up fighting games like Street Fighter and etc. Also
 ignore Mario Bros as really a console game. Both are well covered in other literature as well.
 
 ## Universal Patterns
+
 These games __all__ have the following patterns in common.
  - Player Can Move
  - Flat 2D Space (asteroids?!)

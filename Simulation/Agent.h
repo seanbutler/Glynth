@@ -29,7 +29,7 @@ public:
             : Entity()
             , rectangle(R)
     {
-        std::cout << "Agent::Agent ()" << std::endl;
+//        std::cout << "Agent::Agent ()" << std::endl;
     }
 
     Agent(Agent &rhs)
@@ -105,9 +105,7 @@ public:
     Lexer lexer;
     Parser parser;
     Assembler assembler;
-
     VM virtualMachine;
-
     AlienVars alienVars;
 
 };

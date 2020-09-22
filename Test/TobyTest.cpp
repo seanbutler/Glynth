@@ -17,6 +17,8 @@ void TobyTest::TestPopulation()
         agent->SetAlienVar(1, 8 + (int)rand()%16);
     };
 
+
+
     bool xAxis = true;
     auto axisFitness = [&xAxis](Agent* agent){
 
@@ -35,17 +37,21 @@ void TobyTest::TestPopulation()
             auto newPos = std::pair<int,int>(copy->alienVars.get(0), copy->alienVars.get(1));
             if((xAxis ? newPos.first : newPos.second) != lastPos)
                 moveCount++;
+
             if((std::find(uniqueLocations.begin(), uniqueLocations.end(), xAxis ? newPos.first : newPos.second)) == uniqueLocations.end())
             {
                 uniqueLocations.push_back(xAxis ? newPos.first : newPos.second);
             }
+
             float xDist = powf((float)fabs((double)startPos.first - (double)newPos.first),2.0f);
             float yDist = powf((float)fabs((double)startPos.second - (double)newPos.second),2.0f);
             int dist = (int)(xDist + (yDist));
+
             if(dist > furthestDist)
             {
                 furthestDist = dist;
             }
+
             lastPos = xAxis ? newPos.first : newPos.second;
         }
         delete copy;
@@ -99,7 +105,6 @@ void TobyTest::TestPopulation()
     }
     evolution.AssessFitness();
 
-
     auto xPop = evolution.GetTopPopulationAgents(0.1f, true);
 
     xAxis = false;
@@ -133,7 +138,7 @@ void TobyTest::TestPopulation()
     for(auto agent : evolution.GetTopPopulationAgents(0.1f, true))
     {
         agent->Assemble();
-        agent->parser.OutputTreeDiagram("/home/toby/agent" + std::to_string(i));
+        agent->parser.OutputTreeDiagram("../output/agent" + std::to_string(i));
         engine.entityScheduler.entities.push_back((Engine::Entity*)agent);
         i++;
     }
@@ -165,7 +170,7 @@ void TobyTest::TestRandomAST()
     for(auto agent : evolution.GetTopPopulationAgents(1.0f, true))
     {
         agent->Assemble();
-        agent->parser.OutputTreeDiagram("/home/toby/agent" + std::to_string(i));
+        agent->parser.OutputTreeDiagram("../output/agent" + std::to_string(i));
         engine.entityScheduler.entities.push_back((Engine::Entity*)agent);
         i++;
     }

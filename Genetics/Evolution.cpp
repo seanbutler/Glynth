@@ -151,7 +151,6 @@ namespace Genetics {
         }
     }
 
-
     /// Takes the current population and applies crossover, reproduction and mutation to
     /// create and replace the current population with a new one
     void Evolution::GenerateNewPopulation(float crossover, float reproduction, float pointMutation, float branchMutation)

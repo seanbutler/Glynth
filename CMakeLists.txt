@@ -39,8 +39,14 @@ add_executable(Glynth main.cpp
 
         Utils/RandomNumberGenerator.cpp
         Utils/RandomNumberGenerator.h
+
         Test/TobyTest.h
-        Test/TobyTest.cpp)
+        Test/TobyTest.cpp
+
+        Test/PlayerAgentTest.h
+        Test/PlayerAgentTest.cpp
+
+        )
 
 
 find_package(SFML REQUIRED COMPONENTS system graphics window network audio)

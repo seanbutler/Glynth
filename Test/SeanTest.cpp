@@ -22,8 +22,8 @@ void SeanTest::Test1() {
         tmpAgent1Ptr = new HurtfulAgent();
         tmpAgent1Ptr->Compile("../Assets/enemy_homein.c");
         tmpAgent1Ptr->Assemble();
-        tmpAgent1Ptr->SetAlienVar(0, 8 + rand()%16 );
-        tmpAgent1Ptr->SetAlienVar(1, 8 + rand()%16 );
+        tmpAgent1Ptr->SetAlienVar(0, 4 + rand()%24 );
+        tmpAgent1Ptr->SetAlienVar(1, 4 + rand()%24 );
         engine.entityScheduler.entities.push_back((Engine::Entity*)tmpAgent1Ptr);
     }
 

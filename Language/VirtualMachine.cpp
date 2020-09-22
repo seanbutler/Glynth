@@ -208,7 +208,7 @@ void VM::Execute(unsigned int slice) {
                 }
 
                 case INS::RAND : {
-                    // a single parameter function, returns single value
+                    // NOTE takes one parameter and returns one parameter
                     // todo roll this out to a generic form with identifier
                     int param = this->stack.top();
                     param = param <= 0 ? 1 : param;
@@ -219,6 +219,7 @@ void VM::Execute(unsigned int slice) {
                 }
 
                 case INS::SENSE : {
+                    // NOTE takes one parameter and returns one parameter
                     int param = this->stack.top();
                     this->stack.pop();
                     int result =-1;
@@ -242,7 +243,6 @@ void VM::Execute(unsigned int slice) {
                             result = DetectableComponent_Player::directionToNearest(x, y);
                             break;
                         }
-
                     }
 
                     this->stack.push(result);
@@ -250,6 +250,7 @@ void VM::Execute(unsigned int slice) {
                 }
 
                 case INS::MOVE : {
+                    // NOTE takes one parameter and returns nothing
 //                    std::pair<int, int> oldPosition(alienVars->get(0), alienVars->get(1));
                     std::pair<int, int> tmpPosition(alienVars->get(0), alienVars->get(1));
 
@@ -281,8 +282,8 @@ void VM::Execute(unsigned int slice) {
                     break;
                 }
 
-
                 case INS::SAVEALIEN: {
+                    // NOTE takes one parameter and returns nothing
                     int val = stack.top();
                     stack.pop();
                     incrProgramCounter();
