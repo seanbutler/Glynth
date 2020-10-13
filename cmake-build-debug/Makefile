@@ -59,19 +59,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /home/toby/Desktop/CLion-2019.3.2/clion-2019.3.2/bin/cmake/linux/bin/cmake
+CMAKE_COMMAND = /snap/clion/126/bin/cmake/linux/bin/cmake
 
 # The command to remove a file.
-RM = /home/toby/Desktop/CLion-2019.3.2/clion-2019.3.2/bin/cmake/linux/bin/cmake -E rm -f
+RM = /snap/clion/126/bin/cmake/linux/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/toby/Desktop/Glynth
+CMAKE_SOURCE_DIR = /home/sean/Projects/Glynth
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/toby/Desktop/Glynth/cmake-build-debug
+CMAKE_BINARY_DIR = /home/sean/Projects/Glynth/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -79,7 +79,7 @@ CMAKE_BINARY_DIR = /home/toby/Desktop/Glynth/cmake-build-debug
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/home/toby/Desktop/CLion-2019.3.2/clion-2019.3.2/bin/cmake/linux/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/snap/clion/126/bin/cmake/linux/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -90,7 +90,7 @@ rebuild_cache/fast: rebuild_cache
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/home/toby/Desktop/CLion-2019.3.2/clion-2019.3.2/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+	/snap/clion/126/bin/cmake/linux/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -100,9 +100,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/toby/Desktop/Glynth/cmake-build-debug/CMakeFiles /home/toby/Desktop/Glynth/cmake-build-debug/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/sean/Projects/Glynth/cmake-build-debug/CMakeFiles /home/sean/Projects/Glynth/cmake-build-debug/CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/toby/Desktop/Glynth/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/sean/Projects/Glynth/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -467,6 +467,33 @@ Simulation/Detection.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Glynth.dir/build.make CMakeFiles/Glynth.dir/Simulation/Detection.cpp.s
 .PHONY : Simulation/Detection.cpp.s
 
+Test/PlayerAgentTest.o: Test/PlayerAgentTest.cpp.o
+
+.PHONY : Test/PlayerAgentTest.o
+
+# target to build an object file
+Test/PlayerAgentTest.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Glynth.dir/build.make CMakeFiles/Glynth.dir/Test/PlayerAgentTest.cpp.o
+.PHONY : Test/PlayerAgentTest.cpp.o
+
+Test/PlayerAgentTest.i: Test/PlayerAgentTest.cpp.i
+
+.PHONY : Test/PlayerAgentTest.i
+
+# target to preprocess a source file
+Test/PlayerAgentTest.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Glynth.dir/build.make CMakeFiles/Glynth.dir/Test/PlayerAgentTest.cpp.i
+.PHONY : Test/PlayerAgentTest.cpp.i
+
+Test/PlayerAgentTest.s: Test/PlayerAgentTest.cpp.s
+
+.PHONY : Test/PlayerAgentTest.s
+
+# target to generate assembly for a file
+Test/PlayerAgentTest.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Glynth.dir/build.make CMakeFiles/Glynth.dir/Test/PlayerAgentTest.cpp.s
+.PHONY : Test/PlayerAgentTest.cpp.s
+
 Test/SeanTest.o: Test/SeanTest.cpp.o
 
 .PHONY : Test/SeanTest.o
@@ -493,6 +520,60 @@ Test/SeanTest.s: Test/SeanTest.cpp.s
 Test/SeanTest.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Glynth.dir/build.make CMakeFiles/Glynth.dir/Test/SeanTest.cpp.s
 .PHONY : Test/SeanTest.cpp.s
+
+Test/TobyTest.o: Test/TobyTest.cpp.o
+
+.PHONY : Test/TobyTest.o
+
+# target to build an object file
+Test/TobyTest.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Glynth.dir/build.make CMakeFiles/Glynth.dir/Test/TobyTest.cpp.o
+.PHONY : Test/TobyTest.cpp.o
+
+Test/TobyTest.i: Test/TobyTest.cpp.i
+
+.PHONY : Test/TobyTest.i
+
+# target to preprocess a source file
+Test/TobyTest.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Glynth.dir/build.make CMakeFiles/Glynth.dir/Test/TobyTest.cpp.i
+.PHONY : Test/TobyTest.cpp.i
+
+Test/TobyTest.s: Test/TobyTest.cpp.s
+
+.PHONY : Test/TobyTest.s
+
+# target to generate assembly for a file
+Test/TobyTest.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Glynth.dir/build.make CMakeFiles/Glynth.dir/Test/TobyTest.cpp.s
+.PHONY : Test/TobyTest.cpp.s
+
+Utils/RandomNumberGenerator.o: Utils/RandomNumberGenerator.cpp.o
+
+.PHONY : Utils/RandomNumberGenerator.o
+
+# target to build an object file
+Utils/RandomNumberGenerator.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Glynth.dir/build.make CMakeFiles/Glynth.dir/Utils/RandomNumberGenerator.cpp.o
+.PHONY : Utils/RandomNumberGenerator.cpp.o
+
+Utils/RandomNumberGenerator.i: Utils/RandomNumberGenerator.cpp.i
+
+.PHONY : Utils/RandomNumberGenerator.i
+
+# target to preprocess a source file
+Utils/RandomNumberGenerator.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Glynth.dir/build.make CMakeFiles/Glynth.dir/Utils/RandomNumberGenerator.cpp.i
+.PHONY : Utils/RandomNumberGenerator.cpp.i
+
+Utils/RandomNumberGenerator.s: Utils/RandomNumberGenerator.cpp.s
+
+.PHONY : Utils/RandomNumberGenerator.s
+
+# target to generate assembly for a file
+Utils/RandomNumberGenerator.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Glynth.dir/build.make CMakeFiles/Glynth.dir/Utils/RandomNumberGenerator.cpp.s
+.PHONY : Utils/RandomNumberGenerator.cpp.s
 
 main.o: main.cpp.o
 
@@ -566,9 +647,18 @@ help:
 	@echo "... Simulation/Detection.o"
 	@echo "... Simulation/Detection.i"
 	@echo "... Simulation/Detection.s"
+	@echo "... Test/PlayerAgentTest.o"
+	@echo "... Test/PlayerAgentTest.i"
+	@echo "... Test/PlayerAgentTest.s"
 	@echo "... Test/SeanTest.o"
 	@echo "... Test/SeanTest.i"
 	@echo "... Test/SeanTest.s"
+	@echo "... Test/TobyTest.o"
+	@echo "... Test/TobyTest.i"
+	@echo "... Test/TobyTest.s"
+	@echo "... Utils/RandomNumberGenerator.o"
+	@echo "... Utils/RandomNumberGenerator.i"
+	@echo "... Utils/RandomNumberGenerator.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

@@ -230,7 +230,6 @@ std::string MoveAST::eval() {
     return str;
 }
 
-
 // ---------------------------------------------------------------------------
 
 void RandFuncAST::Accept( Genetics::MutationVisitor *visitor) {

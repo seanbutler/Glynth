@@ -1,4 +1,4 @@
-# Install script for directory: /home/toby/Desktop/Glynth
+# Install script for directory: /home/sean/Projects/Glynth
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/toby/Desktop/Glynth/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/sean/Projects/Glynth/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
