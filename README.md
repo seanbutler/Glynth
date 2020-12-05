@@ -2,7 +2,9 @@
 
 **An Experiment in genetic programming over a c-like language.**
 
-Written for video game mechanics and gameplay generation, but generally usable for any realtime simulation where you want to investigate evolution of agents with movement and avoidance.
+A work in progress.
+
+Written for video game generation, but generally usable for any realtime simulation where you want to investigate evolution of agents with movement and avoidance.
 
 ![Screenshot](./Media/Screenshot_1.png)
 
